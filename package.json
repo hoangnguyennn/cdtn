@@ -1,6 +1,11 @@
 {
-  "name": "root",
+  "name": "cdtn",
   "private": true,
+  "scripts": {
+    "be-dev": "lerna run --scope server dev --stream",
+    "be-build": "lerna run --scope server build --stream",
+    "be-start": "lerna run --scope server start --stream"
+  },
   "devDependencies": {
     "lerna": "^4.0.0"
   }
