@@ -3,8 +3,8 @@
 	"private": true,
 	"scripts": {
 		"be-dev": "cd packages/server && yarn dev",
-		"be-build": "cd packages/server && yarn dev",
-		"be-start": "cd packages/server && yarn dev",
+		"be-build": "cd packages/server && yarn build",
+		"be-start": "cd packages/server && yarn start",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix --ext .ts,.tsx .",
 		"prepare": "husky install"
