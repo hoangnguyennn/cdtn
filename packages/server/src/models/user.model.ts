@@ -28,6 +28,22 @@ const userSchema = new Schema<IUser>({
 		enum: UserTypes,
 		default: UserTypes.CUSTOMER,
 	},
+	isActivated: {
+		type: Boolean,
+		default: function () {
+			const userType = (this as any)['userType']
+				? (this as any)['userType']
+				: UserTypes.MANAGER;
+
+			if (userType === UserTypes.MANAGER) {
+				return false;
+			} else if (userType === UserTypes.CUSTOMER) {
+				return true;
+			}
+
+			return false;
+		},
+	},
 });
 
 const User = model<IUser>(Names.USER, userSchema);

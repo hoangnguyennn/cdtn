@@ -23,8 +23,8 @@ const cartSchema = new Schema<ICart>({
 		default: false,
 	},
 	dateAddedToCart: {
-		type: Date,
-		default: new Date(),
+		type: Number,
+		default: Date.now,
 	},
 });
 
