@@ -2,9 +2,9 @@
 	"name": "cdtn",
 	"private": true,
 	"scripts": {
-		"be-dev": "cd packages/server & yarn dev",
-		"be-build": "cd packages/server & yarn dev",
-		"be-start": "cd packages/server & yarn dev",
+		"be-dev": "cd packages/server && yarn dev",
+		"be-build": "cd packages/server && yarn dev",
+		"be-start": "cd packages/server && yarn dev",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix --ext .ts,.tsx .",
 		"prepare": "husky install"
