@@ -1,11 +1,11 @@
 import { Types, Document } from 'mongoose';
 import {
-  Actions,
-  HttpStatusCode,
-  OrderStatuses,
-  PaymentStatuses,
-  ProductStatuses,
-  UserTypes,
+	Actions,
+	HttpStatusCode,
+	OrderStatuses,
+	PaymentStatuses,
+	ProductStatuses,
+	UserTypes,
 } from './enums';
 import DatabaseCollectionNames from '../constants/databaseCollectionNames';
 import { NextFunction, Request, Response } from 'express';

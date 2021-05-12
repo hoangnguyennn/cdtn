@@ -2,8 +2,8 @@ import { Router } from 'express';
 
 import catcherWrapper from '../../helpers/catcherWrapper';
 import {
-  getAllProduct,
-  getProductById,
+	getAllProduct,
+	getProductById,
 } from '../controllers/product.controller';
 
 const router = Router();
