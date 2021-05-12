@@ -41,8 +41,8 @@ const orderSchema = new Schema<IOrder>({
 		required: true,
 	},
 	orderDate: {
-		type: Date,
-		default: new Date(),
+		type: Number,
+		default: Date.now,
 	},
 });
 
