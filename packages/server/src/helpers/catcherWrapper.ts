@@ -4,6 +4,7 @@ import { AsyncFunction } from '../interfaces';
 import { commonResponse } from './commonResponse';
 import { HttpStatusCode } from '../interfaces/enums';
 import { INTERNAL_SERVER_ERROR } from '../constants/commonResponseMessages';
+import logger from '../utils/logger';
 
 const catcherWrapper = (fn: AsyncFunction) => {
 	return (req: Request, res: Response, next?: NextFunction): Promise<void> =>
@@ -13,6 +14,8 @@ const catcherWrapper = (fn: AsyncFunction) => {
 			} else {
 				console.log(err.name);
 			}
+
+			logger.error(err.message);
 
 			commonResponse(res, {
 				hasError: true,
