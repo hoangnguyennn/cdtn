@@ -1,9 +1,10 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-import Names from '../constants/databaseCollectionNames';
+import { IUser } from '../interfaces';
 import { UserTypes } from '../interfaces/enums';
+import Names from '../constants/databaseCollectionNames';
 
-const userSchema = new Schema({
+const userSchema = new Schema<IUser>({
   email: {
     type: String,
     unique: true,
@@ -29,5 +30,5 @@ const userSchema = new Schema({
   },
 });
 
-const User = model(Names.USER, userSchema);
+const User = model<IUser>(Names.USER, userSchema);
 export default User;

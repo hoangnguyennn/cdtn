@@ -1,8 +1,9 @@
 import { model, Schema, Types } from 'mongoose';
 
+import { IOrderItem } from '../interfaces';
 import Names from '../constants/databaseCollectionNames';
 
-const orderItemSchema = new Schema({
+const orderItemSchema = new Schema<IOrderItem>({
   orderId: {
     type: Types.ObjectId,
     ref: Names.ORDER,
@@ -23,5 +24,5 @@ const orderItemSchema = new Schema({
   },
 });
 
-const OrderItem = model(Names.ORDER_ITEM, orderItemSchema);
+const OrderItem = model<IOrderItem>(Names.ORDER_ITEM, orderItemSchema);
 export default OrderItem;

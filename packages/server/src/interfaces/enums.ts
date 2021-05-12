@@ -20,3 +20,16 @@ export enum Actions {
   UPDATE,
   DELETE,
 }
+export enum ProductStatuses {
+  STOPPED_TRADING,
+  TRADING,
+}
+
+export enum HttpStatusCode {
+  HTTP_200 = 200,
+  HTTP_400 = 400,
+  HTTP_401 = 401,
+  HTTP_403 = 403,
+  HTTP_404 = 404,
+  HTTP_500 = 500,
+}

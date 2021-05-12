@@ -1,8 +1,9 @@
 import { model, Schema, Types } from 'mongoose';
 
+import { ICart } from '../interfaces';
 import Names from '../constants/databaseCollectionNames';
 
-const cartSchema = new Schema({
+const cartSchema = new Schema<ICart>({
   userId: {
     type: Types.ObjectId,
     ref: Names.USER,
@@ -27,5 +28,5 @@ const cartSchema = new Schema({
   },
 });
 
-const Cart = model(Names.CART, cartSchema);
+const Cart = model<ICart>(Names.CART, cartSchema);
 export default Cart;

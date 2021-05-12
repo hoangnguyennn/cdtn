@@ -1,8 +1,10 @@
 import { model, Schema, Types } from 'mongoose';
 
+import { IProduct } from '../interfaces';
+import { ProductStatuses } from '../interfaces/enums';
 import Names from '../constants/databaseCollectionNames';
 
-const productSchema = new Schema({
+const productSchema = new Schema<IProduct>({
   name: {
     type: String,
     required: true,
@@ -17,7 +19,12 @@ const productSchema = new Schema({
     required: true,
   },
   description: String,
+  status: {
+    type: String,
+    enum: ProductStatuses,
+    default: ProductStatuses.TRADING,
+  },
 });
 
-const Product = model(Names.PRODUCT, productSchema);
+const Product = model<IProduct>(Names.PRODUCT, productSchema);
 export default Product;

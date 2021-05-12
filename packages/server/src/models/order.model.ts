@@ -1,9 +1,10 @@
 import { model, Schema, Types } from 'mongoose';
 
-import Names from '../constants/databaseCollectionNames';
+import { IOrder } from '../interfaces';
 import { OrderStatuses, PaymentStatuses } from '../interfaces/enums';
+import Names from '../constants/databaseCollectionNames';
 
-const orderSchema = new Schema({
+const orderSchema = new Schema<IOrder>({
   userId: {
     type: Types.ObjectId,
     ref: Names.USER,
@@ -45,5 +46,5 @@ const orderSchema = new Schema({
   },
 });
 
-const Order = model(Names.ORDER, orderSchema);
+const Order = model<IOrder>(Names.ORDER, orderSchema);
 export default Order;

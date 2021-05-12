@@ -1,8 +1,9 @@
 import { model, Schema } from 'mongoose';
 
+import { IPaymentMethod } from '../interfaces';
 import Names from '../constants/databaseCollectionNames';
 
-const paymentMethodSchema = new Schema({
+const paymentMethodSchema = new Schema<IPaymentMethod>({
   name: {
     type: String,
     required: true,
@@ -28,5 +29,8 @@ const paymentMethodSchema = new Schema({
   },
 });
 
-const PaymentMethod = model(Names.PAYMENT_METHOD, paymentMethodSchema);
+const PaymentMethod = model<IPaymentMethod>(
+  Names.PAYMENT_METHOD,
+  paymentMethodSchema
+);
 export default PaymentMethod;

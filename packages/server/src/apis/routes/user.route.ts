@@ -1,9 +1,10 @@
 import { Router } from 'express';
 
-import userController from '../controllers/user.controller';
+import catcherWrapper from '../../helpers/catcherWrapper';
+import { getAllUser } from '../controllers/user.controller';
 
 const router = Router();
 
-router.get('/', userController.getAllUser);
+router.get('/', catcherWrapper(getAllUser));
 
 export default router;
