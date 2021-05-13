@@ -29,8 +29,19 @@ export const createNewUser = async (
 	commonResponse(res, serviceResponse);
 };
 
+export const updateUserById = async (
+	req: Request,
+	res: Response
+): Promise<void> => {
+	const { id } = req.params;
+	const user = req.body;
+	const serviceResponse = await UserService.updateUserById(id, user);
+	commonResponse(res, serviceResponse);
+};
+
 export default {
 	getAllUser,
 	getUserById,
 	createNewUser,
+	updateUserById,
 };

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import {
+	FORBIDDEN,
 	INVALID_TOKEN,
 	UNAUTHORIZED,
 } from '../constants/commonResponseMessages';
@@ -50,6 +51,28 @@ export const checkUserType = (userType: UserTypes) => {
 		next();
 		return;
 	};
+};
+
+export const checkSameUser = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const { userId } = res.locals;
+	const { id } = req.params;
+
+	if (userId === id) {
+		next();
+		return;
+	}
+
+	commonResponse(res, {
+		hasError: true,
+		httpStatusCode: HttpStatusCode.HTTP_403,
+		message: FORBIDDEN,
+	});
+
+	return;
 };
 
 export default {
