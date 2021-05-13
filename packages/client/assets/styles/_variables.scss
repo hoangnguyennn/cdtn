@@ -1,0 +1,34 @@
+:root {
+	--blue: #007bff;
+	--indigo: #6610f2;
+	--purple: #6f42c1;
+	--pink: #e83e8c;
+	--red: #dc3545;
+	--orange: #fd7e14;
+	--yellow: #ffc107;
+	--green: #28a745;
+	--teal: #20c997;
+	--cyan: #17a2b8;
+	--white: #fff;
+	--gray: #7d879c;
+	--gray-dark: #373f50;
+	--primary: #fe696a;
+	--secondary: #f3f5f9;
+	--success: #42d697;
+	--info: #69b3fe;
+	--warning: #fea569;
+	--danger: #f34770;
+	--light: #fff;
+	--dark: #373f50;
+	--accent: #4e54c8;
+	--primary-hover: #fe3638;
+
+	--breakpoint-xs: 0;
+	--breakpoint-sm: 576px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 992px;
+	--breakpoint-xl: 1280px;
+	--font-family-sans-serif: 'Rubik', sans-serif;
+	--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+}
