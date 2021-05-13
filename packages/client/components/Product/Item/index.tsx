@@ -1,5 +1,6 @@
 import { FC, MouseEvent } from 'react';
 import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
 
 import { Root } from './ProductItem';
 
@@ -16,6 +17,8 @@ const ProductItem: FC<ProductItemProps> = ({
 	price,
 	link,
 }: ProductItemProps) => {
+	const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
+
 	const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 	};
@@ -41,9 +44,11 @@ const ProductItem: FC<ProductItemProps> = ({
 				<p className="name">{name}</p>
 				<p className="price">{price}</p>
 			</div>
-			<div className="add-to-cart">
-				<button onClick={handleAddToCartClick}>Add to cart</button>
-			</div>
+			{isDesktop ? (
+				<div className="add-to-cart">
+					<button onClick={handleAddToCartClick}>Add to cart</button>
+				</div>
+			) : null}
 		</Wrapper>
 	);
 };

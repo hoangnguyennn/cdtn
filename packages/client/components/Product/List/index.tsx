@@ -4,6 +4,7 @@ import ProductItem from '../Item';
 
 type ProductListProps = {
 	columns: number;
+	'lg-columns': number;
 	title?: string;
 	viewMore?: boolean;
 };
@@ -12,9 +13,10 @@ const ProductList: FC<ProductListProps> = ({
 	columns = 5,
 	title,
 	viewMore = true,
+	...rest
 }: ProductListProps) => {
 	return (
-		<Root columns={columns} hasTitle={title ? true : false}>
+		<Root hasTitle={!!title} columns={columns} {...rest}>
 			{title ? <h3 className="title">{title}</h3> : null}
 			<div className="list">
 				<ProductItem
