@@ -2,13 +2,11 @@ import styled from 'styled-components';
 
 type RootProps = {
 	columns: number;
+	'lg-columns': number;
 	hasTitle?: boolean;
 };
 
 const Root = styled.div<RootProps>`
-	padding-top: 1rem;
-	padding-bottom: 3rem;
-
 	.title {
 		margin-bottom: 0.75rem;
 		color: var(--dark);
@@ -44,6 +42,17 @@ const Root = styled.div<RootProps>`
 			&:hover {
 				background-color: var(--accent);
 				color: var(--light);
+			}
+		}
+	}
+
+	@media (min-width: 992px) {
+		padding-top: 1rem;
+		padding-bottom: 3rem;
+
+		.list {
+			> * {
+				width: calc(100% / ${(props) => props['lg-columns']});
 			}
 		}
 	}
