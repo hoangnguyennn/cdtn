@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Root = styled.header`
 	padding: 0.75rem 1rem;
+	border-bottom: 1px solid #dae1e7;
 
 	.container {
 		display: flex;
