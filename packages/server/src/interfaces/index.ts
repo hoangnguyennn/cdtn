@@ -98,12 +98,16 @@ export interface IUser extends Document {
 	isActivated: boolean;
 }
 
-export type IUserRequest = Pick<
+export type IUserCreate = Pick<
 	IUser,
 	'email' | 'passwordHashed' | 'fullName' | 'phone' | 'userType'
 > & {
 	address?: string;
 };
+
+export type IUserUpdate = Partial<
+	Pick<IUser, 'fullName' | 'phone' | 'address'>
+>;
 
 export interface AsyncFunction<T = any> {
 	(req: Request, res: Response, next?: NextFunction): Promise<T>;

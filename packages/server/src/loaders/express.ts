@@ -1,4 +1,5 @@
 import { Application, json, urlencoded } from 'express';
+import { errors } from 'celebrate';
 
 import routes from '../apis/routes';
 import notFound from '../helpers/notFound';
@@ -14,6 +15,9 @@ export default ({ app }: { app: Application }): void => {
 
 	// load api routes
 	app.use(routes);
+
+	// load handle celebrate error
+	app.use(errors());
 
 	// load handle 404 error
 	app.use(notFound);

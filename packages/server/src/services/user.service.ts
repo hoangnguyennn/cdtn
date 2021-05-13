@@ -1,5 +1,10 @@
 import { HttpStatusCode } from '../interfaces/enums';
-import { IServiceResponse, IUser, IUserRequest } from '../interfaces';
+import {
+	IServiceResponse,
+	IUser,
+	IUserCreate,
+	IUserUpdate,
+} from '../interfaces';
 import User from '../models/user.model';
 import { NOT_FOUND } from '../constants/commonResponseMessages';
 
@@ -32,7 +37,7 @@ export const getById = async (id: string): Promise<IServiceResponse<IUser>> => {
 };
 
 export const createNewUser = async (
-	user: IUserRequest
+	user: IUserCreate
 ): Promise<IServiceResponse<IUser>> => {
 	const userCreated: IUser = await User.create({
 		email: user.email,
@@ -50,8 +55,48 @@ export const createNewUser = async (
 	};
 };
 
+export const updateUserById = async (
+	id: string,
+	user: IUserUpdate
+): Promise<IServiceResponse<IUser>> => {
+	const userUpdate: IUserUpdate = {};
+
+	if (user.fullName) {
+		userUpdate.fullName = user.fullName;
+	}
+
+	if (user.phone) {
+		userUpdate.phone = user.phone;
+	}
+
+	if (user.address) {
+		userUpdate.address = user.address;
+	}
+
+	const userUpdated = await User.findOneAndUpdate(
+		{ _id: id },
+		{ $set: userUpdate },
+		{ new: true }
+	);
+
+	if (!userUpdated) {
+		return {
+			hasError: true,
+			httpStatusCode: HttpStatusCode.HTTP_404,
+			message: NOT_FOUND,
+		};
+	}
+
+	return {
+		hasError: false,
+		httpStatusCode: HttpStatusCode.HTTP_200,
+		data: userUpdated,
+	};
+};
+
 export default {
 	getAll,
 	getById,
 	createNewUser,
+	updateUserById,
 };
