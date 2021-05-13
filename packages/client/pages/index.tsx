@@ -1,13 +1,14 @@
-import MobileMenu from '../components/Menu/Mobile';
+import MainLayout from '../layouts/MainLayout';
 import ProductList from '../components/Product/List';
 
-const Home = () => {
+const HomePage = () => {
 	return (
-		<div className="container">
-			<ProductList columns={1} lg-columns={4} title="Trending products" />
-			<MobileMenu />
-		</div>
+		<MainLayout>
+			<div className="container">
+				<ProductList columns={1} lg-columns={4} title="Trending products" />
+			</div>
+		</MainLayout>
 	);
 };
 
-export default Home;
+export default HomePage;

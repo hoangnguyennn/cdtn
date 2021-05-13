@@ -20,42 +20,50 @@ const ProductList: FC<ProductListProps> = ({
 			{title ? <h3 className="title">{title}</h3> : null}
 			<div className="list">
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>
 				<ProductItem
-					thumbnail="https://demo2.madrasthemes.com/cartzilla/wp-content/uploads/2020/03/2-1-350x326.jpg"
+					link="/products/1"
+					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
 					name="Nam bao ngu tuoi"
 					price={300000}
 				/>

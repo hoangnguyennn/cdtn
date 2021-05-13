@@ -1,6 +1,7 @@
 import { FC, MouseEvent } from 'react';
 import Link from 'next/link';
-import { useMediaQuery } from 'react-responsive';
+
+import useMatchMedia from '../../../hooks/useMatchMedia';
 
 import { Root } from './ProductItem';
 
@@ -17,7 +18,8 @@ const ProductItem: FC<ProductItemProps> = ({
 	price,
 	link,
 }: ProductItemProps) => {
-	const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
+	// const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
+	const isDesktop = useMatchMedia('(min-width: 992px)');
 
 	const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
@@ -37,12 +39,14 @@ const ProductItem: FC<ProductItemProps> = ({
 
 	return (
 		<Wrapper>
-			<div className="thumbnail">
-				<img src={thumbnail} alt="" />
-			</div>
-			<div className="info">
-				<p className="name">{name}</p>
-				<p className="price">{price}</p>
+			<div className="wrap">
+				<div className="thumbnail">
+					<img src={thumbnail} alt="" />
+				</div>
+				<div className="info">
+					<p className="name">{name}</p>
+					<p className="price">{price}</p>
+				</div>
 			</div>
 			{isDesktop ? (
 				<div className="add-to-cart">
