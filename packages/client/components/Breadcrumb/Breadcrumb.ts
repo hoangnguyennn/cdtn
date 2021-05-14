@@ -11,7 +11,7 @@ const Root = styled.div`
 			align-items: center;
 
 			> * {
-				color: var(--light);
+				color: var(--white);
 				font-size: 0.8125rem;
 				text-decoration: none;
 			}

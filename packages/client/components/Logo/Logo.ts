@@ -9,7 +9,7 @@ const Root = styled.div`
 	a {
 		display: flex;
 		align-items: center;
-		color: var(--dark);
+		color: var(--main-text-color);
 		text-decoration: none;
 
 		img {

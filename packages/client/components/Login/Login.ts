@@ -11,7 +11,7 @@ const Root = styled.div`
 
 	.title {
 		margin-bottom: 0.5rem;
-		font-size: 2.25rem;
+		font-size: 1.75rem;
 		font-weight: 400;
 		text-align: center;
 	}
@@ -25,16 +25,15 @@ const Root = styled.div`
 		button {
 			margin-top: 0.5rem;
 			margin-bottom: 0.5rem;
-			padding: 0.625rem 1rem;
-			height: 3.5rem;
-			font-size: 0.9375rem;
+			padding: 0.625rem 1.373rem;
+			font-size: 1rem;
 			border: 1px solid #dae1e7;
-			border-radius: 0.3125rem;
+			border-radius: 2px;
 		}
 
 		.actions {
-			margin-top: 1rem;
-			margin-bottom: 1rem;
+			margin-top: 0.5rem;
+			margin-bottom: 0.5rem;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -51,10 +50,9 @@ const Root = styled.div`
 
 		.submit {
 			background-color: var(--primary);
-			color: var(--light);
-			font-weight: 700;
+			color: var(--white);
 			border-color: var(--primary);
-			box-shadow: 0 0.5rem 1.125rem -0.5rem rgb(254 105 106 / 90%);
+			box-shadow: 0 0.5rem 1.125rem -0.5rem var(--primary-shadow);
 			cursor: pointer;
 
 			&:hover {
@@ -67,7 +65,7 @@ const Root = styled.div`
 
 	@media (min-width: 992px) {
 		.login-form {
-			width: 50%;
+			width: 40%;
 			margin-left: auto;
 			margin-right: auto;
 

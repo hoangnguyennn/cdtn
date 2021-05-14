@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Link from 'next/link';
 import { Root } from './ProductList';
 import ProductItem from '../Item';
 
@@ -70,7 +71,9 @@ const ProductList: FC<ProductListProps> = ({
 			</div>
 			{viewMore ? (
 				<div className="view-more">
-					<button>More products</button>
+					<Link href="/products">
+						<a>More products</a>
+					</Link>
 				</div>
 			) : null}
 		</Root>

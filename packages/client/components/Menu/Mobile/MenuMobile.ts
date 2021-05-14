@@ -26,7 +26,7 @@ const Root = styled.div`
 		bottom: 0;
 		width: 90%;
 		height: 100%;
-		background-color: var(--light);
+		background-color: var(--white);
 		z-index: 2;
 
 		.head {

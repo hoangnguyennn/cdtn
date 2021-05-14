@@ -24,7 +24,7 @@ const Root = styled.a`
 
 		.name {
 			margin-bottom: 0.5rem;
-			color: var(--dark);
+			color: var(--main-text-color);
 			font-size: 0.875rem;
 			font-weight: 500;
 
@@ -34,14 +34,14 @@ const Root = styled.a`
 		}
 
 		.price {
-			color: var(--accent);
+			color: var(--primary);
 			font-size: 0.9375rem;
 		}
 	}
 
 	@media (min-width: 992px) {
 		border-bottom-color: transparent;
-		border-radius: 0.4375rem;
+		border-radius: 2px;
 
 		.add-to-cart {
 			position: absolute;
@@ -52,21 +52,23 @@ const Root = styled.a`
 			padding-right: 1.25rem;
 			padding-bottom: 1.25rem;
 			height: 0;
-			background-color: var(--light);
+			background-color: var(--white);
 			visibility: hidden;
 			opacity: 0;
 
 			button {
-				padding: 0.425rem 1rem;
+				padding: 0.75rem 1.25rem;
 				width: 100%;
 				background-color: var(--primary);
-				color: var(--light);
+				color: var(--white);
 				font-size: 0.8125rem;
+				font-weight: 400;
 				line-height: 1.5;
 				border: none;
-				border-radius: 0.1875rem;
+				border-radius: 2px;
 				outline: none;
 				cursor: pointer;
+				z-index: 1;
 
 				&:hover {
 					background-color: var(--primary-hover);
@@ -88,8 +90,8 @@ const Root = styled.a`
 				box-shadow: 0 1.15rem 1.525rem -0.375rem rgb(0 0 0 / 0.5);
 				border-top-left-radius: 0;
 				border-top-right-radius: 0;
-				border-bottom-left-radius: 0.4375rem;
-				border-bottom-right-radius: 0.4375rem;
+				border-bottom-left-radius: 2px;
+				border-bottom-right-radius: 2px;
 			}
 		}
 	}

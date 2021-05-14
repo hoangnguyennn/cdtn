@@ -9,7 +9,7 @@ type RootProps = {
 const Root = styled.div<RootProps>`
 	.title {
 		margin-bottom: 0.75rem;
-		color: var(--dark);
+		color: var(--main-text-color);
 		font-size: 1.75rem;
 		font-weight: 500;
 		line-height: 1.2;
@@ -30,18 +30,20 @@ const Root = styled.div<RootProps>`
 		padding-top: 1rem;
 		text-align: center;
 
-		button {
+		> * {
 			margin-bottom: 0.5rem;
 			padding: 0.625rem 1.373rem;
 			background-color: transparent;
-			color: var(--accent);
-			border: 1px solid var(--accent);
-			border-radius: 0.3125rem;
+			color: var(--primary);
+			font-size: 1rem;
+			text-decoration: none;
+			border: 1px solid var(--primary);
+			border-radius: 2px;
 			cursor: pointer;
 
 			&:hover {
-				background-color: var(--accent);
-				color: var(--light);
+				background-color: var(--primary);
+				color: var(--white);
 			}
 		}
 	}

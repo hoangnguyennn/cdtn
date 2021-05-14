@@ -25,12 +25,14 @@ const Login = () => {
 						type="text"
 						className="email"
 						placeholder="Your email"
+						required
 					/>
 					<input
 						ref={passwordRef}
 						type="password"
 						className="password"
 						placeholder="Enter password"
+						required
 					/>
 					<div className="actions">
 						<div></div>

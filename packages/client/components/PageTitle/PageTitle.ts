@@ -10,7 +10,7 @@ const Root = styled.div`
 	}
 
 	.title {
-		color: var(--light);
+		color: var(--white);
 		font-size: 1.75rem;
 		font-weight: 500;
 		line-height: 1.2;

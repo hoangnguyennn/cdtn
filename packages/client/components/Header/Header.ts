@@ -41,7 +41,7 @@ const Root = styled.header`
 					min-width: 1.25rem;
 					height: 1.25rem;
 					background-color: var(--primary);
-					color: var(--light);
+					color: var(--white);
 					font-size: 0.75rem;
 					line-height: 1.25;
 					border-radius: 0.625rem;
@@ -58,7 +58,7 @@ const Root = styled.header`
 				height: 2.875rem;
 
 				.icon {
-					background-color: var(--secondary);
+					background-color: var(--light);
 					border-radius: 50%;
 				}
 

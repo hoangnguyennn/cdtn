@@ -10,24 +10,35 @@
 	--teal: #20c997;
 	--cyan: #17a2b8;
 	--white: #fff;
-	--gray: #7d879c;
-	--gray-dark: #373f50;
-	--primary: #fe696a;
-	--secondary: #f3f5f9;
-	--success: #42d697;
-	--info: #69b3fe;
-	--warning: #fea569;
-	--danger: #f34770;
-	--light: #fff;
-	--dark: #373f50;
-	--accent: #4e54c8;
-	--primary-hover: #eb6468;
+	--gray: #6c757d;
+	--gray-dark: #343a40;
+	--primary: #007be8;
+	--secondary: #6c757d;
+	--success: #28a745;
+	--info: #17a2b8;
+	--warning: #ffc107;
+	--danger: #dc3545;
+	--light: #f8f9fa;
+	--dark: #343a40;
+
+	--main-text-color: #627182;
+
+	--primary-hover: #3395ed;
+	--secondary-hover: #5a6268;
+	--success-hover: #218838;
+	--info-hover: #138496;
+	--warning-hover: #e0a800;
+	--danger-hover: #c82333;
+	--light-hover: #e2e6ea;
+	--dark-hover: #23272b;
+
+	--primary-shadow: #b8daff;
 
 	--breakpoint-xs: 0;
 	--breakpoint-sm: 576px;
 	--breakpoint-md: 768px;
 	--breakpoint-lg: 992px;
-	--breakpoint-xl: 1280px;
+	--breakpoint-xl: 1200px;
 	--font-family-sans-serif: 'Rubik', sans-serif;
 	--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
 		'Liberation Mono', 'Courier New', monospace;

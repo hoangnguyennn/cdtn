@@ -5,8 +5,8 @@ const Root = styled.div`
 
 	.summary {
 		padding: 1rem;
-		background-color: var(--light);
-		border-radius: 0.4375rem;
+		background-color: var(--white);
+		border-radius: 2px;
 		box-shadow: 0 0.3rem 1.525rem -0.375rem rgba(0, 0, 0, 0.1);
 		display: flex;
 		flex-direction: column;
@@ -25,7 +25,7 @@ const Root = styled.div`
 
 		.price {
 			margin-bottom: 1rem;
-			color: var(--accent);
+			color: var(--primary);
 			font-size: 1.75rem;
 		}
 
@@ -43,18 +43,18 @@ const Root = styled.div`
 					height: 2.75rem;
 					font-size: 0.9375rem;
 					border: 1px solid #dae1e7;
-					border-radius: 0.3125rem;
+					border-radius: 2px;
 				}
 			}
 
 			button {
 				flex: 1;
 				background-color: var(--primary);
-				color: var(--light);
+				color: var(--white);
 				font-size: 0.9375rem;
 				border: 1px solid var(--primary);
-				border-radius: 0.3125rem;
-				box-shadow: 0 0.5rem 1.125rem -0.5rem rgb(254 105 106 / 90%);
+				border-radius: 2px;
+				box-shadow: 0 0.5rem 1.125rem -0.5rem var(--primary-shadow);
 				cursor: pointer;
 
 				&:hover {
@@ -69,7 +69,7 @@ const Root = styled.div`
 			padding: 1.25rem;
 			font-size: 0.875rem;
 			border: 1px solid #dae1e7;
-			border-radius: 0.3125rem;
+			border-radius: 2px;
 
 			.list {
 				list-style-type: disc;
