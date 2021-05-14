@@ -6,13 +6,9 @@ import useMatchMedia from '../../../hooks/useMatchMedia';
 
 import { Root } from './ProductItem';
 import { toCurrency } from '../../../utils/formatter';
+import { IProduct } from '../../../models';
 
-type ProductItemProps = {
-	thumbnail: string;
-	name: string;
-	price: number;
-	link?: string;
-};
+type ProductItemProps = IProduct;
 
 const ProductItem: FC<ProductItemProps> = ({
 	thumbnail,

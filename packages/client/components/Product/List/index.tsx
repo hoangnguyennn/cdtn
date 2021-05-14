@@ -4,18 +4,22 @@ import { useTranslation } from 'react-i18next';
 
 import { Root } from './ProductList';
 import ProductItem from '../Item';
+import { IProduct } from '../../../models';
+import { PATH_NAME } from '../../../configs/pathName';
 
 type ProductListProps = {
 	columns: number;
 	'lg-columns': number;
 	title?: string;
 	viewMore?: boolean;
+	items: IProduct[];
 };
 
 const ProductList: FC<ProductListProps> = ({
 	columns = 5,
 	title,
 	viewMore = true,
+	items,
 	...rest
 }: ProductListProps) => {
 	const { t } = useTranslation();
@@ -24,54 +28,15 @@ const ProductList: FC<ProductListProps> = ({
 		<Root hasTitle={!!title} columns={columns} {...rest}>
 			{title ? <h3 className="title">{title}</h3> : null}
 			<div className="list">
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
-				<ProductItem
-					link="/products/1"
-					thumbnail="http://vikinoko.com/resources/img/product-reishi.png"
-					name="Nam bao ngu tuoi"
-					price={300000}
-				/>
+				{items.map((product) => (
+					<ProductItem
+						key={product.id}
+						link={`${PATH_NAME.PRODUCTS}/${product.id}`}
+						thumbnail={product.thumbnail}
+						name={product.name}
+						price={product.price}
+					/>
+				))}
 			</div>
 			{viewMore ? (
 				<div className="view-more">

@@ -1,25 +1,43 @@
 import Link from 'next/link';
+import { FC } from 'react';
+import classnames from 'classnames';
+import { IBreadcrumb } from '../../models';
 import { Root } from './Breadcrumb';
 
-const Breadcrumb = () => {
+type BreadcrumbProps = {
+	breadcrumb: IBreadcrumb[];
+};
+
+const Breadcrumb: FC<BreadcrumbProps> = ({ breadcrumb }: BreadcrumbProps) => {
+	const lastIndex = breadcrumb.length - 1;
+
 	return (
 		<Root>
 			<ul className="list">
-				<li className="item">
-					<Link href="/">
-						<a>Home</a>
-					</Link>
-				</li>
-				<li className="item">
-					<div className="icon czi-arrow-right"></div>
-					<Link href="/">
-						<a>Products</a>
-					</Link>
-				</li>
-				<li className="item">
-					<div className="icon czi-arrow-right"></div>
-					<a>Nam bao ngu tuoi</a>
-				</li>
+				{breadcrumb.map((item, index) => {
+					return (
+						<li className="item" key={item.id}>
+							{index === lastIndex ? (
+								<>
+									<div className="icon czi-arrow-right"></div>
+									<a>{item.name}</a>
+								</>
+							) : (
+								<>
+									<div
+										className={classnames({
+											icon: true,
+											'czi-arrow-right': index !== 0,
+										})}
+									></div>
+									<Link href={item.url}>
+										<a>{item.name}</a>
+									</Link>
+								</>
+							)}
+						</li>
+					);
+				})}
 			</ul>
 		</Root>
 	);
