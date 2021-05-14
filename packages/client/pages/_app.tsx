@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 
+import '../locales';
 import '../assets/styles/index.scss';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

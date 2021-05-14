@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import { Root } from './ProductList';
 import ProductItem from '../Item';
 
@@ -16,6 +18,8 @@ const ProductList: FC<ProductListProps> = ({
 	viewMore = true,
 	...rest
 }: ProductListProps) => {
+	const { t } = useTranslation();
+
 	return (
 		<Root hasTitle={!!title} columns={columns} {...rest}>
 			{title ? <h3 className="title">{title}</h3> : null}
@@ -72,7 +76,7 @@ const ProductList: FC<ProductListProps> = ({
 			{viewMore ? (
 				<div className="view-more">
 					<Link href="/products">
-						<a>More products</a>
+						<a>{t('More products')}</a>
 					</Link>
 				</div>
 			) : null}

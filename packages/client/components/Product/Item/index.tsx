@@ -1,5 +1,6 @@
 import { FC, MouseEvent } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
@@ -19,7 +20,7 @@ const ProductItem: FC<ProductItemProps> = ({
 	price,
 	link,
 }: ProductItemProps) => {
-	// const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
+	const { t } = useTranslation();
 	const isDesktop = useMatchMedia('(min-width: 992px)');
 
 	const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -51,7 +52,7 @@ const ProductItem: FC<ProductItemProps> = ({
 			</div>
 			{isDesktop ? (
 				<div className="add-to-cart">
-					<button onClick={handleAddToCartClick}>Add to cart</button>
+					<button onClick={handleAddToCartClick}>{t('Add to cart')}</button>
 				</div>
 			) : null}
 		</Wrapper>

@@ -1,8 +1,12 @@
+import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import { Root } from './Header';
 import Logo from '../Logo';
-import Link from 'next/link';
 
 const Header = () => {
+	const { t } = useTranslation();
+
 	return (
 		<Root>
 			<div className="container">
@@ -15,8 +19,10 @@ const Header = () => {
 								<i className="czi-user"></i>
 							</div>
 							<div className="text ml-n2">
-								<small>Hello, Sign in</small>
-								<span>My Account</span>
+								<small>
+									{t('Hello')}, {t('Sign in')}
+								</small>
+								<span>{t('My Account')}</span>
 							</div>
 						</a>
 					</Link>
@@ -29,7 +35,7 @@ const Header = () => {
 							</div>
 							<div className="text">
 								<small></small>
-								<span>My Cart</span>
+								<span>{t('My Cart')}</span>
 							</div>
 						</a>
 					</Link>
