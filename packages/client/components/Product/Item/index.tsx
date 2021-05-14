@@ -4,6 +4,7 @@ import Link from 'next/link';
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
 import { Root } from './ProductItem';
+import { toCurrency } from '../../../utils/formatter';
 
 type ProductItemProps = {
 	thumbnail: string;
@@ -45,7 +46,7 @@ const ProductItem: FC<ProductItemProps> = ({
 				</div>
 				<div className="info">
 					<p className="name">{name}</p>
-					<p className="price">{price}</p>
+					<p className="price">{toCurrency(price)}</p>
 				</div>
 			</div>
 			{isDesktop ? (

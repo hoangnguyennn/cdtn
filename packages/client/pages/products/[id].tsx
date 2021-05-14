@@ -1,13 +1,15 @@
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import MainLayout from '../../layouts/MainLayout';
+import PageTitle from '../../components/PageTitle';
+import ProductDetail from '../../components/Product/Detail';
 
 const ProductDetailPage = () => {
-	const router = useRouter();
-	const { id } = router.query;
+	// const router = useRouter();
+	// const { id } = router.query;
 	return (
 		<MainLayout>
-			<div>Product Detail Page</div>
-			<div>Product Id: {id}</div>
+			<PageTitle />
+			<ProductDetail />
 		</MainLayout>
 	);
 };
