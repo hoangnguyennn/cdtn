@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Root = styled.a`
 	margin-bottom: 1rem;
-	padding: 1.25rem;
 	width: 100%;
 	text-decoration: none;
 	border-bottom: 1px solid #e3e9ef;
@@ -40,6 +39,7 @@ const Root = styled.a`
 	}
 
 	@media (min-width: 992px) {
+		padding: 1.25rem;
 		border-bottom-color: transparent;
 		border-radius: 2px;
 

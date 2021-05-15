@@ -10,7 +10,7 @@ const Root = styled.div`
 	flex-direction: column;
 	align-items: stretch;
 
-	.login-form {
+	.register-form {
 		padding-top: 1rem;
 		display: flex;
 		flex-direction: column;
@@ -24,23 +24,6 @@ const Root = styled.div`
 			font-size: 1rem;
 			border: 1px solid #dae1e7;
 			border-radius: 2px;
-		}
-
-		.actions {
-			margin-top: 0.5rem;
-			margin-bottom: 0.5rem;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-
-			a {
-				color: var(--primary);
-				text-decoration: none;
-
-				&:hover {
-					color: var(--primary-hover);
-				}
-			}
 		}
 
 		.submit {
@@ -58,13 +41,19 @@ const Root = styled.div`
 		}
 	}
 
-	.sign-up {
-		padding-top: 1rem;
-		padding-bottom: 1rem;
+	.sign-in {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
 		text-align: center;
+
+		span {
+			display: inline-block;
+			margin-bottom: 0.5rem;
+		}
 
 		a {
 			color: var(--primary);
+			text-decoration: none;
 
 			&:hover {
 				color: var(--primary-hover);
@@ -73,7 +62,7 @@ const Root = styled.div`
 	}
 
 	@media (min-width: 992px) {
-		.login-form {
+		.register-form {
 			width: 40%;
 			margin-left: auto;
 			margin-right: auto;

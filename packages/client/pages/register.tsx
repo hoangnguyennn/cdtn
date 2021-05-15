@@ -2,20 +2,20 @@ import { useTranslation } from 'react-i18next';
 
 import MainLayout from '../layouts/MainLayout';
 import PageTitle from '../components/PageTitle';
-import Login from '../components/Login';
-import { loginPage } from '../configs/breadcrumb';
+import Register from '../components/Register';
+import { registerPage } from '../configs/breadcrumb';
 
-const LoginPage = () => {
+const RegisterPage = () => {
 	const { t } = useTranslation();
 
 	return (
 		<MainLayout>
-			<PageTitle breadcrumb={loginPage()} title={t('Login')} />
+			<PageTitle breadcrumb={registerPage()} title={t('Register Account')} />
 			<div className="container">
-				<Login />
+				<Register />
 			</div>
 		</MainLayout>
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;

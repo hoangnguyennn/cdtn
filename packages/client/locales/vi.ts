@@ -16,6 +16,15 @@ const vi = {
 	Logo: 'Logo',
 	Product: 'Sản phẩm',
 	Slogan: 'Nấm sạch - Niềm vui và sức khỏe',
+
+	'Not have account': 'Bạn chưa có tài khoản? Vui lòng đăng ký tài khoản mới',
+	Here: 'tại đây',
+	'Register Account': 'Đăng ký tài khoản',
+	Fullname: 'Họ tên',
+	Phone: 'Điện thoại',
+	'Confirm Password': 'Nhập lại mật khẩu',
+	Register: 'Đăng ký',
+	or: 'hoặc',
 };
 
 export default vi;
