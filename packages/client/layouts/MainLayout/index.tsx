@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const MainLayout: FC = ({ children }) => {
 	return (
@@ -7,6 +8,8 @@ const MainLayout: FC = ({ children }) => {
 			<Header />
 
 			{children}
+
+			<Footer />
 		</>
 	);
 };

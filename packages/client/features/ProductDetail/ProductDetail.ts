@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Root = styled.div`
 	margin-top: -4.875rem;
+	margin-bottom: 3rem;
 
 	.summary {
 		padding: 1rem;

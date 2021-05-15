@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import MainLayout from '../layouts/MainLayout';
 import PageTitle from '../components/PageTitle';
-import Login from '../components/Login';
+import Login from '../features/Login';
 import { loginPage } from '../configs/breadcrumb';
 
 const LoginPage = () => {

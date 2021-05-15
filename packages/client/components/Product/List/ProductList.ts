@@ -7,6 +7,8 @@ type RootProps = {
 };
 
 const Root = styled.div<RootProps>`
+	padding-bottom: 3rem;
+
 	.title {
 		margin-bottom: 0.75rem;
 		color: var(--main-text-color);
@@ -31,6 +33,7 @@ const Root = styled.div<RootProps>`
 		text-align: center;
 
 		> * {
+			display: inline-block;
 			margin-bottom: 0.5rem;
 			padding: 0.625rem 1.375rem;
 			background-color: transparent;
@@ -50,7 +53,6 @@ const Root = styled.div<RootProps>`
 
 	@media (min-width: 992px) {
 		padding-top: 1rem;
-		padding-bottom: 3rem;
 
 		.list {
 			> * {
