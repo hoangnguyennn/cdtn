@@ -5,6 +5,7 @@ const vi = {
 	'More products': 'Xem thêm',
 	'My Account': 'Tài khoản',
 	'My Cart': 'Giỏ hàng',
+	'Shop Now': 'Ăn nấm thôi !!!',
 	'Sign in': 'Đăng nhập',
 	'Trending products': 'Sản phẩm nổi bật',
 	'Your email': 'Email của bạn',
@@ -14,6 +15,7 @@ const vi = {
 	Login: 'Đăng nhập',
 	Logo: 'Logo',
 	Product: 'Sản phẩm',
+	Slogan: 'Nấm sạch - Niềm vui và sức khỏe',
 };
 
 export default vi;

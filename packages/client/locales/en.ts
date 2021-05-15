@@ -5,6 +5,7 @@ const en = {
 	'More products': 'More products',
 	'My Account': 'My Account',
 	'My Cart': 'My Cart',
+	'Shop Now': 'Shop Now',
 	'Sign in': 'Sign in',
 	'Trending products': 'Trending products',
 	'Your email': 'Your email',
@@ -14,6 +15,7 @@ const en = {
 	Login: 'Login',
 	Logo: 'Logo',
 	Product: 'Product',
+	Slogan: 'Clean mushrooms - Joy and health',
 };
 
 export default en;

@@ -32,7 +32,7 @@ const Root = styled.div<RootProps>`
 
 		> * {
 			margin-bottom: 0.5rem;
-			padding: 0.625rem 1.373rem;
+			padding: 0.625rem 1.375rem;
 			background-color: transparent;
 			color: var(--primary);
 			font-size: 1rem;

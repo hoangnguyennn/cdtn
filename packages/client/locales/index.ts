@@ -9,8 +9,8 @@ i18n.use(initReactI18next).init({
 		en: { translation: en },
 		vi: { translation: vi },
 	},
-	lng: 'en',
-	fallbackLng: 'en',
+	lng: 'vi',
+	fallbackLng: 'vi',
 });
 
 export default i18n;
