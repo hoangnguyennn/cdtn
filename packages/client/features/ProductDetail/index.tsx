@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { toCurrency } from '../../../utils/formatter';
+import { toCurrency } from '../../utils/formatter';
 
 import { Root } from './ProductDetail';
 

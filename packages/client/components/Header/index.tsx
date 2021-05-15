@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 import { Root } from './Header';
-import Logo from '../Logo';
+import Logo from '../../features/Logo';
 
 const Header = () => {
 	const { t } = useTranslation();

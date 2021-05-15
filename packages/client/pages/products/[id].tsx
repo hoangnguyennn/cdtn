@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import MainLayout from '../../layouts/MainLayout';
 import PageTitle from '../../components/PageTitle';
-import ProductDetail from '../../components/Product/Detail';
+import ProductDetail from '../../features/ProductDetail';
 import { productPage } from '../../configs/breadcrumb';
 
 const ProductDetailPage = () => {
