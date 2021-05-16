@@ -11,3 +11,9 @@ export type IProduct = {
 	thumbnail: string;
 	link?: string;
 };
+
+export type IWidget = {
+	id: string;
+	title: string;
+	url: string;
+};

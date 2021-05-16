@@ -1,4 +1,4 @@
-import { IProduct } from '../models';
+import { IProduct, IWidget } from '../models';
 
 export const trendingProducts: IProduct[] = [
 	{
@@ -49,4 +49,29 @@ export const trendingProducts: IProduct[] = [
 		name: 'Nam bao ngu tuoi',
 		price: 300000,
 	},
+];
+
+export const widgets: IWidget[][] = [
+	[
+		{
+			id: 'p1',
+			title: 'About Company',
+			url: '/',
+		},
+		{
+			id: 'p2',
+			title: 'Our Team',
+			url: '/',
+		},
+		{
+			id: 'p3',
+			title: 'Contacts',
+			url: '/',
+		},
+		{
+			id: 'p4',
+			title: 'News',
+			url: '/',
+		},
+	],
 ];
