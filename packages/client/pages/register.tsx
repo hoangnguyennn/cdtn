@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
+import { registerPage } from '../configs/breadcrumb';
 import MainLayout from '../layouts/MainLayout';
+import PageContent from '../components/PageContent';
 import PageTitle from '../components/PageTitle';
 import Register from '../features/Register';
-import { registerPage } from '../configs/breadcrumb';
 
 const RegisterPage = () => {
 	const { t } = useTranslation();
@@ -11,9 +12,9 @@ const RegisterPage = () => {
 	return (
 		<MainLayout>
 			<PageTitle breadcrumb={registerPage()} title={t('Register Account')} />
-			<div className="container">
+			<PageContent>
 				<Register />
-			</div>
+			</PageContent>
 		</MainLayout>
 	);
 };

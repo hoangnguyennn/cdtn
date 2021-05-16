@@ -6,9 +6,7 @@ type RootProps = {
 	hasTitle?: boolean;
 };
 
-const Root = styled.div<RootProps>`
-	padding-bottom: 3rem;
-
+const ProductList = styled.div<RootProps>`
 	.title {
 		margin-bottom: 0.75rem;
 		color: var(--main-text-color);
@@ -19,7 +17,7 @@ const Root = styled.div<RootProps>`
 	}
 
 	.list {
-		padding-top: ${(props) => (props.hasTitle ? '24px' : '0')};
+		padding-top: ${(props) => (props.hasTitle ? '1.5rem' : '0')};
 		display: flex;
 		flex-wrap: wrap;
 
@@ -32,22 +30,8 @@ const Root = styled.div<RootProps>`
 		padding-top: 1rem;
 		text-align: center;
 
-		> * {
-			display: inline-block;
-			margin-bottom: 0.5rem;
-			padding: 0.625rem 1.375rem;
-			background-color: transparent;
-			color: var(--primary);
-			font-size: 1rem;
+		a {
 			text-decoration: none;
-			border: 1px solid var(--primary);
-			border-radius: 2px;
-			cursor: pointer;
-
-			&:hover {
-				background-color: var(--primary);
-				color: var(--white);
-			}
 		}
 	}
 
@@ -62,4 +46,10 @@ const Root = styled.div<RootProps>`
 	}
 `;
 
-export { Root };
+ProductList.defaultProps = {
+	columns: 1,
+	'lg-columns': 5,
+	hasTitle: false,
+};
+
+export default ProductList;

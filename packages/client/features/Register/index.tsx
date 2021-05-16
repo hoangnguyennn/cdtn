@@ -1,74 +1,55 @@
-import { FormEvent, useRef } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-import { Root } from './Register';
+import Button from '../../components/core/Button';
+import Form from '../../components/core/Form';
+import FormGroup from '../../components/core/FormGroup';
+import Input from '../../components/core/Input';
 import { PATH_NAME } from '../../configs/pathName';
+
+import RegisterStyled from './Register';
 
 const Register = () => {
 	const { t } = useTranslation();
-	const fullNameRef = useRef<HTMLInputElement>(null);
-	const emailRef = useRef<HTMLInputElement>(null);
-	const phoneRef = useRef<HTMLInputElement>(null);
-	const passwordRef = useRef<HTMLInputElement>(null);
-	const confirmRef = useRef<HTMLInputElement>(null);
-
-	const handleFormSubmit = (event: FormEvent) => {
-		event.preventDefault();
-
-		console.log('submit');
-	};
 
 	return (
-		<Root>
-			<form className="register-form" onSubmit={handleFormSubmit}>
-				<input
-					ref={fullNameRef}
-					type="text"
-					className="fullname"
-					placeholder={t('Fullname')}
-					required
-				/>
-				<input
-					ref={emailRef}
-					type="text"
-					className="email"
-					placeholder={t('Your email')}
-					required
-				/>
-				<input
-					ref={phoneRef}
-					type="text"
-					className="phone"
-					placeholder={t('Phone')}
-					required
-				/>
-				<input
-					ref={passwordRef}
-					type="password"
-					className="password"
-					placeholder={t('Enter password')}
-					required
-				/>
-				<input
-					ref={confirmRef}
-					type="password"
-					className="confirm-password"
-					placeholder={t('Confirm Password')}
-					required
-				/>
-				<button type="submit" className="submit">
-					{t('Register')}
-				</button>
-			</form>
-			<div className="sign-in">
-				<span>{t('or')}</span>
-				<br />
-				<Link href={PATH_NAME.LOGIN}>
-					<a>{t('Login')}</a>
-				</Link>
-			</div>
-		</Root>
+		<RegisterStyled>
+			<Form className="register-form">
+				<FormGroup>
+					<Input />
+				</FormGroup>
+
+				<FormGroup>
+					<Input />
+				</FormGroup>
+
+				<FormGroup>
+					<Input />
+				</FormGroup>
+
+				<FormGroup>
+					<Input />
+				</FormGroup>
+
+				<FormGroup>
+					<Input />
+				</FormGroup>
+
+				<FormGroup className="submit-group">
+					<Button shadow className="submit">
+						{t('Register')}
+					</Button>
+				</FormGroup>
+
+				<FormGroup className="sign-in">
+					<span>{t('or')}</span>
+					<br />
+					<Link href={PATH_NAME.LOGIN}>
+						<a>{t('Login')}</a>
+					</Link>
+				</FormGroup>
+			</Form>
+		</RegisterStyled>
 	);
 };
 

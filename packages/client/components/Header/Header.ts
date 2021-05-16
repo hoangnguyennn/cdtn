@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import Container from '../core/Container';
 
-const Root = styled.header`
+export default styled.header`
 	padding: 0.75rem 1rem;
 	border-bottom: 1px solid #dae1e7;
 
-	.container {
+	${Container} {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -82,11 +83,9 @@ const Root = styled.header`
 	}
 
 	@media (max-width: 991.98px) {
-		.container {
+		${Container} {
 			padding-left: 0;
 			padding-right: 0;
 		}
 	}
 `;
-
-export { Root };

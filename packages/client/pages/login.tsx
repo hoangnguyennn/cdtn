@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
-import MainLayout from '../layouts/MainLayout';
-import PageTitle from '../components/PageTitle';
-import Login from '../features/Login';
 import { loginPage } from '../configs/breadcrumb';
+import Login from '../features/Login';
+import MainLayout from '../layouts/MainLayout';
+import PageContent from '../components/PageContent';
+import PageTitle from '../components/PageTitle';
 
 const LoginPage = () => {
 	const { t } = useTranslation();
@@ -11,9 +12,9 @@ const LoginPage = () => {
 	return (
 		<MainLayout>
 			<PageTitle breadcrumb={loginPage()} title={t('Login')} />
-			<div className="container">
+			<PageContent>
 				<Login />
-			</div>
+			</PageContent>
 		</MainLayout>
 	);
 };

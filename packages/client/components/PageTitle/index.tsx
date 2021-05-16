@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { IBreadcrumb } from '../../models';
 import Breadcrumb from '../Breadcrumb';
-import { Root } from './PageTitle';
+import Container from '../core/Container';
+import PageTitleStyled from './PageTitle';
 
 type PageTitleProps = {
 	breadcrumb: IBreadcrumb[];
@@ -13,12 +14,12 @@ const PageTitle: FC<PageTitleProps> = ({
 	title,
 }: PageTitleProps) => {
 	return (
-		<Root>
-			<div className="container">
+		<PageTitleStyled>
+			<Container>
 				<Breadcrumb breadcrumb={breadcrumb} />
 				<h3 className="title">{title}</h3>
-			</div>
-		</Root>
+			</Container>
+		</PageTitleStyled>
 	);
 };
 

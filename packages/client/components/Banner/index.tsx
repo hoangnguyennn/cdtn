@@ -1,25 +1,33 @@
+import { FC } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 import { PATH_NAME } from '../../configs/pathName';
-import { Root } from './Banner';
+import BannerStyled from './Banner';
+import Button from '../core/Button';
 
-const Banner = () => {
+type BannerProps = {
+	background?: string;
+};
+
+const Banner: FC<BannerProps> = ({ background }) => {
 	const { t } = useTranslation();
 
 	return (
-		<Root>
+		<BannerStyled background={background}>
 			<div className="container">
 				<div className="intro">
 					<h2 className="title">{t('Slogan')}</h2>
 					<div className="actions">
 						<Link href={PATH_NAME.PRODUCTS}>
-							<a className="button">{t('Shop Now')}</a>
+							<Button as="a" href={PATH_NAME.PRODUCTS} shadow>
+								{t('Shop Now')}
+							</Button>
 						</Link>
 					</div>
 				</div>
 			</div>
-		</Root>
+		</BannerStyled>
 	);
 };
 

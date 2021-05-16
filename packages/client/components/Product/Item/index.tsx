@@ -4,42 +4,42 @@ import { useTranslation } from 'react-i18next';
 
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
-import { Root } from './ProductItem';
-import { toCurrency } from '../../../utils/formatter';
 import { IProduct } from '../../../models';
+import { toCurrency } from '../../../utils/formatter';
+import ProductItemStyled from './ProductItem';
 
 type ProductItemProps = IProduct;
+
+const Wrap: FC<{ link?: string }> = ({ children, link }) => {
+	if (link) {
+		return (
+			<Link href={link}>
+				<ProductItemStyled href={link}>{children}</ProductItemStyled>
+			</Link>
+		);
+	}
+
+	return <ProductItemStyled as="div">{children}</ProductItemStyled>;
+};
 
 const ProductItem: FC<ProductItemProps> = ({
 	thumbnail,
 	name,
 	price,
 	link,
-}: ProductItemProps) => {
-	const { t } = useTranslation();
+}) => {
 	const isDesktop = useMatchMedia('(min-width: 992px)');
+	const { t } = useTranslation();
 
 	const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 	};
 
-	const Wrapper: FC = ({ children }) => {
-		if (link) {
-			return (
-				<Link href={link}>
-					<Root href={link}>{children}</Root>
-				</Link>
-			);
-		} else {
-			return <Root as="div">{children}</Root>;
-		}
-	};
-
 	return (
-		<Wrapper>
+		<Wrap link={link}>
 			<div className="wrap">
 				<div className="thumbnail">
-					<img src={thumbnail} alt="" />
+					<img src={thumbnail} alt={name} />
 				</div>
 				<div className="info">
 					<p className="name">{name}</p>
@@ -51,7 +51,7 @@ const ProductItem: FC<ProductItemProps> = ({
 					<button onClick={handleAddToCartClick}>{t('Add to cart')}</button>
 				</div>
 			) : null}
-		</Wrapper>
+		</Wrap>
 	);
 };
 

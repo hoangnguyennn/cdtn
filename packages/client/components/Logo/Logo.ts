@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Root = styled.div`
+export default styled.div`
 	margin-right: 0.5rem;
 	padding-top: 0.65625rem;
 	padding-bottom: 0.65625rem;
@@ -21,5 +21,3 @@ const Root = styled.div`
 		width: 142px;
 	}
 `;
-
-export { Root };

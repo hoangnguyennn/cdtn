@@ -2,10 +2,11 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-import { Root } from './ProductList';
-import ProductItem from '../Item';
 import { IProduct } from '../../../models';
 import { PATH_NAME } from '../../../configs/pathName';
+import Button from '../../core/Button';
+import ProductItem from '../Item';
+import ProductListStyled from './ProductList';
 
 type ProductListProps = {
 	columns: number;
@@ -16,7 +17,6 @@ type ProductListProps = {
 };
 
 const ProductList: FC<ProductListProps> = ({
-	columns = 5,
 	title,
 	viewMore = true,
 	items,
@@ -25,11 +25,12 @@ const ProductList: FC<ProductListProps> = ({
 	const { t } = useTranslation();
 
 	return (
-		<Root hasTitle={!!title} columns={columns} {...rest}>
+		<ProductListStyled hasTitle={!!title} {...rest}>
 			{title ? <h3 className="title">{title}</h3> : null}
 			<div className="list">
 				{items.map((product) => (
 					<ProductItem
+						id={product.id}
 						key={product.id}
 						link={`${PATH_NAME.PRODUCTS}/${product.id}`}
 						thumbnail={product.thumbnail}
@@ -40,12 +41,14 @@ const ProductList: FC<ProductListProps> = ({
 			</div>
 			{viewMore ? (
 				<div className="view-more">
-					<Link href="/products">
-						<a>{t('More products')}</a>
+					<Link href={PATH_NAME.PRODUCTS}>
+						<Button as="a" href={PATH_NAME.PRODUCTS} shadow>
+							{t('More products')}
+						</Button>
 					</Link>
 				</div>
 			) : null}
-		</Root>
+		</ProductListStyled>
 	);
 };
 

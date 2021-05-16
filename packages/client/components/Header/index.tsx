@@ -1,19 +1,21 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-import { Root } from './Header';
+import HeaderStyled from './Header';
 import Logo from '../Logo';
+import Container from '../core/Container';
+import { PATH_NAME } from '../../configs/pathName';
 
 const Header = () => {
 	const { t } = useTranslation();
 
 	return (
-		<Root>
-			<div className="container">
+		<HeaderStyled>
+			<Container>
 				<Logo />
 
 				<div className="tools">
-					<Link href="/login">
+					<Link href={PATH_NAME.LOGIN}>
 						<a className="tool-item user">
 							<div className="icon">
 								<i className="czi-user"></i>
@@ -27,7 +29,7 @@ const Header = () => {
 						</a>
 					</Link>
 
-					<Link href="/cart">
+					<Link href={PATH_NAME.CART}>
 						<a className="tool-item cart ml-3">
 							<div className="icon">
 								<i className="czi-cart"></i>
@@ -40,8 +42,8 @@ const Header = () => {
 						</a>
 					</Link>
 				</div>
-			</div>
-		</Root>
+			</Container>
+		</HeaderStyled>
 	);
 };
 

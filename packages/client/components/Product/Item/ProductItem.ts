@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Root = styled.a`
+export default styled.a`
 	margin-bottom: 1rem;
 	width: 100%;
 	text-decoration: none;
@@ -96,5 +96,3 @@ const Root = styled.a`
 		}
 	}
 `;
-
-export { Root };

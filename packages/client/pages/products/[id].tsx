@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
-import MainLayout from '../../layouts/MainLayout';
-import PageTitle from '../../components/PageTitle';
-import ProductDetail from '../../features/ProductDetail';
+
 import { productPage } from '../../configs/breadcrumb';
+import MainLayout from '../../layouts/MainLayout';
+import PageContent from '../../components/PageContent';
+import PageTitle from '../../components/PageTitle';
+import ProductSummary from '../../features/ProductSummary';
 
 const ProductDetailPage = () => {
 	const router = useRouter();
@@ -12,7 +14,9 @@ const ProductDetailPage = () => {
 	return (
 		<MainLayout>
 			<PageTitle breadcrumb={productPage(title, id as string)} title={title} />
-			<ProductDetail />
+			<PageContent>
+				<ProductSummary />
+			</PageContent>
 		</MainLayout>
 	);
 };

@@ -1,11 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
-import MainLayout from '../layouts/MainLayout';
-import PageTitle from '../components/PageTitle';
-import CartSummary from '../features/CartSummary';
-import PaymentMethod from '../features/PaymentMethod';
 import { cartPage } from '../configs/breadcrumb';
-import OrderForm from '../features/OrderForm';
+import Cart from '../features/Cart';
+import MainLayout from '../layouts/MainLayout';
+import PageContent from '../components/PageContent';
+import PageTitle from '../components/PageTitle';
 
 const CartPage = () => {
 	const { t } = useTranslation();
@@ -13,13 +12,9 @@ const CartPage = () => {
 	return (
 		<MainLayout>
 			<PageTitle breadcrumb={cartPage()} title={t('Cart')} />
-			<div className="container">
-				<CartSummary />
-				<div>
-					<OrderForm />
-					<PaymentMethod />
-				</div>
-			</div>
+			<PageContent>
+				<Cart />
+			</PageContent>
 		</MainLayout>
 	);
 };

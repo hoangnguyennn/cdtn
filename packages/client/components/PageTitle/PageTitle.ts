@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import Container from '../core/Container';
 
-const Root = styled.div`
+export default styled.div`
 	padding-top: 1.5rem;
 	padding-bottom: 5.5rem;
 	background-color: var(--dark);
 
-	.container {
+	${Container} {
 		padding: 1rem;
 	}
 
@@ -18,7 +19,7 @@ const Root = styled.div`
 	}
 
 	@media (min-width: 992px) {
-		.container {
+		${Container} {
 			display: flex;
 			flex-direction: row-reverse;
 			justify-content: space-between;
@@ -26,5 +27,3 @@ const Root = styled.div`
 		}
 	}
 `;
-
-export { Root };
