@@ -16,11 +16,11 @@ const Login = () => {
 		<LoginStyled>
 			<Form className="login-form">
 				<FormGroup>
-					<Input />
+					<Input placeholder={t('Your email')} />
 				</FormGroup>
 
 				<FormGroup>
-					<Input />
+					<Input placeholder={t('Enter password')} />
 				</FormGroup>
 
 				<FormGroup className="actions">

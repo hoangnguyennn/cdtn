@@ -16,23 +16,23 @@ const Register = () => {
 		<RegisterStyled>
 			<Form className="register-form">
 				<FormGroup>
-					<Input />
+					<Input placeholder={t('Fullname')} />
 				</FormGroup>
 
 				<FormGroup>
-					<Input />
+					<Input placeholder={t('Your email')} />
 				</FormGroup>
 
 				<FormGroup>
-					<Input />
+					<Input placeholder={t('Phone')} />
 				</FormGroup>
 
 				<FormGroup>
-					<Input />
+					<Input placeholder={t('Enter password')} />
 				</FormGroup>
 
 				<FormGroup>
-					<Input />
+					<Input placeholder={t('Confirm password')} />
 				</FormGroup>
 
 				<FormGroup className="submit-group">

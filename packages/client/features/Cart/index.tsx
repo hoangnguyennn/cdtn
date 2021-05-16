@@ -32,8 +32,8 @@ const Cart = () => {
 							</div>
 						</div>
 						<div className="actions">
-							<span className="action">Xoa</span>
-							<span className="action">Mua sau</span>
+							<span className="action">{t('Delete')}</span>
+							<span className="action">{t('Buy later')}</span>
 							<span className="price">{toCurrency(123123)}</span>
 						</div>
 					</FormGroup>
@@ -54,8 +54,8 @@ const Cart = () => {
 							</div>
 						</div>
 						<div className="actions">
-							<span className="action">Xoa</span>
-							<span className="action">Mua sau</span>
+							<span className="action">{t('Delete')}</span>
+							<span className="action">{t('Buy later')}</span>
 							<span className="price">{toCurrency(123123)}</span>
 						</div>
 					</FormGroup>
@@ -76,15 +76,15 @@ const Cart = () => {
 							</div>
 						</div>
 						<div className="actions">
-							<span className="action">Xoa</span>
-							<span className="action">Mua sau</span>
+							<span className="action">{t('Delete')}</span>
+							<span className="action">{t('Buy later')}</span>
 							<span className="price">{toCurrency(123123)}</span>
 						</div>
 					</FormGroup>
 				</div>
 				<div className="cart-summary">
 					<FormGroup>
-						<label>{t('Sub total')}</label>
+						<label>{t('Subtotal')}</label>
 						<span className="price">{toCurrency(123123)}</span>
 					</FormGroup>
 
@@ -105,23 +105,23 @@ const Cart = () => {
 					<h3 className="title">{t('Order information')}</h3>
 
 					<FormGroup>
-						<Input />
+						<Input placeholder={t('Fullname')} />
 					</FormGroup>
 
 					<FormGroup>
-						<Input />
+						<Input placeholder={t('Phone')} />
 					</FormGroup>
 
 					<FormGroup>
-						<Input />
+						<Input placeholder={t('Email address')} />
 					</FormGroup>
 
 					<FormGroup>
-						<Input />
+						<Input placeholder={t('Address')} />
 					</FormGroup>
 
 					<FormGroup>
-						<Input />
+						<Input placeholder={t('Note')} />
 					</FormGroup>
 				</div>
 

@@ -13,9 +13,9 @@ export default styled.div`
 
 	.cart-sidebar {
 		.cart-detail {
-			border-bottom: 1px solid #dae1e7;
-
 			.cart-item {
+				padding-bottom: 0.5rem;
+				border-bottom: 1px solid #dae1e7;
 				display: flex;
 
 				.thumbnail {
@@ -89,6 +89,11 @@ export default styled.div`
 					.action {
 						color: var(--main-text-color);
 						font-size: 0.8125rem;
+
+						&:hover {
+							text-decoration: underline;
+							cursor: pointer;
+						}
 					}
 
 					.price {
