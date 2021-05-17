@@ -8,12 +8,12 @@ import Button from '../../components/core/Button';
 import Form from '../../components/core/Form';
 import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
+import Invalid from '../../components/core/Invalid';
+import RegisterStyled from './Register';
 import { PATH_NAME } from '../../configs/pathName';
 
-import RegisterStyled from './Register';
 import { registerAction } from '../../redux/reducers/auth.reducer';
 import { IRegisterForm, IUserType } from '../../models';
-import Invalid from '../../components/core/Invalid';
 
 const Register = () => {
 	const { t } = useTranslation();

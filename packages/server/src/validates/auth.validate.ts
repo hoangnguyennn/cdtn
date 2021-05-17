@@ -10,3 +10,10 @@ export const registerValidator = celebrate({
 		userType: Joi.string().valid(UserTypes.CUSTOMER).required(),
 	}),
 });
+
+export const loginValidator = celebrate({
+	[Segments.BODY]: Joi.object().keys({
+		email: Joi.string().email().required(),
+		password: Joi.string().required(),
+	}),
+});

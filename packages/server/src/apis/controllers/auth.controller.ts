@@ -9,6 +9,13 @@ export const register = async (req: Request, res: Response) => {
 	commonResponse(res, serviceResponse);
 };
 
+export const login = async (req: Request, res: Response) => {
+	const login = req.body;
+	const serviceResponse = await UserService.login(login);
+	commonResponse(res, serviceResponse);
+};
+
 export default {
 	register,
+	login,
 };

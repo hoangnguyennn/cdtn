@@ -60,3 +60,15 @@ export interface IRegisterForm {
 	password: string;
 	confirmPassword: string;
 }
+
+export interface ILogin {
+	email: string;
+	password: string;
+}
+
+export interface ILoginResponse {
+	data: {
+		token: string;
+		user: IUserResponse;
+	};
+}

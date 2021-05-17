@@ -1,5 +1,7 @@
 import { HttpStatusCode } from '../interfaces/enums';
 import {
+	ILogin,
+	ILoginResponse,
 	IRegisterResponse,
 	IServiceResponse,
 	IUser,
@@ -8,6 +10,8 @@ import {
 } from '../interfaces';
 import User from '../models/user.model';
 import { NOT_FOUND, SUCCUESSFUL } from '../constants/commonResponseMessages';
+import { mapDataToUserResponse } from '../helpers/mappingResponse';
+import { encodeToken } from '../utils/token';
 
 export const getAll = async (): Promise<IServiceResponse<IUser[]>> => {
 	const users = await User.find();
@@ -116,10 +120,44 @@ export const registerAccount = async (
 	};
 };
 
+export const login = async (
+	login: ILogin
+): Promise<IServiceResponse<ILoginResponse>> => {
+	const user = await User.findOne({ email: login.email });
+
+	if (!user) {
+		return {
+			hasError: true,
+			httpStatusCode: HttpStatusCode.HTTP_404,
+			message: NOT_FOUND,
+		};
+	}
+
+	if (user.passwordHashed !== login.password) {
+		return {
+			hasError: true,
+			httpStatusCode: HttpStatusCode.HTTP_404,
+			message: NOT_FOUND,
+		};
+	}
+
+	const token = encodeToken({ userId: user._id });
+
+	return {
+		hasError: false,
+		httpStatusCode: HttpStatusCode.HTTP_200,
+		data: {
+			token,
+			user: mapDataToUserResponse(user),
+		},
+	};
+};
+
 export default {
 	getAll,
 	getById,
 	createNewUser,
 	updateUserById,
 	registerAccount,
+	login,
 };

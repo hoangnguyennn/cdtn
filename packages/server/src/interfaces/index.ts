@@ -133,3 +133,13 @@ export interface IUserResponse {
 export interface IRegisterResponse {
 	message: string;
 }
+
+export interface ILogin {
+	email: string;
+	password: string;
+}
+
+export interface ILoginResponse {
+	token: string;
+	user: IUserResponse;
+}
