@@ -1,21 +1,63 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-import { commonResponse } from '../../helpers/commonResponse';
-import UserService from '../../services/user.service';
+import { ILoginRequest, IUserRegister } from '../../interfaces';
+import { mapUserToResponse } from '../../helpers/mappingResponse';
+import { notFound, success, unauthorized } from '../../helpers/commonResponse';
+import AuthService from '../../services/auth.service';
+import { generate } from '../../utils/token';
+import { IUser } from '../../interfaces/IDocuments';
 
-export const register = async (req: Request, res: Response) => {
-	const user = req.body;
-	const serviceResponse = await UserService.registerAccount(user);
-	commonResponse(res, serviceResponse);
+export const registerAccountController = async (
+	req: Request,
+	res: Response
+) => {
+	const userRequest: IUserRegister = req.body;
+	userRequest.passwordHashed = userRequest.password;
+
+	const userCreated = await AuthService.registerAccountService(userRequest);
+
+	return success(res, mapUserToResponse(userCreated));
 };
 
-export const login = async (req: Request, res: Response) => {
-	const login = req.body;
-	const serviceResponse = await UserService.login(login);
-	commonResponse(res, serviceResponse);
+export const loginController = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const userRequest: ILoginRequest = req.body;
+
+	const loginServiceResponse = await AuthService.loginService(userRequest);
+	if (loginServiceResponse.hasError) {
+		return notFound(next, loginServiceResponse.message || '');
+	}
+
+	const user = loginServiceResponse.data as IUser;
+	const token = generate({ userId: user._id });
+
+	return success(res, {
+		token,
+		user: mapUserToResponse(user),
+	});
+};
+
+export const getCurrentUserController = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const { userId } = res.locals;
+
+	const user = await AuthService.getCurrentUserService(userId);
+
+	if (!user) {
+		return unauthorized(next);
+	}
+
+	return success(res, mapUserToResponse(user));
 };
 
 export default {
-	register,
-	login,
+	registerAccountController,
+	loginController,
+	getCurrentUserController,
 };

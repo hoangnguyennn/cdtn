@@ -1,15 +1,16 @@
-import Router from 'next/router';
 import { createSlice, createSelector, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { IAuth, IUserRegister, IRootState, ILogin } from '../../models';
+import Router from 'next/router';
 
-import { registerApi, loginApi } from '../../apis/auth.api';
+import { IAuth, IRootState } from '../../interfaces/IState';
+import { ILogin, IUserRegister } from '../../interfaces';
+import { login, loginByToken, registerAccount } from '../../apis/auth.api';
 import { PATH_NAME } from '../../configs/pathName';
 
 const initialState: IAuth = {
 	token: '',
 	user: {
-		_id: '',
+		id: '',
 		email: '',
 		fullName: '',
 		address: '',
@@ -26,51 +27,68 @@ const AuthSlice = createSlice({
 		setUserSuccessful: (state: IAuth, action) => {
 			state.token = action.payload.token;
 			state.user = action.payload.user;
-			state.message = action.payload.message;
 			state.hasError = false;
 		},
-
-		setUserFailed: (state: IAuth, action) => {
-			state.message = action.payload.message;
+		setUserFailed: (state: IAuth) => {
 			state.hasError = true;
+		},
+		clearUser: (state: IAuth) => {
+			state.token = initialState.token;
+			state.user = initialState.user;
+			state.message = initialState.message;
+			state.hasError = initialState.hasError;
 		},
 	},
 });
 
-const { setUserSuccessful, setUserFailed } = AuthSlice.actions;
+const { setUserSuccessful, setUserFailed, clearUser } = AuthSlice.actions;
 
-const registerAction = (user: IUserRegister) => async (dispatch: Dispatch) => {
+const registerAccountAction = (userRegister: IUserRegister) => async () => {
 	try {
-		await registerApi(user);
+		await registerAccount(userRegister);
 		Router.push(PATH_NAME.LOGIN);
-	} catch (e) {
-		const message = e.response?.data?.message || e.message;
-		toast.error(message);
-		dispatch(setUserFailed({ message }));
+	} catch (err) {
+		toast.error(err.message);
 	}
 };
 
 const loginAction = (userLogin: ILogin) => async (dispatch: Dispatch) => {
 	try {
-		const res = await loginApi(userLogin);
-		dispatch(setUserSuccessful(res.data));
+		const loginResponse = await login(userLogin);
+		dispatch(setUserSuccessful(loginResponse));
+		window.localStorage.setItem('access-token', loginResponse.token);
 		Router.push(PATH_NAME.HOME);
-	} catch (e) {
-		const message = e.response?.data?.message || e.message;
-		toast.error(message);
-		dispatch(setUserFailed({ message }));
+	} catch (err) {
+		toast.error(err.message);
+		dispatch(setUserFailed());
 	}
 };
 
+const loginByTokenAction = () => async (dispatch: Dispatch) => {
+	const token = localStorage.getItem('access-token');
+	if (!token) {
+		dispatch(clearUser());
+		localStorage.removeItem('access-token');
+		return;
+	}
+
+	try {
+		const userResponse = await loginByToken(token);
+		dispatch(setUserSuccessful({ token, user: userResponse }));
+	} catch {
+		localStorage.removeItem('access-token');
+		dispatch(setUserFailed());
+	}
+};
+
+export { registerAccountAction, loginAction, loginByTokenAction };
+
 const authState = (state: IRootState) => state.auth;
+const selector = function <T>(combiner: { (state: IAuth): T }) {
+	return createSelector(authState, combiner);
+};
 
-export const getMessage = createSelector(authState, (state) => state.message);
-export const getHasError = createSelector(authState, (state) => state.hasError);
-export const getUserFullname = createSelector(
-	authState,
-	(state) => state.user.fullName
-);
-
-export { registerAction, loginAction };
+export const getFullName = selector((state) => state.user.fullName);
+export const getToken = selector((state) => state.token);
 
 export default AuthSlice.reducer;

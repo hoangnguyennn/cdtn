@@ -1,12 +1,10 @@
 import { Application } from 'express';
 
-import expressLoader from './express';
 import mongooseLoader from './mongoose';
+import expressLoader from './express';
 
-export default async ({ app }: { app: Application }): Promise<void> => {
-	// load mongoose
+export default async (app: Application) => {
 	await mongooseLoader();
 
-	// load express
-	expressLoader({ app });
+	await expressLoader(app);
 };

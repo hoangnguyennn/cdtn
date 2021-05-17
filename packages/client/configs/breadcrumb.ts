@@ -1,6 +1,6 @@
-import i18n from '../locales';
-import { IBreadcrumb } from '../models';
+import { IBreadcrumb } from '../interfaces';
 import { PATH_NAME } from './pathName';
+import i18n from '../locales';
 
 export const productsPage = (): IBreadcrumb[] => [
 	{ id: 'p1', name: i18n.t('Home'), url: PATH_NAME.HOME },

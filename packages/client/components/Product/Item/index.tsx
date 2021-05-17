@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
-import { IProduct } from '../../../models';
+import { IProduct } from '../../../interfaces';
 import { toCurrency } from '../../../utils/formatter';
 import ProductItemStyled from './ProductItem';
 

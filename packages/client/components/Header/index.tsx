@@ -1,16 +1,17 @@
-import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
+import Container from '../core/Container';
 import HeaderStyled from './Header';
 import Logo from '../Logo';
-import Container from '../core/Container';
+
+import { getFullName } from '../../redux/reducers/auth.reducer';
 import { PATH_NAME } from '../../configs/pathName';
-import { useSelector } from 'react-redux';
-import { getUserFullname } from '../../redux/reducers/auth.reducer';
 
 const Header = () => {
 	const { t } = useTranslation();
-	const fullname = useSelector(getUserFullname);
+	const fullName = useSelector(getFullName);
 
 	return (
 		<HeaderStyled>
@@ -18,14 +19,14 @@ const Header = () => {
 				<Logo />
 
 				<div className="tools">
-					{fullname ? (
+					{fullName ? (
 						<div className="tool-item user">
 							<div className="icon">
 								<i className="czi-user"></i>
 							</div>
 							<div className="text ml-n2">
 								<small>{t('My Account')}</small>
-								<span>{fullname}</span>
+								<span>{fullName}</span>
 							</div>
 						</div>
 					) : (

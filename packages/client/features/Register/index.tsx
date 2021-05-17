@@ -1,26 +1,26 @@
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
+import Link from 'next/link';
 
+import { PATH_NAME } from '../../configs/pathName';
 import Button from '../../components/core/Button';
 import Form from '../../components/core/Form';
 import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 import RegisterStyled from './Register';
-import { PATH_NAME } from '../../configs/pathName';
 
-import { registerAction } from '../../redux/reducers/auth.reducer';
-import { IRegisterForm, IUserType } from '../../models';
+import { IRegisterForm } from '../../interfaces';
+import { registerAccountAction } from '../../redux/reducers/auth.reducer';
 
 const Register = () => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
 	const initialValues: IRegisterForm = {
-		fullname: '',
+		fullName: '',
 		email: '',
 		phone: '',
 		password: '',
@@ -28,29 +28,22 @@ const Register = () => {
 	};
 
 	const validationSchema = Yup.object({
-		fullname: Yup.string().required(t('Fullname is required')),
-		email: Yup.string()
-			.email(t('Invalid email'))
-			.required(t('Email is required')),
-		phone: Yup.string().required(t('Phone is required')),
-		password: Yup.string().required(t('Password is required')),
+		fullName: Yup.string().required(),
+		email: Yup.string().email().required(),
+		phone: Yup.string().required(),
+		password: Yup.string().required(),
 		confirmPassword: Yup.string()
-			.oneOf(
-				[Yup.ref('password')],
-				t('Confirm password must be equal to password')
-			)
-			.required(t('Confirm password is required')),
+			.oneOf([Yup.ref('password')])
+			.required(),
 	});
 
-	const handleSubmit = async (values: IRegisterForm, { setSubmitting }) => {
-		console.log('submit');
+	const handleSubmit = (values: IRegisterForm, { setSubmitting }) => {
 		dispatch(
-			registerAction({
+			registerAccountAction({
+				fullName: values.fullName,
 				email: values.email,
-				fullName: values.fullname,
-				passwordHashed: values.password,
 				phone: values.phone,
-				userType: IUserType.CUSTOMER,
+				password: values.password,
 			})
 		);
 
@@ -58,8 +51,8 @@ const Register = () => {
 	};
 
 	const formik = useFormik({
-		initialValues: initialValues,
-		validationSchema: validationSchema,
+		initialValues,
+		validationSchema,
 		validateOnChange: false,
 		validateOnBlur: false,
 		onSubmit: handleSubmit,
@@ -70,15 +63,15 @@ const Register = () => {
 			<Form className="register-form" onSubmit={formik.handleSubmit}>
 				<FormGroup>
 					<Input
-						value={formik.values.fullname}
-						name="fullname"
+						value={formik.values.fullName}
+						name="fullName"
 						required
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						placeholder={t('Fullname')}
 					/>
-					{formik.errors.fullname ? (
-						<Invalid>{formik.errors.fullname}</Invalid>
+					{formik.errors.fullName ? (
+						<Invalid>{formik.errors.fullName}</Invalid>
 					) : null}
 				</FormGroup>
 

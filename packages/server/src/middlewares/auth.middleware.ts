@@ -1,81 +1,20 @@
-import { NextFunction, Request, Response } from 'express';
-import {
-	FORBIDDEN,
-	INVALID_TOKEN,
-	UNAUTHORIZED,
-} from '../constants/commonResponseMessages';
-import { commonResponse } from '../helpers/commonResponse';
-import { HttpStatusCode, UserTypes } from '../interfaces/enums';
-import { decodeToken } from '../utils/token';
+import { Request, Response, NextFunction } from 'express';
+import { COMMON_MESSAGE, unauthorized } from '../helpers/commonResponse';
+import { decode } from '../utils/token';
 
-export const checkAuth = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-): void => {
+export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 	const token = req.headers.authorization;
 
 	if (!token) {
-		commonResponse(res, {
-			hasError: true,
-			httpStatusCode: HttpStatusCode.HTTP_401,
-			message: UNAUTHORIZED,
-		});
-
-		return;
+		return unauthorized(next, COMMON_MESSAGE.UNAUTHORIZED);
 	}
 
-	const decode = decodeToken(token);
-	if (!decode.isValid) {
-		commonResponse(res, {
-			hasError: true,
-			httpStatusCode: HttpStatusCode.HTTP_401,
-			message: INVALID_TOKEN,
-		});
+	const decoded = decode(token);
 
-		return;
+	if (!decoded) {
+		return unauthorized(next, COMMON_MESSAGE.INVALID_TOKEN);
 	}
 
-	res.locals.userId = decode.payload.userId;
-	next();
-	return;
-};
-
-export const checkUserType = (userType: UserTypes) => {
-	return (req: Request, res: Response, next: NextFunction) => {
-		if (userType === UserTypes.ADMIN) {
-			next();
-			return;
-		}
-
-		next();
-		return;
-	};
-};
-
-export const checkSameUser = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	const { userId } = res.locals;
-	const { id } = req.params;
-
-	if (userId === id) {
-		next();
-		return;
-	}
-
-	commonResponse(res, {
-		hasError: true,
-		httpStatusCode: HttpStatusCode.HTTP_403,
-		message: FORBIDDEN,
-	});
-
-	return;
-};
-
-export default {
-	checkAuth,
-	checkUserType,
+	res.locals.userId = decoded.userId;
+	return next();
 };

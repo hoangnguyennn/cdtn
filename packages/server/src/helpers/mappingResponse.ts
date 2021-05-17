@@ -1,11 +1,12 @@
-import { IUser, IUserResponse } from '../interfaces';
+import { IUserResponse } from '../interfaces';
+import { IUser } from '../interfaces/IDocuments';
 
-export const mapDataToUserResponse = (user: IUser): IUserResponse => {
+export const mapUserToResponse = (user: IUser): IUserResponse => {
 	return {
-		_id: user._id,
-		fullName: user.fullName,
-		address: user.address,
+		id: user._id,
 		email: user.email,
+		fullName: user.fullName,
 		phone: user.phone,
+		address: user.address,
 	};
 };

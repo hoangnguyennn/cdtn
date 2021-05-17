@@ -1,29 +1,18 @@
-import jwt from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
+import { IPayload } from '../interfaces';
 import configs from '../configs';
-import { IDecodeToken, IPayload } from '../interfaces';
 
-export const encodeToken = (payload: IPayload) => {
-	return jwt.sign(payload, configs.tokenSecret, {
+export const generate = (payload: IPayload) => {
+	return sign(payload, configs.tokenSecret, {
 		expiresIn: configs.tokenExpiresIn,
 	});
 };
 
-export const decodeToken = (token: string): IDecodeToken => {
+export const decode = (token: string): IPayload | null => {
 	try {
-		const decode = jwt.verify(token, configs.tokenSecret);
-		return {
-			isValid: true,
-			payload: decode as IPayload,
-		};
-	} catch (e) {
-		return {
-			isValid: false,
-			payload: {} as IPayload,
-		};
+		const decoded = verify(token, configs.tokenSecret) as IPayload;
+		return decoded;
+	} catch {
+		return null;
 	}
-};
-
-export default {
-	encodeToken,
-	decodeToken,
 };

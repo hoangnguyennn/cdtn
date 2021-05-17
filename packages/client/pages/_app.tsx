@@ -1,9 +1,10 @@
-import type { AppProps } from 'next/app';
-import Router from 'next/router';
-import NProgress from 'nprogress';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import NProgress from 'nprogress';
+import Router from 'next/router';
+import type { AppProps } from 'next/app';
 
+import Auth from '../guards/Auth';
 import store from '../redux/store';
 
 import '../locales';
@@ -19,7 +20,9 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	return (
 		<Provider store={store}>
-			<Component {...pageProps} />
+			<Auth>
+				<Component {...pageProps} />
+			</Auth>
 			<ToastContainer />
 		</Provider>
 	);

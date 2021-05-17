@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { IBreadcrumb } from '../../models';
+
+import { IBreadcrumb } from '../../interfaces';
 import Breadcrumb from '../Breadcrumb';
 import Container from '../core/Container';
 import PageTitleStyled from './PageTitle';

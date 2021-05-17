@@ -1,7 +1,8 @@
 import { celebrate, Joi, Segments } from 'celebrate';
+
 import { UserTypes } from '../interfaces/enums';
 
-export const registerValidator = celebrate({
+export const registerValidate = celebrate({
 	[Segments.BODY]: Joi.object().keys({
 		email: Joi.string().email().required(),
 		passwordHashed: Joi.string().required(),
@@ -11,7 +12,7 @@ export const registerValidator = celebrate({
 	}),
 });
 
-export const loginValidator = celebrate({
+export const loginValidate = celebrate({
 	[Segments.BODY]: Joi.object().keys({
 		email: Joi.string().email().required(),
 		password: Joi.string().required(),

@@ -1,8 +1,9 @@
-import Link from 'next/link';
 import { FC } from 'react';
 import classnames from 'classnames';
-import { IBreadcrumb } from '../../models';
-import { Root } from './Breadcrumb';
+import Link from 'next/link';
+
+import { IBreadcrumb } from '../../interfaces';
+import BreadcrumbStyled from './Breadcrumb';
 
 type BreadcrumbProps = {
 	breadcrumb: IBreadcrumb[];
@@ -12,7 +13,7 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ breadcrumb }: BreadcrumbProps) => {
 	const lastIndex = breadcrumb.length - 1;
 
 	return (
-		<Root>
+		<BreadcrumbStyled>
 			<ul className="list">
 				{breadcrumb.map((item, index) => {
 					return (
@@ -39,7 +40,7 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ breadcrumb }: BreadcrumbProps) => {
 					);
 				})}
 			</ul>
-		</Root>
+		</BreadcrumbStyled>
 	);
 };
 

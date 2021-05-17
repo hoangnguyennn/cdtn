@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-import { IProduct } from '../../../models';
+import { IProduct } from '../../../interfaces';
 import { PATH_NAME } from '../../../configs/pathName';
 import Button from '../../core/Button';
 import ProductItem from '../Item';

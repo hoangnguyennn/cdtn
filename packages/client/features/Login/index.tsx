@@ -1,7 +1,10 @@
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
+import Link from 'next/link';
 
 import Button from '../../components/core/Button';
 import Form from '../../components/core/Form';
@@ -11,13 +14,14 @@ import Invalid from '../../components/core/Invalid';
 import LoginStyled from './Login';
 import { PATH_NAME } from '../../configs/pathName';
 
-import { ILogin } from '../../models';
-import { loginAction } from '../../redux/reducers/auth.reducer';
-import { useDispatch } from 'react-redux';
+import { ILogin } from '../../interfaces';
+import { getToken, loginAction } from '../../redux/reducers/auth.reducer';
 
 const Login = () => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
+	const router = useRouter();
+	const token = useSelector(getToken);
 
 	const initialValues: ILogin = {
 		email: '',
@@ -25,21 +29,12 @@ const Login = () => {
 	};
 
 	const validationSchema = Yup.object({
-		email: Yup.string()
-			.email(t('Invalid email'))
-			.required(t('Email is required')),
-		password: Yup.string().required(t('Password is required')),
+		email: Yup.string().required(),
+		password: Yup.string().required(),
 	});
 
-	const handleSubmit = async (values: ILogin, { setSubmitting }) => {
-		console.log('submit');
-		dispatch(
-			loginAction({
-				email: values.email,
-				password: values.password,
-			})
-		);
-
+	const handleSubmit = (values: ILogin, { setSubmitting }) => {
+		dispatch(loginAction(values));
 		setSubmitting(false);
 	};
 
@@ -50,6 +45,12 @@ const Login = () => {
 		validateOnBlur: false,
 		onSubmit: handleSubmit,
 	});
+
+	useEffect(() => {
+		if (token) {
+			router.push(PATH_NAME.HOME);
+		}
+	}, [token]);
 
 	return (
 		<LoginStyled>

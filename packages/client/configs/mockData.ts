@@ -1,4 +1,4 @@
-import { IProduct, IWidget } from '../models';
+import { IProduct, IWidget } from '../interfaces';
 
 export const trendingProducts: IProduct[] = [
 	{

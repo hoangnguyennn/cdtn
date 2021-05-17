@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Root = styled.div`
+export default styled.div`
 	margin-bottom: 1rem;
 
 	.list {
@@ -38,5 +38,3 @@ const Root = styled.div`
 		margin-bottom: 0;
 	}
 `;
-
-export { Root };
