@@ -25,7 +25,7 @@ export const checkAuth = (
 		return;
 	}
 
-	const decode = decodeToken();
+	const decode = decodeToken(token);
 	if (!decode.isValid) {
 		commonResponse(res, {
 			hasError: true,
@@ -36,7 +36,7 @@ export const checkAuth = (
 		return;
 	}
 
-	res.locals.userId = decode.userId;
+	res.locals.userId = decode.payload.userId;
 	next();
 	return;
 };

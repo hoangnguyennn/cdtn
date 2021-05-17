@@ -1,12 +1,13 @@
 import { HttpStatusCode } from '../interfaces/enums';
 import {
+	IRegisterResponse,
 	IServiceResponse,
 	IUser,
 	IUserCreate,
 	IUserUpdate,
 } from '../interfaces';
 import User from '../models/user.model';
-import { NOT_FOUND } from '../constants/commonResponseMessages';
+import { NOT_FOUND, SUCCUESSFUL } from '../constants/commonResponseMessages';
 
 export const getAll = async (): Promise<IServiceResponse<IUser[]>> => {
 	const users = await User.find();
@@ -94,9 +95,31 @@ export const updateUserById = async (
 	};
 };
 
+export const registerAccount = async (
+	user: IUserCreate
+): Promise<IServiceResponse<IRegisterResponse>> => {
+	await User.create({
+		email: user.email,
+		passwordHashed: user.passwordHashed,
+		fullName: user.fullName,
+		address: user.address || '',
+		phone: user.phone,
+		userType: user.userType,
+	});
+
+	return {
+		hasError: false,
+		httpStatusCode: HttpStatusCode.HTTP_200,
+		data: {
+			message: SUCCUESSFUL,
+		},
+	};
+};
+
 export default {
 	getAll,
 	getById,
 	createNewUser,
 	updateUserById,
+	registerAccount,
 };

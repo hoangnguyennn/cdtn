@@ -39,6 +39,14 @@ const vi = {
 	Slogan: 'Nấm sạch - Niềm vui và sức khỏe',
 	Subtotal: 'Tạm tính',
 	Total: 'Tổng cộng',
+
+	'Fullname is required': 'Vui lòng nhập email',
+	'Invalid email': 'Email không hợp lệ',
+	'Email is required': 'Vui lòng nhập email',
+	'Phone is required': 'Vui lòng nhập số điện thoại',
+	'Password is required': 'Vui lòng nhập mật khẩu',
+	'Confirm password is required': 'Vui lòng nhập lại mật khẩu',
+	'Confirm password must be equal to password': 'Mật khẩu không trùng hợp',
 };
 
 export default vi;

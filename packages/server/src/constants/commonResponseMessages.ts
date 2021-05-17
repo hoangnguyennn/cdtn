@@ -3,6 +3,7 @@ export const INTERNAL_SERVER_ERROR = 'Internal Server Error';
 export const UNAUTHORIZED = 'Unauthorized';
 export const INVALID_TOKEN = 'Invalid Token';
 export const FORBIDDEN = 'Forbidden';
+export const SUCCUESSFUL = 'Successful';
 
 export default {
 	NOT_FOUND,
@@ -10,4 +11,5 @@ export default {
 	UNAUTHORIZED,
 	INVALID_TOKEN,
 	FORBIDDEN,
+	SUCCUESSFUL,
 };

@@ -112,3 +112,24 @@ export type IUserUpdate = Partial<
 export interface AsyncFunction<T = any> {
 	(req: Request, res: Response, next?: NextFunction): Promise<T>;
 }
+
+export interface IPayload {
+	userId: string;
+}
+
+export interface IDecodeToken {
+	isValid: boolean;
+	payload: IPayload;
+}
+
+export interface IUserResponse {
+	_id: string;
+	email: string;
+	fullName: string;
+	address: string;
+	phone: string;
+}
+
+export interface IRegisterResponse {
+	message: string;
+}
