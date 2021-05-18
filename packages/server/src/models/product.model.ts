@@ -1,8 +1,6 @@
 import { model, Schema, Types } from 'mongoose';
-
-import { IProduct } from '../interfaces';
-import { ProductStatuses } from '../interfaces/enums';
-import Names from '../constants/databaseCollectionNames';
+import { CollectionNames, ProductStatuses } from '../interfaces/enums';
+import { IProduct } from '../interfaces/IDocuments';
 
 const productSchema = new Schema<IProduct>({
 	name: {
@@ -15,16 +13,17 @@ const productSchema = new Schema<IProduct>({
 	},
 	unit: {
 		type: Types.ObjectId,
-		ref: Names.PRODUCT_UNIT,
+		ref: CollectionNames.PRODUCT_UNIT,
 		required: true,
 	},
-	description: String,
+	description: {
+		type: String,
+	},
 	status: {
 		type: String,
 		enum: ProductStatuses,
-		default: ProductStatuses.TRADING,
+		default: ProductStatuses.NOT_SELLING,
 	},
 });
 
-const Product = model<IProduct>(Names.PRODUCT, productSchema);
-export default Product;
+export default model<IProduct>(CollectionNames.PRODUCT, productSchema);

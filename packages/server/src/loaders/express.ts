@@ -1,11 +1,10 @@
 import { Application, json, urlencoded } from 'express';
 import { errors } from 'celebrate';
 import cors from 'cors';
+import routers from '../apis/routes';
+import { notFound } from '../helpers/commonResponse';
 
-import routes from '../apis/routes';
-import notFound from '../helpers/notFound';
-
-export default ({ app }: { app: Application }): void => {
+export default async (app: Application) => {
 	// load middlewares
 	app.use(cors());
 	app.use(json());
@@ -15,14 +14,13 @@ export default ({ app }: { app: Application }): void => {
 		return res.send('Hello');
 	});
 
-	// load api routes
-	app.use(routes);
+	// load routes
+	app.use(routers);
 
-	// load handle celebrate error
+	// load error handler
+	// celebrate error handler
 	app.use(errors());
 
-	// load handle 404 error
-	app.use(notFound);
-
-	// load common error
+	// not found error handler
+	app.use((req, res, next) => notFound(next));
 };

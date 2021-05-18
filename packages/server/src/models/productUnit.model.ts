@@ -1,14 +1,16 @@
 import { model, Schema } from 'mongoose';
-
-import { IProductUnit } from '../interfaces';
-import Names from '../constants/databaseCollectionNames';
+import { CollectionNames } from '../interfaces/enums';
+import { IProductUnit } from '../interfaces/IDocuments';
 
 const productUnitSchema = new Schema<IProductUnit>({
 	name: {
 		type: String,
+		unique: true,
 		required: true,
 	},
 });
 
-const ProductUnit = model<IProductUnit>(Names.PRODUCT_UNIT, productUnitSchema);
-export default ProductUnit;
+export default model<IProductUnit>(
+	CollectionNames.PRODUCT_UNIT,
+	productUnitSchema
+);

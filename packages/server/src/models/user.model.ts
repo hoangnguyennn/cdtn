@@ -1,8 +1,6 @@
 import { model, Schema } from 'mongoose';
-
-import { IUser } from '../interfaces';
-import { UserTypes } from '../interfaces/enums';
-import Names from '../constants/databaseCollectionNames';
+import { CollectionNames, UserTypes } from '../interfaces/enums';
+import { IUser } from '../interfaces/IDocuments';
 
 const userSchema = new Schema<IUser>({
 	email: {
@@ -18,10 +16,13 @@ const userSchema = new Schema<IUser>({
 		type: String,
 		required: true,
 	},
-	address: String,
 	phone: {
 		type: String,
+		unique: true,
 		required: true,
+	},
+	address: {
+		type: String,
 	},
 	userType: {
 		type: String,
@@ -31,9 +32,7 @@ const userSchema = new Schema<IUser>({
 	isActivated: {
 		type: Boolean,
 		default: function () {
-			const userType = (this as any)['userType']
-				? (this as any)['userType']
-				: UserTypes.MANAGER;
+			const userType = (this as any)['userType'] || UserTypes.MANAGER;
 
 			if (userType === UserTypes.MANAGER) {
 				return false;
@@ -46,5 +45,4 @@ const userSchema = new Schema<IUser>({
 	},
 });
 
-const User = model<IUser>(Names.USER, userSchema);
-export default User;
+export default model<IUser>(CollectionNames.USER, userSchema);
