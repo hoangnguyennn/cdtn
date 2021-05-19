@@ -15,13 +15,6 @@ export interface IPayload {
 	userId: string;
 }
 
-export interface IProductTrendingResponse {
-	id: string;
-	name: string;
-	price: number;
-	image: string;
-}
-
 export interface IUserRegisterRequest {
 	email: string;
 	password: string;
