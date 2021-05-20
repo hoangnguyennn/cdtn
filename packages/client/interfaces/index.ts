@@ -22,6 +22,16 @@ export interface IProduct {
 	link?: string;
 }
 
+export interface IProductResponse {
+	id: string;
+	name: string;
+	price: number;
+	unit: string;
+	description?: string;
+	status: string;
+	images: string[];
+}
+
 export interface IRegisterForm extends IUserRegister {
 	confirmPassword: string;
 }

@@ -5,7 +5,7 @@ import Router from 'next/router';
 import type { AppProps } from 'next/app';
 
 import Auth from '../guards/Auth';
-import store from '../redux/store';
+import useStore from '../redux/store';
 
 import '../locales';
 import '../assets/styles/index.scss';
@@ -18,6 +18,8 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+	const store = useStore(pageProps.initialReduxState);
+
 	return (
 		<Provider store={store}>
 			<Auth>

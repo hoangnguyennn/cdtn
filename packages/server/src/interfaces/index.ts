@@ -1,4 +1,5 @@
-import { UserTypes } from './enums';
+import { Types } from 'mongoose';
+import { ProductStatuses, UserTypes } from './enums';
 
 export interface ILoginRequest {
 	email: string;
@@ -13,6 +14,33 @@ export interface IServiceCommonResponse<T> {
 
 export interface IPayload {
 	userId: string;
+}
+
+export interface IProductImageRequest {
+	productId: Types.ObjectId | string;
+	imageUrl: string;
+}
+
+export interface IProductRequest {
+	name: string;
+	price: number;
+	unit: Types.ObjectId;
+	description?: string;
+	status?: ProductStatuses;
+}
+
+export interface IProductResponse {
+	id: string;
+	name: string;
+	price: number;
+	unit: string;
+	description?: string;
+	status: ProductStatuses;
+	images: string[];
+}
+
+export interface IProductUnitRequest {
+	name: string;
 }
 
 export interface IUserRegisterRequest {

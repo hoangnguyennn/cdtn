@@ -4,4 +4,5 @@ export const ENDPOINT = {
 	login: '/auth/login',
 	me: '/auth/me',
 	register: '/auth/register',
+	trendingProducts: '/products/trending',
 };

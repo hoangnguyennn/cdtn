@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-import { IProduct } from '../../../interfaces';
+import { IProductResponse } from '../../../interfaces';
 import { PATH_NAME } from '../../../configs/pathName';
 import Button from '../../core/Button';
 import ProductItem from '../Item';
@@ -13,7 +13,7 @@ type ProductListProps = {
 	'lg-columns': number;
 	title?: string;
 	viewMore?: boolean;
-	items: IProduct[];
+	items: IProductResponse[];
 };
 
 const ProductList: FC<ProductListProps> = ({
@@ -33,7 +33,7 @@ const ProductList: FC<ProductListProps> = ({
 						id={product.id}
 						key={product.id}
 						link={`${PATH_NAME.PRODUCTS}/${product.id}`}
-						thumbnail={product.thumbnail}
+						thumbnail={product.images[0]}
 						name={product.name}
 						price={product.price}
 					/>

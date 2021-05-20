@@ -1,6 +1,7 @@
 import { Application, json, urlencoded } from 'express';
 import { errors } from 'celebrate';
 import cors from 'cors';
+
 import routers from '../apis/routes';
 import { notFound } from '../helpers/commonResponse';
 

@@ -11,7 +11,7 @@ const productSchema = new Schema<IProduct>({
 		type: Number,
 		required: true,
 	},
-	unit: {
+	unitId: {
 		type: Types.ObjectId,
 		ref: CollectionNames.PRODUCT_UNIT,
 		required: true,
@@ -24,6 +24,29 @@ const productSchema = new Schema<IProduct>({
 		enum: ProductStatuses,
 		default: ProductStatuses.NOT_SELLING,
 	},
+	imagesId: [
+		{
+			type: Types.ObjectId,
+			ref: CollectionNames.PRODUCT_IMAGE,
+			default: [],
+		},
+	],
 });
+
+productSchema.virtual('unit', {
+	ref: CollectionNames.PRODUCT_UNIT,
+	localField: 'unitId',
+	foreignField: '_id',
+	justOne: true,
+});
+
+productSchema.virtual('images', {
+	ref: CollectionNames.PRODUCT_IMAGE,
+	localField: 'imagesId',
+	foreignField: '_id',
+});
+
+productSchema.set('toObject', { virtuals: true });
+productSchema.set('toJSON', { virtuals: true });
 
 export default model<IProduct>(CollectionNames.PRODUCT, productSchema);

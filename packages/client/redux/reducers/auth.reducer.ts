@@ -2,12 +2,12 @@ import { createSlice, createSelector, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import Router from 'next/router';
 
-import { IAuth, IRootState } from '../../interfaces/IState';
+import { IAuthState, IRootState } from '../../interfaces/IState';
 import { ILogin, IUserRegister } from '../../interfaces';
 import { login, loginByToken, registerAccount } from '../../apis/auth.api';
 import { PATH_NAME } from '../../configs/pathName';
 
-const initialState: IAuth = {
+const initialState: IAuthState = {
 	token: '',
 	user: {
 		id: '',
@@ -24,15 +24,15 @@ const AuthSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		setUserSuccessful: (state: IAuth, action) => {
+		setUserSuccessful: (state: IAuthState, action) => {
 			state.token = action.payload.token;
 			state.user = action.payload.user;
 			state.hasError = false;
 		},
-		setUserFailed: (state: IAuth) => {
+		setUserFailed: (state: IAuthState) => {
 			state.hasError = true;
 		},
-		clearUser: (state: IAuth) => {
+		clearUser: (state: IAuthState) => {
 			state.token = initialState.token;
 			state.user = initialState.user;
 			state.message = initialState.message;
@@ -84,7 +84,7 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 export { registerAccountAction, loginAction, loginByTokenAction };
 
 const authState = (state: IRootState) => state.auth;
-const selector = function <T>(combiner: { (state: IAuth): T }) {
+const selector = function <T>(combiner: { (state: IAuthState): T }) {
 	return createSelector(authState, combiner);
 };
 

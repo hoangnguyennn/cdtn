@@ -5,13 +5,15 @@ import { ProductStatuses, UserTypes } from './enums';
 export interface IProduct extends Document {
 	name: string;
 	price: number;
-	unit: Types.ObjectId | IProductUnit;
+	unitId: Types.ObjectId;
+	unit?: IProductUnit;
 	description?: string;
 	status: ProductStatuses;
+	imagesId: Types.ObjectId[];
+	images?: IProductImage[];
 }
 
 export interface IProductImage extends Document {
-	productId: Types.ObjectId;
 	imageUrl: string;
 }
 
