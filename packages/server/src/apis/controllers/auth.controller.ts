@@ -6,6 +6,7 @@ import { notFound, success, unauthorized } from '../../helpers/commonResponse';
 import AuthService from '../../services/auth.service';
 import { generate } from '../../utils/token';
 import { IUser } from '../../interfaces/IDocuments';
+import { UserTypes } from '../../interfaces/enums';
 
 export const registerAccountController = async (
 	req: Request,
@@ -13,6 +14,7 @@ export const registerAccountController = async (
 ) => {
 	const userRequest: IUserRegister = req.body;
 	userRequest.passwordHashed = userRequest.password;
+	userRequest.userType = UserTypes.CUSTOMER;
 
 	const userCreated = await AuthService.registerAccountService(userRequest);
 

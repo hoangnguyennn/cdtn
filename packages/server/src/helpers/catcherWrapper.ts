@@ -8,7 +8,8 @@ interface AsyncFunction {
 export default (fn: AsyncFunction) => {
 	return (req: Request, res: Response, next: NextFunction) => {
 		fn(req, res, next).catch((err: Error) => {
-			internalServerError(next, err.message);
+			console.log(err.message);
+			return internalServerError(next, err.message);
 		});
 	};
 };
