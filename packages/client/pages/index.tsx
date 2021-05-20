@@ -1,31 +1,28 @@
-import { GetServerSideProps, NextPage } from 'next';
-import { fetchTrendingProducts } from '../apis/product.api';
+import { GetServerSideProps } from 'next';
 
+import { fetchTrendingProductsAction } from '../redux/reducers/product.reducer';
+import { initialStore } from '../redux/store';
 import Banner from '../components/Banner';
 import Home from '../features/Home';
-import { IProductResponse } from '../interfaces';
 import MainLayout from '../layouts/MainLayout';
 
-type HomePageProps = {
-	trendingProducts: IProductResponse[];
-};
-
-const HomePage: NextPage<HomePageProps> = ({ trendingProducts }) => {
+const HomePage = () => {
 	return (
 		<MainLayout>
 			<Banner background="http://vikinoko.com/resources/css/img/Mhero.jpg" />
-			<Home trendingProducts={trendingProducts} />
+			<Home />
 		</MainLayout>
 	);
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const trendingProducts = await fetchTrendingProducts();
+	const reduxStore = initialStore();
+	const { dispatch } = reduxStore;
+
+	await dispatch(fetchTrendingProductsAction());
 
 	return {
-		props: {
-			trendingProducts,
-		},
+		props: { initialReduxState: reduxStore.getState() },
 	};
 };
 

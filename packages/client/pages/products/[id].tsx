@@ -1,4 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+
+import {
+	fetchProductByIdAction,
+	getProduct,
+} from '../../redux/reducers/product.reducer';
 
 import { productPage } from '../../configs/breadcrumb';
 import MainLayout from '../../layouts/MainLayout';
@@ -8,14 +15,26 @@ import ProductSummary from '../../features/ProductSummary';
 
 const ProductDetailPage = () => {
 	const router = useRouter();
+	console.log(router.query);
 	const { id } = router.query;
-	const title = 'Nấm bào ngư tươi';
+
+	const dispatch = useDispatch();
+	const product = useSelector(getProduct);
+
+	useEffect(() => {
+		if (id) {
+			dispatch(fetchProductByIdAction(id as string));
+		}
+	}, [id]);
 
 	return (
 		<MainLayout>
-			<PageTitle breadcrumb={productPage(title, id as string)} title={title} />
+			<PageTitle
+				breadcrumb={productPage(product.name, product.id as string)}
+				title={product.name}
+			/>
 			<PageContent>
-				<ProductSummary />
+				<ProductSummary product={product} />
 			</PageContent>
 		</MainLayout>
 	);

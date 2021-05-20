@@ -1,17 +1,14 @@
-import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { IProductResponse } from '../../interfaces';
+import { getTrendingProducts } from '../../redux/reducers/product.reducer';
 import Container from '../../components/core/Container';
 import HomeStyled from './Home';
 import ProductList from '../../components/Product/List';
 
-type HomeProps = {
-	trendingProducts: IProductResponse[];
-};
-
-const Home: FC<HomeProps> = ({ trendingProducts }) => {
+const Home = () => {
 	const { t } = useTranslation();
+	const trendingProducts = useSelector(getTrendingProducts);
 
 	return (
 		<HomeStyled>

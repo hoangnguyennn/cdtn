@@ -23,7 +23,17 @@ export const getTrendingProductsService = async (): Promise<IProduct[]> => {
 		]);
 };
 
+export const getProductByIdService = async (
+	id: string
+): Promise<IProduct | null> => {
+	return Product.findOne({ _id: id }).populate([
+		{ path: 'unit', select: '-_id name' },
+		{ path: 'images', select: '-_id imageUrl' },
+	]);
+};
+
 export default {
 	createProductService,
 	getTrendingProductsService,
+	getProductByIdService,
 };

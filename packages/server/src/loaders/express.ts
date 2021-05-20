@@ -3,7 +3,7 @@ import { errors } from 'celebrate';
 import cors from 'cors';
 
 import routers from '../apis/routes';
-import { notFound } from '../helpers/commonResponse';
+import { handleError, notFound } from '../helpers/commonResponse';
 
 export default async (app: Application) => {
 	// load middlewares
@@ -24,4 +24,6 @@ export default async (app: Application) => {
 
 	// not found error handler
 	app.use((req, res, next) => notFound(next));
+
+	app.use(handleError);
 };

@@ -9,6 +9,7 @@ export interface IAuthState {
 
 export interface IProductState {
 	trendingProducts: IProductResponse[];
+	product: IProductResponse;
 }
 
 export interface IRootState {

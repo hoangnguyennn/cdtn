@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { success } from '../../helpers/commonResponse';
+import { NextFunction, Request, Response } from 'express';
+import { notFound, success } from '../../helpers/commonResponse';
 
 import ProductImage from '../../services/productImage.service';
 import Product from '../../services/product.service';
@@ -27,7 +27,23 @@ export const getTrendingProductsController = async (
 	return success(res, trendingProducts.map(mapProductToResponse));
 };
 
+export const getProductByIdController = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const { id } = req.params;
+	const product = await Product.getProductByIdService(id);
+
+	if (!product) {
+		return notFound(next);
+	}
+
+	return success(res, mapProductToResponse(product));
+};
+
 export default {
 	createNewProductController,
 	getTrendingProductsController,
+	getProductByIdController,
 };

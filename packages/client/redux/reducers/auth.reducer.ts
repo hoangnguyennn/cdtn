@@ -7,7 +7,7 @@ import { ILogin, IUserRegister } from '../../interfaces';
 import { login, loginByToken, registerAccount } from '../../apis/auth.api';
 import { PATH_NAME } from '../../configs/pathName';
 
-const initialState: IAuthState = {
+export const initialState: IAuthState = {
 	token: '',
 	user: {
 		id: '',
