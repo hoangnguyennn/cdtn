@@ -4,6 +4,10 @@ export interface IBreadcrumb {
 	url: string;
 }
 
+export interface ICartItem extends IProductResponse {
+	qty: number;
+}
+
 export interface ILogin {
 	email: string;
 	password: string;

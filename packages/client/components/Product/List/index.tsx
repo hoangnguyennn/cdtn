@@ -7,6 +7,8 @@ import { PATH_NAME } from '../../../configs/pathName';
 import Button from '../../core/Button';
 import ProductItem from '../Item';
 import ProductListStyled from './ProductList';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../redux/reducers/cart.reducer';
 
 type ProductListProps = {
 	columns: number;
@@ -23,6 +25,7 @@ const ProductList: FC<ProductListProps> = ({
 	...rest
 }: ProductListProps) => {
 	const { t } = useTranslation();
+	const dispatch = useDispatch();
 
 	return (
 		<ProductListStyled hasTitle={!!title} {...rest}>
@@ -36,6 +39,7 @@ const ProductList: FC<ProductListProps> = ({
 						thumbnail={product.images[0]}
 						name={product.name}
 						price={product.price}
+						addToCart={() => dispatch(addToCart({ ...product, qty: 1 }))}
 					/>
 				))}
 			</div>

@@ -8,7 +8,9 @@ import { IProduct } from '../../../interfaces';
 import { toCurrency } from '../../../utils/formatter';
 import ProductItemStyled from './ProductItem';
 
-type ProductItemProps = IProduct;
+type ProductItemProps = IProduct & {
+	addToCart: () => any;
+};
 
 const Wrap: FC<{ link?: string }> = ({ children, link }) => {
 	if (link) {
@@ -23,16 +25,19 @@ const Wrap: FC<{ link?: string }> = ({ children, link }) => {
 };
 
 const ProductItem: FC<ProductItemProps> = ({
-	thumbnail,
+	link,
 	name,
 	price,
-	link,
+	thumbnail,
+	addToCart,
 }) => {
 	const isDesktop = useMatchMedia('(min-width: 992px)');
 	const { t } = useTranslation();
 
 	const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation();
+		event.preventDefault();
+
+		addToCart();
 	};
 
 	return (

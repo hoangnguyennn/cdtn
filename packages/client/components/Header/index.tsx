@@ -6,12 +6,14 @@ import Container from '../core/Container';
 import HeaderStyled from './Header';
 import Logo from '../Logo';
 
+import { getCartLength } from '../../redux/reducers/cart.reducer';
 import { getFullName } from '../../redux/reducers/auth.reducer';
 import { PATH_NAME } from '../../configs/pathName';
 
 const Header = () => {
 	const { t } = useTranslation();
 	const fullName = useSelector(getFullName);
+	const cartLength = useSelector(getCartLength);
 
 	return (
 		<HeaderStyled>
@@ -49,7 +51,7 @@ const Header = () => {
 						<a className="tool-item cart ml-3">
 							<div className="icon">
 								<i className="czi-cart"></i>
-								<div className="label">0</div>
+								<div className="label">{cartLength}</div>
 							</div>
 							<div className="text">
 								<small></small>

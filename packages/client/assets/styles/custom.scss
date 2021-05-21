@@ -26,3 +26,8 @@ ul {
 	margin-right: auto;
 	margin-left: auto;
 }
+
+.disabled {
+	cursor: not-allowed !important;
+	pointer-events: none !important;
+}

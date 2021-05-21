@@ -6,9 +6,23 @@ import FormGroup from '../../components/core/FormGroup';
 import Form from '../../components/core/Form';
 import Input from '../../components/core/Input';
 import Button from '../../components/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	getCartItems,
+	getCartSubtotal,
+	getDeliveryFee,
+	removeFromCart,
+	updateQty,
+} from '../../redux/reducers/cart.reducer';
+import { getUserInfo } from '../../redux/reducers/auth.reducer';
 
 const Cart = () => {
 	const { t } = useTranslation();
+
+	const cartItems = useSelector(getCartItems);
+	const cartSubtotal = useSelector(getCartSubtotal);
+	const userInfo = useSelector(getUserInfo);
+	const dispatch = useDispatch();
 
 	return (
 		<CartStyled>
@@ -16,86 +30,82 @@ const Cart = () => {
 				<div className="cart-detail">
 					<h3 className="title">{t('Cart detail')}</h3>
 
-					<FormGroup className="cart-item">
-						<div className="thumbnail">
-							<img
-								src="http://vikinoko.com/resources/img/product-reishi.png"
-								alt=""
-							/>
-						</div>
-						<div className="info">
-							<p className="name">Nam bao ngu tuoi</p>
-							<div className="qty">
-								<span className="qty-decreace">-</span>
-								<input defaultValue="1" disabled />
-								<span className="qty-increase">+</span>
-							</div>
-						</div>
-						<div className="actions">
-							<span className="action">{t('Delete')}</span>
-							<span className="action">{t('Buy later')}</span>
-							<span className="price">{toCurrency(123123)}</span>
-						</div>
-					</FormGroup>
-
-					<FormGroup className="cart-item">
-						<div className="thumbnail">
-							<img
-								src="http://vikinoko.com/resources/img/product-reishi.png"
-								alt=""
-							/>
-						</div>
-						<div className="info">
-							<p className="name">Nam bao ngu tuoi</p>
-							<div className="qty">
-								<span className="qty-decreace">-</span>
-								<input defaultValue="1" disabled />
-								<span className="qty-increase">+</span>
-							</div>
-						</div>
-						<div className="actions">
-							<span className="action">{t('Delete')}</span>
-							<span className="action">{t('Buy later')}</span>
-							<span className="price">{toCurrency(123123)}</span>
-						</div>
-					</FormGroup>
-
-					<FormGroup className="cart-item">
-						<div className="thumbnail">
-							<img
-								src="http://vikinoko.com/resources/img/product-reishi.png"
-								alt=""
-							/>
-						</div>
-						<div className="info">
-							<p className="name">Nam bao ngu tuoi</p>
-							<div className="qty">
-								<span className="qty-decreace">-</span>
-								<input defaultValue="1" disabled />
-								<span className="qty-increase">+</span>
-							</div>
-						</div>
-						<div className="actions">
-							<span className="action">{t('Delete')}</span>
-							<span className="action">{t('Buy later')}</span>
-							<span className="price">{toCurrency(123123)}</span>
-						</div>
-					</FormGroup>
+					{cartItems.length ? (
+						cartItems.map((item) => (
+							<FormGroup className="cart-item" key={item.id}>
+								<div className="thumbnail">
+									<img src={item.images[0] || ''} alt="" />
+								</div>
+								<div className="info">
+									<p className="name">{item.name}</p>
+									<div className="qty">
+										<span
+											className={`qty-decreace ${
+												item.qty > 0 ? '' : 'disabled'
+											}`}
+											onClick={() => {
+												if (item.qty > 0) {
+													dispatch(
+														updateQty({ id: item.id, qty: item.qty - 1 })
+													);
+												}
+											}}
+										>
+											-
+										</span>
+										<input
+											value={item.qty}
+											onChange={() => undefined}
+											disabled
+										/>
+										<span
+											className={`qty-increase ${
+												item.qty < 99 ? '' : 'disabled'
+											}`}
+											onClick={() => {
+												if (item.qty < 99) {
+													dispatch(
+														updateQty({ id: item.id, qty: item.qty + 1 })
+													);
+												}
+											}}
+										>
+											+
+										</span>
+									</div>
+								</div>
+								<div className="actions">
+									<span
+										className="action"
+										onClick={() => dispatch(removeFromCart({ ...item }))}
+									>
+										{t('Delete')}
+									</span>
+									<span className="action">{t('Buy later')}</span>
+									<span className="price">{toCurrency(item.price)}</span>
+								</div>
+							</FormGroup>
+						))
+					) : (
+						<p>Empty</p>
+					)}
 				</div>
 				<div className="cart-summary">
 					<FormGroup>
 						<label>{t('Subtotal')}</label>
-						<span className="price">{toCurrency(123123)}</span>
+						<span className="price">{toCurrency(cartSubtotal)}</span>
 					</FormGroup>
 
 					<FormGroup>
 						<label>{t('Delivery fee')}</label>
-						<span className="price">{toCurrency(123123)}</span>
+						<span className="price">{toCurrency(getDeliveryFee)}</span>
 					</FormGroup>
 
 					<FormGroup>
 						<label>{t('Total')}</label>
-						<span className="price total-price">{toCurrency(123123)}</span>
+						<span className="price total-price">
+							{toCurrency(cartSubtotal + getDeliveryFee)}
+						</span>
 					</FormGroup>
 				</div>
 			</div>
@@ -105,19 +115,25 @@ const Cart = () => {
 					<h3 className="title">{t('Order information')}</h3>
 
 					<FormGroup>
-						<Input placeholder={t('Fullname')} />
+						<Input
+							defaultValue={userInfo.fullName}
+							placeholder={t('Fullname')}
+						/>
 					</FormGroup>
 
 					<FormGroup>
-						<Input placeholder={t('Phone')} />
+						<Input defaultValue={userInfo.phone} placeholder={t('Phone')} />
 					</FormGroup>
 
 					<FormGroup>
-						<Input placeholder={t('Email address')} />
+						<Input
+							defaultValue={userInfo.email}
+							placeholder={t('Email address')}
+						/>
 					</FormGroup>
 
 					<FormGroup>
-						<Input placeholder={t('Address')} />
+						<Input defaultValue={userInfo.address} placeholder={t('Address')} />
 					</FormGroup>
 
 					<FormGroup>
@@ -154,7 +170,9 @@ const Cart = () => {
 				</div>
 
 				<FormGroup>
-					<Button shadow>{t('Checkout')}</Button>
+					<Button shadow as={cartItems.length ? 'button' : 'div'}>
+						{t('Checkout')}
+					</Button>
 				</FormGroup>
 			</Form>
 		</CartStyled>

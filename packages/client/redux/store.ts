@@ -4,6 +4,7 @@ import { IRootState } from '../interfaces/IState';
 
 import { initialState as initialAuthState } from './reducers/auth.reducer';
 import { initialState as initialProductState } from './reducers/product.reducer';
+import { initialState as initialCartState } from './reducers/cart.reducer';
 
 import rootReducer from './reducers';
 
@@ -13,6 +14,7 @@ const initStore = (
 	preloadedState: IRootState = {
 		auth: initialAuthState,
 		product: initialProductState,
+		cart: initialCartState,
 	}
 ) => {
 	return configureStore({

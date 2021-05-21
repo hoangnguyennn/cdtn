@@ -21,6 +21,7 @@ const Button = styled.button<ButtonProps>`
 	background-color: var(--${(props) => props.variant});
 	color: var(--white);
 	font-size: 1rem;
+	text-align: center;
 	border: 1px solid var(--${(props) => props.variant});
 	border-radius: 2px;
 	box-shadow: ${(props) => renderShadow(props.shadow, props.variant)};

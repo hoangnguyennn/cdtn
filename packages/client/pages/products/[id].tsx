@@ -15,7 +15,6 @@ import ProductSummary from '../../features/ProductSummary';
 
 const ProductDetailPage = () => {
 	const router = useRouter();
-	console.log(router.query);
 	const { id } = router.query;
 
 	const dispatch = useDispatch();
