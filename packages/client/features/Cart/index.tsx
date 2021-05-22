@@ -15,14 +15,32 @@ import {
 	updateQty,
 } from '../../redux/reducers/cart.reducer';
 import { getUserInfo } from '../../redux/reducers/auth.reducer';
+import { ChangeEvent, useEffect, useState } from 'react';
+import {
+	fetchPaymentMethodsAction,
+	getPaymentMethods,
+} from '../../redux/reducers/paymentMethods.reducer';
+import classNames from 'classnames';
 
 const Cart = () => {
 	const { t } = useTranslation();
+	const [pMethod, setPMethod] = useState<string>(null);
 
 	const cartItems = useSelector(getCartItems);
 	const cartSubtotal = useSelector(getCartSubtotal);
 	const userInfo = useSelector(getUserInfo);
+	const paymentMethods = useSelector(getPaymentMethods);
 	const dispatch = useDispatch();
+
+	const handlePaymentMethodInputChange = (
+		event: ChangeEvent<HTMLInputElement>
+	) => {
+		setPMethod(event.target.value);
+	};
+
+	useEffect(() => {
+		dispatch(fetchPaymentMethodsAction());
+	}, []);
 
 	return (
 		<CartStyled>
@@ -144,29 +162,27 @@ const Cart = () => {
 				<div className="payment-methods">
 					<h3 className="title">{t('Payment method')}</h3>
 
-					<FormGroup as="label" className="payment-method">
-						<input type="radio" />
-						<div className="icon czi-check-circle"></div>
-						<div>
-							<h4>{t('Payment on delivery')}</h4>
-						</div>
-					</FormGroup>
-
-					<FormGroup as="label" className="payment-method">
-						<input type="radio" />
-						<div className="icon czi-check-circle"></div>
-						<div>
-							<h4>{t('Payment on delivery')}</h4>
-						</div>
-					</FormGroup>
-
-					<FormGroup as="label" className="payment-method">
-						<input type="radio" />
-						<div className="icon czi-check-circle"></div>
-						<div>
-							<h4>{t('Payment on delivery')}</h4>
-						</div>
-					</FormGroup>
+					{paymentMethods.map((method) => (
+						<FormGroup
+							as="label"
+							className={classNames({
+								'payment-method': true,
+								active: pMethod === method.id,
+							})}
+							key={method.id}
+						>
+							<input
+								type="radio"
+								value={method.id}
+								checked={pMethod === method.id}
+								onChange={handlePaymentMethodInputChange}
+							/>
+							<div className="icon czi-check-circle"></div>
+							<div>
+								<h4>{t(method.name)}</h4>
+							</div>
+						</FormGroup>
+					))}
 				</div>
 
 				<FormGroup>

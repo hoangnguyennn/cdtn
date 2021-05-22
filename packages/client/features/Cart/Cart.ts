@@ -138,8 +138,13 @@ export default styled.div`
 			padding: 0.625rem 1rem;
 			display: flex;
 			align-items: center;
-			border: 1px solid var(--primary);
+			border: 1px solid var(--gray);
 			cursor: pointer;
+			transition: none;
+
+			* {
+				transition: none;
+			}
 
 			input {
 				display: none;
@@ -147,11 +152,20 @@ export default styled.div`
 
 			.icon {
 				margin-right: 1.25rem;
-				color: var(--primary);
 			}
 
 			h4 {
 				font-weight: 400;
+			}
+
+			&.active {
+				background-color: var(--light);
+				color: var(--primary);
+				border-color: var(--primary);
+
+				.icon {
+					color: var(--primary);
+				}
 			}
 		}
 	}

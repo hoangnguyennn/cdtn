@@ -1,6 +1,6 @@
+import Image from '../models/image.model';
 import mongooseLoader from '../loaders/mongoose';
 import Product from '../models/product.model';
-import ProductImage from '../models/productImage.model';
 import ProductUnit from '../models/productUnit.model';
 
 const generateProducts = async () => {
@@ -12,7 +12,7 @@ const generateProducts = async () => {
 
 	for (let i = 0; i < 100; i++) {
 		console.log(`create product ${i + 1}`);
-		const image = await ProductImage.create({
+		const image = await Image.create({
 			imageUrl:
 				'https://res.cloudinary.com/hoangnguyennn/image/upload/v1621465858/yzzutbi4htoulq6zkbwb.png',
 		});

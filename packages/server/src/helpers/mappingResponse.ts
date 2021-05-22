@@ -1,5 +1,9 @@
-import { IProductResponse, IUserResponse } from '../interfaces';
-import { IProduct, IUser } from '../interfaces/IDocuments';
+import {
+	IPaymentMethodResponse,
+	IProductResponse,
+	IUserResponse,
+} from '../interfaces';
+import { IPaymentMethod, IProduct, IUser } from '../interfaces/IDocuments';
 
 export const mapUserToResponse = (user: IUser): IUserResponse => {
 	return {
@@ -20,5 +24,15 @@ export const mapProductToResponse = (product: IProduct): IProductResponse => {
 		description: product.description,
 		status: product.status,
 		images: product.images?.map((image) => image.imageUrl) || [],
+	};
+};
+
+export const mapPaymentMethodToResponse = (
+	paymentMethod: IPaymentMethod
+): IPaymentMethodResponse => {
+	return {
+		id: paymentMethod._id,
+		name: paymentMethod.name,
+		imageUrl: paymentMethod.imageUrl,
 	};
 };

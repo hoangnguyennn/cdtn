@@ -1,23 +1,22 @@
 import { Types } from 'mongoose';
 import { ProductStatuses, UserTypes } from './enums';
 
+export interface IImageRequest {
+	imageUrl: string;
+}
+
 export interface ILoginRequest {
 	email: string;
 	password: string;
-}
-
-export interface IServiceCommonResponse<T> {
-	hasError: boolean;
-	message?: string;
-	data?: T;
 }
 
 export interface IPayload {
 	userId: string;
 }
 
-export interface IProductImageRequest {
-	productId: Types.ObjectId | string;
+export interface IPaymentMethodResponse {
+	id: string;
+	name: string;
 	imageUrl: string;
 }
 
@@ -41,6 +40,12 @@ export interface IProductResponse {
 
 export interface IProductUnitRequest {
 	name: string;
+}
+
+export interface IServiceCommonResponse<T> {
+	hasError: boolean;
+	message?: string;
+	data?: T;
 }
 
 export interface IUserRegisterRequest {

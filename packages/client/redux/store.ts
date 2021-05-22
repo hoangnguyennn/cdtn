@@ -5,6 +5,7 @@ import { IRootState } from '../interfaces/IState';
 import { initialState as initialAuthState } from './reducers/auth.reducer';
 import { initialState as initialProductState } from './reducers/product.reducer';
 import { initialState as initialCartState } from './reducers/cart.reducer';
+import { initialState as initialPaymentMethodState } from './reducers/paymentMethods.reducer';
 
 import rootReducer from './reducers';
 
@@ -15,6 +16,7 @@ const initStore = (
 		auth: initialAuthState,
 		product: initialProductState,
 		cart: initialCartState,
+		paymentMethod: initialPaymentMethodState,
 	}
 ) => {
 	return configureStore({

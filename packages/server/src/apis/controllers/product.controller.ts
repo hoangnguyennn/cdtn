@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { notFound, success } from '../../helpers/commonResponse';
 
-import ProductImage from '../../services/productImage.service';
+import Image from '../../services/image.service';
 import Product from '../../services/product.service';
 import { mapProductToResponse } from '../../helpers/mappingResponse';
 
@@ -13,7 +13,7 @@ export const createNewProductController = async (
 	const productCreated = await Product.createProductService(product);
 
 	product.productId = productCreated._id;
-	await ProductImage.createProductImageService(product);
+	await Image.createProductImageService(product);
 
 	return success(res, productCreated);
 };

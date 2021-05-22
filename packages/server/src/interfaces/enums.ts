@@ -1,4 +1,5 @@
 export enum CollectionNames {
+	PAYMENT_METHOD = 'paymentMethod',
 	PRODUCT = 'products',
 	PRODUCT_IMAGE = 'productImages',
 	PRODUCT_UNIT = 'productUnits',

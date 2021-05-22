@@ -18,6 +18,12 @@ export interface ILoginResponse {
 	user: IUserResponse;
 }
 
+export interface IPaymentMethodResponse {
+	id: string;
+	name: string;
+	imageUrl: string;
+}
+
 export interface IProduct {
 	id: string;
 	name: string;
