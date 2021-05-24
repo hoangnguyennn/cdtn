@@ -14,6 +14,7 @@ export const register = async (req: Request, res: Response) => {
 		...userRequest,
 		passwordHashed: userRequest.password,
 		userType: UserTypes.CUSTOMER,
+		isActivated: true,
 	};
 
 	const userCreated = await AuthService.register(userCreate);

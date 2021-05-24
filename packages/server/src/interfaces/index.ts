@@ -42,8 +42,9 @@ export interface IPaymentMethodResponse {
 export interface IProductRequest {
 	name: string;
 	price: number;
-	unit: Types.ObjectId;
+	unitId: Types.ObjectId;
 	description?: string;
+	imagesId: string[];
 	status?: ProductStatuses;
 }
 
@@ -85,4 +86,5 @@ export interface IUserResponse {
 export type IUserCreate = Omit<IRegisterRequest, 'password'> & {
 	passwordHashed: string;
 	userType: UserTypes;
+	isActivated: boolean;
 };

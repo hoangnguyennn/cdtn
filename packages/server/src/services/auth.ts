@@ -14,7 +14,7 @@ export const register = async (user: IUserCreate): Promise<IUser> => {
 		fullName: user.fullName,
 		phone: user.phone,
 		userType: user.userType,
-		isActivated: true,
+		isActivated: user.isActivated,
 	});
 };
 

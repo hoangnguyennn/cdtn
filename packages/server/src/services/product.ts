@@ -6,9 +6,10 @@ export const create = (product: IProductRequest): Promise<IProduct> => {
 	return ProductModel.create({
 		name: product.name,
 		price: product.price,
-		unit: product.unit,
+		unitId: product.unitId,
 		description: product.description,
 		status: product.status,
+		imagesId: product.imagesId,
 	});
 };
 

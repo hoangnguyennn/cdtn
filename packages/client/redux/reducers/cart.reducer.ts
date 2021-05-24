@@ -58,14 +58,21 @@ const cartSlice = createSlice({
 			);
 
 			if (indexInCart !== -1) {
-				state.cart = [
-					...state.cart.slice(0, indexInCart),
-					{
-						...state.cart[indexInCart],
-						qty: action.payload.qty,
-					},
-					...state.cart.slice(indexInCart + 1),
-				];
+				if (action.payload.qty === 0) {
+					state.cart = [
+						...state.cart.slice(0, indexInCart),
+						...state.cart.slice(indexInCart + 1),
+					];
+				} else {
+					state.cart = [
+						...state.cart.slice(0, indexInCart),
+						{
+							...state.cart[indexInCart],
+							qty: action.payload.qty,
+						},
+						...state.cart.slice(indexInCart + 1),
+					];
+				}
 			} else {
 				state.cart = [...state.cart, action.payload];
 			}
