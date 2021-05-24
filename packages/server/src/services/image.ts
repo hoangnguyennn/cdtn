@@ -1,8 +1,8 @@
 import { IImageRequest } from '../interfaces';
-import Image from '../models/image';
+import ImageModel from '../models/image';
 
 export const create = (image: IImageRequest) => {
-	return Image.create({
+	return ImageModel.create({
 		url: image.url,
 	});
 };

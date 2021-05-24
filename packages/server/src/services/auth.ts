@@ -2,26 +2,26 @@ import { COMMON_MESSAGE } from '../helpers/commonResponse';
 import {
 	ILoginRequest,
 	IServiceCommonResponse,
-	IUserRegister,
+	IUserCreate,
 } from '../interfaces';
 import { IUser } from '../interfaces/IDocuments';
-import User from '../models/user';
+import UserModel from '../models/user';
 
-export const register = async (userRegister: IUserRegister): Promise<IUser> => {
-	return User.create({
-		email: userRegister.email,
-		passwordHashed: userRegister.passwordHashed,
-		fullName: userRegister.fullName,
-		phone: userRegister.phone,
-		userType: userRegister.userType,
+export const register = async (user: IUserCreate): Promise<IUser> => {
+	return UserModel.create({
+		email: user.email,
+		passwordHashed: user.passwordHashed,
+		fullName: user.fullName,
+		phone: user.phone,
+		userType: user.userType,
 		isActivated: true,
 	});
 };
 
 export const login = async (
-	userLogin: ILoginRequest
+	login: ILoginRequest
 ): Promise<IServiceCommonResponse<IUser>> => {
-	const user = await User.findOne({ email: userLogin.email });
+	const user = await UserModel.findOne({ email: login.email });
 
 	if (!user) {
 		return {
@@ -30,7 +30,7 @@ export const login = async (
 		};
 	}
 
-	if (user.passwordHashed !== userLogin.password) {
+	if (user.passwordHashed !== login.password) {
 		return {
 			hasError: true,
 			message: COMMON_MESSAGE.NOT_FOUND,
@@ -44,7 +44,7 @@ export const login = async (
 };
 
 export const getCurrentUser = async (id: string): Promise<IUser | null> => {
-	return User.findOne({ _id: id });
+	return UserModel.findOne({ _id: id });
 };
 
 export default {

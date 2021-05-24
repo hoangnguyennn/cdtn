@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { generate } from '../../utils/token';
-import { ILoginRequest, IUserRegister } from '../../interfaces';
+import { ILoginRequest, IRegisterRequest, IUserCreate } from '../../interfaces';
 import { IUser } from '../../interfaces/IDocuments';
 import { mapUserToResponse } from '../../helpers/mappingResponse';
 import { notFound, success, unauthorized } from '../../helpers/commonResponse';
@@ -9,11 +9,14 @@ import { UserTypes } from '../../interfaces/enums';
 import AuthService from '../../services/auth';
 
 export const register = async (req: Request, res: Response) => {
-	const userRequest: IUserRegister = req.body;
-	userRequest.passwordHashed = userRequest.password;
-	userRequest.userType = UserTypes.CUSTOMER;
+	const userRequest: IRegisterRequest = req.body;
+	const userCreate: IUserCreate = {
+		...userRequest,
+		passwordHashed: userRequest.password,
+		userType: UserTypes.CUSTOMER,
+	};
 
-	const userCreated = await AuthService.register(userRequest);
+	const userCreated = await AuthService.register(userCreate);
 	return success(res, mapUserToResponse(userCreated));
 };
 
@@ -22,15 +25,15 @@ export const login = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const userRequest: ILoginRequest = req.body;
+	const credential: ILoginRequest = req.body;
 
-	const loginServiceResponse = await AuthService.login(userRequest);
+	const response = await AuthService.login(credential);
 
-	if (loginServiceResponse.hasError) {
-		return notFound(next, loginServiceResponse.message || '');
+	if (response.hasError) {
+		return notFound(next, response.message || '');
 	}
 
-	const user = loginServiceResponse.data as IUser;
+	const user = response.data as IUser;
 	const token = generate({ userId: user._id });
 
 	return success(res, {

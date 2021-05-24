@@ -1,8 +1,8 @@
 import { IProductUnitRequest } from '../interfaces';
-import ProductUnit from '../models/productUnit';
+import ProductUnitModel from '../models/productUnit';
 
 export const create = (productUnit: IProductUnitRequest) => {
-	return ProductUnit.create({
+	return ProductUnitModel.create({
 		name: productUnit.name,
 	});
 };

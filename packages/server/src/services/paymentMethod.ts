@@ -1,10 +1,10 @@
 import { IPaymentMethod } from '../interfaces/IDocuments';
-import PaymentMethod from '../models/paymentMethod';
+import PaymentMethodModel from '../models/paymentMethod';
 
 export const create = (
 	paymentMethod: IPaymentMethod
 ): Promise<IPaymentMethod> => {
-	return PaymentMethod.create({
+	return PaymentMethodModel.create({
 		name: paymentMethod.name,
 		imageUrl: paymentMethod.imageUrl,
 		accessKey: paymentMethod.accessKey,
@@ -16,7 +16,7 @@ export const create = (
 };
 
 export const get = async (): Promise<IPaymentMethod[]> => {
-	return PaymentMethod.find();
+	return PaymentMethodModel.find();
 };
 
 export default {

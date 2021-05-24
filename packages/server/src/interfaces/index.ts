@@ -1,11 +1,6 @@
 import { Types } from 'mongoose';
 import { ProductStatuses, UserTypes } from './enums';
 
-export interface ICartItem {
-	productId: string;
-	qty: number;
-}
-
 export interface IImageRequest {
 	url: string;
 }
@@ -15,15 +10,23 @@ export interface ILoginRequest {
 	password: string;
 }
 
+export type IOrderCreate = Omit<IOrderRequest, 'items'> & {
+	orderItemsId: string[];
+};
+
 export interface IOrderRequest {
 	userId?: string;
 	deliveryFullName: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
 	deliveryAddress: string;
-	note?: string;
-	paymentMethod: string;
-	cart: ICartItem[];
+	paymentMethodId: string;
+	items: IOrderItemRequest[];
+}
+
+export interface IOrderItemRequest {
+	productId: string;
+	qty: number;
 }
 
 export interface IPayload {
@@ -58,22 +61,17 @@ export interface IProductUnitRequest {
 	name: string;
 }
 
-export interface IServiceCommonResponse<T> {
-	hasError: boolean;
-	message?: string;
-	data?: T;
-}
-
-export interface IUserRegisterRequest {
+export interface IRegisterRequest {
 	email: string;
 	password: string;
 	fullName: string;
 	phone: string;
 }
 
-export interface IUserRegister extends IUserRegisterRequest {
-	userType: UserTypes;
-	passwordHashed: string;
+export interface IServiceCommonResponse<T> {
+	hasError: boolean;
+	message?: string;
+	data?: T;
 }
 
 export interface IUserResponse {
@@ -83,3 +81,8 @@ export interface IUserResponse {
 	phone: string;
 	address: string;
 }
+
+export type IUserCreate = Omit<IRegisterRequest, 'password'> & {
+	passwordHashed: string;
+	userType: UserTypes;
+};
