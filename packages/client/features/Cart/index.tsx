@@ -1,46 +1,115 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
+import classNames from 'classnames';
 
 import { toCurrency } from '../../utils/formatter';
-import CartStyled from './Cart';
-import FormGroup from '../../components/core/FormGroup';
-import Form from '../../components/core/Form';
-import Input from '../../components/core/Input';
 import Button from '../../components/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import CartStyled from './Cart';
+import Form from '../../components/core/Form';
+import FormGroup from '../../components/core/FormGroup';
+import Input from '../../components/core/Input';
+import Invalid from '../../components/core/Invalid';
+
 import {
 	getCartItems,
 	getCartSubtotal,
 	getDeliveryFee,
+	orderAction,
 	removeFromCart,
 	updateQty,
 } from '../../redux/reducers/cart.reducer';
 import { getUserInfo } from '../../redux/reducers/auth.reducer';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { IOrder, IOrderRequest } from '../../interfaces';
+
 import {
 	fetchPaymentMethodsAction,
 	getPaymentMethods,
 } from '../../redux/reducers/paymentMethods.reducer';
-import classNames from 'classnames';
 
 const Cart = () => {
 	const { t } = useTranslation();
-	const [pMethod, setPMethod] = useState<string>(null);
+	const [isValid, setIsValid] = useState(false);
 
 	const cartItems = useSelector(getCartItems);
 	const cartSubtotal = useSelector(getCartSubtotal);
 	const userInfo = useSelector(getUserInfo);
 	const paymentMethods = useSelector(getPaymentMethods);
+
 	const dispatch = useDispatch();
 
-	const handlePaymentMethodInputChange = (
-		event: ChangeEvent<HTMLInputElement>
-	) => {
-		setPMethod(event.target.value);
+	const [initialValues, setInitialValues] = useState<IOrder>({
+		fullName: '',
+		phone: '',
+		email: '',
+		address: '',
+		note: '',
+		paymentMethod: '',
+	});
+
+	const validationSchema = Yup.object({
+		fullName: Yup.string().required(),
+		phone: Yup.string().required(),
+		email: Yup.string().email().required(),
+		address: Yup.string().required(),
+		note: Yup.string(),
+	});
+
+	const handleFormSubmit = (values: IOrder, { setSubmitting }) => {
+		const orderRequest: IOrderRequest = {
+			userId: userInfo.id || undefined,
+			deliveryFullName: values.fullName,
+			deliveryPhone: values.phone,
+			deliveryEmail: values.email,
+			deliveryAddress: values.address,
+			paymentMethodId: values.paymentMethod,
+			items: cartItems.map((item) => ({
+				productId: item.id,
+				qty: item.qty,
+			})),
+		};
+
+		dispatch(orderAction(orderRequest));
+		setSubmitting(false);
 	};
+
+	const formik = useFormik({
+		initialValues,
+		enableReinitialize: true,
+		validationSchema,
+		validateOnChange: false,
+		validateOnBlur: false,
+		onSubmit: handleFormSubmit,
+	});
+
+	useEffect(() => {
+		setIsValid(cartItems.length !== 0);
+	}, [cartItems.length]);
 
 	useEffect(() => {
 		dispatch(fetchPaymentMethodsAction());
 	}, []);
+
+	useEffect(() => {
+		setInitialValues((prevState) => ({
+			...prevState,
+			fullName: userInfo.fullName || '',
+			phone: userInfo.phone || '',
+			email: userInfo.email || '',
+			address: userInfo.address || '',
+		}));
+	}, [userInfo]);
+
+	useEffect(() => {
+		if (paymentMethods.length) {
+			setInitialValues((prevState) => ({
+				...prevState,
+				paymentMethod: paymentMethods[0].id,
+			}));
+		}
+	}, [paymentMethods]);
 
 	return (
 		<CartStyled>
@@ -116,7 +185,9 @@ const Cart = () => {
 
 					<FormGroup>
 						<label>{t('Delivery fee')}</label>
-						<span className="price">{toCurrency(getDeliveryFee)}</span>
+						<span className="price">
+							{getDeliveryFee ? toCurrency(getDeliveryFee) : t('Free')}
+						</span>
 					</FormGroup>
 
 					<FormGroup>
@@ -128,34 +199,74 @@ const Cart = () => {
 				</div>
 			</div>
 
-			<Form className="cart-main">
+			<Form className="cart-main" onSubmit={formik.handleSubmit}>
 				<div className="checkout-information">
 					<h3 className="title">{t('Order information')}</h3>
 
 					<FormGroup>
 						<Input
-							defaultValue={userInfo.fullName}
 							placeholder={t('Fullname')}
+							name="fullName"
+							required
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.fullName}
 						/>
-					</FormGroup>
-
-					<FormGroup>
-						<Input defaultValue={userInfo.phone} placeholder={t('Phone')} />
+						{formik.errors.fullName ? (
+							<Invalid>{formik.errors.fullName}</Invalid>
+						) : null}
 					</FormGroup>
 
 					<FormGroup>
 						<Input
-							defaultValue={userInfo.email}
-							placeholder={t('Email address')}
+							placeholder={t('Phone')}
+							name="phone"
+							required
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.phone}
 						/>
+						{formik.errors.phone ? (
+							<Invalid>{formik.errors.phone}</Invalid>
+						) : null}
 					</FormGroup>
 
 					<FormGroup>
-						<Input defaultValue={userInfo.address} placeholder={t('Address')} />
+						<Input
+							placeholder={t('Email address')}
+							name="email"
+							required
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.email}
+						/>
+						{formik.errors.email ? (
+							<Invalid>{formik.errors.email}</Invalid>
+						) : null}
 					</FormGroup>
 
 					<FormGroup>
-						<Input placeholder={t('Note')} />
+						<Input
+							placeholder={t('Address')}
+							name="address"
+							required
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.address}
+						/>
+						{formik.errors.address ? (
+							<Invalid>{formik.errors.address}</Invalid>
+						) : null}
+					</FormGroup>
+
+					<FormGroup>
+						<Input
+							placeholder={t('Note')}
+							name="note"
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.note}
+						/>
 					</FormGroup>
 				</div>
 
@@ -167,15 +278,17 @@ const Cart = () => {
 							as="label"
 							className={classNames({
 								'payment-method': true,
-								active: pMethod === method.id,
+								active: formik.values.paymentMethod === method.id,
 							})}
 							key={method.id}
 						>
 							<input
 								type="radio"
 								value={method.id}
-								checked={pMethod === method.id}
-								onChange={handlePaymentMethodInputChange}
+								name="paymentMethod"
+								checked={formik.values.paymentMethod === method.id}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
 							/>
 							<div className="icon czi-check-circle"></div>
 							<div>
@@ -186,9 +299,15 @@ const Cart = () => {
 				</div>
 
 				<FormGroup>
-					<Button shadow as={cartItems.length ? 'button' : 'div'}>
-						{t('Checkout')}
-					</Button>
+					{isValid ? (
+						<Button shadow type="submit" disabled={!isValid}>
+							{t('Checkout')}
+						</Button>
+					) : (
+						<Button shadow as="div">
+							{t('Checkout')}
+						</Button>
+					)}
 				</FormGroup>
 			</Form>
 		</CartStyled>

@@ -18,6 +18,30 @@ export interface ILoginResponse {
 	user: IUserResponse;
 }
 
+export interface IOrder {
+	fullName: string;
+	phone: string;
+	email: string;
+	address: string;
+	note?: string;
+	paymentMethod: string;
+}
+
+export interface IOrderRequest {
+	userId?: string;
+	deliveryFullName: string;
+	deliveryPhone: string;
+	deliveryEmail: string;
+	deliveryAddress: string;
+	paymentMethodId: string;
+	items: IOrderItemRequest[];
+}
+
+export interface IOrderItemRequest {
+	productId: string;
+	qty: number;
+}
+
 export interface IPaymentMethodResponse {
 	id: string;
 	name: string;

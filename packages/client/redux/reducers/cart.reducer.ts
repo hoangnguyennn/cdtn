@@ -1,7 +1,10 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import isProductInCart from '../../helpers/isProductInCart';
+
 import { ICartState, IRootState } from '../../interfaces/IState';
+import { IOrderRequest } from '../../interfaces';
+import isProductInCart from '../../helpers/isProductInCart';
+import { order } from '../../apis/order.api';
 
 export const initialState: ICartState = {
 	cart: [],
@@ -84,6 +87,10 @@ const cartSlice = createSlice({
 			}
 			state.cart = cart;
 		},
+
+		clearState(state) {
+			state.cart = [];
+		},
 	},
 });
 
@@ -92,7 +99,19 @@ export const {
 	removeFromCart,
 	updateCartFromLocalStorage,
 	updateQty,
+	clearState,
 } = cartSlice.actions;
+
+export const orderAction =
+	(orderRequest: IOrderRequest) => async (dispatch: Dispatch) => {
+		try {
+			await order(orderRequest);
+			dispatch(clearState());
+			toast.info('success');
+		} catch (e) {
+			toast.error(e.message);
+		}
+	};
 
 const cartState = (state: IRootState) => state.cart;
 const selector = function <T>(combiner: { (state: ICartState): T }) {
@@ -107,6 +126,6 @@ export const getCartLength = selector((state) =>
 export const getCartSubtotal = selector((state) =>
 	state.cart.reduce((res, item) => res + item.price * item.qty, 0)
 );
-export const getDeliveryFee = 10000;
+export const getDeliveryFee = 0;
 
 export default cartSlice.reducer;
