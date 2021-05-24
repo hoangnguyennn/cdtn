@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { notFound, success } from '../../helpers/commonResponse';
 
-import Image from '../../services/image.service';
-import Product from '../../services/product.service';
+import Image from '../../services/image';
+import Product from '../../services/product';
 import { mapProductToResponse } from '../../helpers/mappingResponse';
 
 export const createNewProductController = async (

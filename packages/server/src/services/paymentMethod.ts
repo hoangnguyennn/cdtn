@@ -1,5 +1,5 @@
 import { IPaymentMethod } from '../interfaces/IDocuments';
-import PaymentMethod from '../models/paymentMethod.model';
+import PaymentMethod from '../models/paymentMethod';
 
 export const createNewPaymentMethodService = (
 	paymentMethod: IPaymentMethod

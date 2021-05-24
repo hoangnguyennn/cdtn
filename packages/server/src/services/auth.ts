@@ -5,7 +5,7 @@ import {
 	IUserRegister,
 } from '../interfaces';
 import { IUser } from '../interfaces/IDocuments';
-import User from '../models/user.model';
+import User from '../models/user';
 
 export const registerAccountService = async (
 	userRegister: IUserRegister

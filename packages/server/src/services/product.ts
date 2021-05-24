@@ -1,6 +1,6 @@
 import { IProductRequest } from '../interfaces';
 import { IProduct } from '../interfaces/IDocuments';
-import Product from '../models/product.model';
+import Product from '../models/product';
 
 export const createProductService = (
 	productRequest: IProductRequest

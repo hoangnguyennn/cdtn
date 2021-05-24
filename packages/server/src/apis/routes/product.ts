@@ -4,7 +4,7 @@ import {
 	createNewProductController,
 	getProductByIdController,
 	getTrendingProductsController,
-} from '../controllers/product.controller';
+} from '../controllers/product';
 import catcherWrapper from '../../helpers/catcherWrapper';
 
 const router = Router();

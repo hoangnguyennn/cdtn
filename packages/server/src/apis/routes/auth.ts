@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import { checkAuth } from '../../middlewares/auth.middleware';
+import { checkAuth } from '../../middlewares/auth';
 import {
 	getCurrentUserController,
 	loginController,
 	registerAccountController,
-} from '../controllers/auth.controller';
+} from '../controllers/auth';
 import catcherWrapper from '../../helpers/catcherWrapper';
 import { loginValidate, registerValidate } from '../../validates/auth.validate';
 

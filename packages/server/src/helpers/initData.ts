@@ -1,7 +1,7 @@
-import Image from '../models/image.model';
+import Image from '../models/image';
 import mongooseLoader from '../loaders/mongoose';
-import Product from '../models/product.model';
-import ProductUnit from '../models/productUnit.model';
+import Product from '../models/product';
+import ProductUnit from '../models/productUnit';
 
 const generateProducts = async () => {
 	await mongooseLoader();

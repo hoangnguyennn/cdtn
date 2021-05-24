@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { success } from '../../helpers/commonResponse';
 import { mapPaymentMethodToResponse } from '../../helpers/mappingResponse';
-import PaymentMethod from '../../services/paymentMethod.service';
+import PaymentMethod from '../../services/paymentMethod';
 
 export const createNewPaymentMethodController = async (
 	req: Request,

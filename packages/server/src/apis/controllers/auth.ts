@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { ILoginRequest, IUserRegister } from '../../interfaces';
 import { mapUserToResponse } from '../../helpers/mappingResponse';
 import { notFound, success, unauthorized } from '../../helpers/commonResponse';
-import AuthService from '../../services/auth.service';
+import AuthService from '../../services/auth';
 import { generate } from '../../utils/token';
 import { IUser } from '../../interfaces/IDocuments';
 import { UserTypes } from '../../interfaces/enums';

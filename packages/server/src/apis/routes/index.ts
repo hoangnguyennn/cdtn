@@ -1,19 +1,19 @@
 import { Router } from 'express';
 
-import authRoute from './auth.route';
-import uploadRoute from './upload.route';
-import productUnitRoute from './productUnit.route';
-import productRoute from './product.route';
-import paymentMethodRoute from './paymenthMethod.route';
-import orderRoute from './order.route';
+import authRoute from './auth';
+import orderRoute from './order';
+import paymentMethodRoute from './paumentMethod';
+import productRoute from './product';
+import productUnitRoute from './productUnit';
+import uploadRoute from './upload';
 
 const router = Router();
 
 router.use('/auth', authRoute);
-router.use('/upload', uploadRoute);
+router.use('/orders', orderRoute);
+router.use('/payment-methods', paymentMethodRoute);
 router.use('/product-units', productUnitRoute);
 router.use('/products', productRoute);
-router.use('/payment-methods', paymentMethodRoute);
-router.use('/orders', orderRoute);
+router.use('/upload', uploadRoute);
 
 export default router;

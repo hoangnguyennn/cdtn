@@ -1,5 +1,5 @@
 import { IImageRequest } from '../interfaces';
-import Image from '../models/image.model';
+import Image from '../models/image';
 
 export const createProductImageService = (
 	productImageRequest: IImageRequest

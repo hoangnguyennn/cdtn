@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { success } from '../../helpers/commonResponse';
 import { IOrderRequest } from '../../interfaces';
 
-import OrderService from '../../services/order.service';
-import OrderItemService from '../../services/orderItem.service';
+import OrderService from '../../services/order';
+import OrderItemService from '../../services/orderItem';
 
 export const createNewOrderController = async (req: Request, res: Response) => {
 	const orderRequest: IOrderRequest = req.body;

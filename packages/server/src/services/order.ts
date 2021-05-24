@@ -1,5 +1,5 @@
 import { IOrderRequest } from '../interfaces';
-import Order from '../models/order.model';
+import Order from '../models/order';
 
 export const createNewOrderService = (order: IOrderRequest) => {
 	return Order.create({

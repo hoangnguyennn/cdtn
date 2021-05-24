@@ -1,5 +1,5 @@
 import { IProductUnitRequest } from '../interfaces';
-import ProductUnit from '../models/productUnit.model';
+import ProductUnit from '../models/productUnit';
 
 export const createNewProductUnitService = (
 	productUnit: IProductUnitRequest

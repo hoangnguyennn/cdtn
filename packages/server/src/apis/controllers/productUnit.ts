@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { success } from '../../helpers/commonResponse';
-import { createNewProductUnitService } from '../../services/productUnit.service';
+import { createNewProductUnitService } from '../../services/productUnit';
 
 export const createNewProductUnitController = async (
 	req: Request,

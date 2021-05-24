@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import catcherWrapper from '../../helpers/catcherWrapper';
 
-import { createNewOrderController } from '../controllers/order.controller';
+import { createNewProductUnitController } from '../controllers/productUnit';
 
 const router = Router();
 
-router.post('/', catcherWrapper(createNewOrderController));
+router.post('/', catcherWrapper(createNewProductUnitController));
 
 export default router;

@@ -1,5 +1,5 @@
 import { ICartItem } from '../interfaces';
-import OrderItem from '../models/orderItem.model';
+import OrderItem from '../models/orderItem';
 
 export const createManyOrderItemService = async (orderItems: ICartItem[]) => {
 	return OrderItem.insertMany(

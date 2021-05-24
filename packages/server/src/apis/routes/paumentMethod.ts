@@ -4,7 +4,7 @@ import catcherWrapper from '../../helpers/catcherWrapper';
 import {
 	createNewPaymentMethodController,
 	getPaymentMethodsController,
-} from '../controllers/paymentMethod.controller';
+} from '../controllers/paymentMethod';
 
 const router = Router();
 
