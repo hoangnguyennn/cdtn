@@ -5,6 +5,7 @@ import uploadRoute from './upload.route';
 import productUnitRoute from './productUnit.route';
 import productRoute from './product.route';
 import paymentMethodRoute from './paymenthMethod.route';
+import orderRoute from './order.route';
 
 const router = Router();
 
@@ -13,5 +14,6 @@ router.use('/upload', uploadRoute);
 router.use('/product-units', productUnitRoute);
 router.use('/products', productRoute);
 router.use('/payment-methods', paymentMethodRoute);
+router.use('/orders', orderRoute);
 
 export default router;

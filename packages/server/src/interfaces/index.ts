@@ -1,13 +1,29 @@
 import { Types } from 'mongoose';
 import { ProductStatuses, UserTypes } from './enums';
 
+export interface ICartItem {
+	productId: string;
+	qty: number;
+}
+
 export interface IImageRequest {
-	imageUrl: string;
+	url: string;
 }
 
 export interface ILoginRequest {
 	email: string;
 	password: string;
+}
+
+export interface IOrderRequest {
+	userId?: string;
+	deliveryFullName: string;
+	deliveryPhone: string;
+	deliveryEmail: string;
+	deliveryAddress: string;
+	note?: string;
+	paymentMethod: string;
+	cart: ICartItem[];
 }
 
 export interface IPayload {

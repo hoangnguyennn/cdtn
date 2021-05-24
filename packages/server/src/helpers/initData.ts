@@ -13,8 +13,7 @@ const generateProducts = async () => {
 	for (let i = 0; i < 100; i++) {
 		console.log(`create product ${i + 1}`);
 		const image = await Image.create({
-			imageUrl:
-				'https://res.cloudinary.com/hoangnguyennn/image/upload/v1621465858/yzzutbi4htoulq6zkbwb.png',
+			url: 'https://res.cloudinary.com/hoangnguyennn/image/upload/v1621465858/yzzutbi4htoulq6zkbwb.png',
 		});
 
 		await Product.create({

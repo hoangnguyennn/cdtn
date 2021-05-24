@@ -5,13 +5,13 @@ import {
 } from '../interfaces';
 import { IPaymentMethod, IProduct, IUser } from '../interfaces/IDocuments';
 
-export const mapUserToResponse = (user: IUser): IUserResponse => {
+export const mapPaymentMethodToResponse = (
+	paymentMethod: IPaymentMethod
+): IPaymentMethodResponse => {
 	return {
-		id: user._id,
-		email: user.email,
-		fullName: user.fullName,
-		phone: user.phone,
-		address: user.address,
+		id: paymentMethod._id,
+		name: paymentMethod.name,
+		imageUrl: paymentMethod.imageUrl,
 	};
 };
 
@@ -23,16 +23,16 @@ export const mapProductToResponse = (product: IProduct): IProductResponse => {
 		unit: product.unit?.name || '',
 		description: product.description,
 		status: product.status,
-		images: product.images?.map((image) => image.imageUrl) || [],
+		images: product.images?.map((image) => image.url) || [],
 	};
 };
 
-export const mapPaymentMethodToResponse = (
-	paymentMethod: IPaymentMethod
-): IPaymentMethodResponse => {
+export const mapUserToResponse = (user: IUser): IUserResponse => {
 	return {
-		id: paymentMethod._id,
-		name: paymentMethod.name,
-		imageUrl: paymentMethod.imageUrl,
+		id: user._id,
+		email: user.email,
+		fullName: user.fullName,
+		phone: user.phone,
+		address: user.address,
 	};
 };

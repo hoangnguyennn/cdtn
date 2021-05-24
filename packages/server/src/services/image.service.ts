@@ -5,7 +5,7 @@ export const createProductImageService = (
 	productImageRequest: IImageRequest
 ) => {
 	return Image.create({
-		imageUrl: productImageRequest.imageUrl,
+		url: productImageRequest.url,
 	});
 };
 

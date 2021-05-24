@@ -19,7 +19,7 @@ export const getTrendingProductsService = async (): Promise<IProduct[]> => {
 		.limit(8)
 		.populate([
 			{ path: 'unit', select: '-_id name' },
-			{ path: 'images', select: '-_id imageUrl' },
+			{ path: 'images', select: '-_id url' },
 		]);
 };
 
@@ -28,7 +28,7 @@ export const getProductByIdService = async (
 ): Promise<IProduct | null> => {
 	return Product.findOne({ _id: id }).populate([
 		{ path: 'unit', select: '-_id name' },
-		{ path: 'images', select: '-_id imageUrl' },
+		{ path: 'images', select: '-_id url' },
 	]);
 };
 

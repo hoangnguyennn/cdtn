@@ -27,7 +27,7 @@ const productSchema = new Schema<IProduct>({
 	imagesId: [
 		{
 			type: Types.ObjectId,
-			ref: CollectionNames.PRODUCT_IMAGE,
+			ref: CollectionNames.IMAGE,
 			default: [],
 		},
 	],
@@ -41,7 +41,7 @@ productSchema.virtual('unit', {
 });
 
 productSchema.virtual('images', {
-	ref: CollectionNames.PRODUCT_IMAGE,
+	ref: CollectionNames.IMAGE,
 	localField: 'imagesId',
 	foreignField: '_id',
 });
