@@ -1,18 +1,15 @@
 import { Request, Response } from 'express';
 
 import { success } from '../../helpers/commonResponse';
-import { createNewProductUnitService } from '../../services/productUnit';
+import ProductUnitService from '../../services/productUnit';
 
-export const createNewProductUnitController = async (
-	req: Request,
-	res: Response
-) => {
+export const create = async (req: Request, res: Response) => {
 	const productUnit = req.body;
-	const productUnitCreated = await createNewProductUnitService(productUnit);
 
+	const productUnitCreated = await ProductUnitService.create(productUnit);
 	return success(res, productUnitCreated);
 };
 
 export default {
-	createNewProductUnitController,
+	create,
 };

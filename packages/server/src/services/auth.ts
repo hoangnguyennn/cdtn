@@ -7,9 +7,7 @@ import {
 import { IUser } from '../interfaces/IDocuments';
 import User from '../models/user';
 
-export const registerAccountService = async (
-	userRegister: IUserRegister
-): Promise<IUser> => {
+export const register = async (userRegister: IUserRegister): Promise<IUser> => {
 	return User.create({
 		email: userRegister.email,
 		passwordHashed: userRegister.passwordHashed,
@@ -20,7 +18,7 @@ export const registerAccountService = async (
 	});
 };
 
-export const loginService = async (
+export const login = async (
 	userLogin: ILoginRequest
 ): Promise<IServiceCommonResponse<IUser>> => {
 	const user = await User.findOne({ email: userLogin.email });
@@ -45,14 +43,12 @@ export const loginService = async (
 	};
 };
 
-export const getCurrentUserService = async (
-	id: string
-): Promise<IUser | null> => {
+export const getCurrentUser = async (id: string): Promise<IUser | null> => {
 	return User.findOne({ _id: id });
 };
 
 export default {
-	registerAccountService,
-	loginService,
-	getCurrentUserService,
+	register,
+	login,
+	getCurrentUser,
 };

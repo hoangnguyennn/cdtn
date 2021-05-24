@@ -1,14 +1,12 @@
 import { IImageRequest } from '../interfaces';
 import Image from '../models/image';
 
-export const createProductImageService = (
-	productImageRequest: IImageRequest
-) => {
+export const create = (image: IImageRequest) => {
 	return Image.create({
-		url: productImageRequest.url,
+		url: image.url,
 	});
 };
 
 export default {
-	createProductImageService,
+	create,
 };

@@ -11,7 +11,7 @@ cloudinaryV2.config({
 	api_secret: configs.cloudSecret,
 });
 
-const uploadFileHelper = {
+const UploadFileHelper = {
 	uploadSingle: async (file: string) => {
 		return new Promise((resolve) => {
 			cloudinaryV2.uploader.upload(file, (err, res) => {
@@ -27,7 +27,7 @@ const uploadFileHelper = {
 };
 
 const uploadSingleFile = async (req: Request, res: Response) => {
-	const fileUrl = await uploadFileHelper.uploadSingle(req.file.path);
+	const fileUrl = await UploadFileHelper.uploadSingle(req.file.path);
 	return success(res, fileUrl);
 };
 

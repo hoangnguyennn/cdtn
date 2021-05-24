@@ -1,7 +1,7 @@
 import { IOrderRequest } from '../interfaces';
 import Order from '../models/order';
 
-export const createNewOrderService = (order: IOrderRequest) => {
+export const create = (order: IOrderRequest) => {
 	return Order.create({
 		userId: order.userId,
 		deliveryFullName: order.deliveryFullName,
@@ -13,5 +13,5 @@ export const createNewOrderService = (order: IOrderRequest) => {
 };
 
 export default {
-	createNewOrderService,
+	create,
 };

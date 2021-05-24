@@ -1,18 +1,14 @@
 import { Router } from 'express';
 
-import {
-	createNewProductController,
-	getProductByIdController,
-	getTrendingProductsController,
-} from '../controllers/product';
 import catcherWrapper from '../../helpers/catcherWrapper';
+import ProductController from '../controllers/product';
 
 const router = Router();
 
-router.post('/', catcherWrapper(createNewProductController));
+router.post('/', catcherWrapper(ProductController.create));
 
-router.get('/trending', catcherWrapper(getTrendingProductsController));
+router.get('/trending', catcherWrapper(ProductController.getTrending));
 
-router.get('/:id', catcherWrapper(getProductByIdController));
+router.get('/:id', catcherWrapper(ProductController.getById));
 
 export default router;

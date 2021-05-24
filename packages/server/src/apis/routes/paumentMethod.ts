@@ -1,14 +1,11 @@
 import { Router } from 'express';
 
 import catcherWrapper from '../../helpers/catcherWrapper';
-import {
-	createNewPaymentMethodController,
-	getPaymentMethodsController,
-} from '../controllers/paymentMethod';
+import PaymentMethodController from '../controllers/paymentMethod';
 
 const router = Router();
 
-router.get('/', catcherWrapper(getPaymentMethodsController));
-router.post('/', catcherWrapper(createNewPaymentMethodController));
+router.get('/', catcherWrapper(PaymentMethodController.get));
+router.post('/', catcherWrapper(PaymentMethodController.create));
 
 export default router;

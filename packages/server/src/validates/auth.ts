@@ -1,6 +1,6 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 
-export const registerValidate = celebrate({
+export const register = celebrate({
 	[Segments.BODY]: Joi.object().keys({
 		email: Joi.string().email().required(),
 		password: Joi.string().required(),
@@ -9,9 +9,14 @@ export const registerValidate = celebrate({
 	}),
 });
 
-export const loginValidate = celebrate({
+export const login = celebrate({
 	[Segments.BODY]: Joi.object().keys({
 		email: Joi.string().email().required(),
 		password: Joi.string().required(),
 	}),
 });
+
+export default {
+	login,
+	register,
+};

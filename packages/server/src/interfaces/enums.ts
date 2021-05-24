@@ -9,11 +9,11 @@ export enum CollectionNames {
 }
 
 export enum OrderStatuses {
+	CANCEL = 'CANCEL',
+	DELIVERED = 'DELIVERED',
+	DELIVERING = 'DELIVERING',
 	ORDERED = 'ORDERED',
 	VERIFIED = 'VERIFIED',
-	DELIVERING = 'DELIVERING',
-	DELIVERED = 'DELIVERED',
-	CANCEL = 'CANCEL',
 }
 
 export enum PaymentStatuses {
@@ -28,6 +28,6 @@ export enum ProductStatuses {
 
 export enum UserTypes {
 	ADMIN = 'ADMIN',
-	MANAGER = 'MANAGER',
 	CUSTOMER = 'CUSTOMER',
+	MANAGER = 'MANAGER',
 }

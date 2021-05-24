@@ -1,7 +1,7 @@
 import { ICartItem } from '../interfaces';
 import OrderItem from '../models/orderItem';
 
-export const createManyOrderItemService = async (orderItems: ICartItem[]) => {
+export const createMany = async (orderItems: ICartItem[]) => {
 	return OrderItem.insertMany(
 		orderItems.map((item) => ({
 			productId: item.productId,
@@ -12,5 +12,5 @@ export const createManyOrderItemService = async (orderItems: ICartItem[]) => {
 };
 
 export default {
-	createManyOrderItemService,
+	createMany,
 };

@@ -1,39 +1,33 @@
 import { NextFunction, Request, Response } from 'express';
-import { notFound, success } from '../../helpers/commonResponse';
 
-import Image from '../../services/image';
-import Product from '../../services/product';
 import { mapProductToResponse } from '../../helpers/mappingResponse';
+import { notFound, success } from '../../helpers/commonResponse';
+import ImageService from '../../services/image';
+import ProductService from '../../services/product';
 
-export const createNewProductController = async (
-	req: Request,
-	res: Response
-) => {
+export const create = async (req: Request, res: Response) => {
 	const product = req.body;
-	const productCreated = await Product.createProductService(product);
+	const productCreated = await ProductService.create(product);
 
 	product.productId = productCreated._id;
-	await Image.createProductImageService(product);
+	await ImageService.create(product);
 
 	return success(res, productCreated);
 };
 
-export const getTrendingProductsController = async (
-	req: Request,
-	res: Response
-) => {
-	const trendingProducts = await Product.getTrendingProductsService();
+export const getTrending = async (req: Request, res: Response) => {
+	const trendingProducts = await ProductService.getTrending();
 
 	return success(res, trendingProducts.map(mapProductToResponse));
 };
 
-export const getProductByIdController = async (
+export const getById = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
 	const { id } = req.params;
-	const product = await Product.getProductByIdService(id);
+	const product = await ProductService.getById(id);
 
 	if (!product) {
 		return notFound(next);
@@ -43,7 +37,7 @@ export const getProductByIdController = async (
 };
 
 export default {
-	createNewProductController,
-	getTrendingProductsController,
-	getProductByIdController,
+	create,
+	getById,
+	getTrending,
 };

@@ -1,30 +1,22 @@
 import { Request, Response } from 'express';
-import { success } from '../../helpers/commonResponse';
-import { mapPaymentMethodToResponse } from '../../helpers/mappingResponse';
-import PaymentMethod from '../../services/paymentMethod';
 
-export const createNewPaymentMethodController = async (
-	req: Request,
-	res: Response
-) => {
+import { mapPaymentMethodToResponse } from '../../helpers/mappingResponse';
+import { success } from '../../helpers/commonResponse';
+import PaymentMethodService from '../../services/paymentMethod';
+
+export const create = async (req: Request, res: Response) => {
 	const paymentMethod = req.body;
 
-	const paymentMethodCreated =
-		await PaymentMethod.createNewPaymentMethodService(paymentMethod);
-
+	const paymentMethodCreated = await PaymentMethodService.create(paymentMethod);
 	return success(res, paymentMethodCreated);
 };
 
-export const getPaymentMethodsController = async (
-	req: Request,
-	res: Response
-) => {
-	const paymentMethods = await PaymentMethod.getPaymentMethodsService();
-
+export const get = async (req: Request, res: Response) => {
+	const paymentMethods = await PaymentMethodService.get();
 	return success(res, paymentMethods.map(mapPaymentMethodToResponse));
 };
 
 export default {
-	createNewPaymentMethodController,
-	getPaymentMethodsController,
+	create,
+	get,
 };

@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import { COMMON_MESSAGE, unauthorized } from '../helpers/commonResponse';
+import {
+	COMMON_MESSAGE,
+	forbidden,
+	unauthorized,
+} from '../helpers/commonResponse';
 import { decode } from '../utils/token';
 
 export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
@@ -12,7 +16,7 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 	const decoded = decode(token);
 
 	if (!decoded) {
-		return unauthorized(next, COMMON_MESSAGE.INVALID_TOKEN);
+		return forbidden(next, COMMON_MESSAGE.INVALID_TOKEN);
 	}
 
 	res.locals.userId = decoded.userId;

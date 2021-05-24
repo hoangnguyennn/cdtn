@@ -1,22 +1,24 @@
 import { Router } from 'express';
 
 import { checkAuth } from '../../middlewares/auth';
-import {
-	getCurrentUserController,
-	loginController,
-	registerAccountController,
-} from '../controllers/auth';
+import AuthController from '../controllers/auth';
+import AuthValidator from '../../validates/auth';
 import catcherWrapper from '../../helpers/catcherWrapper';
-import { loginValidate, registerValidate } from '../../validates/auth.validate';
 
 const router = Router();
 
-router.post('/login', loginValidate, catcherWrapper(loginController));
+router.post(
+	'/login',
+	AuthValidator.login,
+	catcherWrapper(AuthController.login)
+);
+
 router.post(
 	'/register',
-	registerValidate,
-	catcherWrapper(registerAccountController)
+	AuthValidator.register,
+	catcherWrapper(AuthController.register)
 );
-router.post('/me', checkAuth, catcherWrapper(getCurrentUserController));
+
+router.post('/me', checkAuth, catcherWrapper(AuthController.getCurrentUser));
 
 export default router;

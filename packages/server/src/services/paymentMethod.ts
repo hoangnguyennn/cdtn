@@ -1,7 +1,7 @@
 import { IPaymentMethod } from '../interfaces/IDocuments';
 import PaymentMethod from '../models/paymentMethod';
 
-export const createNewPaymentMethodService = (
+export const create = (
 	paymentMethod: IPaymentMethod
 ): Promise<IPaymentMethod> => {
 	return PaymentMethod.create({
@@ -15,11 +15,11 @@ export const createNewPaymentMethodService = (
 	});
 };
 
-export const getPaymentMethodsService = async (): Promise<IPaymentMethod[]> => {
+export const get = async (): Promise<IPaymentMethod[]> => {
 	return PaymentMethod.find();
 };
 
 export default {
-	createNewPaymentMethodService,
-	getPaymentMethodsService,
+	create,
+	get,
 };
