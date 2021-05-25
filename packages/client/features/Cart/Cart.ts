@@ -4,11 +4,7 @@ import FormGroup from '../../components/core/FormGroup';
 export default styled.div`
 	.cart-sidebar,
 	.cart-main {
-		margin-bottom: 3rem;
 		padding: 1rem;
-		background-color: var(--white);
-		border-radius: 2px;
-		box-shadow: 0 0.3rem 1.525rem -0.375rem rgb(0 0 0 / 10%);
 	}
 
 	.cart-sidebar {
@@ -174,7 +170,6 @@ export default styled.div`
 		padding: 1rem;
 		background-color: var(--white);
 		border-radius: 2px;
-		box-shadow: 0 0.3rem 1.525rem -0.375rem rgb(0 0 0 / 10%);
 
 		display: flex;
 		flex-direction: row-reverse;
@@ -193,7 +188,6 @@ export default styled.div`
 		.cart-main {
 			margin-bottom: 0;
 			border: 1px solid #dae1e7;
-			box-shadow: none;
 		}
 	}
 `;

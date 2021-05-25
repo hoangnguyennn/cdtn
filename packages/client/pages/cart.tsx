@@ -4,15 +4,13 @@ import { cartPage } from '../configs/breadcrumb';
 import Cart from '../features/Cart';
 import MainLayout from '../layouts/MainLayout';
 import PageContent from '../components/PageContent';
-import PageTitle from '../components/PageTitle';
 
 const CartPage = () => {
 	const { t } = useTranslation();
 
 	return (
 		<MainLayout>
-			<PageTitle breadcrumb={cartPage()} title={t('Cart')} />
-			<PageContent>
+			<PageContent breadcrumb={cartPage()} title={t('Cart')}>
 				<Cart />
 			</PageContent>
 		</MainLayout>

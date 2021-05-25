@@ -5,7 +5,7 @@ import Breadcrumb from '../Breadcrumb';
 import Container from '../core/Container';
 import PageTitleStyled from './PageTitle';
 
-type PageTitleProps = {
+export type PageTitleProps = {
 	breadcrumb: IBreadcrumb[];
 	title: string;
 };

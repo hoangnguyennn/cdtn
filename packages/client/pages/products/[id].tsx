@@ -10,7 +10,6 @@ import {
 import { productPage } from '../../configs/breadcrumb';
 import MainLayout from '../../layouts/MainLayout';
 import PageContent from '../../components/PageContent';
-import PageTitle from '../../components/PageTitle';
 import ProductSummary from '../../features/ProductSummary';
 
 const ProductDetailPage = () => {
@@ -28,11 +27,10 @@ const ProductDetailPage = () => {
 
 	return (
 		<MainLayout>
-			<PageTitle
+			<PageContent
 				breadcrumb={productPage(product.name, product.id as string)}
 				title={product.name}
-			/>
-			<PageContent>
+			>
 				<ProductSummary product={product} />
 			</PageContent>
 		</MainLayout>

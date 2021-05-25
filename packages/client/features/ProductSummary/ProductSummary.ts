@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
 export default styled.div`
-	padding: 1rem;
-	background-color: var(--white);
-	border-radius: 2px;
-	box-shadow: 0 0.3rem 1.525rem -0.375rem rgb(0 0 0 / 10%);
-
 	display: flex;
 	flex-direction: column;
 
