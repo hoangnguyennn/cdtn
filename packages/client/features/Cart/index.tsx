@@ -127,9 +127,10 @@ const Cart = () => {
 									<p className="name">{item.name}</p>
 									<div className="qty">
 										<span
-											className={`qty-decreace ${
-												item.qty > 0 ? '' : 'disabled'
-											}`}
+											className={classNames({
+												'qty-decreace': true,
+												disabled: item.qty <= 1,
+											})}
 											onClick={() => {
 												if (item.qty > 0) {
 													dispatch(
@@ -146,9 +147,10 @@ const Cart = () => {
 											disabled
 										/>
 										<span
-											className={`qty-increase ${
-												item.qty < 99 ? '' : 'disabled'
-											}`}
+											className={classNames({
+												'qty-increase': true,
+												disabled: item.qty >= 99,
+											})}
 											onClick={() => {
 												if (item.qty < 99) {
 													dispatch(

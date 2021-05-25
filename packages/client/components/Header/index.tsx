@@ -38,9 +38,7 @@ const Header = () => {
 									<i className="czi-user"></i>
 								</div>
 								<div className="text ml-n2">
-									<small>
-										{t('Hello')}, {t('Sign in')}
-									</small>
+									<small>{t('Sign in')}</small>
 									<span>{t('My Account')}</span>
 								</div>
 							</a>

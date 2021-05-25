@@ -49,7 +49,6 @@ const cartSlice = createSlice({
 			}
 
 			localStorage.setItem('cart', JSON.stringify(state.cart));
-			toast.info('Remove from cart');
 		},
 
 		updateQty: (state, action) => {
@@ -78,7 +77,6 @@ const cartSlice = createSlice({
 			}
 
 			localStorage.setItem('cart', JSON.stringify(state.cart));
-			toast.info('Update quantity');
 		},
 
 		updateCartFromLocalStorage: (state) => {
