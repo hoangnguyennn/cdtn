@@ -2,10 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
 import { IRootState } from '../interfaces/IState';
 
+import { initialState as initialAppState } from './reducers/app.reducer';
 import { initialState as initialAuthState } from './reducers/auth.reducer';
-import { initialState as initialProductState } from './reducers/product.reducer';
 import { initialState as initialCartState } from './reducers/cart.reducer';
 import { initialState as initialPaymentMethodState } from './reducers/paymentMethods.reducer';
+import { initialState as initialProductState } from './reducers/product.reducer';
 
 import rootReducer from './reducers';
 
@@ -17,6 +18,7 @@ const initStore = (
 		product: initialProductState,
 		cart: initialCartState,
 		paymentMethod: initialPaymentMethodState,
+		app: initialAppState,
 	}
 ) => {
 	return configureStore({

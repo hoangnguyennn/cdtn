@@ -2,11 +2,6 @@ import styled from 'styled-components';
 import FormGroup from '../../components/core/FormGroup';
 
 export default styled.div`
-	.cart-sidebar,
-	.cart-main {
-		padding: 1rem;
-	}
-
 	.cart-sidebar {
 		.cart-detail {
 			.cart-item {
@@ -30,7 +25,14 @@ export default styled.div`
 
 					.name {
 						margin-bottom: 0.625rem;
+						color: inherit;
 						font-size: 0.8125rem;
+						text-decoration: none;
+
+						&:hover {
+							color: var(--primary);
+							text-decoration: underline;
+						}
 					}
 
 					.qty {
@@ -167,10 +169,6 @@ export default styled.div`
 	}
 
 	@media (min-width: 992px) {
-		padding: 1rem;
-		background-color: var(--white);
-		border-radius: 2px;
-
 		display: flex;
 		flex-direction: row-reverse;
 		align-items: flex-start;
@@ -186,6 +184,7 @@ export default styled.div`
 
 		.cart-sidebar,
 		.cart-main {
+			padding: 1rem;
 			margin-bottom: 0;
 			border: 1px solid #dae1e7;
 		}

@@ -4,6 +4,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import type { AppProps } from 'next/app';
 
+import { getLimitOfToast } from '../redux/reducers/app.reducer';
 import Auth from '../guards/Auth';
 import useStore from '../redux/store';
 
@@ -25,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 			<Auth>
 				<Component {...pageProps} />
 			</Auth>
-			<ToastContainer />
+			<ToastContainer limit={getLimitOfToast(store.getState())} />
 		</Provider>
 	);
 };

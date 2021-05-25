@@ -28,6 +28,8 @@ import {
 	fetchPaymentMethodsAction,
 	getPaymentMethods,
 } from '../../redux/reducers/paymentMethods.reducer';
+import Link from 'next/link';
+import { PATH_NAME } from '../../configs/pathName';
 
 const Cart = () => {
 	const { t } = useTranslation();
@@ -124,7 +126,9 @@ const Cart = () => {
 									<img src={item.images[0] || ''} alt="" />
 								</div>
 								<div className="info">
-									<p className="name">{item.name}</p>
+									<Link href={`${PATH_NAME.PRODUCTS}/${item.id}`}>
+										<a className="name">{item.name}</a>
+									</Link>
 									<div className="qty">
 										<span
 											className={classNames({

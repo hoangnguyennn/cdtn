@@ -5,6 +5,10 @@ import {
 	IUserResponse,
 } from './index';
 
+export interface IAppState {
+	limitOfToast: number;
+}
+
 export interface IAuthState {
 	token: string;
 	user: IUserResponse;
@@ -26,8 +30,9 @@ export interface IProductState {
 }
 
 export interface IRootState {
+	app: IAppState;
 	auth: IAuthState;
 	cart: ICartState;
-	product: IProductState;
 	paymentMethod: IPaymentMethodState;
+	product: IProductState;
 }
