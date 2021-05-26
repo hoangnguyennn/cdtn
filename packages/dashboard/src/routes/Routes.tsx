@@ -1,4 +1,4 @@
-import { Fragment, lazy } from 'react';
+import { Fragment, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PATH_NAME } from '../configs';
 import IRoute from '../interfaces/IRoute';
@@ -31,25 +31,27 @@ const routesConfig: IRoute[] = [
 const renderRoutes = (routes: IRoute[]) => {
 	return (
 		<Router>
-			<Switch>
-				{routes.map((route, index) => {
-					const Layout = route.layout || Fragment;
-					const Component = route.component;
+			<Suspense fallback={<div />}>
+				<Switch>
+					{routes.map((route, index) => {
+						const Layout = route.layout || Fragment;
+						const Component = route.component;
 
-					return (
-						<Route
-							key={`routes-${index}`}
-							path={route.path}
-							exact={route.exact}
-							render={(props) => (
-								<Layout>
-									<Component {...props} />
-								</Layout>
-							)}
-						/>
-					);
-				})}
-			</Switch>
+						return (
+							<Route
+								key={`routes-${index}`}
+								path={route.path}
+								exact={route.exact}
+								render={(props) => (
+									<Layout>
+										<Component {...props} />
+									</Layout>
+								)}
+							/>
+						);
+					})}
+				</Switch>
+			</Suspense>
 		</Router>
 	);
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
 	DesktopOutlined,
@@ -13,7 +13,7 @@ import './MainLayout.css';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const MainLayout = () => {
+const MainLayout: FC = ({ children }) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	return (
@@ -52,7 +52,7 @@ const MainLayout = () => {
 						className="site-layout-background"
 						style={{ padding: 24, minHeight: 360 }}
 					>
-						Bill is a cat.
+						{children}
 					</div>
 				</Content>
 				<Footer style={{ textAlign: 'center' }}>

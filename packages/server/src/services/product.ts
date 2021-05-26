@@ -29,8 +29,16 @@ export const getById = async (id: string): Promise<IProduct | null> => {
 	]);
 };
 
+export const get = async (): Promise<IProduct[]> => {
+	return ProductModel.find().populate([
+		{ path: 'unit', select: '-_id name' },
+		{ path: 'images', select: '-_id url' },
+	]);
+};
+
 export default {
 	create,
 	getById,
 	getTrending,
+	get,
 };

@@ -36,8 +36,15 @@ export const getById = async (
 	return success(res, mapProductToResponse(product));
 };
 
+export const get = async (req: Request, res: Response) => {
+	const products = await ProductService.get();
+
+	return success(res, products.map(mapProductToResponse));
+};
+
 export default {
 	create,
 	getById,
 	getTrending,
+	get,
 };
