@@ -22,6 +22,7 @@ orderItemSchema.virtual('product', {
 	ref: CollectionName.PRODUCT,
 	localField: 'productId',
 	foreignField: '_id',
+	justOne: true,
 });
 
 export default model<IOrderItem>(CollectionName.ORDER_ITEM, orderItemSchema);

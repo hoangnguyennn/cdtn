@@ -37,6 +37,7 @@ productSchema.virtual('unit', {
 	ref: CollectionName.PRODUCT_UNIT,
 	localField: 'unitId',
 	foreignField: '_id',
+	justOne: true,
 });
 
 productSchema.virtual('images', {

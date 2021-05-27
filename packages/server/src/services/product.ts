@@ -14,15 +14,20 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 };
 
 const get = async (): Promise<IProduct[]> => {
-	return ProductModel.find();
+	return ProductModel.find().populate([{ path: 'unit' }, { path: 'images' }]);
 };
 
 const getById = async (id: string): Promise<IProduct | null> => {
-	return ProductModel.findOne({ _id: id });
+	return ProductModel.findOne({ _id: id }).populate([
+		{ path: 'unit' },
+		{ path: 'images' },
+	]);
 };
 
 const getTrending = async (): Promise<IProduct[]> => {
-	return ProductModel.find().limit(8);
+	return ProductModel.find()
+		.limit(8)
+		.populate([{ path: 'unit' }, { path: 'images' }]);
 };
 
 export default {

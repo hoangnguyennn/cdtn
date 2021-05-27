@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import authRoute from './auth';
 import orderRoute from './order';
 import paymentMethodRoute from './paymentMethod';
 import productRoute from './product';
@@ -8,6 +9,7 @@ import uploadRoute from './upload';
 
 const router = Router();
 
+router.use('/auth', authRoute);
 router.use('/orders', orderRoute);
 router.use('/payment-methods', paymentMethodRoute);
 router.use('/product-units', productUnitRoute);

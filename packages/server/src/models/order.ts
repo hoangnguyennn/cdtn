@@ -63,12 +63,14 @@ orderSchema.virtual('user', {
 	ref: CollectionName.USER,
 	localField: 'userId',
 	foreignField: '_id',
+	justOne: true,
 });
 
 orderSchema.virtual('paymentMethod', {
 	ref: CollectionName.PAYMENT_METHOD,
 	localField: 'paymentMethodId',
 	foreignField: '_id',
+	justOne: true,
 });
 
 orderSchema.virtual('items', {
