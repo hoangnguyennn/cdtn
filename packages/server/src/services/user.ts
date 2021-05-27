@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import {
 	COMMON_MESSAGE,
 	HttpError,
@@ -6,7 +7,7 @@ import {
 import { IUser } from '../interfaces/IDocuments';
 import UserModel from '../models/user';
 
-const getById = async (id: string): Promise<IUser> => {
+const getById = async (id: string | Types.ObjectId): Promise<IUser> => {
 	const user = await UserModel.findOne({ _id: id });
 
 	if (!user) {

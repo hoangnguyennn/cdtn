@@ -30,9 +30,10 @@ export interface IOrder {
 export interface IOrderRequest {
 	userId?: string;
 	deliveryFullName: string;
+	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryAddress: string;
+	deliveryDate?: Date;
 	paymentMethodId: string;
 	items: IOrderItemRequest[];
 }
@@ -60,9 +61,8 @@ export interface IProductResponse {
 	id: string;
 	name: string;
 	price: number;
+	description: string;
 	unit: string;
-	description?: string;
-	status: string;
 	images: string[];
 }
 

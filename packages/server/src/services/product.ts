@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 import { IProduct } from '../interfaces/IDocuments';
 import { IProductCreate } from '../interfaces';
 import ProductModel from '../models/product';
@@ -17,7 +19,9 @@ const get = async (): Promise<IProduct[]> => {
 	return ProductModel.find().populate([{ path: 'unit' }, { path: 'images' }]);
 };
 
-const getById = async (id: string): Promise<IProduct | null> => {
+const getById = async (
+	id: string | Types.ObjectId
+): Promise<IProduct | null> => {
 	return ProductModel.findOne({ _id: id }).populate([
 		{ path: 'unit' },
 		{ path: 'images' },

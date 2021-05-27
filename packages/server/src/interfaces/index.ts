@@ -16,41 +16,47 @@ export interface ILoginResponse {
 }
 
 export interface IOrderCreate {
-	userId?: Types.ObjectId;
+	userId?: string | Types.ObjectId;
 	deliveryFullName: string;
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
 	deliveryDate?: Date;
-	paymentMethodId: Types.ObjectId;
-	itemsId: Types.ObjectId[];
+	paymentMethodId: string | Types.ObjectId;
+	itemsId: string[] | Types.ObjectId[];
 }
 
 export interface IOrderCreateRequest {
-	userId?: Types.ObjectId;
+	userId?: string;
 	deliveryFullName: string;
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
 	deliveryDate?: Date;
-	paymentMethodId: Types.ObjectId;
-	items: IOrderItemCreate[];
+	paymentMethodId: string | Types.ObjectId;
+	items: IOrderItemCreateRequest[];
 }
 
 export interface IOrderItemCreate {
-	productId: Types.ObjectId;
+	productId: string | Types.ObjectId;
+	price: number;
+	qty: number;
+}
+
+export interface IOrderItemCreateRequest {
+	productId: string | Types.ObjectId;
 	qty: number;
 }
 
 export interface IOrderItemResponse {
-	id: string;
-	productId: Types.ObjectId;
+	id: string | Types.ObjectId;
+	productId: string | Types.ObjectId;
 	price: number;
 	qty: number;
 }
 
 export interface IOrderResponse {
-	id: string;
+	id: string | Types.ObjectId;
 	deliveryFullName: string;
 	deliveryAddress: string;
 	deliveryPhone: string;
@@ -66,7 +72,7 @@ export interface IOrderResponse {
 }
 
 export interface IPayload {
-	userId: string;
+	userId: string | Types.ObjectId;
 }
 
 export interface IPaymentMethodCreate {
@@ -80,7 +86,7 @@ export interface IPaymentMethodCreate {
 }
 
 export interface IPaymentMethodResponse {
-	id: string;
+	id: string | Types.ObjectId;
 	name: string;
 	imageUrl: string;
 	description?: string;
@@ -89,23 +95,23 @@ export interface IPaymentMethodResponse {
 export interface IProductCreate {
 	name: string;
 	price: number;
-	unitId: Types.ObjectId;
+	unitId: string | Types.ObjectId;
 	description: string;
 	status: ProductStatus;
-	imagesId: Types.ObjectId[];
+	imagesId: string[] | Types.ObjectId[];
 }
 
 export interface IProductCreateRequest {
 	name: string;
 	price: number;
-	unitId: Types.ObjectId;
+	unitId: string | Types.ObjectId;
 	description: string;
 	status: ProductStatus;
 	imagesUrl: string[];
 }
 
 export interface IProductResponse {
-	id: string;
+	id: string | Types.ObjectId;
 	name: string;
 	price: number;
 	description: string;
@@ -134,7 +140,7 @@ export interface IUserCreateRequest {
 }
 
 export interface IUserResponse {
-	id: string;
+	id: string | Types.ObjectId;
 	email: string;
 	fullName: string;
 	address: string;
