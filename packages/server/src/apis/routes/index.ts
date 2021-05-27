@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import authRoute from './auth';
 import orderRoute from './order';
-import paymentMethodRoute from './paumentMethod';
+import paymentMethodRoute from './paymentMethod';
 import productRoute from './product';
 import productUnitRoute from './productUnit';
 import uploadRoute from './upload';
