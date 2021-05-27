@@ -9,3 +9,11 @@ export interface IProduct {
 	status: ProductStatuses;
 	images: string[];
 }
+
+export interface IMenu {
+	id: string | number;
+	title: string;
+	href?: string;
+	hasItems: boolean;
+	items?: IMenu[];
+}

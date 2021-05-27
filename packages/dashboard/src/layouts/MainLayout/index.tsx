@@ -1,12 +1,9 @@
 import { FC, useState } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-	DesktopOutlined,
-	PieChartOutlined,
-	FileOutlined,
-	TeamOutlined,
-	UserOutlined,
-} from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { PieChartOutlined, UserOutlined } from '@ant-design/icons';
+
+import menu from '../../configs/menu';
 
 import './MainLayout.css';
 
@@ -20,25 +17,30 @@ const MainLayout: FC = ({ children }) => {
 		<Layout style={{ minHeight: '100vh' }} id="components-layout-demo-side">
 			<Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
 				<div className="logo" />
-				<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-					<Menu.Item key="1" icon={<PieChartOutlined />}>
-						Option 1
-					</Menu.Item>
-					<Menu.Item key="2" icon={<DesktopOutlined />}>
-						Option 2
-					</Menu.Item>
-					<SubMenu key="sub1" icon={<UserOutlined />} title="User">
-						<Menu.Item key="3">Tom</Menu.Item>
-						<Menu.Item key="4">Bill</Menu.Item>
-						<Menu.Item key="5">Alex</Menu.Item>
-					</SubMenu>
-					<SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-						<Menu.Item key="6">Team 1</Menu.Item>
-						<Menu.Item key="8">Team 2</Menu.Item>
-					</SubMenu>
-					<Menu.Item key="9" icon={<FileOutlined />}>
-						Files
-					</Menu.Item>
+				<Menu theme="dark" mode="inline">
+					{menu.map((menuItem) => {
+						if (menuItem.hasItems) {
+							return (
+								<SubMenu
+									key={menuItem.id}
+									icon={<UserOutlined />}
+									title={menuItem.title}
+								>
+									{menuItem.items?.map((item) => (
+										<Menu.Item key={item.id}>
+											<Link to={item.href || ''}>{item.title}</Link>
+										</Menu.Item>
+									))}
+								</SubMenu>
+							);
+						} else {
+							return (
+								<Menu.Item key={menuItem.id} icon={<PieChartOutlined />}>
+									<Link to={menuItem.href || ''}>{menuItem.title}</Link>
+								</Menu.Item>
+							);
+						}
+					})}
 				</Menu>
 			</Sider>
 			<Layout className="site-layout">
