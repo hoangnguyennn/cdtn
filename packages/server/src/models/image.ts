@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose';
-import { CollectionNames } from '../interfaces/enums';
-import { IProductImage } from '../interfaces/IDocuments';
+import { CollectionName } from '../interfaces/enums';
+import { IImage } from '../interfaces/IDocuments';
 
-const productImageSchema = new Schema<IProductImage>({
+const imageSchema = new Schema({
 	url: {
 		type: String,
 		required: true,
 	},
 });
 
-export default model<IProductImage>(CollectionNames.IMAGE, productImageSchema);
+export default model<IImage>(CollectionName.IMAGE, imageSchema);

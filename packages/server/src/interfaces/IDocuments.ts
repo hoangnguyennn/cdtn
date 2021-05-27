@@ -1,33 +1,34 @@
-import { Document, ObjectId } from 'mongoose';
+import { Types, Document } from 'mongoose';
+import { OrderStatus, PaymentStatus, ProductStatus, UserType } from './enums';
 
-import {
-	OrderStatuses,
-	PaymentStatuses,
-	ProductStatuses,
-	UserTypes,
-} from './enums';
+export interface IImage extends Document {
+	url: string;
+}
 
 export interface IOrder extends Document {
-	userId?: ObjectId;
+	userId?: Types.ObjectId;
 	deliveryFullName: string;
-	deliveryPhone: string;
 	deliveryAddress: string;
+	deliveryPhone: string;
 	deliveryEmail: string;
 	deliveryDate?: Date;
-	paymentMethodId: ObjectId;
-	paymentMethod?: IPaymentMethod;
-	paymentStatus: PaymentStatuses;
+	paymentMethodId: Types.ObjectId;
+	paymentStatus: PaymentStatus;
+	orderStatus: OrderStatus;
 	orderDate: Date;
-	orderStatus: OrderStatuses;
-	orderItemsId: ObjectId[];
-	orderItem?: IOrderItem[];
+	itemsId: Types.ObjectId[];
+
+	user?: IUser;
+	paymentMethod?: IPaymentMethod;
+	items: IOrderItem[];
 }
 
 export interface IOrderItem extends Document {
-	productId: ObjectId;
-	product?: IProduct;
+	productId: Types.ObjectId;
 	price: number;
 	qty: number;
+
+	product?: IProduct;
 }
 
 export interface IPaymentMethod extends Document {
@@ -36,23 +37,20 @@ export interface IPaymentMethod extends Document {
 	accessKey?: string;
 	secretKey?: string;
 	publicKey?: string;
-	url?: string;
+	host?: string;
 	description?: string;
 }
 
 export interface IProduct extends Document {
 	name: string;
 	price: number;
-	unitId: ObjectId;
-	unit?: IProductUnit;
-	description?: string;
-	status: ProductStatuses;
-	imagesId: ObjectId[];
-	images?: IProductImage[];
-}
+	unitId: Types.ObjectId;
+	description: string;
+	status: ProductStatus;
+	imagesId: Types.ObjectId[];
 
-export interface IProductImage extends Document {
-	url: string;
+	unit?: IProductUnit;
+	images?: IImage[];
 }
 
 export interface IProductUnit extends Document {
@@ -63,8 +61,8 @@ export interface IUser extends Document {
 	email: string;
 	passwordHashed: string;
 	fullName: string;
-	phone: string;
 	address: string;
-	userType: UserTypes;
+	phone: string;
+	userType: UserType;
 	isActivated: boolean;
 }

@@ -1,17 +1,16 @@
+import { IOrderItemCreate } from '../interfaces';
 import { IOrderItem } from '../interfaces/IDocuments';
-import { IOrderItemRequest } from '../interfaces';
 import OrderItemModel from '../models/orderItem';
 
-export const createMany = async (
-	orderItems: IOrderItemRequest[]
+const createMany = async (
+	orderItems: IOrderItemCreate[]
 ): Promise<IOrderItem[]> => {
-	return OrderItemModel.insertMany(
-		orderItems.map((item) => ({
-			productId: item.productId,
-			price: 123,
-			qty: item.qty,
-		}))
-	);
+	const orderItemsCreate = orderItems.map((item) => ({
+		productId: item.productId,
+		qty: item.qty,
+	}));
+
+	return OrderItemModel.insertMany(orderItemsCreate);
 };
 
 export default {

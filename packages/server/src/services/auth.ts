@@ -1,13 +1,27 @@
-import { COMMON_MESSAGE } from '../helpers/commonResponse';
-import {
-	ILoginRequest,
-	IServiceCommonResponse,
-	IUserCreate,
-} from '../interfaces';
-import { IUser } from '../interfaces/IDocuments';
 import UserModel from '../models/user';
+import {
+	COMMON_MESSAGE,
+	HttpError,
+	HttpStatusCode,
+} from '../helpers/commonResponse';
+import { ILogin, IUserCreate } from '../interfaces';
+import { IUser } from '../interfaces/IDocuments';
 
-export const register = async (user: IUserCreate): Promise<IUser> => {
+const login = async (credential: ILogin): Promise<IUser> => {
+	const user = await UserModel.findOne({ email: credential.email });
+
+	if (!user) {
+		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+	}
+
+	if (user.passwordHashed !== credential.password) {
+		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+	}
+
+	return user;
+};
+
+const register = async (user: IUserCreate): Promise<IUser> => {
 	return UserModel.create({
 		email: user.email,
 		passwordHashed: user.passwordHashed,
@@ -18,37 +32,7 @@ export const register = async (user: IUserCreate): Promise<IUser> => {
 	});
 };
 
-export const login = async (
-	login: ILoginRequest
-): Promise<IServiceCommonResponse<IUser>> => {
-	const user = await UserModel.findOne({ email: login.email });
-
-	if (!user) {
-		return {
-			hasError: true,
-			message: COMMON_MESSAGE.NOT_FOUND,
-		};
-	}
-
-	if (user.passwordHashed !== login.password) {
-		return {
-			hasError: true,
-			message: COMMON_MESSAGE.NOT_FOUND,
-		};
-	}
-
-	return {
-		hasError: false,
-		data: user,
-	};
-};
-
-export const getCurrentUser = async (id: string): Promise<IUser | null> => {
-	return UserModel.findOne({ _id: id });
-};
-
 export default {
-	register,
 	login,
-	getCurrentUser,
+	register,
 };

@@ -1,17 +1,21 @@
 import { model, Schema, Types } from 'mongoose';
-import {
-	CollectionNames,
-	OrderStatuses,
-	PaymentStatuses,
-} from '../interfaces/enums';
 import { IOrder } from '../interfaces/IDocuments';
+import {
+	CollectionName,
+	OrderStatus,
+	PaymentStatus,
+} from '../interfaces/enums';
 
 const orderSchema = new Schema({
 	userId: {
 		type: Types.ObjectId,
-		ref: CollectionNames.USER,
+		ref: CollectionName.USER,
 	},
 	deliveryFullName: {
+		type: String,
+		required: true,
+	},
+	deliveryAddress: {
 		type: String,
 		required: true,
 	},
@@ -23,54 +27,54 @@ const orderSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	deliveryAddress: {
+	deliveryDate: {
 		type: String,
 		required: true,
-	},
-	deliveryDate: {
-		type: Date,
 	},
 	paymentMethodId: {
 		type: Types.ObjectId,
+		ref: CollectionName.PAYMENT_METHOD,
 		required: true,
-		ref: CollectionNames.PAYMENT_METHOD,
 	},
 	paymentStatus: {
 		type: String,
+		enum: PaymentStatus,
 		required: true,
-		enum: PaymentStatuses,
-		default: PaymentStatuses.UNPAID,
-	},
-	orderDate: {
-		type: Date,
-		required: true,
-		default: new Date(),
 	},
 	orderStatus: {
 		type: String,
-		required: true,
-		enum: OrderStatuses,
-		default: OrderStatuses.ORDERED,
+		enum: OrderStatus,
+		default: OrderStatus.ORDERED,
 	},
-	orderItemsId: [
+	orderDate: {
+		type: Date,
+		default: new Date(),
+	},
+	itemsId: [
 		{
 			type: Types.ObjectId,
-			ref: CollectionNames.ORDER_ITEM,
-			default: [],
+			ref: CollectionName.ORDER_ITEM,
+			required: true,
 		},
 	],
 });
 
+orderSchema.virtual('user', {
+	ref: CollectionName.USER,
+	localField: 'userId',
+	foreignField: '_id',
+});
+
 orderSchema.virtual('paymentMethod', {
-	ref: CollectionNames.PAYMENT_METHOD,
-	localField: 'paymentMethod',
+	ref: CollectionName.PAYMENT_METHOD,
+	localField: 'paymentMethodId',
 	foreignField: '_id',
 });
 
-orderSchema.virtual('orderItems', {
-	ref: CollectionNames.ORDER_ITEM,
-	localField: 'orderItemsId',
+orderSchema.virtual('items', {
+	ref: CollectionName.ORDER_ITEM,
+	localField: 'itemsId',
 	foreignField: '_id',
 });
 
-export default model<IOrder>('orders', orderSchema);
+export default model<IOrder>(CollectionName.ORDER, orderSchema);

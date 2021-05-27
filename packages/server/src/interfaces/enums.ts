@@ -1,14 +1,14 @@
-export enum CollectionNames {
+export enum CollectionName {
 	IMAGE = 'images',
 	ORDER = 'orders',
 	ORDER_ITEM = 'orderItems',
-	PAYMENT_METHOD = 'paymentMethod',
+	PAYMENT_METHOD = 'paymentMethods',
 	PRODUCT = 'products',
 	PRODUCT_UNIT = 'productUnits',
 	USER = 'users',
 }
 
-export enum OrderStatuses {
+export enum OrderStatus {
 	CANCEL = 'CANCEL',
 	DELIVERED = 'DELIVERED',
 	DELIVERING = 'DELIVERING',
@@ -16,17 +16,17 @@ export enum OrderStatuses {
 	VERIFIED = 'VERIFIED',
 }
 
-export enum PaymentStatuses {
+export enum PaymentStatus {
 	PAID = 'PAID',
 	UNPAID = 'UNPAID',
 }
 
-export enum ProductStatuses {
+export enum ProductStatus {
 	NOT_SELLING = 'NOT_SELLING',
 	SELLING = 'SELLING',
 }
 
-export enum UserTypes {
+export enum UserType {
 	ADMIN = 'ADMIN',
 	CUSTOMER = 'CUSTOMER',
 	MANAGER = 'MANAGER',

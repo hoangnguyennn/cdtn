@@ -1,10 +1,9 @@
-import { IImageRequest } from '../interfaces';
+import { IImage } from '../interfaces/IDocuments';
+import { IImageCreate } from '../interfaces';
 import ImageModel from '../models/image';
 
-export const create = (image: IImageRequest) => {
-	return ImageModel.create({
-		url: image.url,
-	});
+const create = (image: IImageCreate): Promise<IImage> => {
+	return ImageModel.create({ url: image.url });
 };
 
 export default {

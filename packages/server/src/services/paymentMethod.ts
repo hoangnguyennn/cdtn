@@ -1,8 +1,9 @@
 import { IPaymentMethod } from '../interfaces/IDocuments';
+import { IPaymentMethodCreate } from '../interfaces';
 import PaymentMethodModel from '../models/paymentMethod';
 
-export const create = (
-	paymentMethod: IPaymentMethod
+const create = async (
+	paymentMethod: IPaymentMethodCreate
 ): Promise<IPaymentMethod> => {
 	return PaymentMethodModel.create({
 		name: paymentMethod.name,
@@ -10,12 +11,12 @@ export const create = (
 		accessKey: paymentMethod.accessKey,
 		secretKey: paymentMethod.secretKey,
 		publicKey: paymentMethod.publicKey,
-		url: paymentMethod.url,
+		host: paymentMethod.host,
 		description: paymentMethod.description,
 	});
 };
 
-export const get = async (): Promise<IPaymentMethod[]> => {
+const get = async (): Promise<IPaymentMethod[]> => {
 	return PaymentMethodModel.find();
 };
 

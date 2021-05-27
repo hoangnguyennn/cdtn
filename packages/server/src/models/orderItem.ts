@@ -1,12 +1,12 @@
 import { model, Schema, Types } from 'mongoose';
-import { CollectionNames } from '../interfaces/enums';
+import { CollectionName } from '../interfaces/enums';
 import { IOrderItem } from '../interfaces/IDocuments';
 
 const orderItemSchema = new Schema({
 	productId: {
 		type: Types.ObjectId,
+		ref: CollectionName.PRODUCT,
 		required: true,
-		ref: CollectionNames.PRODUCT,
 	},
 	price: {
 		type: Number,
@@ -19,9 +19,9 @@ const orderItemSchema = new Schema({
 });
 
 orderItemSchema.virtual('product', {
-	ref: CollectionNames.PRODUCT,
+	ref: CollectionName.PRODUCT,
 	localField: 'productId',
 	foreignField: '_id',
 });
 
-export default model<IOrderItem>(CollectionNames.ORDER_ITEM, orderItemSchema);
+export default model<IOrderItem>(CollectionName.ORDER_ITEM, orderItemSchema);

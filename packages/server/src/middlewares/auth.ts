@@ -6,7 +6,7 @@ import {
 } from '../helpers/commonResponse';
 import { decode } from '../utils/token';
 
-export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
+const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 	const token = req.headers.authorization;
 
 	if (!token) {
@@ -21,4 +21,8 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 
 	res.locals.userId = decoded.userId;
 	return next();
+};
+
+export default {
+	checkAuth,
 };

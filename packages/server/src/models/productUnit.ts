@@ -1,16 +1,15 @@
 import { model, Schema } from 'mongoose';
-import { CollectionNames } from '../interfaces/enums';
+import { CollectionName } from '../interfaces/enums';
 import { IProductUnit } from '../interfaces/IDocuments';
 
-const productUnitSchema = new Schema<IProductUnit>({
+const productUnitSchema = new Schema({
 	name: {
 		type: String,
-		unique: true,
 		required: true,
 	},
 });
 
 export default model<IProductUnit>(
-	CollectionNames.PRODUCT_UNIT,
+	CollectionName.PRODUCT_UNIT,
 	productUnitSchema
 );

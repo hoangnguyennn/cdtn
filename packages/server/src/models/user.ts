@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose';
-import { CollectionNames, UserTypes } from '../interfaces/enums';
 import { IUser } from '../interfaces/IDocuments';
+import { CollectionName, UserType } from '../interfaces/enums';
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema({
 	email: {
 		type: String,
-		unique: true,
 		required: true,
+		unique: true,
 	},
 	passwordHashed: {
 		type: String,
@@ -16,27 +16,25 @@ const userSchema = new Schema<IUser>({
 		type: String,
 		required: true,
 	},
-	phone: {
-		type: String,
-		unique: true,
-		required: true,
-	},
 	address: {
 		type: String,
+		required: true,
+	},
+	phone: {
+		type: String,
+		required: true,
 	},
 	userType: {
 		type: String,
-		enum: UserTypes,
-		default: UserTypes.CUSTOMER,
+		enum: UserType,
+		default: UserType.CUSTOMER,
 	},
 	isActivated: {
-		type: Boolean,
+		type: String,
 		default: function () {
-			const userType = (this as any)['userType'] || UserTypes.MANAGER;
+			const userType = (this as any)['userType'] || UserType.MANAGER;
 
-			if (userType === UserTypes.MANAGER) {
-				return false;
-			} else if (userType === UserTypes.CUSTOMER) {
+			if (userType === UserType.CUSTOMER) {
 				return true;
 			}
 
@@ -45,4 +43,4 @@ const userSchema = new Schema<IUser>({
 	},
 });
 
-export default model<IUser>(CollectionNames.USER, userSchema);
+export default model<IUser>(CollectionName.USER, userSchema);

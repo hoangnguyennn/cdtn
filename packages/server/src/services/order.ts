@@ -2,15 +2,16 @@ import { IOrder } from '../interfaces/IDocuments';
 import { IOrderCreate } from '../interfaces';
 import OrderModel from '../models/order';
 
-export const create = (order: IOrderCreate): Promise<IOrder> => {
+const create = async (order: IOrderCreate): Promise<IOrder> => {
 	return OrderModel.create({
 		userId: order.userId,
 		deliveryFullName: order.deliveryFullName,
-		deliveryPhone: order.deliveryPhone,
 		deliveryAddress: order.deliveryAddress,
+		deliveryPhone: order.deliveryPhone,
 		deliveryEmail: order.deliveryEmail,
+		deliveryDate: order.deliveryDate,
 		paymentMethodId: order.paymentMethodId,
-		orderItemsId: order.orderItemsId,
+		itemsId: order.itemsId,
 	});
 };
 

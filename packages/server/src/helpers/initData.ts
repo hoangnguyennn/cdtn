@@ -1,10 +1,10 @@
 import mongooseLoader from '../loaders/mongoose';
 
+import { ProductStatus, UserType } from '../interfaces/enums';
+import AuthService from '../services/auth';
 import ImageService from '../services/image';
 import ProductService from '../services/product';
 import ProductUnitService from '../services/productUnit';
-import AuthService from '../services/auth';
-import { UserTypes } from '../interfaces/enums';
 
 const generateProducts = async () => {
 	console.log('init products');
@@ -22,6 +22,7 @@ const generateProducts = async () => {
 			unitId: unit._id,
 			description: `Product ${index} description`,
 			imagesId: [image._id],
+			status: ProductStatus.SELLING,
 		})
 	);
 
@@ -39,7 +40,7 @@ const generateUsers = async () => {
 			passwordHashed: '123',
 			fullName: `Account ${index}`,
 			phone: `011111111${index}`,
-			userType: UserTypes.CUSTOMER,
+			userType: UserType.CUSTOMER,
 			isActivated: true,
 		})
 	);

@@ -1,52 +1,48 @@
 import { model, Schema, Types } from 'mongoose';
-import { CollectionNames, ProductStatuses } from '../interfaces/enums';
 import { IProduct } from '../interfaces/IDocuments';
+import { CollectionName, ProductStatus } from '../interfaces/enums';
 
-const productSchema = new Schema<IProduct>({
+const productSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
+		unique: true,
 	},
 	price: {
-		type: Number,
+		type: String,
 		required: true,
 	},
 	unitId: {
 		type: Types.ObjectId,
-		ref: CollectionNames.PRODUCT_UNIT,
+		ref: CollectionName.PRODUCT_UNIT,
 		required: true,
 	},
 	description: {
 		type: String,
+		required: true,
 	},
 	status: {
 		type: String,
-		enum: ProductStatuses,
-		default: ProductStatuses.NOT_SELLING,
+		enum: ProductStatus,
+		required: true,
 	},
-	imagesId: [
-		{
-			type: Types.ObjectId,
-			ref: CollectionNames.IMAGE,
-			default: [],
-		},
-	],
+	imagesId: {
+		type: Types.ObjectId,
+		ref: CollectionName.IMAGE,
+		required: true,
+	},
 });
 
 productSchema.virtual('unit', {
-	ref: CollectionNames.PRODUCT_UNIT,
+	ref: CollectionName.PRODUCT_UNIT,
 	localField: 'unitId',
 	foreignField: '_id',
-	justOne: true,
 });
 
 productSchema.virtual('images', {
-	ref: CollectionNames.IMAGE,
+	ref: CollectionName.IMAGE,
 	localField: 'imagesId',
 	foreignField: '_id',
 });
 
-productSchema.set('toObject', { virtuals: true });
-productSchema.set('toJSON', { virtuals: true });
-
-export default model<IProduct>(CollectionNames.PRODUCT, productSchema);
+export default model<IProduct>(CollectionName.PRODUCT, productSchema);

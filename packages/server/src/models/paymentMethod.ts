@@ -1,12 +1,11 @@
 import { model, Schema } from 'mongoose';
-import { CollectionNames } from '../interfaces/enums';
+import { CollectionName } from '../interfaces/enums';
 import { IPaymentMethod } from '../interfaces/IDocuments';
 
 const paymentMethodSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
-		unique: true,
 	},
 	imageUrl: {
 		type: String,
@@ -21,7 +20,7 @@ const paymentMethodSchema = new Schema({
 	publicKey: {
 		type: String,
 	},
-	url: {
+	host: {
 		type: String,
 	},
 	description: {
@@ -30,6 +29,6 @@ const paymentMethodSchema = new Schema({
 });
 
 export default model<IPaymentMethod>(
-	CollectionNames.PAYMENT_METHOD,
+	CollectionName.PAYMENT_METHOD,
 	paymentMethodSchema
 );

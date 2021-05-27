@@ -1,25 +1,25 @@
 import { Request, Response } from 'express';
 
-import { IOrderCreate, IOrderRequest } from '../../interfaces';
+import { IOrderCreate, IOrderCreateRequest } from '../../interfaces';
+import { mapOrderToResponse } from '../../helpers/mappingResponse';
 import { success } from '../../helpers/commonResponse';
 import OrderItemService from '../../services/orderItem';
 import OrderService from '../../services/order';
 
-export const create = async (req: Request, res: Response) => {
-	const orderRequest: IOrderRequest = req.body;
-	const orderItemsRequest = orderRequest.items;
+const create = async (req: Request, res: Response) => {
+	const orderCreateRequest: IOrderCreateRequest = req.body;
 
-	const orderItemsCreated = await OrderItemService.createMany(
-		orderItemsRequest
+	const orderItems = await OrderItemService.createMany(
+		orderCreateRequest.items
 	);
 
 	const orderCreate: IOrderCreate = {
-		...orderRequest,
-		orderItemsId: orderItemsCreated.map((item) => item._id),
+		...orderCreateRequest,
+		itemsId: orderItems.map((item) => item._id),
 	};
-	const orderCreated = await OrderService.create(orderCreate);
 
-	return success(res, orderCreated);
+	const orderCreated = await OrderService.create(orderCreate);
+	return success(res, mapOrderToResponse(orderCreated));
 };
 
 export default {
