@@ -59,7 +59,6 @@ const Cart = () => {
 	});
 
 	const handleFormSubmit = (values: ICartForm, { setSubmitting }) => {
-		console.log('submit');
 		const order: IOrder = {
 			...values,
 			userId: userInfo.id,
@@ -110,7 +109,6 @@ const Cart = () => {
 
 	return (
 		<CartStyled>
-			{console.log(formik.errors)}
 			<div className="cart-sidebar">
 				<div className="cart-detail">
 					<h3 className="title">{t('Cart detail')}</h3>

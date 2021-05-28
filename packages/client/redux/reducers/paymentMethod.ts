@@ -23,8 +23,8 @@ const fetchPaymentMethodsAction = () => async (dispatch: Dispatch) => {
 	try {
 		const paymentMethods = await fetchPaymentMethods();
 		dispatch(setPaymentMethods(paymentMethods));
-	} catch {
-		console.log('have err');
+	} catch (err) {
+		console.log(err);
 	}
 };
 

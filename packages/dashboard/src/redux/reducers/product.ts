@@ -22,8 +22,8 @@ const getProductsAction = () => async (dispatch: Dispatch) => {
 	try {
 		const products = await fetchProducts();
 		dispatch(setProducts(products));
-	} catch {
-		console.log('err');
+	} catch (err) {
+		console.log(err);
 	}
 };
 

@@ -1,13 +1,11 @@
-import { Table, Image, Tag, Space } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { useEffect } from 'react';
+import { Table, Image, Tag, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { getProducts, getProductsAction } from '../../redux/reducers/product';
 import { IProduct } from '../../interfaces';
 import { ProductStatuses } from '../../interfaces/enum';
-import {
-	getProducts,
-	getProductsAction,
-} from '../../redux/reducers/product.reducer';
 import { toCurrency } from '../../utils/formatter';
 
 const columns: ColumnsType<IProduct> = [
