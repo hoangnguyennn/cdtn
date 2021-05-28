@@ -5,7 +5,7 @@ import { IProductCreate } from '../interfaces';
 import ProductModel from '../models/product';
 
 const create = async (product: IProductCreate): Promise<IProduct> => {
-	return ProductModel.create({
+	const productCreated = await ProductModel.create({
 		name: product.name,
 		price: product.price,
 		unitId: product.unitId,
@@ -13,6 +13,11 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 		status: product.status,
 		imagesId: product.imagesId,
 	});
+
+	return ProductModel.populate(productCreated, [
+		{ path: 'unit' },
+		{ path: 'images' },
+	]);
 };
 
 const get = async (): Promise<IProduct[]> => {

@@ -21,24 +21,23 @@ const cartSlice = createSlice({
 
 			if (indexInCart === -1) {
 				state.cartItems = [...state.cartItems, action.payload];
-				return;
+			} else {
+				state.cartItems = [
+					...state.cartItems.slice(0, indexInCart),
+					{
+						...state.cartItems[indexInCart],
+						qty: state.cartItems[indexInCart].qty + action.payload.qty,
+					},
+					...state.cartItems.slice(indexInCart + 1),
+				];
 			}
-
-			state.cartItems = [
-				...state.cartItems.slice(0, indexInCart),
-				{
-					...state.cartItems[indexInCart],
-					qty: state.cartItems[indexInCart].qty + action.payload.qty,
-				},
-				...state.cartItems.slice(indexInCart + 1),
-			];
 
 			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 			toast.info('Add to cart');
 		},
 		removeFromCart(state, action) {
 			const indexInCart = state.cartItems.findIndex(
-				(cartItem) => cartItem.id === action.payload
+				(cartItem) => action.payload.id === cartItem.id
 			);
 
 			if (indexInCart !== -1) {
@@ -69,17 +68,16 @@ const cartSlice = createSlice({
 
 			if (indexInCart === -1) {
 				state.cartItems = [...state.cartItems, action.payload];
-				return;
+			} else {
+				state.cartItems = [
+					...state.cartItems.slice(0, indexInCart),
+					{
+						...state.cartItems[indexInCart],
+						qty: action.payload.qty,
+					},
+					...state.cartItems.slice(indexInCart + 1),
+				];
 			}
-
-			state.cartItems = [
-				...state.cartItems.slice(0, indexInCart),
-				{
-					...state.cartItems[indexInCart],
-					qty: state.cartItems[indexInCart].qty + action.payload.qty,
-				},
-				...state.cartItems.slice(indexInCart + 1),
-			];
 
 			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 		},

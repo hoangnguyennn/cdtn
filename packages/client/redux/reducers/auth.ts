@@ -83,6 +83,7 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 
 	try {
 		const user = await loginByToken(token);
+		dispatch(setToken(token));
 		dispatch(setUser(user));
 	} catch {
 		localStorage.removeItem('access-token');

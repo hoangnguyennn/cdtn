@@ -29,7 +29,6 @@ const orderSchema = new Schema({
 	},
 	deliveryDate: {
 		type: String,
-		required: true,
 	},
 	paymentMethodId: {
 		type: Types.ObjectId,

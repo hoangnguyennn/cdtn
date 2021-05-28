@@ -7,10 +7,12 @@ const createMany = async (
 ): Promise<IOrderItem[]> => {
 	const orderItemsCreate = orderItems.map((item) => ({
 		productId: item.productId,
+		price: item.price,
 		qty: item.qty,
 	}));
 
-	return OrderItemModel.insertMany(orderItemsCreate);
+	const orderItemsCreated = await OrderItemModel.insertMany(orderItemsCreate);
+	return OrderItemModel.populate(orderItemsCreated, [{ path: 'product' }]);
 };
 
 export default {

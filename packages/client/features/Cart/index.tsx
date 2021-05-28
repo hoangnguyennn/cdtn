@@ -51,14 +51,15 @@ const Cart = () => {
 	});
 
 	const validationSchema = Yup.object({
-		fullName: Yup.string().required(),
-		phone: Yup.string().required(),
-		email: Yup.string().email().required(),
-		address: Yup.string().required(),
+		deliveryFullName: Yup.string().required(),
+		deliveryAddress: Yup.string().required(),
+		deliveryPhone: Yup.string().required(),
+		deliveryEmail: Yup.string().email().required(),
 		note: Yup.string(),
 	});
 
 	const handleFormSubmit = (values: ICartForm, { setSubmitting }) => {
+		console.log('submit');
 		const order: IOrder = {
 			...values,
 			userId: userInfo.id,
@@ -91,10 +92,10 @@ const Cart = () => {
 	useEffect(() => {
 		setInitialValues((prevState) => ({
 			...prevState,
-			fullName: userInfo.fullName || '',
-			phone: userInfo.phone || '',
-			email: userInfo.email || '',
-			address: userInfo.address || '',
+			deliveryFullName: userInfo.fullName || '',
+			deliveryAddress: userInfo.address || '',
+			deliveryPhone: userInfo.phone || '',
+			deliveryEmail: userInfo.email || '',
 		}));
 	}, [userInfo]);
 
@@ -102,13 +103,14 @@ const Cart = () => {
 		if (paymentMethods.length) {
 			setInitialValues((prevState) => ({
 				...prevState,
-				paymentMethod: paymentMethods[0].id,
+				paymentMethodId: paymentMethods[0].id,
 			}));
 		}
 	}, [paymentMethods]);
 
 	return (
 		<CartStyled>
+			{console.log(formik.errors)}
 			<div className="cart-sidebar">
 				<div className="cart-detail">
 					<h3 className="title">{t('Cart detail')}</h3>
@@ -164,7 +166,7 @@ const Cart = () => {
 								<div className="actions">
 									<span
 										className="action"
-										onClick={() => dispatch(removeFromCart({ ...item }))}
+										onClick={() => dispatch(removeFromCart(item))}
 									>
 										{t('Delete')}
 									</span>
@@ -206,7 +208,7 @@ const Cart = () => {
 					<FormGroup>
 						<Input
 							placeholder={t('Fullname')}
-							name="fullName"
+							name="deliveryFullName"
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -220,7 +222,7 @@ const Cart = () => {
 					<FormGroup>
 						<Input
 							placeholder={t('Phone')}
-							name="phone"
+							name="deliveryPhone"
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -234,7 +236,7 @@ const Cart = () => {
 					<FormGroup>
 						<Input
 							placeholder={t('Email address')}
-							name="email"
+							name="deliveryEmail"
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -248,7 +250,7 @@ const Cart = () => {
 					<FormGroup>
 						<Input
 							placeholder={t('Address')}
-							name="address"
+							name="deliveryAddress"
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -262,7 +264,7 @@ const Cart = () => {
 					<FormGroup>
 						<Input
 							placeholder={t('Note')}
-							name="note"
+							name="deliveryNote"
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
 							value={formik.values.deliveryNote}
@@ -285,7 +287,7 @@ const Cart = () => {
 							<input
 								type="radio"
 								value={method.id}
-								name="paymentMethod"
+								name="paymentMethodId"
 								checked={formik.values.paymentMethodId === method.id}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
