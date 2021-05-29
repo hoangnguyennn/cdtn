@@ -4,7 +4,16 @@ export interface IBreadcrumb {
 	url: string;
 }
 
-export interface ICartItem extends IProductResponse {
+export interface ICartForm {
+	deliveryFullName: string;
+	deliveryAddress: string;
+	deliveryPhone: string;
+	deliveryEmail: string;
+	deliveryNote?: string;
+	paymentMethodId: string;
+}
+
+export interface ICartItem extends IProduct {
 	qty: number;
 }
 
@@ -15,49 +24,55 @@ export interface ILogin {
 
 export interface ILoginResponse {
 	token: string;
-	user: IUserResponse;
+	user: IUser;
 }
 
 export interface IOrder {
-	fullName: string;
-	phone: string;
-	email: string;
-	address: string;
-	note?: string;
-	paymentMethod: string;
-}
-
-export interface IOrderRequest {
 	userId?: string;
 	deliveryFullName: string;
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryDate?: Date;
 	paymentMethodId: string;
-	items: IOrderItemRequest[];
+	items: IOrderItem[];
 }
 
-export interface IOrderItemRequest {
+export interface IOrderItem {
 	productId: string;
 	qty: number;
 }
 
-export interface IPaymentMethodResponse {
+export interface IOrderItemResponse {
+	id: string;
+	productId: string;
+	price: number;
+	qty: number;
+}
+
+export interface IOrderResponse {
+	id: string;
+	deliveryFullName: string;
+	deliveryAddress: string;
+	deliveryPhone: string;
+	deliveryEmail: string;
+	deliveryDate?: Date;
+	paymentStatus: string;
+	orderStatus: string;
+	orderDate: Date;
+
+	user?: IUser;
+	paymentMethod: IPaymentMethod;
+	items: IOrderItemResponse[];
+}
+
+export interface IPaymentMethod {
 	id: string;
 	name: string;
 	imageUrl: string;
+	description?: string;
 }
 
 export interface IProduct {
-	id: string;
-	name: string;
-	price: number;
-	thumbnail: string;
-	link?: string;
-}
-
-export interface IProductResponse {
 	id: string;
 	name: string;
 	price: number;
@@ -66,23 +81,32 @@ export interface IProductResponse {
 	images: string[];
 }
 
-export interface IRegisterForm extends IUserRegister {
-	confirmPassword: string;
+export interface IProductWithLink extends IProduct {
+	link: string;
 }
 
-export interface IUserRegister {
+export interface IRegisterForm {
+	email: string;
+	password: string;
+	confirmPassword: string;
+	fullName: string;
+	phone: string;
+}
+
+export interface IUser {
+	id: string;
+	email: string;
+	fullName: string;
+	address: string;
+	phone: string;
+	userType: string;
+}
+
+export interface IUserCreate {
 	email: string;
 	password: string;
 	fullName: string;
 	phone: string;
-}
-
-export interface IUserResponse {
-	id: string;
-	email: string;
-	fullName: string;
-	phone: string;
-	address: string;
 }
 
 export interface IWidget {

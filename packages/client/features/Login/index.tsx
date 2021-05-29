@@ -13,7 +13,7 @@ import Invalid from '../../components/core/Invalid';
 import LoginStyled from './Login';
 
 import { getToken, loginAction } from '../../redux/reducers/auth';
-import { ILogin } from '../../interfaces/new_index';
+import { ILogin } from '../../interfaces/index';
 import { PATH_NAME } from '../../configs/pathName';
 
 const Login = () => {

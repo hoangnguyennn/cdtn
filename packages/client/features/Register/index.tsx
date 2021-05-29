@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import Link from 'next/link';
 
-import { IRegisterForm } from '../../interfaces/new_index';
+import { IRegisterForm } from '../../interfaces/index';
 import { PATH_NAME } from '../../configs/pathName';
 import { registerAction } from '../../redux/reducers/auth';
 import Button from '../../components/core/Button';

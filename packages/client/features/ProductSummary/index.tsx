@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { addToCart } from '../../redux/reducers/cart';
-import { IProduct } from '../../interfaces/new_index';
+import { IProduct } from '../../interfaces/index';
 import { toCurrency } from '../../utils/formatter';
 import { useDispatch } from 'react-redux';
 import Button from '../../components/core/Button';

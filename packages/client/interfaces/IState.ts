@@ -1,9 +1,4 @@
-import {
-	ICartItem,
-	IPaymentMethodResponse,
-	IProductResponse,
-	IUserResponse,
-} from './index';
+import { ICartItem, IPaymentMethod, IProduct, IUser } from './index';
 
 export interface IAppState {
 	limitOfToast: number;
@@ -11,22 +6,20 @@ export interface IAppState {
 
 export interface IAuthState {
 	token: string;
-	user: IUserResponse;
-	message: string;
-	hasError: boolean;
+	user: IUser;
 }
 
 export interface ICartState {
-	cart: ICartItem[];
+	cartItems: ICartItem[];
 }
 
 export interface IPaymentMethodState {
-	paymentMethods: IPaymentMethodResponse[];
+	paymentMethods: IPaymentMethod[];
 }
 
 export interface IProductState {
-	trendingProducts: IProductResponse[];
-	product: IProductResponse;
+	trendingProducts: IProduct[];
+	product: IProduct;
 }
 
 export interface IRootState {

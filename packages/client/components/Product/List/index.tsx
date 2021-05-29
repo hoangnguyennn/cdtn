@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
 import { addToCart } from '../../../redux/reducers/cart';
-import { IProduct } from '../../../interfaces/new_index';
+import { IProduct } from '../../../interfaces/index';
 import { PATH_NAME } from '../../../configs/pathName';
 import Button from '../../core/Button';
 import ProductItem from '../Item';
@@ -33,13 +33,10 @@ const ProductList: FC<ProductListProps> = ({
 			<div className="list">
 				{items.map((product) => (
 					<ProductItem
-						id={product.id}
 						key={product.id}
 						link={`${PATH_NAME.PRODUCTS}/${product.id}`}
-						thumbnail={product.images[0]}
-						name={product.name}
-						price={product.price}
 						addToCart={() => dispatch(addToCart({ ...product, qty: 1 }))}
+						{...product}
 					/>
 				))}
 			</div>

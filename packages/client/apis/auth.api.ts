@@ -4,7 +4,7 @@ import {
 	ILoginResponse,
 	IUser,
 	IUserCreate,
-} from '../interfaces/new_index';
+} from '../interfaces/index';
 import axiosInstance from '../services/instance';
 
 export const register = async (user: IUserCreate): Promise<IUser> => {

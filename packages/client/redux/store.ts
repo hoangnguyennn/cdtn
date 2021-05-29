@@ -7,7 +7,7 @@ import { initialState as initialCartState } from './reducers/cart';
 import { initialState as initialPaymentMethodState } from './reducers/paymentMethod';
 import { initialState as initialProductState } from './reducers/product';
 
-import { IRootState } from '../interfaces/new_IState';
+import { IRootState } from '../interfaces/IState';
 import rootReducer from './reducers';
 
 let store: ReturnType<typeof initStore>;

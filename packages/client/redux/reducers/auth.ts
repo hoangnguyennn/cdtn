@@ -2,9 +2,8 @@ import { createSlice, createSelector, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import Router from 'next/router';
 
-import { IAuthState, IRootState } from '../../interfaces/new_IState';
-import { ILogin } from '../../interfaces';
-import { IUserCreate } from '../../interfaces/new_index';
+import { IAuthState, IRootState } from '../../interfaces/IState';
+import { ILogin, IUserCreate } from '../../interfaces/index';
 import { login, loginByToken, register } from '../../apis/auth.api';
 import { PATH_NAME } from '../../configs/pathName';
 

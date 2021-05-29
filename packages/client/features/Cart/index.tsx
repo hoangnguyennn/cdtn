@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 import { toCurrency } from '../../utils/formatter';
 import Button from '../../components/core/Button';
@@ -14,6 +15,10 @@ import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 
 import {
+	fetchPaymentMethodsAction,
+	getPaymentMethods,
+} from '../../redux/reducers/paymentMethod';
+import {
 	getCartItems,
 	getCartSubtotal,
 	getDeliveryFee,
@@ -22,13 +27,7 @@ import {
 	updateQty,
 } from '../../redux/reducers/cart';
 import { getUserInfo } from '../../redux/reducers/auth';
-import { IOrder, IOrderRequest } from '../../interfaces';
-
-import {
-	fetchPaymentMethodsAction,
-	getPaymentMethods,
-} from '../../redux/reducers/paymentMethod';
-import Link from 'next/link';
+import { ICartForm, IOrder } from '../../interfaces/index';
 import { PATH_NAME } from '../../configs/pathName';
 
 const Cart = () => {
@@ -37,18 +36,18 @@ const Cart = () => {
 
 	const cartItems = useSelector(getCartItems);
 	const cartSubtotal = useSelector(getCartSubtotal);
-	const userInfo = useSelector(getUserInfo);
 	const paymentMethods = useSelector(getPaymentMethods);
+	const userInfo = useSelector(getUserInfo);
 
 	const dispatch = useDispatch();
 
-	const [initialValues, setInitialValues] = useState<IOrder>({
-		fullName: '',
-		phone: '',
-		email: '',
-		address: '',
-		note: '',
-		paymentMethod: '',
+	const [initialValues, setInitialValues] = useState<ICartForm>({
+		deliveryFullName: '',
+		deliveryAddress: '',
+		deliveryPhone: '',
+		deliveryEmail: '',
+		deliveryNote: '',
+		paymentMethodId: '',
 	});
 
 	const validationSchema = Yup.object({
@@ -59,21 +58,16 @@ const Cart = () => {
 		note: Yup.string(),
 	});
 
-	const handleFormSubmit = (values: IOrder, { setSubmitting }) => {
-		const orderRequest: IOrderRequest = {
-			userId: userInfo.id || undefined,
-			deliveryFullName: values.fullName,
-			deliveryPhone: values.phone,
-			deliveryEmail: values.email,
-			deliveryAddress: values.address,
-			paymentMethodId: values.paymentMethod,
-			items: cartItems.map((item) => ({
-				productId: item.id,
-				qty: item.qty,
+	const handleFormSubmit = (values: ICartForm, { setSubmitting }) => {
+		const order: IOrder = {
+			...values,
+			userId: userInfo.id,
+			items: cartItems.map((cartItem) => ({
+				productId: cartItem.id,
+				qty: cartItem.qty,
 			})),
 		};
-
-		dispatch(orderAction(orderRequest));
+		dispatch(orderAction(order));
 		setSubmitting(false);
 	};
 
@@ -216,10 +210,10 @@ const Cart = () => {
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							value={formik.values.fullName}
+							value={formik.values.deliveryFullName}
 						/>
-						{formik.errors.fullName ? (
-							<Invalid>{formik.errors.fullName}</Invalid>
+						{formik.errors.deliveryFullName ? (
+							<Invalid>{formik.errors.deliveryFullName}</Invalid>
 						) : null}
 					</FormGroup>
 
@@ -230,10 +224,10 @@ const Cart = () => {
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							value={formik.values.phone}
+							value={formik.values.deliveryPhone}
 						/>
-						{formik.errors.phone ? (
-							<Invalid>{formik.errors.phone}</Invalid>
+						{formik.errors.deliveryPhone ? (
+							<Invalid>{formik.errors.deliveryPhone}</Invalid>
 						) : null}
 					</FormGroup>
 
@@ -244,10 +238,10 @@ const Cart = () => {
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							value={formik.values.email}
+							value={formik.values.deliveryEmail}
 						/>
-						{formik.errors.email ? (
-							<Invalid>{formik.errors.email}</Invalid>
+						{formik.errors.deliveryEmail ? (
+							<Invalid>{formik.errors.deliveryEmail}</Invalid>
 						) : null}
 					</FormGroup>
 
@@ -258,10 +252,10 @@ const Cart = () => {
 							required
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							value={formik.values.address}
+							value={formik.values.deliveryAddress}
 						/>
-						{formik.errors.address ? (
-							<Invalid>{formik.errors.address}</Invalid>
+						{formik.errors.deliveryAddress ? (
+							<Invalid>{formik.errors.deliveryAddress}</Invalid>
 						) : null}
 					</FormGroup>
 
@@ -271,7 +265,7 @@ const Cart = () => {
 							name="note"
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							value={formik.values.note}
+							value={formik.values.deliveryNote}
 						/>
 					</FormGroup>
 				</div>
@@ -284,7 +278,7 @@ const Cart = () => {
 							as="label"
 							className={classNames({
 								'payment-method': true,
-								active: formik.values.paymentMethod === method.id,
+								active: formik.values.paymentMethodId === method.id,
 							})}
 							key={method.id}
 						>
@@ -292,7 +286,7 @@ const Cart = () => {
 								type="radio"
 								value={method.id}
 								name="paymentMethod"
-								checked={formik.values.paymentMethod === method.id}
+								checked={formik.values.paymentMethodId === method.id}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 							/>

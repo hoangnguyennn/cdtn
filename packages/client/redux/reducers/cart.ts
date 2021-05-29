@@ -1,8 +1,8 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { ICartState, IRootState } from '../../interfaces/new_IState';
-import { IOrder } from '../../interfaces/new_index';
+import { ICartState, IRootState } from '../../interfaces/IState';
+import { IOrder } from '../../interfaces/index';
 import { order } from '../../apis/order.api';
 import isProductInCart from '../../helpers/isProductInCart';
 

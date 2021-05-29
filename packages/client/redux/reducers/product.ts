@@ -4,7 +4,7 @@ import {
 	fetchProductById,
 	fetchTrendingProducts,
 } from '../../apis/product.api';
-import { IProductState, IRootState } from '../../interfaces/new_IState';
+import { IProductState, IRootState } from '../../interfaces/IState';
 
 export const initialState: IProductState = {
 	trendingProducts: [],

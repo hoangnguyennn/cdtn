@@ -1,5 +1,5 @@
 import { ENDPOINT } from '../configs/endpoint';
-import { IProduct } from '../interfaces/new_index';
+import { IProduct } from '../interfaces/index';
 import axiosInstance from '../services/instance';
 
 export const fetchTrendingProducts = async (): Promise<IProduct[]> => {

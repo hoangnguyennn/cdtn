@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
-import { IProduct } from '../../../interfaces';
+import { IProductWithLink } from '../../../interfaces';
 import { toCurrency } from '../../../utils/formatter';
 import ProductItemStyled from './ProductItem';
 
-type ProductItemProps = IProduct & {
+type ProductItemProps = IProductWithLink & {
 	addToCart: () => any;
 };
 
@@ -28,7 +28,7 @@ const ProductItem: FC<ProductItemProps> = ({
 	link,
 	name,
 	price,
-	thumbnail,
+	images,
 	addToCart,
 }) => {
 	const isDesktop = useMatchMedia('(min-width: 992px)');
@@ -44,7 +44,7 @@ const ProductItem: FC<ProductItemProps> = ({
 		<Wrap link={link}>
 			<div className="wrap">
 				<div className="thumbnail">
-					<img src={thumbnail} alt={name} />
+					<img src={images[0]} alt={name} />
 				</div>
 				<div className="info">
 					<p className="name">{name}</p>
