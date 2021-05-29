@@ -2,24 +2,20 @@ import { ENDPOINT } from '../configs/endpoint';
 import {
 	ILogin,
 	ILoginResponse,
-	IUserRegister,
-	IUserResponse,
-} from '../interfaces';
+	IUser,
+	IUserCreate,
+} from '../interfaces/new_index';
 import axiosInstance from '../services/instance';
 
-export const registerAccount = async (
-	userRegister: IUserRegister
-): Promise<IUserResponse> => {
-	return axiosInstance
-		.post(ENDPOINT.register, userRegister)
-		.then((res) => res.data);
+export const register = async (user: IUserCreate): Promise<IUser> => {
+	return axiosInstance.post(ENDPOINT.register, user).then((res) => res.data);
 };
 
-export const login = async (userLogin: ILogin): Promise<ILoginResponse> => {
-	return axiosInstance.post(ENDPOINT.login, userLogin).then((res) => res.data);
+export const login = async (credential: ILogin): Promise<ILoginResponse> => {
+	return axiosInstance.post(ENDPOINT.login, credential).then((res) => res.data);
 };
 
-export const loginByToken = async (token: string): Promise<IUserResponse> => {
+export const loginByToken = async (token: string): Promise<IUser> => {
 	return axiosInstance
 		.post(ENDPOINT.me, null, {
 			headers: { Authorization: token },

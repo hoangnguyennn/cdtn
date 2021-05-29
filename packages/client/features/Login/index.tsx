@@ -11,10 +11,10 @@ import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 import LoginStyled from './Login';
-import { PATH_NAME } from '../../configs/pathName';
 
-import { ILogin } from '../../interfaces';
-import { getToken, loginAction } from '../../redux/reducers/auth.reducer';
+import { getToken, loginAction } from '../../redux/reducers/auth';
+import { ILogin } from '../../interfaces/new_index';
+import { PATH_NAME } from '../../configs/pathName';
 
 const Login = () => {
 	const { t } = useTranslation();

@@ -4,16 +4,15 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import Link from 'next/link';
 
+import { IRegisterForm } from '../../interfaces/new_index';
 import { PATH_NAME } from '../../configs/pathName';
+import { registerAction } from '../../redux/reducers/auth';
 import Button from '../../components/core/Button';
 import Form from '../../components/core/Form';
 import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 import RegisterStyled from './Register';
-
-import { IRegisterForm } from '../../interfaces';
-import { registerAccountAction } from '../../redux/reducers/auth.reducer';
 
 const Register = () => {
 	const { t } = useTranslation();
@@ -39,7 +38,7 @@ const Register = () => {
 
 	const handleSubmit = (values: IRegisterForm, { setSubmitting }) => {
 		dispatch(
-			registerAccountAction({
+			registerAction({
 				fullName: values.fullName,
 				email: values.email,
 				phone: values.phone,

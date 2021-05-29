@@ -1,8 +1,7 @@
 import { ENDPOINT } from '../configs/endpoint';
-import { IPaymentMethodResponse } from '../interfaces';
+import { IPaymentMethod } from '../interfaces/new_index';
 import axiosInstance from '../services/instance';
 
-export const fetchPaymentMethods =
-	async (): Promise<IPaymentMethodResponse> => {
-		return axiosInstance.get(ENDPOINT.paymentMethods).then((res) => res.data);
-	};
+export const fetchPaymentMethods = async (): Promise<IPaymentMethod[]> => {
+	return axiosInstance.get(ENDPOINT.paymentMethods).then((res) => res.data);
+};

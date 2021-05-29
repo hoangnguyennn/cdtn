@@ -4,7 +4,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import type { AppProps } from 'next/app';
 
-import { getLimitOfToast } from '../redux/reducers/app.reducer';
+import { getLimitOfToast } from '../redux/reducers/app';
 import Auth from '../guards/Auth';
 import useStore from '../redux/store';
 

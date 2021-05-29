@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
-import { IRootState } from '../interfaces/IState';
 
-import { initialState as initialAppState } from './reducers/app.reducer';
-import { initialState as initialAuthState } from './reducers/auth.reducer';
-import { initialState as initialCartState } from './reducers/cart.reducer';
-import { initialState as initialPaymentMethodState } from './reducers/paymentMethods.reducer';
-import { initialState as initialProductState } from './reducers/product.reducer';
+import { initialState as initialAppState } from './reducers/app';
+import { initialState as initialAuthState } from './reducers/auth';
+import { initialState as initialCartState } from './reducers/cart';
+import { initialState as initialPaymentMethodState } from './reducers/paymentMethod';
+import { initialState as initialProductState } from './reducers/product';
 
+import { IRootState } from '../interfaces/new_IState';
 import rootReducer from './reducers';
 
 let store: ReturnType<typeof initStore>;

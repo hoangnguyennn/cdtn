@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 
-import { fetchTrendingProductsAction } from '../redux/reducers/product.reducer';
+import { fetchTrendingProductsAction } from '../redux/reducers/product';
 import { initialStore } from '../redux/store';
 import Banner from '../components/Banner';
 import Home from '../features/Home';

@@ -1,6 +1,7 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
+
 import { fetchPaymentMethods } from '../../apis/paymentMethod.api';
-import { IPaymentMethodState, IRootState } from '../../interfaces/IState';
+import { IPaymentMethodState, IRootState } from '../../interfaces/new_IState';
 
 export const initialState: IPaymentMethodState = {
 	paymentMethods: [],
@@ -11,7 +12,7 @@ const paymentMethodSlice = createSlice({
 	initialState,
 	reducers: {
 		setPaymentMethods: (state, action) => {
-			state.paymentMethods = action.payload.paymentMethods;
+			state.paymentMethods = action.payload;
 		},
 	},
 });
@@ -21,7 +22,7 @@ const { setPaymentMethods } = paymentMethodSlice.actions;
 const fetchPaymentMethodsAction = () => async (dispatch: Dispatch) => {
 	try {
 		const paymentMethods = await fetchPaymentMethods();
-		dispatch(setPaymentMethods({ paymentMethods }));
+		dispatch(setPaymentMethods(paymentMethods));
 	} catch {
 		console.log('have err');
 	}

@@ -20,14 +20,14 @@ import {
 	orderAction,
 	removeFromCart,
 	updateQty,
-} from '../../redux/reducers/cart.reducer';
-import { getUserInfo } from '../../redux/reducers/auth.reducer';
+} from '../../redux/reducers/cart';
+import { getUserInfo } from '../../redux/reducers/auth';
 import { IOrder, IOrderRequest } from '../../interfaces';
 
 import {
 	fetchPaymentMethodsAction,
 	getPaymentMethods,
-} from '../../redux/reducers/paymentMethods.reducer';
+} from '../../redux/reducers/paymentMethod';
 import Link from 'next/link';
 import { PATH_NAME } from '../../configs/pathName';
 

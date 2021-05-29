@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import appReducer from './app.reducer';
-import authReducer from './auth.reducer';
-import cartReducer from './cart.reducer';
-import paymentMethodReducer from './paymentMethods.reducer';
-import productReducer from './product.reducer';
+import appReducer from './app';
+import authReducer from './auth';
+import cartReducer from './cart';
+import paymentMethodReducer from './paymentMethod';
+import productReducer from './product';
 
 export default combineReducers({
 	app: appReducer,

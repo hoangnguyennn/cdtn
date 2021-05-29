@@ -1,9 +1,10 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
+
 import {
 	fetchProductById,
 	fetchTrendingProducts,
 } from '../../apis/product.api';
-import { IProductState, IRootState } from '../../interfaces/IState';
+import { IProductState, IRootState } from '../../interfaces/new_IState';
 
 export const initialState: IProductState = {
 	trendingProducts: [],
@@ -11,9 +12,8 @@ export const initialState: IProductState = {
 		id: '',
 		name: '',
 		price: 0,
-		unit: '',
 		description: '',
-		status: '',
+		unit: '',
 		images: [],
 	},
 };
@@ -23,11 +23,11 @@ const productSlice = createSlice({
 	initialState,
 	reducers: {
 		setTrendingProducts: (state, action) => {
-			state.trendingProducts = action.payload.trendingProducts;
+			state.trendingProducts = action.payload;
 		},
 
 		setProduct: (state, action) => {
-			state.product = action.payload.product;
+			state.product = action.payload;
 		},
 	},
 });
@@ -37,7 +37,7 @@ const { setTrendingProducts, setProduct } = productSlice.actions;
 const fetchTrendingProductsAction = () => async (dispatch: Dispatch) => {
 	try {
 		const trendingProducts = await fetchTrendingProducts();
-		return dispatch(setTrendingProducts({ trendingProducts }));
+		return dispatch(setTrendingProducts(trendingProducts));
 	} catch (err) {
 		console.log(err);
 	}
@@ -46,7 +46,7 @@ const fetchTrendingProductsAction = () => async (dispatch: Dispatch) => {
 const fetchProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
 	try {
 		const product = await fetchProductById(id);
-		dispatch(setProduct({ product }));
+		dispatch(setProduct(product));
 	} catch (err) {
 		console.log(err);
 	}

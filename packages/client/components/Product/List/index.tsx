@@ -1,21 +1,21 @@
 import { FC } from 'react';
-import Link from 'next/link';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
-import { IProductResponse } from '../../../interfaces';
+import { addToCart } from '../../../redux/reducers/cart';
+import { IProduct } from '../../../interfaces/new_index';
 import { PATH_NAME } from '../../../configs/pathName';
 import Button from '../../core/Button';
 import ProductItem from '../Item';
 import ProductListStyled from './ProductList';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../redux/reducers/cart.reducer';
 
 type ProductListProps = {
 	columns: number;
 	'lg-columns': number;
 	title?: string;
 	viewMore?: boolean;
-	items: IProductResponse[];
+	items: IProduct[];
 };
 
 const ProductList: FC<ProductListProps> = ({

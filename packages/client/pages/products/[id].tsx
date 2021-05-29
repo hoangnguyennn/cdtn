@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import {
 	fetchProductByIdAction,
 	getProduct,
-} from '../../redux/reducers/product.reducer';
+} from '../../redux/reducers/product';
 
 import { productPage } from '../../configs/breadcrumb';
 import MainLayout from '../../layouts/MainLayout';

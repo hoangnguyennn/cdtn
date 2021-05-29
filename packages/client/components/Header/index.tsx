@@ -6,8 +6,8 @@ import Container from '../core/Container';
 import HeaderStyled from './Header';
 import Logo from '../Logo';
 
-import { getCartLength } from '../../redux/reducers/cart.reducer';
-import { getFullName } from '../../redux/reducers/auth.reducer';
+import { getCartLength } from '../../redux/reducers/cart';
+import { getFullName } from '../../redux/reducers/auth';
 import { PATH_NAME } from '../../configs/pathName';
 
 const Header = () => {

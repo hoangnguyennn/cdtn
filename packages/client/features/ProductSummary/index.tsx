@@ -1,21 +1,21 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { IProductResponse } from '../../interfaces';
+import { addToCart } from '../../redux/reducers/cart';
+import { IProduct } from '../../interfaces/new_index';
 import { toCurrency } from '../../utils/formatter';
+import { useDispatch } from 'react-redux';
 import Button from '../../components/core/Button';
 import Input from '../../components/core/Input';
 import ProductSummaryStyled from './ProductSummary';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/reducers/cart.reducer';
 
 type ProductSummaryProps = {
-	product: IProductResponse;
+	product: IProduct;
 };
 
 const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
-	const { t } = useTranslation();
 	const [qty, setQty] = useState('1');
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
 	const handleAddToCart = () => {
@@ -44,18 +44,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 						{t('Add to cart')}
 					</Button>
 				</div>
-				<div className="description">
-					{/* <ul className="list">
-						<li>Tốn 2X thời gian sinh trưởng!</li>
-						<li>Tốn 2X thời gian sinh trưởng!</li>
-						<li>Tốn 2X thời gian sinh trưởng!</li>
-						<li>Tốn 2X thời gian sinh trưởng!</li>
-						<li>Tốn 2X thời gian sinh trưởng!</li>
-						<li>Tốn 2X thời gian sinh trưởng!</li>
-						<li>Tốn 2X thời gian sinh trưởng!</li>
-					</ul> */}
-					{product.description}
-				</div>
+				<div className="description">{product.description}</div>
 			</div>
 		</ProductSummaryStyled>
 	);

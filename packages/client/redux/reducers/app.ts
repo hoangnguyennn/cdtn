@@ -1,7 +1,7 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { IAppState, IRootState } from '../../interfaces/IState';
+import { IAppState, IRootState } from '../../interfaces/new_IState';
 
-export const initialState = {
+export const initialState: IAppState = {
 	limitOfToast: 3,
 };
 

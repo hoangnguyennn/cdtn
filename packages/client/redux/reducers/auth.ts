@@ -2,9 +2,10 @@ import { createSlice, createSelector, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import Router from 'next/router';
 
-import { IAuthState, IRootState } from '../../interfaces/IState';
-import { ILogin, IUserRegister } from '../../interfaces';
-import { login, loginByToken, registerAccount } from '../../apis/auth.api';
+import { IAuthState, IRootState } from '../../interfaces/new_IState';
+import { ILogin } from '../../interfaces';
+import { IUserCreate } from '../../interfaces/new_index';
+import { login, loginByToken, register } from '../../apis/auth.api';
 import { PATH_NAME } from '../../configs/pathName';
 
 export const initialState: IAuthState = {
@@ -15,37 +16,46 @@ export const initialState: IAuthState = {
 		fullName: '',
 		address: '',
 		phone: '',
+		userType: '',
 	},
-	message: '',
-	hasError: false,
 };
 
 const AuthSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		setUserSuccessful: (state: IAuthState, action) => {
-			state.token = action.payload.token;
-			state.user = action.payload.user;
-			state.hasError = false;
+		setToken(state, action) {
+			state.token = action.payload;
 		},
-		setUserFailed: (state: IAuthState) => {
-			state.hasError = true;
+		setUser(state, action) {
+			state.user = {
+				id: action.payload.id,
+				email: action.payload.email,
+				fullName: action.payload.fullName,
+				address: action.payload.address,
+				phone: action.payload.phone,
+				userType: action.payload.userType,
+			};
 		},
-		clearUser: (state: IAuthState) => {
-			state.token = initialState.token;
-			state.user = initialState.user;
-			state.message = initialState.message;
-			state.hasError = initialState.hasError;
+		clearUser(state) {
+			state.token = '';
+			state.user = {
+				id: '',
+				email: '',
+				fullName: '',
+				address: '',
+				phone: '',
+				userType: '',
+			};
 		},
 	},
 });
 
-const { setUserSuccessful, setUserFailed, clearUser } = AuthSlice.actions;
+const { setToken, setUser, clearUser } = AuthSlice.actions;
 
-const registerAccountAction = (userRegister: IUserRegister) => async () => {
+const registerAction = (user: IUserCreate) => async () => {
 	try {
-		await registerAccount(userRegister);
+		await register(user);
 		Router.push(PATH_NAME.LOGIN);
 	} catch (err) {
 		toast.error(err.message);
@@ -55,12 +65,12 @@ const registerAccountAction = (userRegister: IUserRegister) => async () => {
 const loginAction = (userLogin: ILogin) => async (dispatch: Dispatch) => {
 	try {
 		const loginResponse = await login(userLogin);
-		dispatch(setUserSuccessful(loginResponse));
+		dispatch(setToken(loginResponse.token));
+		dispatch(setUser(loginResponse.user));
 		window.localStorage.setItem('access-token', loginResponse.token);
 		Router.push(PATH_NAME.HOME);
 	} catch (err) {
 		toast.error(err.message);
-		dispatch(setUserFailed());
 	}
 };
 
@@ -73,15 +83,14 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 	}
 
 	try {
-		const userResponse = await loginByToken(token);
-		dispatch(setUserSuccessful({ token, user: userResponse }));
+		const user = await loginByToken(token);
+		dispatch(setUser(user));
 	} catch {
 		localStorage.removeItem('access-token');
-		dispatch(setUserFailed());
 	}
 };
 
-export { registerAccountAction, loginAction, loginByTokenAction };
+export { loginAction, loginByTokenAction, registerAction };
 
 const authState = (state: IRootState) => state.auth;
 const selector = function <T>(combiner: { (state: IAuthState): T }) {

@@ -1,9 +1,7 @@
 import { ENDPOINT } from '../configs/endpoint';
-import { IOrderRequest } from '../interfaces';
+import { IOrder, IOrderResponse } from '../interfaces/new_index';
 import axiosInstance from '../services/instance';
 
-export const order = async (orderRequest: IOrderRequest) => {
-	return axiosInstance
-		.post(ENDPOINT.orders, orderRequest)
-		.then((res) => res.data);
+export const order = async (order: IOrder): Promise<IOrderResponse> => {
+	return axiosInstance.post(ENDPOINT.orders, order).then((res) => res.data);
 };
