@@ -8,4 +8,5 @@ export const ENDPOINT = {
 	products: '/products',
 	register: '/auth/register',
 	trendingProducts: '/products/trending',
+	users: '/users',
 };

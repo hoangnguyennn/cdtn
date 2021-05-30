@@ -106,7 +106,7 @@ export const orderAction =
 				Router.replace(PATH_NAME.MY_ORDER);
 				dispatch(clearCart());
 			}, 1000);
-			toast.info('success');
+			toast.success('success');
 		} catch (e) {
 			toast.error(e.message);
 		}

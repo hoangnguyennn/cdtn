@@ -9,7 +9,7 @@ export const order = async (order: IOrder): Promise<IOrderResponse> => {
 export const get = async (token: string): Promise<IOrderResponse[]> => {
 	return axiosInstance
 		.get(ENDPOINT.orders, {
-			headers: { Authorization: token },
+			headers: { Authorization: `Bearer ${token}` },
 		})
 		.then((res) => res.data);
 };

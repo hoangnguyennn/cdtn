@@ -12,12 +12,13 @@ import UserService from '../services/user';
 import { FORBIDDEN, NOT_FOUND } from '../constants/commonResponseMessages';
 
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
-	const token = req.headers.authorization;
+	const bearerToken = req.headers.authorization;
 
-	if (!token) {
+	if (!bearerToken) {
 		return unauthorized(next, COMMON_MESSAGE.UNAUTHORIZED);
 	}
 
+	const token = String(bearerToken).split(' ')[1];
 	const decoded = decode(token);
 
 	if (!decoded) {

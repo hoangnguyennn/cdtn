@@ -3,9 +3,10 @@ import { toast } from 'react-toastify';
 import Router from 'next/router';
 
 import { IAuthState, IRootState } from '../../interfaces/IState';
-import { ILogin, IUserCreate } from '../../interfaces/index';
+import { ILogin, IUserCreate, IUserUpdate } from '../../interfaces/index';
 import { login, loginByToken, register } from '../../apis/auth.api';
 import { PATH_NAME } from '../../configs/pathName';
+import { updateUserInfo } from '../../apis/user.api';
 
 export const initialState: IAuthState = {
 	token: '',
@@ -90,7 +91,7 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 	}
 };
 
-const logout = () => async () => {
+const logoutAction = () => async () => {
 	try {
 		localStorage.removeItem('access-token');
 		Router.replace(PATH_NAME.HOME);
@@ -99,7 +100,32 @@ const logout = () => async () => {
 	}
 };
 
-export { loginAction, loginByTokenAction, logout, registerAction };
+const updateUserInfoAction = (userId: string, userInfo: IUserUpdate) => {
+	return async (dispatch: Dispatch) => {
+		const token = localStorage.getItem('access-token');
+		if (!token) {
+			localStorage.removeItem('access-token');
+			dispatch(clearUser());
+			return;
+		}
+
+		try {
+			const userUpdated = await updateUserInfo(userId, userInfo, token);
+			dispatch(setUser(userUpdated));
+			toast.success('success');
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export {
+	loginAction,
+	loginByTokenAction,
+	logoutAction,
+	registerAction,
+	updateUserInfoAction,
+};
 
 const authState = (state: IRootState) => state.auth;
 const selector = function <T>(combiner: { (state: IAuthState): T }) {

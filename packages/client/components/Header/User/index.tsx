@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import Root from './User';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../../redux/reducers/auth';
+import { logoutAction } from '../../../redux/reducers/auth';
 import { PATH_NAME } from '../../../configs/pathName';
 
 type UserProps = {
@@ -34,7 +34,10 @@ const User: FC<UserProps> = ({ fullName }) => {
 						<a className="dropdown-item">My account</a>
 					</Link>
 
-					<span className="dropdown-item" onClick={() => dispatch(logout())}>
+					<span
+						className="dropdown-item"
+						onClick={() => dispatch(logoutAction())}
+					>
 						Logout
 					</span>
 				</div>

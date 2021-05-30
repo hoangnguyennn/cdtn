@@ -18,7 +18,7 @@ export const login = async (credential: ILogin): Promise<ILoginResponse> => {
 export const loginByToken = async (token: string): Promise<IUser> => {
 	return axiosInstance
 		.post(ENDPOINT.me, null, {
-			headers: { Authorization: token },
+			headers: { Authorization: `Bearer ${token}` },
 		})
 		.then((res) => res.data);
 };

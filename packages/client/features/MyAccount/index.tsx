@@ -1,20 +1,39 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import Button from '../../components/core/Button';
 import Form from '../../components/core/Form';
 import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
+import { IUserUpdateInfo } from '../../interfaces';
+import { getUserInfo, updateUserInfoAction } from '../../redux/reducers/auth';
 import Root from './MyAccount';
+import { useEffect, useState } from 'react';
 
 const MyAccount = () => {
 	const { t } = useTranslation();
+	const dispatch = useDispatch();
+	const userInfo = useSelector(getUserInfo);
 
-	const initialUserInforValues = {};
+	const [initialUserInforValues, setInitialUserInforValues] =
+		useState<IUserUpdateInfo>({
+			fullName: '',
+			email: '',
+			phone: '',
+			address: '',
+		});
 
-	const userInforValidationSchema = {};
+	const userInforValidationSchema = Yup.object({
+		fullName: Yup.string().required(),
+		email: Yup.string().email().required(),
+		phone: Yup.string().required(),
+		address: Yup.string().required(),
+	});
 
-	const handleUserFormSubmit = (values, { setSubmitting }) => {
+	const handleUserFormSubmit = (values: IUserUpdateInfo, { setSubmitting }) => {
+		dispatch(updateUserInfoAction(userInfo.id, values));
 		setSubmitting(false);
 	};
 
@@ -27,11 +46,24 @@ const MyAccount = () => {
 		onSubmit: handleUserFormSubmit,
 	});
 
-	const initialChangePasswordValues = {};
+	const initialChangePasswordValues = {
+		oldPassword: '',
+		newPassword: '',
+		confirmNewPassword: '',
+	};
 
-	const changePasswordValidationSchema = {};
+	const changePasswordValidationSchema = Yup.object({
+		oldPassword: Yup.string().required(),
+		newPassword: Yup.string().required(),
+		confirmNewPassword: Yup.string()
+			.oneOf([Yup.ref('newPassword')])
+			.required(),
+	});
 
-	const handleChangePasswordSubmit = (values, { setSubmitting }) => {
+	const handleChangePasswordSubmit = (values: any, { setSubmitting }) => {
+		dispatch(
+			updateUserInfoAction(userInfo.id, { password: values.newPassword })
+		);
 		setSubmitting(false);
 	};
 
@@ -43,50 +75,122 @@ const MyAccount = () => {
 		onSubmit: handleChangePasswordSubmit,
 	});
 
+	useEffect(() => {
+		setInitialUserInforValues((prevState) => ({
+			...prevState,
+			fullName: userInfo.fullName,
+			email: userInfo.email,
+			phone: userInfo.phone,
+			address: userInfo.address,
+		}));
+	}, [userInfo]);
+
 	return (
 		<Root>
-			<Form className="user-info">
+			<Form className="user-info" onSubmit={userFormik.handleSubmit}>
 				<h3>{t('Account information')}</h3>
 				<FormGroup>
-					<Input placeholder={t('Fullname')} />
+					<Input
+						name="fullName"
+						onBlur={userFormik.handleBlur}
+						onChange={userFormik.handleChange}
+						placeholder={t('Fullname')}
+						required
+						value={userFormik.values.fullName}
+					/>
 				</FormGroup>
 
 				<FormGroup>
-					<Input placeholder={t('Phone')} />
+					<Input
+						name="phone"
+						onBlur={userFormik.handleBlur}
+						onChange={userFormik.handleChange}
+						placeholder={t('Phone')}
+						required
+						value={userFormik.values.phone}
+					/>
 				</FormGroup>
 
 				<FormGroup>
-					<Input placeholder={t('Email address')} />
+					<Input
+						name="email"
+						onBlur={userFormik.handleBlur}
+						onChange={userFormik.handleChange}
+						placeholder={t('Email address')}
+						required
+						value={userFormik.values.email}
+					/>
 				</FormGroup>
 
 				<FormGroup>
-					<Input placeholder={t('Address')} />
+					<Input
+						name="address"
+						onBlur={userFormik.handleBlur}
+						onChange={userFormik.handleChange}
+						placeholder={t('Address')}
+						required
+						value={userFormik.values.address}
+					/>
 				</FormGroup>
 
 				<FormGroup>
-					<Button shadow type="submit" className="submit">
+					<Button
+						shadow
+						type="submit"
+						className="submit"
+						disabled={userFormik.isSubmitting}
+					>
 						{t('Update')}
 					</Button>
 				</FormGroup>
 			</Form>
 
-			<Form className="update-password">
+			<Form
+				className="update-password"
+				onSubmit={changePasswordFormik.handleSubmit}
+			>
 				<h3>{t('Change password')}</h3>
 
 				<FormGroup>
-					<Input placeholder={t('Current password')} />
+					<Input
+						name="oldPassword"
+						onBlur={changePasswordFormik.handleBlur}
+						onChange={changePasswordFormik.handleChange}
+						placeholder={t('Current password')}
+						required
+						value={changePasswordFormik.values.oldPassword}
+					/>
 				</FormGroup>
 
 				<FormGroup>
-					<Input placeholder={t('New password')} />
+					<Input
+						name="newPassword"
+						onBlur={changePasswordFormik.handleBlur}
+						onChange={changePasswordFormik.handleChange}
+						placeholder={t('New password')}
+						required
+						value={changePasswordFormik.values.newPassword}
+					/>
 				</FormGroup>
 
 				<FormGroup>
-					<Input placeholder={t('Confirm new password')} />
+					<Input
+						name="confirmNewPassword"
+						onBlur={changePasswordFormik.handleBlur}
+						onChange={changePasswordFormik.handleChange}
+						placeholder={t('Confirm new password')}
+						required
+						value={changePasswordFormik.values.confirmNewPassword}
+					/>
 				</FormGroup>
 
 				<FormGroup>
-					<Button shadow type="submit" className="submit">
+					<Button
+						shadow
+						type="submit"
+						className="submit"
+						disabled={changePasswordFormik.isSubmitting}
+					>
 						{t('Update')}
 					</Button>
 				</FormGroup>

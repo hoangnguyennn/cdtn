@@ -6,6 +6,7 @@ import paymentMethodRoute from './paymentMethod';
 import productRoute from './product';
 import productUnitRoute from './productUnit';
 import uploadRoute from './upload';
+import userRoute from './user';
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.use('/payment-methods', paymentMethodRoute);
 router.use('/product-units', productUnitRoute);
 router.use('/products', productRoute);
 router.use('/upload', uploadRoute);
+router.use('/users', userRoute);
 
 export default router;

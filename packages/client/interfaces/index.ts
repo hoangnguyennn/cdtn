@@ -112,6 +112,19 @@ export interface IUserCreate {
 	phone: string;
 }
 
+export interface IUserUpdateInfo {
+	email: string;
+	fullName: string;
+	address: string;
+	phone: string;
+}
+
+export interface IUserUpdatePassword {
+	password: string;
+}
+
+export type IUserUpdate = IUserUpdateInfo | IUserUpdatePassword;
+
 export interface IWidget {
 	id: string;
 	title: string;

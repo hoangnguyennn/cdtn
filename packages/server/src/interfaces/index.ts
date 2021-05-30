@@ -152,3 +152,19 @@ export interface IUserResponse {
 	phone: string;
 	userType: UserType;
 }
+
+export interface IUserUpdateRequest {
+	email: string;
+	fullName: string;
+	address: string;
+	phone: string;
+	password: string;
+}
+
+export interface IUserUpdate {
+	email: string;
+	fullName: string;
+	address: string;
+	phone: string;
+	passwordHashed: string;
+}
