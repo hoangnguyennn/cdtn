@@ -4,6 +4,7 @@ type RootProps = {
 	columns: number;
 	'lg-columns': number;
 	hasTitle?: boolean;
+	[key: string]: any;
 };
 
 const ProductList = styled.div<RootProps>`
@@ -36,7 +37,7 @@ const ProductList = styled.div<RootProps>`
 	}
 
 	@media (min-width: 992px) {
-		padding-top: 1rem;
+		padding-top: ${(props) => (props.hasTitle ? '1rem' : '0')};
 
 		.list {
 			> * {

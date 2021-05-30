@@ -16,6 +16,7 @@ type ProductListProps = {
 	title?: string;
 	viewMore?: boolean;
 	items: IProduct[];
+	[key: string]: any;
 };
 
 const ProductList: FC<ProductListProps> = ({

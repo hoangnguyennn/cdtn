@@ -62,6 +62,9 @@ const vi = {
 	'New password': 'Mật khẩu mới',
 	'Password must be same': 'Mật khẩu phải giống nhau',
 	'This field is required': 'Trường này là bắt buộc',
+	Price: 'Giá',
+	'Select price range': 'Chọn khoảng giá',
+	Apply: 'Áp dụng',
 };
 
 export default vi;

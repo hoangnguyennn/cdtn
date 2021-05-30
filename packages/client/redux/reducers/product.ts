@@ -2,11 +2,13 @@ import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 
 import {
 	fetchProductById,
+	fetchProducts,
 	fetchTrendingProducts,
 } from '../../apis/product.api';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
 export const initialState: IProductState = {
+	products: [],
 	trendingProducts: [],
 	product: {
 		id: '',
@@ -29,10 +31,23 @@ const productSlice = createSlice({
 		setProduct: (state, action) => {
 			state.product = action.payload;
 		},
+
+		setProducts: (state, action) => {
+			state.products = action.payload;
+		},
 	},
 });
 
-const { setTrendingProducts, setProduct } = productSlice.actions;
+const { setTrendingProducts, setProduct, setProducts } = productSlice.actions;
+
+const fetchProductsAction = () => async (dispatch: Dispatch) => {
+	try {
+		const products = await fetchProducts();
+		return dispatch(setProducts(products));
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 const fetchTrendingProductsAction = () => async (dispatch: Dispatch) => {
 	try {
@@ -52,14 +67,19 @@ const fetchProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
 	}
 };
 
-export { fetchTrendingProductsAction, fetchProductByIdAction };
+export {
+	fetchProductByIdAction,
+	fetchProductsAction,
+	fetchTrendingProductsAction,
+};
 
 const productState = (state: IRootState) => state.product;
 const selector = function <T>(combiner: { (state: IProductState): T }) {
 	return createSelector(productState, combiner);
 };
 
-export const getTrendingProducts = selector((state) => state.trendingProducts);
 export const getProduct = selector((state) => state.product);
+export const getProducts = selector((state) => state.products);
+export const getTrendingProducts = selector((state) => state.trendingProducts);
 
 export default productSlice.reducer;

@@ -28,6 +28,7 @@ export interface IPaymentMethodState {
 }
 
 export interface IProductState {
+	products: IProduct[];
 	trendingProducts: IProduct[];
 	product: IProduct;
 }

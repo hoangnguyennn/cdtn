@@ -16,8 +16,6 @@ const MyOrder = () => {
 		dispatch(fetchOrders());
 	}, []);
 
-	console.log(orders);
-
 	return (
 		<Root>
 			<table className="order-list">

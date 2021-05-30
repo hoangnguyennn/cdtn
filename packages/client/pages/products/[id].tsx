@@ -1,29 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
+import { useSelector } from 'react-redux';
 
 import {
 	fetchProductByIdAction,
 	getProduct,
 } from '../../redux/reducers/product';
 
+import { initialStore } from '../../redux/store';
 import { productPage } from '../../configs/breadcrumb';
 import MainLayout from '../../layouts/MainLayout';
 import PageContent from '../../components/PageContent';
 import ProductSummary from '../../features/ProductSummary';
 
 const ProductDetailPage = () => {
-	const router = useRouter();
-	const { id } = router.query;
-
-	const dispatch = useDispatch();
 	const product = useSelector(getProduct);
-
-	useEffect(() => {
-		if (id) {
-			dispatch(fetchProductByIdAction(id as string));
-		}
-	}, [id]);
 
 	return (
 		<MainLayout>
@@ -35,6 +25,19 @@ const ProductDetailPage = () => {
 			</PageContent>
 		</MainLayout>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const { id } = context.query;
+
+	const reduxStore = initialStore();
+	const { dispatch } = reduxStore;
+
+	await dispatch(fetchProductByIdAction(id as string));
+
+	return {
+		props: { initialReduxState: reduxStore.getState() },
+	};
 };
 
 export default ProductDetailPage;
