@@ -34,6 +34,13 @@ const create = async (req: Request, res: Response) => {
 	return success(res, mapOrderToResponse(orderCreated));
 };
 
+const get = async (req: Request, res: Response) => {
+	const { userId } = res.locals;
+	const orders = await OrderService.get({ userId });
+	return success(res, orders.map(mapOrderToResponse));
+};
+
 export default {
 	create,
+	get,
 };

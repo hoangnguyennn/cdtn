@@ -23,6 +23,25 @@ const create = async (order: IOrderCreate): Promise<IOrder> => {
 	]);
 };
 
+const get = async (order: Partial<IOrder> = {}): Promise<IOrder[]> => {
+	const orderFilter = Object.entries(order).reduce(
+		(result: any, [key, value]) => {
+			if (value) {
+				result[key] = value;
+			}
+			return result;
+		},
+		{}
+	);
+
+	return OrderModel.find(orderFilter).populate([
+		{ path: 'user' },
+		{ path: 'paymentMethod' },
+		{ path: 'items' },
+	]);
+};
+
 export default {
 	create,
+	get,
 };
