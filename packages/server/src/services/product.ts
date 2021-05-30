@@ -20,8 +20,11 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 	]);
 };
 
-const get = async (): Promise<IProduct[]> => {
-	return ProductModel.find().populate([{ path: 'unit' }, { path: 'images' }]);
+const get = async (filter: any): Promise<IProduct[]> => {
+	return ProductModel.find(filter).populate([
+		{ path: 'unit' },
+		{ path: 'images' },
+	]);
 };
 
 const getById = async (

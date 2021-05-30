@@ -40,9 +40,9 @@ const productSlice = createSlice({
 
 const { setTrendingProducts, setProduct, setProducts } = productSlice.actions;
 
-const fetchProductsAction = () => async (dispatch: Dispatch) => {
+const fetchProductsAction = (query: any) => async (dispatch: Dispatch) => {
 	try {
-		const products = await fetchProducts();
+		const products = await fetchProducts(query);
 		return dispatch(setProducts(products));
 	} catch (err) {
 		console.log(err);

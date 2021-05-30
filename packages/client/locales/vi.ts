@@ -65,6 +65,8 @@ const vi = {
 	Price: 'Giá',
 	'Select price range': 'Chọn khoảng giá',
 	Apply: 'Áp dụng',
+	'There are no products to display': 'Không có sản phẩm nào để hiển thị',
+	'Delete all': 'Xóa tất cả',
 };
 
 export default vi;

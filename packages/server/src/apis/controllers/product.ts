@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { IProductCreate, IProductCreateRequest } from '../../interfaces';
 
-import ProductService from '../../services/product';
-import ImageService from '../../services/image';
-import { notFound, success } from '../../helpers/commonResponse';
 import { mapProductToResponse } from '../../helpers/mappingResponse';
+import { notFound, success } from '../../helpers/commonResponse';
+import ImageService from '../../services/image';
+import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
+import ProductService from '../../services/product';
 
 const create = async (req: Request, res: Response) => {
 	const productRequest: IProductCreateRequest = req.body;
@@ -24,7 +25,9 @@ const create = async (req: Request, res: Response) => {
 };
 
 const get = async (req: Request, res: Response) => {
-	const products = await ProductService.get();
+	const filter = mapQueryToMongoFilter(req.query);
+	console.log(filter);
+	const products = await ProductService.get(filter);
 	return success(res, products.map(mapProductToResponse));
 };
 

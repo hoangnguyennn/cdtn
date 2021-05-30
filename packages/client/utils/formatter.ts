@@ -33,7 +33,12 @@ export const toNDigits = (num: number | string, numberOfDigits = 2) => {
 	return `${zeroBefore}${num}`.slice(-numberOfDigits);
 };
 
+export const numberWithDot = (num: number | string) => {
+	return String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+};
+
 export default {
-	toCurrency,
 	isoDateToNativeDate,
+	numberWithDot,
+	toCurrency,
 };

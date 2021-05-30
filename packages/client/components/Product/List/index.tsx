@@ -31,16 +31,23 @@ const ProductList: FC<ProductListProps> = ({
 	return (
 		<ProductListStyled hasTitle={!!title} {...rest}>
 			{title ? <h3 className="title">{title}</h3> : null}
-			<div className="list">
-				{items.map((product) => (
-					<ProductItem
-						key={product.id}
-						link={`${PATH_NAME.PRODUCTS}/${product.id}`}
-						addToCart={() => dispatch(addToCart({ ...product, qty: 1 }))}
-						{...product}
-					/>
-				))}
-			</div>
+			{items.length ? (
+				<div className="list">
+					{items.map((product) => (
+						<ProductItem
+							key={product.id}
+							link={`${PATH_NAME.PRODUCTS}/${product.id}`}
+							addToCart={() => dispatch(addToCart({ ...product, qty: 1 }))}
+							{...product}
+						/>
+					))}
+				</div>
+			) : (
+				<div className="not-found-products">
+					{t('There are no products to display')}
+				</div>
+			)}
+
 			{viewMore ? (
 				<div className="view-more">
 					<Link href={PATH_NAME.PRODUCTS}>

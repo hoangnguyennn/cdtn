@@ -27,6 +27,14 @@ const ProductList = styled.div<RootProps>`
 		}
 	}
 
+	.not-found-products {
+		margin: 1rem;
+		padding: 1rem 1.5rem;
+		color: var(--danger);
+		border: 1px solid var(--danger);
+		border-radius: 0.25rem;
+	}
+
 	.view-more {
 		padding-top: 1rem;
 		text-align: center;

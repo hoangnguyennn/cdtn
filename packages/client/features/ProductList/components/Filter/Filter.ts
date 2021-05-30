@@ -1,11 +1,23 @@
 import styled from 'styled-components';
+import Form from '../../../../components/core/Form';
 
-export default styled.div`
+export default styled(Form)`
 	border-right: 1px solid #dae1e7;
 
 	.filter-item {
 		padding: 1rem 1rem 0.75rem 0;
 		border-top: 1px solid #dae1e7;
+
+		.delete-all {
+			background-color: transparent;
+			color: var(--primary);
+			border: none;
+			cursor: pointer;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 
 		.title {
 			padding-bottom: 0.875rem;

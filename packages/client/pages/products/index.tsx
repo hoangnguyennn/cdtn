@@ -20,11 +20,12 @@ const ProductDetailPage = () => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 	const reduxStore = initialStore();
 	const { dispatch } = reduxStore;
 
-	await dispatch(fetchProductsAction());
+	const query = context.query;
+	await dispatch(fetchProductsAction(query));
 
 	return {
 		props: { initialReduxState: reduxStore.getState() },
