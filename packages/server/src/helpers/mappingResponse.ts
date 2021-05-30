@@ -41,6 +41,9 @@ export const mapOrderItemToResponse = (
 		productId: orderItem.productId,
 		price: orderItem.price,
 		qty: orderItem.qty,
+		product: {
+			name: orderItem.product?.name || '',
+		},
 	};
 };
 

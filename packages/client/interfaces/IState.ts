@@ -1,4 +1,10 @@
-import { ICartItem, IPaymentMethod, IProduct, IUser } from './index';
+import {
+	ICartItem,
+	IOrderResponse,
+	IPaymentMethod,
+	IProduct,
+	IUser,
+} from './index';
 
 export interface IAppState {
 	limitOfToast: number;
@@ -11,6 +17,10 @@ export interface IAuthState {
 
 export interface ICartState {
 	cartItems: ICartItem[];
+}
+
+export interface IOrderState {
+	orders: IOrderResponse[];
 }
 
 export interface IPaymentMethodState {
@@ -26,6 +36,7 @@ export interface IRootState {
 	app: IAppState;
 	auth: IAuthState;
 	cart: ICartState;
+	order: IOrderState;
 	paymentMethod: IPaymentMethodState;
 	product: IProductState;
 }

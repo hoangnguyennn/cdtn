@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { initialState as initialAppState } from './reducers/app';
 import { initialState as initialAuthState } from './reducers/auth';
 import { initialState as initialCartState } from './reducers/cart';
+import { initialState as initialOrderState } from './reducers/order';
 import { initialState as initialPaymentMethodState } from './reducers/paymentMethod';
 import { initialState as initialProductState } from './reducers/product';
 
@@ -14,11 +15,12 @@ let store: ReturnType<typeof initStore>;
 
 const initStore = (
 	preloadedState: IRootState = {
-		auth: initialAuthState,
-		product: initialProductState,
-		cart: initialCartState,
-		paymentMethod: initialPaymentMethodState,
 		app: initialAppState,
+		auth: initialAuthState,
+		cart: initialCartState,
+		order: initialOrderState,
+		paymentMethod: initialPaymentMethodState,
+		product: initialProductState,
 	}
 ) => {
 	return configureStore({

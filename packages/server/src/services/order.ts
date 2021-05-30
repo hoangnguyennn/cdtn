@@ -34,11 +34,13 @@ const get = async (order: Partial<IOrder> = {}): Promise<IOrder[]> => {
 		{}
 	);
 
-	return OrderModel.find(orderFilter).populate([
-		{ path: 'user' },
-		{ path: 'paymentMethod' },
-		{ path: 'items' },
-	]);
+	return OrderModel.find(orderFilter)
+		.populate([
+			{ path: 'user' },
+			{ path: 'paymentMethod' },
+			{ path: 'items', populate: { path: 'product' } },
+		])
+		.sort({ orderDate: -1 });
 };
 
 export default {

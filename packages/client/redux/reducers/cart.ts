@@ -1,10 +1,12 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import Router from 'next/router';
 
 import { ICartState, IRootState } from '../../interfaces/IState';
 import { IOrder } from '../../interfaces/index';
 import { order } from '../../apis/order.api';
 import isProductInCart from '../../helpers/isProductInCart';
+import { PATH_NAME } from '../../configs/pathName';
 
 export const initialState: ICartState = {
 	cartItems: [],
@@ -100,7 +102,10 @@ export const orderAction =
 	(orderRequest: IOrder) => async (dispatch: Dispatch) => {
 		try {
 			await order(orderRequest);
-			dispatch(clearCart());
+			setTimeout(() => {
+				Router.replace(PATH_NAME.MY_ORDER);
+				dispatch(clearCart());
+			}, 1000);
 			toast.info('success');
 		} catch (e) {
 			toast.error(e.message);

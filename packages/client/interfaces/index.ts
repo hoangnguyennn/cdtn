@@ -47,6 +47,9 @@ export interface IOrderItemResponse {
 	productId: string;
 	price: number;
 	qty: number;
+	product: {
+		name: string;
+	};
 }
 
 export interface IOrderResponse {
@@ -55,10 +58,10 @@ export interface IOrderResponse {
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryDate?: Date;
+	deliveryDate?: string;
 	paymentStatus: string;
 	orderStatus: string;
-	orderDate: Date;
+	orderDate: string;
 
 	user?: IUser;
 	paymentMethod: IPaymentMethod;

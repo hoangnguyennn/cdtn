@@ -47,6 +47,11 @@ const vi = {
 	Slogan: 'Nấm sạch - Niềm vui và sức khỏe',
 	Subtotal: 'Tạm tính',
 	Total: 'Tổng cộng',
+
+	'My orders': 'Đơn hàng của tôi',
+	'Order Date': 'Ngày mua',
+	'Order Id': 'Mã đơn hàng',
+	'Order Status': 'Trạng thái đơn hàng',
 };
 
 export default vi;

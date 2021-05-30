@@ -299,15 +299,9 @@ const Cart = () => {
 				</div>
 
 				<FormGroup>
-					{isValid ? (
-						<Button shadow type="submit" disabled={!isValid}>
-							{t('Checkout')}
-						</Button>
-					) : (
-						<Button shadow as="div">
-							{t('Checkout')}
-						</Button>
-					)}
+					<Button shadow type="submit" disabled={!isValid}>
+						{t('Checkout')}
+					</Button>
 				</FormGroup>
 			</Form>
 		</CartStyled>

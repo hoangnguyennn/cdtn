@@ -12,7 +12,7 @@ const renderShadow = (shadow?: boolean, variant?: Color) => {
 		return `0 0.5rem 1.125rem -0.5rem var(--${variant}-shadow)`;
 	}
 
-	return;
+	return 'unset';
 };
 
 const Button = styled.button<ButtonProps>`
@@ -31,6 +31,13 @@ const Button = styled.button<ButtonProps>`
 		background-color: var(--${(props) => props.variant}-hover);
 		border-color: var(--${(props) => props.variant}-hover);
 		box-shadow: unset;
+	}
+
+	&:disabled {
+		background-color: var(--gray);
+		border-color: var(--gray);
+		box-shadow: ${(props) => renderShadow(false, props.variant)};
+		cursor: not-allowed;
 	}
 `;
 

@@ -53,6 +53,11 @@ export interface IOrderItemResponse {
 	productId: string | Types.ObjectId;
 	price: number;
 	qty: number;
+	product?: IOrderItemProductResponse;
+}
+
+export interface IOrderItemProductResponse {
+	name: string;
 }
 
 export interface IOrderResponse {
