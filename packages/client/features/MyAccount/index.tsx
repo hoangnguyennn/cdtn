@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
+import { getUserInfo, updateUserInfoAction } from '../../redux/reducers/auth';
+import { IUserUpdateInfo } from '../../interfaces';
 import Button from '../../components/core/Button';
 import Form from '../../components/core/Form';
 import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
-import { IUserUpdateInfo } from '../../interfaces';
-import { getUserInfo, updateUserInfoAction } from '../../redux/reducers/auth';
+import Invalid from '../../components/core/Invalid';
+
 import Root from './MyAccount';
-import { useEffect, useState } from 'react';
 
 const MyAccount = () => {
 	const { t } = useTranslation();
@@ -26,10 +28,10 @@ const MyAccount = () => {
 		});
 
 	const userInforValidationSchema = Yup.object({
-		fullName: Yup.string().required(),
-		email: Yup.string().email().required(),
-		phone: Yup.string().required(),
-		address: Yup.string().required(),
+		fullName: Yup.string().required(t('This field is required')),
+		email: Yup.string().email().required(t('This field is required')),
+		phone: Yup.string().required(t('This field is required')),
+		address: Yup.string().required(t('This field is required')),
 	});
 
 	const handleUserFormSubmit = (values: IUserUpdateInfo, { setSubmitting }) => {
@@ -53,11 +55,11 @@ const MyAccount = () => {
 	};
 
 	const changePasswordValidationSchema = Yup.object({
-		oldPassword: Yup.string().required(),
-		newPassword: Yup.string().required(),
+		oldPassword: Yup.string().required(t('This field is required')),
+		newPassword: Yup.string().required(t('This field is required')),
 		confirmNewPassword: Yup.string()
-			.oneOf([Yup.ref('newPassword')])
-			.required(),
+			.oneOf([Yup.ref('newPassword')], t('Password must be same'))
+			.required(t('This field is required')),
 	});
 
 	const handleChangePasswordSubmit = (values: any, { setSubmitting }) => {
@@ -98,6 +100,9 @@ const MyAccount = () => {
 						required
 						value={userFormik.values.fullName}
 					/>
+					{userFormik.errors.fullName ? (
+						<Invalid>{userFormik.errors.fullName}</Invalid>
+					) : null}
 				</FormGroup>
 
 				<FormGroup>
@@ -109,6 +114,9 @@ const MyAccount = () => {
 						required
 						value={userFormik.values.phone}
 					/>
+					{userFormik.errors.phone ? (
+						<Invalid>{userFormik.errors.phone}</Invalid>
+					) : null}
 				</FormGroup>
 
 				<FormGroup>
@@ -120,6 +128,9 @@ const MyAccount = () => {
 						required
 						value={userFormik.values.email}
 					/>
+					{userFormik.errors.email ? (
+						<Invalid>{userFormik.errors.email}</Invalid>
+					) : null}
 				</FormGroup>
 
 				<FormGroup>
@@ -131,6 +142,9 @@ const MyAccount = () => {
 						required
 						value={userFormik.values.address}
 					/>
+					{userFormik.errors.address ? (
+						<Invalid>{userFormik.errors.address}</Invalid>
+					) : null}
 				</FormGroup>
 
 				<FormGroup>
@@ -154,34 +168,46 @@ const MyAccount = () => {
 				<FormGroup>
 					<Input
 						name="oldPassword"
+						type="password"
 						onBlur={changePasswordFormik.handleBlur}
 						onChange={changePasswordFormik.handleChange}
 						placeholder={t('Current password')}
 						required
 						value={changePasswordFormik.values.oldPassword}
 					/>
+					{changePasswordFormik.errors.oldPassword ? (
+						<Invalid>{changePasswordFormik.errors.oldPassword}</Invalid>
+					) : null}
 				</FormGroup>
 
 				<FormGroup>
 					<Input
 						name="newPassword"
+						type="password"
 						onBlur={changePasswordFormik.handleBlur}
 						onChange={changePasswordFormik.handleChange}
 						placeholder={t('New password')}
 						required
 						value={changePasswordFormik.values.newPassword}
 					/>
+					{changePasswordFormik.errors.newPassword ? (
+						<Invalid>{changePasswordFormik.errors.newPassword}</Invalid>
+					) : null}
 				</FormGroup>
 
 				<FormGroup>
 					<Input
 						name="confirmNewPassword"
+						type="password"
 						onBlur={changePasswordFormik.handleBlur}
 						onChange={changePasswordFormik.handleChange}
 						placeholder={t('Confirm new password')}
 						required
 						value={changePasswordFormik.values.confirmNewPassword}
 					/>
+					{changePasswordFormik.errors.confirmNewPassword ? (
+						<Invalid>{changePasswordFormik.errors.confirmNewPassword}</Invalid>
+					) : null}
 				</FormGroup>
 
 				<FormGroup>

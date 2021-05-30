@@ -51,10 +51,10 @@ const Cart = () => {
 	});
 
 	const validationSchema = Yup.object({
-		deliveryFullName: Yup.string().required(),
-		deliveryAddress: Yup.string().required(),
-		deliveryPhone: Yup.string().required(),
-		deliveryEmail: Yup.string().email().required(),
+		deliveryFullName: Yup.string().required(t('This field is required')),
+		deliveryAddress: Yup.string().required(t('This field is required')),
+		deliveryPhone: Yup.string().required(t('This field is required')),
+		deliveryEmail: Yup.string().email().required(t('This field is required')),
 		note: Yup.string(),
 	});
 

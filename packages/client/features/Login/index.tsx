@@ -28,8 +28,8 @@ const Login = () => {
 	};
 
 	const validationSchema = Yup.object({
-		email: Yup.string().required(),
-		password: Yup.string().required(),
+		email: Yup.string().required(t('This field is required')),
+		password: Yup.string().required(t('This field is required')),
 	});
 
 	const handleSubmit = (values: ILogin, { setSubmitting }) => {

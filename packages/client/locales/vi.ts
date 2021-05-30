@@ -55,11 +55,13 @@ const vi = {
 	'Order Status': 'Trạng thái đơn hàng',
 	Update: 'Cập nhật',
 
-	'Current password': 'Mật khẩu hiện tại',
-	'New password': 'Mật khẩu mới',
-	'Confirm new password': 'Nhập lại mật khẩu mới',
 	'Account information': 'Thông tin tài khoản',
 	'Change password': 'Thay đổi mật khẩu',
+	'Confirm new password': 'Nhập lại mật khẩu mới',
+	'Current password': 'Mật khẩu hiện tại',
+	'New password': 'Mật khẩu mới',
+	'Password must be same': 'Mật khẩu phải giống nhau',
+	'This field is required': 'Trường này là bắt buộc',
 };
 
 export default vi;

@@ -27,13 +27,13 @@ const Register = () => {
 	};
 
 	const validationSchema = Yup.object({
-		fullName: Yup.string().required(),
-		email: Yup.string().email().required(),
-		phone: Yup.string().required(),
-		password: Yup.string().required(),
+		fullName: Yup.string().required(t('This field is required')),
+		email: Yup.string().email().required(t('This field is required')),
+		phone: Yup.string().required(t('This field is required')),
+		password: Yup.string().required(t('This field is required')),
 		confirmPassword: Yup.string()
-			.oneOf([Yup.ref('password')])
-			.required(),
+			.oneOf([Yup.ref('password')], t('Password must be same'))
+			.required(t('This field is required')),
 	});
 
 	const handleSubmit = (values: IRegisterForm, { setSubmitting }) => {
