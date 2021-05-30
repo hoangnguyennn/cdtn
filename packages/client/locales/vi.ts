@@ -48,10 +48,18 @@ const vi = {
 	Subtotal: 'Tạm tính',
 	Total: 'Tổng cộng',
 
+	'My account': 'Tài khoản của tôi',
 	'My orders': 'Đơn hàng của tôi',
 	'Order Date': 'Ngày mua',
 	'Order Id': 'Mã đơn hàng',
 	'Order Status': 'Trạng thái đơn hàng',
+	Update: 'Cập nhật',
+
+	'Current password': 'Mật khẩu hiện tại',
+	'New password': 'Mật khẩu mới',
+	'Confirm new password': 'Nhập lại mật khẩu mới',
+	'Account information': 'Thông tin tài khoản',
+	'Change password': 'Thay đổi mật khẩu',
 };
 
 export default vi;

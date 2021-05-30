@@ -12,6 +12,11 @@ export const loginPage = (): IBreadcrumb[] => [
 	{ id: 'p2', name: i18n.t('Login'), url: PATH_NAME.LOGIN },
 ];
 
+export const myAccountPage = (): IBreadcrumb[] => [
+	{ id: 'p1', name: i18n.t('Home'), url: PATH_NAME.HOME },
+	{ id: 'p2', name: i18n.t('My account'), url: PATH_NAME.MY_ACCOUNT },
+];
+
 export const myOrderPage = (): IBreadcrumb[] => [
 	{ id: 'p1', name: i18n.t('Home'), url: PATH_NAME.HOME },
 	{ id: 'p2', name: i18n.t('My orders'), url: PATH_NAME.MY_ORDER },

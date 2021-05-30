@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
+	overflow-x: auto;
+
 	.order-list {
 		width: 100%;
 		border-collapse: collapse;
