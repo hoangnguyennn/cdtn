@@ -67,7 +67,7 @@ const loginAction = (userLogin: ILogin) => async (dispatch: Dispatch) => {
 		dispatch(setToken(loginResponse.token));
 		dispatch(setUser(loginResponse.user));
 		window.localStorage.setItem('access-token', loginResponse.token);
-		Router.push(PATH_NAME.HOME);
+		Router.replace(PATH_NAME.HOME);
 	} catch (err) {
 		toast.error(err.message);
 	}
@@ -76,8 +76,8 @@ const loginAction = (userLogin: ILogin) => async (dispatch: Dispatch) => {
 const loginByTokenAction = () => async (dispatch: Dispatch) => {
 	const token = localStorage.getItem('access-token');
 	if (!token) {
-		dispatch(clearUser());
 		localStorage.removeItem('access-token');
+		dispatch(clearUser());
 		return;
 	}
 
@@ -90,7 +90,16 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 	}
 };
 
-export { loginAction, loginByTokenAction, registerAction };
+const logout = () => async () => {
+	try {
+		localStorage.removeItem('access-token');
+		Router.replace(PATH_NAME.HOME);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export { loginAction, loginByTokenAction, logout, registerAction };
 
 const authState = (state: IRootState) => state.auth;
 const selector = function <T>(combiner: { (state: IAuthState): T }) {

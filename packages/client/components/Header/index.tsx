@@ -9,6 +9,7 @@ import Logo from '../Logo';
 import { getCartLength } from '../../redux/reducers/cart';
 import { getFullName } from '../../redux/reducers/auth';
 import { PATH_NAME } from '../../configs/pathName';
+import User from './User';
 
 const Header = () => {
 	const { t } = useTranslation();
@@ -22,15 +23,7 @@ const Header = () => {
 
 				<div className="tools">
 					{fullName ? (
-						<div className="tool-item user">
-							<div className="icon">
-								<i className="czi-user"></i>
-							</div>
-							<div className="text ml-n2">
-								<small>{t('My Account')}</small>
-								<span>{fullName}</span>
-							</div>
-						</div>
+						<User fullName={fullName} />
 					) : (
 						<Link href={PATH_NAME.LOGIN}>
 							<a className="tool-item user">

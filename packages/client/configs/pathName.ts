@@ -4,4 +4,6 @@ export const PATH_NAME = {
 	LOGIN: '/login',
 	PRODUCTS: '/products',
 	REGISTER: '/register',
+	MY_ORDER: '/customer/orders',
+	MY_ACCOUNT: '/customer/account',
 };
