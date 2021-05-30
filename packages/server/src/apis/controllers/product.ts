@@ -26,7 +26,6 @@ const create = async (req: Request, res: Response) => {
 
 const get = async (req: Request, res: Response) => {
 	const filter = mapQueryToMongoFilter(req.query);
-	console.log(filter);
 	const products = await ProductService.get(filter);
 	return success(res, products.map(mapProductToResponse));
 };

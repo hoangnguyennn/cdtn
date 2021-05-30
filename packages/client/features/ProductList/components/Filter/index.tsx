@@ -61,7 +61,6 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	};
 
 	useEffect(() => {
-		console.log('updateQuery');
 		let { price } = router.query;
 
 		if (price) {
@@ -80,7 +79,6 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 
 	return (
 		<Root className={className} onSubmit={filter} method="post">
-			{console.log(priceFrom, priceTo)}
 			<div className="filter-item">
 				<button className="delete-all" type="button" onClick={clearAllFilter}>
 					{t('Delete all')}
