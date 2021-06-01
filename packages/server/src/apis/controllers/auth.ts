@@ -27,6 +27,7 @@ const login = async (req: Request, res: Response) => {
 
 	const payload: IPayload = {
 		userId: user._id,
+		userType: user.userType,
 	};
 
 	const token = generate(payload);

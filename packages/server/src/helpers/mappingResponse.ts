@@ -3,6 +3,7 @@ import {
 	IOrderResponse,
 	IPaymentMethodResponse,
 	IProductResponse,
+	IProductResponseForAdmin,
 	IProductUnitResponse,
 	IUserResponse,
 } from '../interfaces';
@@ -67,6 +68,20 @@ export const mapProductToResponse = (product: IProduct): IProductResponse => {
 		description: product.description,
 		unit: product.unit?.name || '',
 		images: product.images?.map((image) => image.url) || [],
+	};
+};
+
+export const mapProductToResponseForAdmin = (
+	product: IProduct
+): IProductResponseForAdmin => {
+	return {
+		id: product._id,
+		name: product.name,
+		price: product.price,
+		description: product.description,
+		unit: product.unit?.name || '',
+		images: product.images?.map((image) => image.url) || [],
+		status: product.status,
 	};
 };
 

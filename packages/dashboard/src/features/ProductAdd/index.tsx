@@ -1,16 +1,18 @@
 import { Form, Input, InputNumber, Button, Select, Switch } from 'antd';
-import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import UploadImage from '../../components/UploadImage';
-import { PATH_NAME } from '../../configs';
-import { IProductCreate } from '../../interfaces';
-import { ProductStatus } from '../../interfaces/enum';
+
 import { createProductAction } from '../../redux/reducers/product';
+import { IProductCreate } from '../../interfaces';
+import { PATH_NAME } from '../../configs';
+import { ProductStatus } from '../../interfaces/enum';
 import {
 	fetchProductUnitsAction,
 	getProductUnits,
 } from '../../redux/reducers/productUnit';
+import UploadImage from '../../components/UploadImage';
 
 import './ProductAdd.css';
 
@@ -36,7 +38,11 @@ const ProductAdd = () => {
 	};
 
 	const onFinish = async (values: any) => {
-		console.log('submit', values);
+		if (values.images.filter((image: string) => image).length === 0) {
+			toast.error('Wait for upload images to complete');
+			return;
+		}
+
 		const productCreate: IProductCreate = {
 			name: values.name,
 			price: values.price,

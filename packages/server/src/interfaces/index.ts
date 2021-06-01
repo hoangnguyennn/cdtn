@@ -78,6 +78,7 @@ export interface IOrderResponse {
 
 export interface IPayload {
 	userId: string | Types.ObjectId;
+	userType: string | UserType;
 }
 
 export interface IPaymentMethodCreate {
@@ -122,6 +123,10 @@ export interface IProductResponse {
 	description: string;
 	unit: string;
 	images: string[];
+}
+
+export interface IProductResponseForAdmin extends IProductResponse {
+	status: string;
 }
 
 export interface IProductUnitCreate {

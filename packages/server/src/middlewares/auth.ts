@@ -7,7 +7,25 @@ import {
 } from '../helpers/commonResponse';
 import { decode } from '../utils/token';
 import { UserType } from '../interfaces/enums';
-import UserService from '../services/user';
+
+const decodeToken = (req: Request, res: Response, next: NextFunction) => {
+	const bearerToken = req.headers.authorization;
+
+	if (!bearerToken) {
+		return next();
+	}
+
+	const token = String(bearerToken).split(' ')[1];
+	const decoded = decode(token);
+
+	if (!decoded) {
+		return next();
+	}
+
+	res.locals.userId = decoded.userId;
+	res.locals.userType = decoded.userType;
+	return next();
+};
 
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 	const bearerToken = req.headers.authorization;
@@ -24,19 +42,19 @@ const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	res.locals.userId = decoded.userId;
+	res.locals.userType = decoded.userType;
 	return next();
 };
 
 const checkRole = (roles: UserType[]) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
-		const { userId } = res.locals;
-		const user = await UserService.getById(userId);
+		const { userId, userType } = res.locals;
 
-		if (!user) {
+		if (!userId) {
 			return notFound(next);
 		}
 
-		if (!roles.includes(user.userType)) {
+		if (!roles.includes(userType)) {
 			return forbidden(next);
 		}
 
@@ -45,6 +63,7 @@ const checkRole = (roles: UserType[]) => {
 };
 
 export default {
+	decodeToken,
 	checkAuth,
 	checkRole,
 };

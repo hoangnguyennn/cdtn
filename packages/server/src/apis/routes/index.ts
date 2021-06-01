@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import AuthMiddleware from '../../middlewares/auth';
+
 import authRoute from './auth';
 import orderRoute from './order';
 import paymentMethodRoute from './paymentMethod';
@@ -9,6 +11,9 @@ import uploadRoute from './upload';
 import userRoute from './user';
 
 const router = Router();
+
+// decode token if they sent to server
+router.use(AuthMiddleware.decodeToken);
 
 router.use('/auth', authRoute);
 router.use('/orders', orderRoute);
