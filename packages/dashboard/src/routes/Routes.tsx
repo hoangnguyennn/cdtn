@@ -10,6 +10,8 @@ const Home = lazy(() => import('../features/Home'));
 const Login = lazy(() => import('../features/Login'));
 const ProductAdd = lazy(() => import('../features/ProductAdd'));
 const ProductList = lazy(() => import('../features/ProductList'));
+const ProductUnitList = lazy(() => import('../features/ProductUnitList'));
+const ProductUnitAdd = lazy(() => import('../features/ProductUnitAdd'));
 
 const routesConfig: IRoute[] = [
 	{
@@ -30,6 +32,18 @@ const routesConfig: IRoute[] = [
 		guard: Auth,
 		layout: MainLayout,
 		component: ProductList,
+	},
+	{
+		path: PATH_NAME.PRODUCT_UNIT_LIST,
+		guard: Auth,
+		layout: MainLayout,
+		component: ProductUnitList,
+	},
+	{
+		path: PATH_NAME.PRODUCT_UNIT_ADD,
+		guard: Auth,
+		layout: MainLayout,
+		component: ProductUnitAdd,
 	},
 	{
 		path: PATH_NAME.LOGIN,

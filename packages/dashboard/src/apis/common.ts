@@ -1,9 +1,15 @@
 import { ENDPOINT } from '../configs/endpoint';
-import { IProductCreate, IUser } from '../interfaces';
+import { IProductCreate, IProductUnitCreate, IUser } from '../interfaces';
 import axiosInstance from '../services/instance';
 
 export const createProduct = async (product: IProductCreate) => {
 	return axiosInstance.post(ENDPOINT.products, product).then((res) => res.data);
+};
+
+export const createProductUnit = async (productUnit: IProductUnitCreate) => {
+	return axiosInstance
+		.post(ENDPOINT.productUnits, productUnit)
+		.then((res) => res.data);
 };
 
 export const fetchProducts = async () => {

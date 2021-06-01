@@ -22,7 +22,10 @@ export interface IProductCreate {
 export interface IProductUnit {
 	id: string;
 	name: string;
-	description?: string;
+}
+
+export interface IProductUnitCreate {
+	name: string;
 }
 
 export interface IMenu {

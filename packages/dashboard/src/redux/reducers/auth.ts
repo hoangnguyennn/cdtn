@@ -1,9 +1,7 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 import { IAuthState, IRootState } from '../../interfaces/IState';
 import { login, loginByToken } from '../../apis/common';
-import { PATH_NAME } from '../../configs';
 
 const initialState: IAuthState = {
 	token: '',
@@ -70,34 +68,32 @@ const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
 	}
 };
 
-const loginByTokenAction =
-	(history: ReturnType<typeof useHistory>) => async (dispatch: Dispatch) => {
-		const token = localStorage.getItem('access-token');
-		if (!token) {
+const loginByTokenAction = () => async (dispatch: Dispatch) => {
+	const token = localStorage.getItem('access-token');
+	if (!token) {
+		localStorage.removeItem('access-token');
+		dispatch(clearUser());
+		throw new Error('token not found');
+	}
+
+	try {
+		const user = await loginByToken();
+
+		if (user.userType !== 'MANAGER') {
 			localStorage.removeItem('access-token');
 			dispatch(clearUser());
-			history.push(PATH_NAME.LOGIN);
-			return;
+			throw new Error('forbidden');
 		}
 
-		try {
-			const user = await loginByToken();
-
-			if (user.userType !== 'MANAGER') {
-				localStorage.removeItem('access-token');
-				dispatch(clearUser());
-				history.push(PATH_NAME.LOGIN);
-				return;
-			}
-
-			dispatch(setToken(token));
-			dispatch(setUser(user));
-		} catch {
-			localStorage.removeItem('access-token');
-			dispatch(clearUser());
-			history.push(PATH_NAME.LOGIN);
-		}
-	};
+		dispatch(setToken(token));
+		dispatch(setUser(user));
+		return 1;
+	} catch (err) {
+		localStorage.removeItem('access-token');
+		dispatch(clearUser());
+		throw err;
+	}
+};
 
 export { loginAction, loginByTokenAction };
 
