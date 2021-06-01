@@ -1,4 +1,4 @@
-import { ProductStatuses } from './enum';
+import { ProductStatus } from './enum';
 
 export interface IProduct {
 	id: string;
@@ -6,8 +6,23 @@ export interface IProduct {
 	price: number;
 	unit: string;
 	description?: string;
-	status: ProductStatuses;
+	status: ProductStatus;
 	images: string[];
+}
+
+export interface IProductCreate {
+	name: string;
+	price: number;
+	unitId: string;
+	description: string;
+	status: ProductStatus;
+	imagesUrl: string[];
+}
+
+export interface IProductUnit {
+	id: string;
+	name: string;
+	description?: string;
 }
 
 export interface IMenu {

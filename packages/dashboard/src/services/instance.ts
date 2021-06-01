@@ -12,9 +12,7 @@ instance.interceptors.request.use((config) => {
 });
 
 instance.interceptors.response.use(
-	(response) => {
-		return response;
-	},
+	(response) => response,
 	(error: any) => {
 		if (error.isAxiosError) {
 			throw error.response?.data;

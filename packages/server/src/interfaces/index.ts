@@ -110,7 +110,7 @@ export interface IProductCreateRequest {
 	name: string;
 	price: number;
 	unitId: string | Types.ObjectId;
-	description: string;
+	description?: string;
 	status: ProductStatus;
 	imagesUrl: string[];
 }
@@ -126,6 +126,12 @@ export interface IProductResponse {
 
 export interface IProductUnitCreate {
 	name: string;
+}
+
+export interface IProductUnitResponse {
+	id: string;
+	name: string;
+	description?: string;
 }
 
 export interface IUserCreate {

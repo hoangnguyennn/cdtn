@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import { getProducts, getProductsAction } from '../../redux/reducers/product';
 import { IProduct } from '../../interfaces';
-import { ProductStatuses } from '../../interfaces/enum';
+import { ProductStatus } from '../../interfaces/enum';
 import { toCurrency } from '../../utils/formatter';
 
 const columns: ColumnsType<IProduct> = [
@@ -46,7 +46,7 @@ const columns: ColumnsType<IProduct> = [
 		title: 'Status',
 		dataIndex: 'status',
 		key: 'status',
-		render: (status: ProductStatuses) => (
+		render: (status: ProductStatus) => (
 			<Tag color={status ? 'geekblue' : 'green'}>{status}</Tag>
 		),
 		sorter: (a: IProduct, b: IProduct) => {

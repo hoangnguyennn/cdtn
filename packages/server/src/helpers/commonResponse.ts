@@ -7,6 +7,8 @@ import {
 	UNAUTHORIZED,
 } from '../constants/commonResponseMessages';
 
+const isDev = process.env.NODE !== 'production';
+
 export enum HttpStatusCode {
 	HTTP_200 = 200,
 	HTTP_400 = 400,
@@ -29,9 +31,10 @@ export enum COMMON_MESSAGE {
 export class HttpError extends Error {
 	httpStatusCode: HttpStatusCode;
 
-	constructor(message: string, httpStatusCode: HttpStatusCode) {
+	constructor(message: string, httpStatusCode: HttpStatusCode, stack?: any) {
 		super(message);
 
+		this.stack = stack;
 		this.httpStatusCode = httpStatusCode;
 	}
 }
@@ -77,5 +80,6 @@ export const handleError = (
 ) => {
 	return res.status(err.httpStatusCode).json({
 		message: err.message,
+		stack: isDev ? err.stack : undefined,
 	});
 };

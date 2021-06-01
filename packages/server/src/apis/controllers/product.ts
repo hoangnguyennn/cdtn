@@ -17,6 +17,7 @@ const create = async (req: Request, res: Response) => {
 	const images = await Promise.all(imagesPromise);
 	const productCreate: IProductCreate = {
 		...productRequest,
+		description: productRequest.description || '',
 		imagesId: images.map((image) => image._id),
 	};
 

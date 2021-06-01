@@ -6,6 +6,7 @@ export const ENDPOINT = {
 	orders: '/orders',
 	paymentMethods: '/payment-methods',
 	products: '/products',
+	productUnits: '/product-units',
 	register: '/auth/register',
 	trendingProducts: '/products/trending',
 };

@@ -7,6 +7,8 @@ import ProductUnitController from '../controllers/productUnit';
 
 const router = Router();
 
+router.get('/', catcherWrapper(ProductUnitController.get));
+
 router.post(
 	'/',
 	AuthMiddleware.checkAuth,

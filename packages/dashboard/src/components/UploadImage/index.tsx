@@ -1,7 +1,7 @@
-import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
 import { RcFile, UploadFile } from 'antd/lib/upload/interface';
+import { Upload, Modal } from 'antd';
+import { useEffect, useState } from 'react';
 
 function getBase64(file: RcFile): Promise<string | ArrayBuffer | null> {
 	return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ function getBase64(file: RcFile): Promise<string | ArrayBuffer | null> {
 	});
 }
 
-const UploadImage = () => {
+const UploadImage = ({ onChange }: { onChange: any }) => {
 	const [fileList, setFileList] = useState<any[]>([]);
 	const [preview, setPreview] = useState({
 		isVisible: false,
@@ -39,6 +39,12 @@ const UploadImage = () => {
 
 	const handleChange = ({ fileList }: { fileList: any[] }) => {
 		setFileList(fileList);
+		onChange(fileList);
+	};
+
+	const requestHeaders = () => {
+		const token = localStorage.getItem('access-token');
+		return { Authorization: `Bearer ${token}` };
 	};
 
 	const uploadButton = (
@@ -56,6 +62,7 @@ const UploadImage = () => {
 		<>
 			<Upload
 				action="http://localhost:5000/upload"
+				headers={requestHeaders()}
 				listType="picture-card"
 				fileList={fileList}
 				onPreview={handlePreview}

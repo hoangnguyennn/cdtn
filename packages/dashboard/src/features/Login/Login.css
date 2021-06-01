@@ -12,7 +12,7 @@
 	align-items: center;
 }
 
-.form {
+.login-form .form {
 	padding: 30px;
 	width: 360px;
 	background-color: #fff;
@@ -21,7 +21,7 @@
 	position: relative;
 }
 
-.form .logo {
+.login-form .form .logo {
 	display: flex;
 	position: absolute;
 	top: 0;
@@ -34,11 +34,11 @@
 	overflow: hidden;
 }
 
-.form .logo img {
+.login-form .form .logo img {
 	width: 100%;
 }
 
-.form h2 {
+.login-form .form h2 {
 	margin: 40px 0 20px;
 	font-weight: 300;
 	text-align: center;

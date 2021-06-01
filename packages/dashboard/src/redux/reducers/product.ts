@@ -1,5 +1,7 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { fetchProducts } from '../../apis/common';
+import { toast } from 'react-toastify';
+import { createProduct, fetchProducts } from '../../apis/common';
+import { IProduct, IProductCreate } from '../../interfaces';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
 const initialState: IProductState = {
@@ -13,19 +15,35 @@ const productSlice = createSlice({
 		setProducts(state, action) {
 			state.products = action.payload;
 		},
+		addProductToState(state, action) {
+			const product: IProduct = action.payload;
+			state.products = [product, ...state.products];
+		},
 	},
 });
 
-const { setProducts } = productSlice.actions;
+const { setProducts, addProductToState } = productSlice.actions;
 
 const getProductsAction = () => async (dispatch: Dispatch) => {
 	try {
 		const products = await fetchProducts();
 		dispatch(setProducts(products));
 	} catch (err) {
-		console.log(err);
+		toast.error(err.message);
 	}
 };
+
+const createProductAction =
+	(product: IProductCreate) => async (dispatch: Dispatch) => {
+		try {
+			const newProduct = await createProduct(product);
+			dispatch(addProductToState(newProduct));
+		} catch (err) {
+			toast.error(err.message);
+		}
+	};
+
+export { getProductsAction, createProductAction };
 
 const productState = (state: IRootState) => state.product;
 const selector = function <T>(combiner: { (state: IProductState): T }) {
@@ -33,7 +51,5 @@ const selector = function <T>(combiner: { (state: IProductState): T }) {
 };
 
 export const getProducts = selector((state) => state.products);
-
-export { getProductsAction };
 
 export default productSlice.reducer;

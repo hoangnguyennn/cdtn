@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import { success } from '../../helpers/commonResponse';
 import { IProductUnitCreate } from '../../interfaces';
+import { mapProductUnitToResponse } from '../../helpers/mappingResponse';
+import { success } from '../../helpers/commonResponse';
 
 import ProductUnitService from '../../services/productUnit';
 
@@ -12,7 +13,7 @@ const create = async (req: Request, res: Response) => {
 
 const get = async (req: Request, res: Response) => {
 	const productUnits = await ProductUnitService.get();
-	return success(res, productUnits);
+	return success(res, productUnits.map(mapProductUnitToResponse));
 };
 
 export default {
