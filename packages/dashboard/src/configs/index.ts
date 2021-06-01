@@ -1,4 +1,6 @@
 export const PATH_NAME = {
-	PRODUCT_LIST: '/products',
+	HOME: '/',
+	LOGIN: '/login',
 	PRODUCT_ADD: '/product/add',
+	PRODUCT_LIST: '/products',
 };

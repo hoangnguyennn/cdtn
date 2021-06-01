@@ -2,7 +2,7 @@ import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import { fetchProducts } from '../../apis/common';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
-const initialState = {
+const initialState: IProductState = {
 	products: [],
 };
 

@@ -5,4 +5,5 @@ export default interface IRoute {
 	exact?: boolean;
 	layout?: React.FC;
 	component?: any;
+	guard?: React.FC;
 }

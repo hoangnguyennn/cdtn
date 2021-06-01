@@ -1,30 +1,39 @@
 import { Fragment, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PATH_NAME } from '../configs';
+import Auth from '../guards/Auth';
 import IRoute from '../interfaces/IRoute';
 
 import MainLayout from '../layouts/MainLayout';
 
 const Home = lazy(() => import('../features/Home'));
+const Login = lazy(() => import('../features/Login'));
 const ProductAdd = lazy(() => import('../features/ProductAdd'));
 const ProductList = lazy(() => import('../features/ProductList'));
 
 const routesConfig: IRoute[] = [
 	{
 		exact: true,
-		path: '/',
-		component: Home,
+		path: PATH_NAME.HOME,
+		guard: Auth,
 		layout: MainLayout,
+		component: Home,
 	},
 	{
 		path: PATH_NAME.PRODUCT_ADD,
-		component: ProductAdd,
+		guard: Auth,
 		layout: MainLayout,
+		component: ProductAdd,
 	},
 	{
 		path: PATH_NAME.PRODUCT_LIST,
-		component: ProductList,
+		guard: Auth,
 		layout: MainLayout,
+		component: ProductList,
+	},
+	{
+		path: PATH_NAME.LOGIN,
+		component: Login,
 	},
 ];
 
@@ -36,6 +45,7 @@ const renderRoutes = (routes: IRoute[]) => {
 					{routes.map((route, index) => {
 						const Layout = route.layout || Fragment;
 						const Component = route.component;
+						const Guard = route.guard || Fragment;
 
 						return (
 							<Route
@@ -43,9 +53,11 @@ const renderRoutes = (routes: IRoute[]) => {
 								path={route.path}
 								exact={route.exact}
 								render={(props) => (
-									<Layout>
-										<Component {...props} />
-									</Layout>
+									<Guard>
+										<Layout>
+											<Component {...props} />
+										</Layout>
+									</Guard>
 								)}
 							/>
 						);

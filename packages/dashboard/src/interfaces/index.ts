@@ -17,3 +17,12 @@ export interface IMenu {
 	hasItems: boolean;
 	items?: IMenu[];
 }
+
+export interface IUser {
+	id: string;
+	email: string;
+	fullName: string;
+	address: string;
+	phone: string;
+	userType: string;
+}
