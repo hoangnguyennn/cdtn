@@ -38,6 +38,7 @@ const createProductAction =
 		try {
 			const newProduct = await createProduct(product);
 			dispatch(addProductToState(newProduct));
+			toast.success('success');
 		} catch (err) {
 			toast.error(err.message);
 		}

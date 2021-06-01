@@ -1,7 +1,9 @@
 import { Form, Input, InputNumber, Button, Select, Switch } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import UploadImage from '../../components/UploadImage';
+import { PATH_NAME } from '../../configs';
 import { IProductCreate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 import { createProductAction } from '../../redux/reducers/product';
@@ -16,6 +18,7 @@ const { Option } = Select;
 
 const ProductAdd = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const productUnits = useSelector(getProductUnits);
 
 	const layout = {
@@ -44,6 +47,7 @@ const ProductAdd = () => {
 		};
 
 		await dispatch(createProductAction(productCreate));
+		history.push(PATH_NAME.PRODUCT_LIST);
 	};
 
 	useEffect(() => {
