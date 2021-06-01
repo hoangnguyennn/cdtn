@@ -1,6 +1,6 @@
 import { Form, Input, Button, Checkbox } from 'antd';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { PATH_NAME } from '../../configs';
 
@@ -18,10 +18,6 @@ const Login = () => {
 		dispatch(loginAction(values));
 	};
 
-	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo);
-	};
-
 	useEffect(() => {
 		if (token && userType === 'MANAGER') {
 			history.push(PATH_NAME.HOME);
@@ -35,7 +31,6 @@ const Login = () => {
 				className="form"
 				initialValues={{ remember: true, layout: 'vertical' }}
 				onFinish={onFinish}
-				onFinishFailed={onFinishFailed}
 			>
 				<div className="logo">
 					<img

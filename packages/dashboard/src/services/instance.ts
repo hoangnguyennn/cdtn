@@ -1,14 +1,27 @@
 import axios from 'axios';
 import { BASE_URL } from '../configs/endpoint';
 
-axios.interceptors.request.use((config) => {
-	return config;
-});
-
-axios.interceptors.response.use((config) => {
-	return config;
-});
-
-export default axios.create({
+const instance = axios.create({
 	baseURL: BASE_URL,
 });
+
+instance.interceptors.request.use((config) => {
+	const token = localStorage.getItem('access-token');
+	config.headers = { Authorization: `Bearer ${token}` };
+	return config;
+});
+
+instance.interceptors.response.use(
+	(response) => {
+		return response;
+	},
+	(error: any) => {
+		if (error.isAxiosError) {
+			throw error.response?.data;
+		}
+
+		throw error;
+	}
+);
+
+export default instance;

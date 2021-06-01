@@ -2,14 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import {
 	COMMON_MESSAGE,
 	forbidden,
-	HttpError,
-	HttpStatusCode,
+	notFound,
 	unauthorized,
 } from '../helpers/commonResponse';
-import { UserType } from '../interfaces/enums';
 import { decode } from '../utils/token';
+import { UserType } from '../interfaces/enums';
 import UserService from '../services/user';
-import { FORBIDDEN, NOT_FOUND } from '../constants/commonResponseMessages';
 
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 	const bearerToken = req.headers.authorization;
@@ -35,11 +33,11 @@ const checkRole = (roles: UserType[]) => {
 		const user = await UserService.getById(userId);
 
 		if (!user) {
-			throw new HttpError(NOT_FOUND, HttpStatusCode.HTTP_404);
+			return notFound(next);
 		}
 
 		if (!roles.includes(user.userType)) {
-			throw new HttpError(FORBIDDEN, HttpStatusCode.HTTP_403);
+			return forbidden(next);
 		}
 
 		return next();

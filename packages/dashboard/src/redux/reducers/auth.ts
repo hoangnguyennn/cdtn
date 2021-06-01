@@ -1,8 +1,9 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
+import { IAuthState, IRootState } from '../../interfaces/IState';
 import { login, loginByToken } from '../../apis/common';
 import { PATH_NAME } from '../../configs';
-import { IAuthState, IRootState } from '../../interfaces/IState';
 
 const initialState: IAuthState = {
 	token: '',
@@ -52,11 +53,20 @@ const { setToken, setUser, clearUser } = authSlice.actions;
 const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
 	try {
 		const loginResponse = await login(userLogin);
+
+		if (loginResponse.user.userType !== 'MANAGER') {
+			localStorage.removeItem('access-token');
+			dispatch(clearUser());
+			toast.error('Not found');
+			return;
+		}
+
 		dispatch(setToken(loginResponse.token));
 		dispatch(setUser(loginResponse.user));
 		window.localStorage.setItem('access-token', loginResponse.token);
 	} catch (err) {
 		console.log(err);
+		toast.error(err.message);
 	}
 };
 
@@ -71,9 +81,9 @@ const loginByTokenAction =
 		}
 
 		try {
-			const user = await loginByToken(token);
+			const user = await loginByToken();
 
-			if (user.userType !== 'MANGER') {
+			if (user.userType !== 'MANAGER') {
 				localStorage.removeItem('access-token');
 				dispatch(clearUser());
 				history.push(PATH_NAME.LOGIN);

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import { generate } from '../../utils/token';
 import {
 	ILogin,
 	ILoginResponse,
@@ -7,7 +8,6 @@ import {
 	IUserCreate,
 	IUserCreateRequest,
 } from '../../interfaces';
-import { generate } from '../../utils/token';
 import { mapUserToResponse } from '../../helpers/mappingResponse';
 import { success } from '../../helpers/commonResponse';
 import { UserType } from '../../interfaces/enums';
