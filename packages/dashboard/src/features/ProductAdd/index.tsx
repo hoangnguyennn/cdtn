@@ -43,6 +43,8 @@ const ProductAdd = () => {
 			return;
 		}
 
+		console.log(values.status);
+
 		const productCreate: IProductCreate = {
 			name: values.name,
 			price: values.price,
@@ -62,8 +64,13 @@ const ProductAdd = () => {
 
 	return (
 		<Form {...layout} className="form" onFinish={onFinish}>
-			<Form.Item label="Is selling" name="status" valuePropName="checked">
-				<Switch defaultChecked />
+			<Form.Item
+				label="Is selling"
+				name="status"
+				valuePropName="checked"
+				initialValue={true}
+			>
+				<Switch />
 			</Form.Item>
 			<Form.Item
 				label="Name"

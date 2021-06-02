@@ -8,6 +8,8 @@
 		"fe-dev": "cd packages/client && yarn dev",
 		"fe-build": "cd packages/client && yarn build",
 		"fe-start": "cd packages/client && yarn start",
+		"dashboard-start": "cd packages/dashboard && yarn start",
+		"dashboard-build": "cd packages/dashboard && yarn build",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix --ext .ts,.tsx .",
 		"prepare": "husky install"

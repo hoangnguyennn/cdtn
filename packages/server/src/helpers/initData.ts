@@ -7,6 +7,8 @@ import PaymentMethodService from '../services/paymentMethod';
 import ProductService from '../services/product';
 import ProductUnitService from '../services/productUnit';
 
+import data from './initData.json';
+
 const generateProducts = async () => {
 	console.log('init products');
 
@@ -35,37 +37,46 @@ const generateProducts = async () => {
 const generateUsers = async () => {
 	console.log('init users');
 
-	const usersPromise = Array.from(new Array(3)).map((_, index) =>
+	const users = data.users;
+
+	const usersPromise = users.map((user) =>
 		AuthService.register({
-			email: `mail${index + 1}@mail.com`,
-			passwordHashed: '123',
-			fullName: `Account ${index + 1}`,
-			phone: `011111111${index + 1}`,
-			userType: UserType.CUSTOMER,
-			isActivated: true,
+			email: user.email,
+			passwordHashed: user.passwordHashed,
+			fullName: user.fullName,
+			phone: user.phone,
+			userType: user.userType as UserType,
+			isActivated: user.isActivated,
 		})
 	);
 
 	return Promise.all(usersPromise).then(() => {
-		console.log('Users created');
+		console.log('users created');
 	});
 };
 
-const generatePaymentMethod = async () => {
+const generatePaymentMethods = async () => {
 	console.log('init payment methods');
 
-	PaymentMethodService.create({
-		name: 'Thanh toán bằng tiền mặt',
-		imageUrl: 'https://www.coolmate.me/images/momo-icon.png',
+	const paymentMethods = data.paymentMethods;
+	const promises = paymentMethods.map((paymentMethod) =>
+		PaymentMethodService.create({
+			name: paymentMethod.name,
+			imageUrl: paymentMethod.imageUrl,
+		})
+	);
+
+	return Promise.all(promises).then(() => {
+		console.log('payment methods created');
 	});
 };
 
 const generate = async () => {
 	await mongooseLoader();
 
-	await generateProducts();
+	// await generateProducts();
 	await generateUsers();
-	await generatePaymentMethod();
+	await generatePaymentMethods();
 
 	return 1;
 };
