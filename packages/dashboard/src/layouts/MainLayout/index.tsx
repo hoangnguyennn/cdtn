@@ -6,11 +6,16 @@ import { PieChartOutlined, UserOutlined } from '@ant-design/icons';
 import menu from '../../configs/menu';
 
 import './MainLayout.css';
+import { IBreadCrumb } from '../../interfaces';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const MainLayout: FC = ({ children }) => {
+type MainLayoutProps = {
+	breadcrumb: IBreadCrumb[];
+};
+
+const MainLayout: FC<MainLayoutProps> = ({ children, breadcrumb }) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	return (
@@ -47,8 +52,11 @@ const MainLayout: FC = ({ children }) => {
 				<Header className="site-layout-background" style={{ padding: 0 }} />
 				<Content style={{ margin: '0 16px' }}>
 					<Breadcrumb style={{ margin: '16px 0' }}>
-						<Breadcrumb.Item>User</Breadcrumb.Item>
-						<Breadcrumb.Item>Bill</Breadcrumb.Item>
+						{breadcrumb.map((item) => (
+							<Breadcrumb.Item key={item.id} href={item.url}>
+								{item.title}
+							</Breadcrumb.Item>
+						))}
 					</Breadcrumb>
 					<div
 						className="site-layout-background"
@@ -57,9 +65,7 @@ const MainLayout: FC = ({ children }) => {
 						{children}
 					</div>
 				</Content>
-				<Footer style={{ textAlign: 'center' }}>
-					Ant Design ©2018 Created by Ant UED
-				</Footer>
+				<Footer style={{ textAlign: 'center' }}>hoangnguyen &copy; 2021</Footer>
 			</Layout>
 		</Layout>
 	);

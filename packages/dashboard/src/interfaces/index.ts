@@ -1,5 +1,11 @@
 import { ProductStatus } from './enum';
 
+export interface IBreadCrumb {
+	id: string;
+	title: string;
+	url: string;
+}
+
 export interface IProduct {
 	id: string;
 	name: string;
