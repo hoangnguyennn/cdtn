@@ -107,8 +107,9 @@ export const orderAction =
 				dispatch(clearCart());
 			}, 1000);
 			toast.success('success');
-		} catch (e) {
-			toast.error(e.message);
+		} catch (err) {
+			toast.error(err.message);
+			throw err;
 		}
 	};
 

@@ -30,6 +30,7 @@ const fetchOrders = () => async (dispatch: Dispatch) => {
 		dispatch(setOrders(orders));
 	} catch (err) {
 		console.log(err);
+		throw err;
 	}
 };
 

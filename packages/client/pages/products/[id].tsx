@@ -33,11 +33,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const reduxStore = initialStore();
 	const { dispatch } = reduxStore;
 
-	await dispatch(fetchProductByIdAction(id as string));
+	try {
+		await dispatch(fetchProductByIdAction(id as string));
 
-	return {
-		props: { initialReduxState: reduxStore.getState() },
-	};
+		return {
+			props: { initialReduxState: reduxStore.getState() },
+		};
+	} catch (err) {
+		console.log(err);
+
+		return {
+			notFound: true,
+		};
+	}
 };
 
 export default ProductDetailPage;

@@ -58,7 +58,7 @@ const Cart = () => {
 		note: Yup.string(),
 	});
 
-	const handleFormSubmit = (values: ICartForm, { setSubmitting }) => {
+	const handleFormSubmit = async (values: ICartForm, { setSubmitting }) => {
 		const order: IOrder = {
 			...values,
 			userId: userInfo.id,
@@ -67,7 +67,13 @@ const Cart = () => {
 				qty: cartItem.qty,
 			})),
 		};
-		dispatch(orderAction(order));
+
+		try {
+			dispatch(orderAction(order));
+		} catch {
+			console.log('order failed');
+		}
+
 		setSubmitting(false);
 	};
 

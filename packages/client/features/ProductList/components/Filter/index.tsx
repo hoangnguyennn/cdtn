@@ -28,14 +28,14 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 
 	const setPrice = (
 		event: ChangeEvent<HTMLInputElement>,
-		dispatch: Dispatch<SetStateAction<any>>
+		setState: Dispatch<SetStateAction<any>>
 	) => {
 		const value = event.target.value.split('.').join('');
 
 		if (value.length === 0) {
-			dispatch('0');
+			setState('0');
 		} else {
-			dispatch(String(Number(value)));
+			setState(String(Number(value)));
 		}
 	};
 

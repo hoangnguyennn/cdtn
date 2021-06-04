@@ -32,9 +32,13 @@ const Login = () => {
 		password: Yup.string().required(t('This field is required')),
 	});
 
-	const handleSubmit = (values: ILogin, { setSubmitting }) => {
-		dispatch(loginAction(values));
+	const handleSubmit = async (values: ILogin, { setSubmitting }) => {
+		await dispatch(loginAction(values));
 		setSubmitting(false);
+
+		if (token) {
+			router.replace(PATH_NAME.HOME);
+		}
 	};
 
 	const formik = useFormik({

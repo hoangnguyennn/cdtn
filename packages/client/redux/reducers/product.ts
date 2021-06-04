@@ -46,6 +46,7 @@ const fetchProductsAction = (query: any) => async (dispatch: Dispatch) => {
 		return dispatch(setProducts(products));
 	} catch (err) {
 		console.log(err);
+		throw err;
 	}
 };
 
@@ -55,6 +56,7 @@ const fetchTrendingProductsAction = () => async (dispatch: Dispatch) => {
 		return dispatch(setTrendingProducts(trendingProducts));
 	} catch (err) {
 		console.log(err);
+		throw err;
 	}
 };
 
@@ -64,6 +66,7 @@ const fetchProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
 		dispatch(setProduct(product));
 	} catch (err) {
 		console.log(err);
+		throw err;
 	}
 };
 

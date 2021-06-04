@@ -13,10 +13,12 @@ import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 import RegisterStyled from './Register';
+import { useRouter } from 'next/router';
 
 const Register = () => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const initialValues: IRegisterForm = {
 		fullName: '',
@@ -36,15 +38,20 @@ const Register = () => {
 			.required(t('This field is required')),
 	});
 
-	const handleSubmit = (values: IRegisterForm, { setSubmitting }) => {
-		dispatch(
-			registerAction({
-				fullName: values.fullName,
-				email: values.email,
-				phone: values.phone,
-				password: values.password,
-			})
-		);
+	const handleSubmit = async (values: IRegisterForm, { setSubmitting }) => {
+		try {
+			await dispatch(
+				registerAction({
+					fullName: values.fullName,
+					email: values.email,
+					phone: values.phone,
+					password: values.password,
+				})
+			);
+			router.push(PATH_NAME.LOGIN);
+		} catch {
+			console.log('register failed');
+		}
 
 		setSubmitting(false);
 	};

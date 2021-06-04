@@ -25,6 +25,7 @@ const fetchPaymentMethodsAction = () => async (dispatch: Dispatch) => {
 		dispatch(setPaymentMethods(paymentMethods));
 	} catch (err) {
 		console.log(err);
+		throw err;
 	}
 };
 

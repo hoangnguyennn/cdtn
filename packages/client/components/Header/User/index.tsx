@@ -6,6 +6,7 @@ import Root from './User';
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../../redux/reducers/auth';
 import { PATH_NAME } from '../../../configs/pathName';
+import { useRouter } from 'next/router';
 
 type UserProps = {
 	fullName: string;
@@ -14,6 +15,12 @@ type UserProps = {
 const User: FC<UserProps> = ({ fullName }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
+	const router = useRouter();
+
+	const handleLogout = async () => {
+		await dispatch(logoutAction());
+		router.replace(PATH_NAME.HOME);
+	};
 
 	return (
 		<Root>
@@ -34,10 +41,7 @@ const User: FC<UserProps> = ({ fullName }) => {
 						<a className="dropdown-item">My account</a>
 					</Link>
 
-					<span
-						className="dropdown-item"
-						onClick={() => dispatch(logoutAction())}
-					>
+					<span className="dropdown-item" onClick={handleLogout}>
 						Logout
 					</span>
 				</div>
