@@ -52,69 +52,62 @@ const AuthSlice = createSlice({
 const { setToken, setUser, clearUser } = AuthSlice.actions;
 
 const registerAction = (user: IUserCreate) => async () => {
-	try {
-		await register(user);
-	} catch (err) {
+	return register(user).catch((err) => {
 		toast.error(err.message);
 		throw err;
-	}
+	});
 };
 
 const loginAction = (userLogin: ILogin) => async (dispatch: Dispatch) => {
-	try {
-		const loginResponse = await login(userLogin);
-		dispatch(setToken(loginResponse.token));
-		dispatch(setUser(loginResponse.user));
-		window.localStorage.setItem('access-token', loginResponse.token);
-	} catch (err) {
-		toast.error(err.message);
-	}
+	return login(userLogin)
+		.then((response) => {
+			dispatch(setToken(response.token));
+			dispatch(setUser(response.user));
+			window.localStorage.setItem('access-token', response.token);
+		})
+		.catch((err) => {
+			toast.error(err.message);
+			throw err;
+		});
 };
 
 const loginByTokenAction = () => async (dispatch: Dispatch) => {
 	const token = localStorage.getItem('access-token');
 	if (!token) {
 		localStorage.removeItem('access-token');
-		dispatch(clearUser());
-		return;
+		return dispatch(clearUser());
 	}
 
-	try {
-		const user = await loginByToken(token);
-		dispatch(setToken(token));
-		dispatch(setUser(user));
-	} catch (err) {
-		localStorage.removeItem('access-token');
-		throw err;
-	}
+	return loginByToken(token)
+		.then((user) => {
+			dispatch(setToken(token));
+			dispatch(setUser(user));
+		})
+		.catch((err) => {
+			localStorage.removeItem('access-token');
+			throw err;
+		});
 };
 
-const logoutAction = () => async () => {
-	try {
-		localStorage.removeItem('access-token');
-	} catch (err) {
-		console.log(err);
-		throw err;
-	}
-};
+const logoutAction = () => () => localStorage.removeItem('access-token');
 
 const updateUserInfoAction = (userId: string, userInfo: IUserUpdate) => {
 	return async (dispatch: Dispatch) => {
 		const token = localStorage.getItem('access-token');
 		if (!token) {
 			localStorage.removeItem('access-token');
-			dispatch(clearUser());
-			return;
+			return dispatch(clearUser());
 		}
 
-		try {
-			const userUpdated = await updateUserInfo(userId, userInfo, token);
-			dispatch(setUser(userUpdated));
-			toast.success('success');
-		} catch (err) {
-			console.log(err);
-			throw err;
-		}
+		return updateUserInfo(userId, userInfo, token)
+			.then((userUpdated) => {
+				dispatch(setUser(userUpdated));
+				toast.success('success');
+			})
+			.catch((err) => {
+				toast.error(err.message);
+				throw err;
+			});
 	};
 };
 

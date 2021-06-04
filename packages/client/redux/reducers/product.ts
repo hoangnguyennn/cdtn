@@ -1,4 +1,5 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 import {
 	fetchProductById,
@@ -41,33 +42,36 @@ const productSlice = createSlice({
 const { setTrendingProducts, setProduct, setProducts } = productSlice.actions;
 
 const fetchProductsAction = (query: any) => async (dispatch: Dispatch) => {
-	try {
-		const products = await fetchProducts(query);
-		return dispatch(setProducts(products));
-	} catch (err) {
-		console.log(err);
-		throw err;
-	}
+	return fetchProducts(query)
+		.then((products) => {
+			return dispatch(setProducts(products));
+		})
+		.catch((err) => {
+			toast.error(err.message);
+			throw err;
+		});
 };
 
 const fetchTrendingProductsAction = () => async (dispatch: Dispatch) => {
-	try {
-		const trendingProducts = await fetchTrendingProducts();
-		return dispatch(setTrendingProducts(trendingProducts));
-	} catch (err) {
-		console.log(err);
-		throw err;
-	}
+	return fetchTrendingProducts()
+		.then((trendingProducts) => {
+			return dispatch(setTrendingProducts(trendingProducts));
+		})
+		.catch((err) => {
+			toast.error(err.message);
+			throw err;
+		});
 };
 
 const fetchProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
-	try {
-		const product = await fetchProductById(id);
-		dispatch(setProduct(product));
-	} catch (err) {
-		console.log(err);
-		throw err;
-	}
+	return fetchProductById(id)
+		.then((product) => {
+			dispatch(setProduct(product));
+		})
+		.catch((err) => {
+			toast.error(err.message);
+			throw err;
+		});
 };
 
 export {

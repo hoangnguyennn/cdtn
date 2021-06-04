@@ -1,4 +1,5 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 import { fetchPaymentMethods } from '../../apis/paymentMethod.api';
 import { IPaymentMethodState, IRootState } from '../../interfaces/IState';
@@ -20,13 +21,14 @@ const paymentMethodSlice = createSlice({
 const { setPaymentMethods } = paymentMethodSlice.actions;
 
 const fetchPaymentMethodsAction = () => async (dispatch: Dispatch) => {
-	try {
-		const paymentMethods = await fetchPaymentMethods();
-		dispatch(setPaymentMethods(paymentMethods));
-	} catch (err) {
-		console.log(err);
-		throw err;
-	}
+	return fetchPaymentMethods()
+		.then((paymentMethods) => {
+			dispatch(setPaymentMethods(paymentMethods));
+		})
+		.catch((err) => {
+			toast.error(err.message);
+			throw err;
+		});
 };
 
 export { fetchPaymentMethodsAction };

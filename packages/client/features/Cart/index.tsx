@@ -29,6 +29,7 @@ import {
 import { getUserInfo } from '../../redux/reducers/auth';
 import { ICartForm, IOrder } from '../../interfaces/index';
 import { PATH_NAME } from '../../configs/pathName';
+import { useRouter } from 'next/router';
 
 const Cart = () => {
 	const { t } = useTranslation();
@@ -38,6 +39,7 @@ const Cart = () => {
 	const cartSubtotal = useSelector(getCartSubtotal);
 	const paymentMethods = useSelector(getPaymentMethods);
 	const userInfo = useSelector(getUserInfo);
+	const router = useRouter();
 
 	const dispatch = useDispatch();
 
@@ -69,7 +71,8 @@ const Cart = () => {
 		};
 
 		try {
-			dispatch(orderAction(order));
+			await dispatch(orderAction(order));
+			router.replace(PATH_NAME.MY_ORDER);
 		} catch {
 			console.log('order failed');
 		}

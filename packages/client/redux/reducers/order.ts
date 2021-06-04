@@ -1,4 +1,5 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { get } from '../../apis/order.api';
 import { IOrderState, IRootState } from '../../interfaces/IState';
 
@@ -25,13 +26,14 @@ const fetchOrders = () => async (dispatch: Dispatch) => {
 		return;
 	}
 
-	try {
-		const orders = await get(token);
-		dispatch(setOrders(orders));
-	} catch (err) {
-		console.log(err);
-		throw err;
-	}
+	return get(token)
+		.then((orders) => {
+			dispatch(setOrders(orders));
+		})
+		.catch((err) => {
+			toast.error(err.message);
+			throw err;
+		});
 };
 
 export { fetchOrders };
