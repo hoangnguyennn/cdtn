@@ -133,6 +133,10 @@ export interface IProductUnitCreate {
 	name: string;
 }
 
+export interface IProductUnitUpdate {
+	name: string;
+}
+
 export interface IProductUnitResponse {
 	id: string;
 	name: string;

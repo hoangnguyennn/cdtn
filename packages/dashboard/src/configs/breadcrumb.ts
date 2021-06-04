@@ -26,3 +26,9 @@ export const ProductUnitAdd = (): IBreadCrumb[] => [
 	{ id: 'p2', title: 'Product Units', url: PATH_NAME.PRODUCT_UNIT_LIST },
 	{ id: 'p3', title: 'Add', url: PATH_NAME.PRODUCT_UNIT_ADD },
 ];
+
+export const ProductUnitEdit = (): IBreadCrumb[] => [
+	{ id: 'p1', title: 'Dashboard', url: PATH_NAME.HOME },
+	{ id: 'p2', title: 'Product Units', url: PATH_NAME.PRODUCT_UNIT_LIST },
+	{ id: 'p3', title: 'Edit', url: PATH_NAME.PRODUCT_UNIT_EDIT },
+];

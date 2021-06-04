@@ -16,7 +16,26 @@ const get = async (req: Request, res: Response) => {
 	return success(res, productUnits.map(mapProductUnitToResponse));
 };
 
+const getById = async (req: Request, res: Response) => {
+	const { id } = req.params;
+	const productUnit = await ProductUnitService.getById(id);
+	return success(res, mapProductUnitToResponse(productUnit));
+};
+
+const update = async (req: Request, res: Response) => {
+	const { id } = req.params;
+	const productUnitUpdate = req.body;
+	const productUnitUpdated = await ProductUnitService.update(
+		id,
+		productUnitUpdate
+	);
+
+	return success(res, mapProductUnitToResponse(productUnitUpdated));
+};
+
 export default {
 	create,
 	get,
+	getById,
+	update,
 };

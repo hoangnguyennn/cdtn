@@ -12,6 +12,7 @@ import {
 	ProductAdd as ProductAddBR,
 	ProductUnitList as ProductUnitListBR,
 	ProductUnitAdd as ProductUnitAddBR,
+	ProductUnitEdit as ProductUnitEditBR,
 } from '../configs/breadcrumb';
 
 const Home = lazy(() => import('../features/Home'));
@@ -20,6 +21,7 @@ const ProductAdd = lazy(() => import('../features/ProductAdd'));
 const ProductList = lazy(() => import('../features/ProductList'));
 const ProductUnitList = lazy(() => import('../features/ProductUnitList'));
 const ProductUnitAdd = lazy(() => import('../features/ProductUnitAdd'));
+const ProductUnitEdit = lazy(() => import('../features/ProductUnitEdit'));
 
 const routesConfig: IRoute[] = [
 	{
@@ -45,18 +47,25 @@ const routesConfig: IRoute[] = [
 		breadcrumb: ProductListBR(),
 	},
 	{
-		path: PATH_NAME.PRODUCT_UNIT_LIST,
-		guard: Auth,
-		layout: MainLayout,
-		component: ProductUnitList,
-		breadcrumb: ProductUnitListBR(),
-	},
-	{
 		path: PATH_NAME.PRODUCT_UNIT_ADD,
 		guard: Auth,
 		layout: MainLayout,
 		component: ProductUnitAdd,
 		breadcrumb: ProductUnitAddBR(),
+	},
+	{
+		path: PATH_NAME.PRODUCT_UNIT_EDIT,
+		guard: Auth,
+		layout: MainLayout,
+		component: ProductUnitEdit,
+		breadcrumb: ProductUnitEditBR(),
+	},
+	{
+		path: PATH_NAME.PRODUCT_UNIT_LIST,
+		guard: Auth,
+		layout: MainLayout,
+		component: ProductUnitList,
+		breadcrumb: ProductUnitListBR(),
 	},
 	{
 		path: PATH_NAME.LOGIN,
