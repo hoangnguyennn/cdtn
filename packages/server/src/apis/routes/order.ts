@@ -6,7 +6,9 @@ import AuthMiddleware from '../../middlewares/auth';
 
 const router = Router();
 
-router.get('/', AuthMiddleware.checkAuth, catcherWrapper(OrderController.get));
-router.post('/', catcherWrapper(OrderController.create));
+router
+	.route('/')
+	.get(AuthMiddleware.checkAuth, catcherWrapper(OrderController.get))
+	.post(catcherWrapper(OrderController.create));
 
 export default router;

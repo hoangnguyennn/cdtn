@@ -7,12 +7,13 @@ import PaymentMethodController from '../controllers/paymentMethod';
 
 const router = Router();
 
-router.get('/', catcherWrapper(PaymentMethodController.get));
-router.post(
-	'/',
-	AuthMiddleware.checkAuth,
-	AuthMiddleware.checkRole([UserType.MANAGER]),
-	catcherWrapper(PaymentMethodController.create)
-);
+router
+	.route('/')
+	.get(catcherWrapper(PaymentMethodController.get))
+	.post(
+		AuthMiddleware.checkAuth,
+		AuthMiddleware.checkRole([UserType.MANAGER]),
+		catcherWrapper(PaymentMethodController.create)
+	);
 
 export default router;
