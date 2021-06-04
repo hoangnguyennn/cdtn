@@ -1,4 +1,5 @@
 import { ColumnsType } from 'antd/lib/table';
+import { Link } from 'react-router-dom';
 import { Table, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -8,6 +9,7 @@ import {
 	getProductUnits,
 } from '../../redux/reducers/productUnit';
 import { IProductUnit } from '../../interfaces';
+import { PATH_NAME } from '../../configs';
 
 const columns: ColumnsType<IProductUnit> = [
 	{
@@ -27,9 +29,9 @@ const columns: ColumnsType<IProductUnit> = [
 	{
 		title: 'Action',
 		key: 'action',
-		render: () => (
+		render: (_: any, unit: IProductUnit) => (
 			<Space size="middle">
-				<a href="/">Edit</a>
+				<Link to={`${PATH_NAME.PRODUCT_UNIT_LIST}/${unit.id}/edit`}>Edit</Link>
 			</Space>
 		),
 	},

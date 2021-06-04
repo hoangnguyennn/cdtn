@@ -14,8 +14,6 @@ import {
 } from '../../redux/reducers/productUnit';
 import UploadImage from '../../components/UploadImage';
 
-import './ProductAdd.css';
-
 const { Option } = Select;
 
 const ProductAdd = () => {

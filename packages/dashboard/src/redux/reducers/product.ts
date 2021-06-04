@@ -35,13 +35,15 @@ const getProductsAction = () => async (dispatch: Dispatch) => {
 
 const createProductAction =
 	(product: IProductCreate) => async (dispatch: Dispatch) => {
-		try {
-			const newProduct = await createProduct(product);
-			dispatch(addProductToState(newProduct));
-			toast.success('success');
-		} catch (err) {
-			toast.error(err.message);
-		}
+		return createProduct(product)
+			.then((newProduct) => {
+				dispatch(addProductToState(newProduct));
+				toast.success('success');
+			})
+			.catch((err) => {
+				toast.error(err.message);
+				throw err;
+			});
 	};
 
 export { getProductsAction, createProductAction };

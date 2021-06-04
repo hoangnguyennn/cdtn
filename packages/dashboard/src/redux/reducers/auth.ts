@@ -49,23 +49,23 @@ const authSlice = createSlice({
 const { setToken, setUser, clearUser } = authSlice.actions;
 
 const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
-	try {
-		const loginResponse = await login(userLogin);
+	return login(userLogin)
+		.then((response) => {
+			if (response.user.userType !== 'MANAGER') {
+				localStorage.removeItem('access-token');
+				dispatch(clearUser());
+				toast.error('Not found');
+				return;
+			}
 
-		if (loginResponse.user.userType !== 'MANAGER') {
-			localStorage.removeItem('access-token');
-			dispatch(clearUser());
-			toast.error('Not found');
-			return;
-		}
-
-		dispatch(setToken(loginResponse.token));
-		dispatch(setUser(loginResponse.user));
-		window.localStorage.setItem('access-token', loginResponse.token);
-	} catch (err) {
-		console.log(err);
-		toast.error(err.message);
-	}
+			dispatch(setToken(response.token));
+			dispatch(setUser(response.user));
+			window.localStorage.setItem('access-token', response.token);
+		})
+		.catch((err) => {
+			toast.error(err.message);
+			throw err;
+		});
 };
 
 const loginByTokenAction = () => async (dispatch: Dispatch) => {
@@ -76,23 +76,23 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 		throw new Error('token not found');
 	}
 
-	try {
-		const user = await loginByToken();
+	return loginByToken()
+		.then((user) => {
+			if (user.userType !== 'MANAGER') {
+				localStorage.removeItem('access-token');
+				dispatch(clearUser());
+				throw new Error('forbidden');
+			}
 
-		if (user.userType !== 'MANAGER') {
+			dispatch(setToken(token));
+			dispatch(setUser(user));
+			return;
+		})
+		.catch((err) => {
 			localStorage.removeItem('access-token');
 			dispatch(clearUser());
-			throw new Error('forbidden');
-		}
-
-		dispatch(setToken(token));
-		dispatch(setUser(user));
-		return 1;
-	} catch (err) {
-		localStorage.removeItem('access-token');
-		dispatch(clearUser());
-		throw err;
-	}
+			throw err;
+		});
 };
 
 export { loginAction, loginByTokenAction };

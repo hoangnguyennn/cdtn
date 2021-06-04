@@ -1,15 +1,9 @@
 import { Form, Input, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 
-import {
-	createProductUnitAction,
-	fetchProductUnitsAction,
-} from '../../redux/reducers/productUnit';
+import { createProductUnitAction } from '../../redux/reducers/productUnit';
 import { PATH_NAME } from '../../configs';
-
-import './ProductUnitAdd.css';
 
 const ProductUnitAdd = () => {
 	const dispatch = useDispatch();
@@ -28,10 +22,6 @@ const ProductUnitAdd = () => {
 		await dispatch(createProductUnitAction(values));
 		history.push(PATH_NAME.PRODUCT_UNIT_LIST);
 	};
-
-	useEffect(() => {
-		dispatch(fetchProductUnitsAction());
-	}, [dispatch]);
 
 	return (
 		<Form {...layout} className="form" onFinish={onFinish}>
