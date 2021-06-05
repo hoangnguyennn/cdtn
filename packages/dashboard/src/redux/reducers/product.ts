@@ -1,6 +1,11 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { createProduct, fetchProducts } from '../../apis/common';
+import {
+	createProduct,
+	fetchProductById,
+	fetchProducts,
+	updateProduct,
+} from '../../apis/common';
 import { IProduct, IProductCreate } from '../../interfaces';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
@@ -15,21 +20,31 @@ const productSlice = createSlice({
 		setProducts(state, action) {
 			state.products = action.payload;
 		},
-		addProductToState(state, action) {
+		addProduct(state, action) {
 			const product: IProduct = action.payload;
-			state.products = [product, ...state.products];
+			const index = state.products.findIndex((item) => item.id === product.id);
+
+			if (index === -1) {
+				state.products = [product, ...state.products];
+			} else {
+				state.products = [
+					...state.products.slice(0, index),
+					product,
+					...state.products.slice(index + 1),
+				];
+			}
 		},
 	},
 });
 
-const { setProducts, addProductToState } = productSlice.actions;
+const { setProducts, addProduct } = productSlice.actions;
 
 const getProductsAction = () => async (dispatch: Dispatch) => {
 	try {
 		const products = await fetchProducts();
 		dispatch(setProducts(products));
 	} catch (err) {
-		toast.error(err.message);
+		toast.error(err?.message || 'Default Error');
 	}
 };
 
@@ -37,16 +52,44 @@ const createProductAction =
 	(product: IProductCreate) => async (dispatch: Dispatch) => {
 		return createProduct(product)
 			.then((newProduct) => {
-				dispatch(addProductToState(newProduct));
+				dispatch(addProduct(newProduct));
 				toast.success('success');
 			})
 			.catch((err) => {
-				toast.error(err.message);
+				toast.error(err?.message || 'Default Error');
 				throw err;
 			});
 	};
 
-export { getProductsAction, createProductAction };
+const getProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
+	return fetchProductById(id)
+		.then((product) => {
+			dispatch(addProduct(product));
+		})
+		.catch((err) => {
+			toast.error(err?.message || 'Default Error');
+			throw err;
+		});
+};
+
+const updateProductAction =
+	(id: string, product: IProductCreate) => async (dispatch: Dispatch) => {
+		return updateProduct(id, product)
+			.then((newProduct) => {
+				dispatch(addProduct(newProduct));
+			})
+			.catch((err) => {
+				toast.error(err?.message || 'Default Error');
+				throw err;
+			});
+	};
+
+export {
+	createProductAction,
+	getProductByIdAction,
+	getProductsAction,
+	updateProductAction,
+};
 
 const productState = (state: IRootState) => state.product;
 const selector = function <T>(combiner: { (state: IProductState): T }) {
@@ -54,5 +97,7 @@ const selector = function <T>(combiner: { (state: IProductState): T }) {
 };
 
 export const getProducts = selector((state) => state.products);
+export const getProduct = (id: string) =>
+	selector((state) => state.products.find((item) => item.id === id));
 
 export default productSlice.reducer;

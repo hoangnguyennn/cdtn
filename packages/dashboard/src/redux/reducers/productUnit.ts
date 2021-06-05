@@ -6,7 +6,7 @@ import {
 	fetchProductUnits,
 	updateProductUnit,
 } from '../../apis/common';
-import { IProductUnit, IProductUnitCreate } from '../../interfaces';
+import { IProductUnitCreate } from '../../interfaces';
 import { IProductUnitState, IRootState } from '../../interfaces/IState';
 
 const initialState: IProductUnitState = {
@@ -21,10 +21,6 @@ const productUnitSlice = createSlice({
 			state.productUnits = action.payload;
 		},
 		addProductUnit(state, action) {
-			const productUnit = action.payload;
-			state.productUnits = [productUnit, ...state.productUnits];
-		},
-		updateItem(state, action) {
 			const productUnit = action.payload;
 
 			const index = state.productUnits.findIndex(
@@ -44,8 +40,7 @@ const productUnitSlice = createSlice({
 	},
 });
 
-const { addProductUnit, setProductUnits, updateItem } =
-	productUnitSlice.actions;
+const { addProductUnit, setProductUnits } = productUnitSlice.actions;
 
 const createProductUnitAction =
 	(productUnit: IProductUnitCreate) => async (dispatch: Dispatch) => {
@@ -54,7 +49,7 @@ const createProductUnitAction =
 				dispatch(addProductUnit(newProductUnit));
 			})
 			.catch((err) => {
-				toast.error(err.message);
+				toast.error(err?.message || 'Default Error');
 				throw err;
 			});
 	};
@@ -65,7 +60,7 @@ const fetchProductUnitsAction = () => async (dispatch: Dispatch) => {
 			dispatch(setProductUnits(productUnits));
 		})
 		.catch((err) => {
-			toast.error(err.message);
+			toast.error(err?.message || 'Default Error');
 			throw err;
 		});
 };
@@ -77,19 +72,19 @@ const fetchProductUnitByIdAction =
 				dispatch(addProductUnit(productUnit));
 			})
 			.catch((err) => {
-				toast.error(err.message);
+				toast.error(err?.message || 'Default Error');
 				throw err;
 			});
 	};
 
 const updateProductUnitAction =
-	(id: string, unit: IProductUnit) => async (dispatch: Dispatch) => {
+	(id: string, unit: IProductUnitCreate) => async (dispatch: Dispatch) => {
 		return updateProductUnit(id, unit)
 			.then((unitUpdated) => {
-				dispatch(updateItem(unitUpdated));
+				dispatch(addProductUnit(unitUpdated));
 			})
 			.catch((err) => {
-				toast.error(err.message);
+				toast.error(err?.message || 'Default Error');
 				throw err;
 			});
 	};

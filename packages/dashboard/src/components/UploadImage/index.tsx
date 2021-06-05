@@ -1,7 +1,8 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import { Upload, Modal } from 'antd';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { IImage } from '../../interfaces';
 
 function getBase64(file: RcFile): Promise<string | ArrayBuffer | null> {
 	return new Promise((resolve, reject) => {
@@ -12,8 +13,19 @@ function getBase64(file: RcFile): Promise<string | ArrayBuffer | null> {
 	});
 }
 
-const UploadImage = ({ onChange }: { onChange: any }) => {
-	const [fileList, setFileList] = useState<any[]>([]);
+type UploadImageProps = {
+	onChange: any;
+	setIsUploaded?: any;
+	images?: IImage[] | UploadFile[];
+};
+
+const UploadImage: FC<UploadImageProps> = ({
+	onChange = () => {},
+	setIsUploaded = () => {},
+	images = [],
+}) => {
+	const [fileList, setFileList] = useState<UploadFile[]>([]);
+
 	const [preview, setPreview] = useState({
 		isVisible: false,
 		image: '',
@@ -37,7 +49,9 @@ const UploadImage = ({ onChange }: { onChange: any }) => {
 		setPreview((prevState) => ({ ...prevState, isVisible: false }));
 	};
 
-	const handleChange = ({ fileList }: { fileList: any[] }) => {
+	const handleChange = ({ fileList }: { fileList: UploadFile[] }) => {
+		const isUploaded = !fileList.some((file) => file.status === 'uploading');
+		setIsUploaded(isUploaded);
 		setFileList(fileList);
 		onChange(fileList);
 	};
@@ -55,8 +69,30 @@ const UploadImage = ({ onChange }: { onChange: any }) => {
 	);
 
 	useEffect(() => {
-		console.log(fileList);
+		console.log('fileList', fileList);
 	}, [fileList]);
+
+	useEffect(() => {
+		if (images.length !== fileList.length) {
+			if (images.length) {
+				if (images[0].hasOwnProperty('uid')) {
+					setFileList(images as UploadFile[]);
+				} else {
+					const newFileList = (images as IImage[]).map((image) => {
+						return {
+							uid: image.id,
+							name: image.url,
+							status: 'done',
+							response: { url: image.url },
+							url: image.url,
+						} as UploadFile;
+					});
+
+					setFileList(newFileList);
+				}
+			}
+		}
+	}, [fileList.length, images]);
 
 	return (
 		<>

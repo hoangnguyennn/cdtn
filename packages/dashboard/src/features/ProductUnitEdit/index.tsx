@@ -16,6 +16,8 @@ const ProductUnitEdit = () => {
 	const history = useHistory();
 	const productUnit = useSelector(getProductUnit(id));
 
+	const [form] = Form.useForm();
+
 	const layout = {
 		labelCol: { span: 8 },
 		wrapperCol: { span: 16 },
@@ -38,13 +40,12 @@ const ProductUnitEdit = () => {
 		}
 	}, [dispatch, id, productUnit]);
 
+	useEffect(() => {
+		form.setFieldsValue(productUnit);
+	}, [form, productUnit]);
+
 	return (
-		<Form
-			{...layout}
-			className="form"
-			onFinish={onFinish}
-			initialValues={productUnit}
-		>
+		<Form {...layout} form={form} className="form" onFinish={onFinish}>
 			<Form.Item
 				label="Name"
 				name="name"

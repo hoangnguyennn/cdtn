@@ -6,14 +6,19 @@ export interface IBreadCrumb {
 	url: string;
 }
 
+export interface IImage {
+	id: string;
+	url: string;
+}
+
 export interface IProduct {
 	id: string;
 	name: string;
 	price: number;
-	unit: string;
-	description?: string;
-	status: ProductStatus;
-	images: string[];
+	description: string;
+	unit?: IProductUnit;
+	images?: IImage[];
+	status: string;
 }
 
 export interface IProductCreate {

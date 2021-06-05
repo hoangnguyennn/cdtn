@@ -63,7 +63,7 @@ const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
 			window.localStorage.setItem('access-token', response.token);
 		})
 		.catch((err) => {
-			toast.error(err.message);
+			toast.error(err?.message || 'Default Error');
 			throw err;
 		});
 };

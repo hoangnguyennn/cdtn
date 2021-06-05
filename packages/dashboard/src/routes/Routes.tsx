@@ -8,20 +8,22 @@ import MainLayout from '../layouts/MainLayout';
 
 import {
 	Dashboard as DashboardBR,
-	ProductList as ProductListBR,
 	ProductAdd as ProductAddBR,
-	ProductUnitList as ProductUnitListBR,
+	ProductEdit as ProductEditBR,
+	ProductList as ProductListBR,
 	ProductUnitAdd as ProductUnitAddBR,
 	ProductUnitEdit as ProductUnitEditBR,
+	ProductUnitList as ProductUnitListBR,
 } from '../configs/breadcrumb';
 
 const Home = lazy(() => import('../features/Home'));
 const Login = lazy(() => import('../features/Login'));
 const ProductAdd = lazy(() => import('../features/ProductAdd'));
+const ProductEdit = lazy(() => import('../features/ProductEdit'));
 const ProductList = lazy(() => import('../features/ProductList'));
-const ProductUnitList = lazy(() => import('../features/ProductUnitList'));
 const ProductUnitAdd = lazy(() => import('../features/ProductUnitAdd'));
 const ProductUnitEdit = lazy(() => import('../features/ProductUnitEdit'));
+const ProductUnitList = lazy(() => import('../features/ProductUnitList'));
 
 const routesConfig: IRoute[] = [
 	{
@@ -38,6 +40,13 @@ const routesConfig: IRoute[] = [
 		layout: MainLayout,
 		component: ProductAdd,
 		breadcrumb: ProductAddBR(),
+	},
+	{
+		path: PATH_NAME.PRODUCT_EDIT,
+		guard: Auth,
+		layout: MainLayout,
+		component: ProductEdit,
+		breadcrumb: ProductEditBR(),
 	},
 	{
 		path: PATH_NAME.PRODUCT_LIST,
@@ -92,9 +101,15 @@ const renderRoutes = (routes: IRoute[]) => {
 								exact={route.exact}
 								render={(props) => (
 									<Guard>
-										<Layout {...layoutProps}>
-											<Component {...props} />
-										</Layout>
+										{route.layout ? (
+											<Layout {...layoutProps}>
+												<Component {...props} />
+											</Layout>
+										) : (
+											<Layout>
+												<Component {...props} />
+											</Layout>
+										)}
 									</Guard>
 								)}
 							/>

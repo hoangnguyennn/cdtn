@@ -1,19 +1,23 @@
 import { ColumnsType } from 'antd/lib/table';
+import { Link } from 'react-router-dom';
 import { Table, Image, Tag, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { getProducts, getProductsAction } from '../../redux/reducers/product';
-import { IProduct } from '../../interfaces';
+import { IImage, IProduct, IProductUnit } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 import { toCurrency } from '../../utils/formatter';
+import { PATH_NAME } from '../../configs';
 
 const columns: ColumnsType<IProduct> = [
 	{
 		title: 'Image',
 		dataIndex: 'images',
 		key: 'images',
-		render: (images: string[]) => <Image width={80} src={images[0]} />,
+		render: (images?: IImage[]) => {
+			return <Image width={80} src={images ? images[0]?.url : ''} />;
+		},
 	},
 	{
 		title: 'Name',
@@ -41,6 +45,7 @@ const columns: ColumnsType<IProduct> = [
 		title: 'Unit',
 		dataIndex: 'unit',
 		key: 'unit',
+		render: (unit?: IProductUnit) => unit?.name,
 	},
 	{
 		title: 'Status',
@@ -62,10 +67,9 @@ const columns: ColumnsType<IProduct> = [
 	{
 		title: 'Action',
 		key: 'action',
-		render: () => (
+		render: (_: any, product: IProduct) => (
 			<Space size="middle">
-				<a href="/">View</a>
-				<a href="/">Edit</a>
+				<Link to={`${PATH_NAME.PRODUCT_LIST}/${product.id}/edit`}>Edit</Link>
 				<a href="/">Stop Business</a>
 			</Space>
 		),

@@ -1,10 +1,5 @@
 import { ENDPOINT } from '../configs/endpoint';
-import {
-	IProductCreate,
-	IProductUnit,
-	IProductUnitCreate,
-	IUser,
-} from '../interfaces';
+import { IProductCreate, IProductUnitCreate, IUser } from '../interfaces';
 import axiosInstance from '../services/instance';
 
 export const createProduct = async (product: IProductCreate) => {
@@ -19,6 +14,12 @@ export const createProductUnit = async (productUnit: IProductUnitCreate) => {
 
 export const fetchProducts = async () => {
 	return axiosInstance.get(ENDPOINT.products).then((res) => res.data);
+};
+
+export const fetchProductById = async (id: string) => {
+	return axiosInstance
+		.get(`${ENDPOINT.products}/${id}`)
+		.then((res) => res.data);
 };
 
 export const fetchProductUnits = async () => {
@@ -39,8 +40,17 @@ export const loginByToken = async (): Promise<IUser> => {
 	return axiosInstance.post(ENDPOINT.me).then((res) => res.data);
 };
 
-export const updateProductUnit = async (id: string, unit: IProductUnit) => {
+export const updateProduct = async (id: string, product: IProductCreate) => {
 	return axiosInstance
-		.post(`${ENDPOINT.productUnits}/${id}`, unit)
+		.patch(`${ENDPOINT.products}/${id}`, product)
+		.then((res) => res.data);
+};
+
+export const updateProductUnit = async (
+	id: string,
+	unit: IProductUnitCreate
+) => {
+	return axiosInstance
+		.patch(`${ENDPOINT.productUnits}/${id}`, unit)
 		.then((res) => res.data);
 };

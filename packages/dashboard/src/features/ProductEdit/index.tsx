@@ -4,23 +4,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
-import { createProductAction } from '../../redux/reducers/product';
-import { IProductCreate } from '../../interfaces';
-import { PATH_NAME } from '../../configs';
-import { ProductStatus } from '../../interfaces/enum';
 import {
 	fetchProductUnitsAction,
 	getProductUnits,
 } from '../../redux/reducers/productUnit';
+import {
+	getProduct,
+	getProductByIdAction,
+	updateProductAction,
+} from '../../redux/reducers/product';
+import { IProductCreate } from '../../interfaces';
+import { PATH_NAME } from '../../configs';
+import { ProductStatus } from '../../interfaces/enum';
+import { UploadFile } from 'antd/lib/upload/interface';
+import { useParams } from 'react-router-dom';
 import UploadImage from '../../components/UploadImage';
 
 const { Option } = Select;
 
-const ProductAdd = () => {
+const ProductEdit = () => {
+	const { id } = useParams<{ id: string }>();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const productUnits = useSelector(getProductUnits);
+	const product = useSelector(getProduct(id));
 	const [isUploaded, setIsUploaded] = useState(true);
+
+	const [form] = Form.useForm();
 
 	const layout = {
 		labelCol: { span: 8 },
@@ -31,9 +41,9 @@ const ProductAdd = () => {
 		wrapperCol: { offset: 8, span: 16 },
 	};
 
-	const normFile = (fileList: any[]) => {
+	const normFile = (fileList: UploadFile[]) => {
 		console.log('Upload event:', JSON.parse(JSON.stringify(fileList)));
-		return fileList.map((file) => file?.response?.url || '');
+		return fileList;
 	};
 
 	const onFinish = async (values: any) => {
@@ -42,20 +52,41 @@ const ProductAdd = () => {
 			return;
 		}
 
-		console.log(values.status);
-
 		const productCreate: IProductCreate = {
 			name: values.name,
 			price: values.price,
 			unitId: values.unit,
 			description: values.description,
-			imagesUrl: values.images,
+			imagesUrl: values.images.map(
+				(image: UploadFile) => image.response?.url || image.url || ''
+			),
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
 		};
 
-		await dispatch(createProductAction(productCreate));
-		history.push(PATH_NAME.PRODUCT_LIST);
+		try {
+			await dispatch(updateProductAction(id, productCreate));
+			history.push(PATH_NAME.PRODUCT_LIST);
+		} catch {}
 	};
+
+	useEffect(() => {
+		if (!product) {
+			dispatch(getProductByIdAction(id));
+		}
+	}, [dispatch, product, id]);
+
+	useEffect(() => {
+		if (product) {
+			form.setFieldsValue({
+				name: product.name,
+				price: product.price,
+				unit: product.unit?.id,
+				description: product.description,
+				images: product.images,
+				status: product.status === ProductStatus.SELLING,
+			});
+		}
+	}, [form, product]);
 
 	useEffect(() => {
 		if (!productUnits.length) {
@@ -64,13 +95,8 @@ const ProductAdd = () => {
 	}, [dispatch, productUnits]);
 
 	return (
-		<Form {...layout} className="form" onFinish={onFinish}>
-			<Form.Item
-				label="Is selling"
-				name="status"
-				valuePropName="checked"
-				initialValue={true}
-			>
+		<Form {...layout} form={form} className="form" onFinish={onFinish}>
+			<Form.Item label="Is selling" name="status" valuePropName="checked">
 				<Switch />
 			</Form.Item>
 			<Form.Item
@@ -107,7 +133,7 @@ const ProductAdd = () => {
 				label="Images"
 				name="images"
 				rules={[{ required: true, message: 'Please upload product images!' }]}
-				valuePropName="fileList"
+				valuePropName="images"
 				getValueFromEvent={normFile}
 			>
 				<UploadImage onChange={normFile} setIsUploaded={setIsUploaded} />
@@ -121,4 +147,4 @@ const ProductAdd = () => {
 	);
 };
 
-export default ProductAdd;
+export default ProductEdit;
