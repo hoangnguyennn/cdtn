@@ -25,11 +25,13 @@ const productSchema = new Schema({
 		enum: ProductStatus,
 		required: true,
 	},
-	imagesId: {
-		type: Types.ObjectId,
-		ref: CollectionName.IMAGE,
-		required: true,
-	},
+	imagesId: [
+		{
+			type: Types.ObjectId,
+			ref: CollectionName.IMAGE,
+			required: true,
+		},
+	],
 });
 
 productSchema.virtual('unit', {

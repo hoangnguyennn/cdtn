@@ -51,9 +51,33 @@ const getTrending = async (): Promise<IProduct[]> => {
 		.populate([{ path: 'unit' }, { path: 'images' }]);
 };
 
+const updateProduct = async (id: string, product: IProductCreate) => {
+	const productUpdated = await ProductModel.findByIdAndUpdate(
+		id,
+		{
+			$set: {
+				name: product.name,
+				price: product.price,
+				unitId: product.unitId,
+				description: product.description,
+				status: product.status,
+				imagesId: product.imagesId,
+			},
+		},
+		{ new: true }
+	).populate([{ path: 'unit' }, { path: 'images' }]);
+
+	if (!productUpdated) {
+		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+	}
+
+	return productUpdated;
+};
+
 export default {
 	create,
 	get,
 	getById,
 	getTrending,
+	updateProduct,
 };

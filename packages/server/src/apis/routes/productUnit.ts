@@ -19,7 +19,7 @@ router
 router
 	.route('/:id')
 	.get(catcherWrapper(ProductUnitController.getById))
-	.post(
+	.patch(
 		AuthMiddleware.checkAuth,
 		AuthMiddleware.checkRole([UserType.MANAGER]),
 		catcherWrapper(ProductUnitController.update)

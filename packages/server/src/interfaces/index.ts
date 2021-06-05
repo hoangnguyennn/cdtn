@@ -109,7 +109,7 @@ export interface IProductCreate {
 	unitId: string | Types.ObjectId;
 	description: string;
 	status: ProductStatus;
-	imagesId: string[] | Types.ObjectId[];
+	imagesId: Types.ObjectId[];
 }
 
 export interface IProductCreateRequest {

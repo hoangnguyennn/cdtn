@@ -46,14 +46,56 @@ const get = async (req: Request, res: Response) => {
 };
 
 const getById = async (req: Request, res: Response) => {
+	const { userType } = res.locals;
 	const { id } = req.params;
 	const product = await ProductService.getById(id);
-	return success(res, mapProductToResponse(product));
+
+	const mappingToResponse =
+		userType === UserType.MANAGER
+			? mapProductToResponseForAdmin
+			: mapProductToResponse;
+
+	return success(res, mappingToResponse(product));
 };
 
 const getTrending = async (req: Request, res: Response) => {
+	const { userType } = res.locals;
 	const products = await ProductService.getTrending();
-	return success(res, products.map(mapProductToResponse));
+
+	const mappingToResponse =
+		userType === UserType.MANAGER
+			? mapProductToResponseForAdmin
+			: mapProductToResponse;
+
+	return success(
+		res,
+		products.map((value) => mappingToResponse(value))
+	);
+};
+
+const updateProduct = async (req: Request, res: Response) => {
+	const { userType } = res.locals;
+	const { id } = req.params;
+	const productUpdateRequest: IProductCreateRequest = req.body;
+
+	const imagesPromise = productUpdateRequest.imagesUrl.map((url: string) => {
+		return ImageService.create({ url });
+	});
+
+	const images = await Promise.all(imagesPromise);
+	const productUpdate: IProductCreate = {
+		...productUpdateRequest,
+		description: productUpdateRequest.description || '',
+		imagesId: images.map((image) => image._id),
+	};
+
+	const mappingToResponse =
+		userType === UserType.MANAGER
+			? mapProductToResponseForAdmin
+			: mapProductToResponse;
+
+	const productUpdated = await ProductService.updateProduct(id, productUpdate);
+	return success(res, mappingToResponse(productUpdated));
 };
 
 export default {
@@ -61,4 +103,5 @@ export default {
 	get,
 	getById,
 	getTrending,
+	updateProduct,
 };

@@ -18,6 +18,13 @@ router
 
 router.get('/trending', catcherWrapper(ProductController.getTrending));
 
-router.get('/:id', catcherWrapper(ProductController.getById));
+router
+	.route('/:id')
+	.get(catcherWrapper(ProductController.getById))
+	.patch(
+		AuthMiddleware.checkAuth,
+		AuthMiddleware.checkRole([UserType.MANAGER]),
+		catcherWrapper(ProductController.updateProduct)
+	);
 
 export default router;
