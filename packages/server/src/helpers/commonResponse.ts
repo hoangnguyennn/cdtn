@@ -1,11 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import {
-	BAD_REQUEST,
-	FORBIDDEN,
-	INTERNAL_SERVER_ERROR,
-	NOT_FOUND,
-	UNAUTHORIZED,
-} from '../constants/commonResponseMessages';
 
 const isDev = process.env.NODE !== 'production';
 
@@ -43,29 +36,41 @@ export const success = (res: Response, data: any = {}) => {
 	return res.status(HttpStatusCode.HTTP_200).json(data);
 };
 
-export const badRequest = (next: NextFunction, message = BAD_REQUEST) => {
+export const badRequest = (
+	next: NextFunction,
+	message: string = COMMON_MESSAGE.BAD_REQUEST
+) => {
 	const error = new HttpError(message, HttpStatusCode.HTTP_400);
 	return next(error);
 };
 
-export const unauthorized = (next: NextFunction, message = UNAUTHORIZED) => {
+export const unauthorized = (
+	next: NextFunction,
+	message: string = COMMON_MESSAGE.UNAUTHORIZED
+) => {
 	const error = new HttpError(message, HttpStatusCode.HTTP_401);
 	return next(error);
 };
 
-export const forbidden = (next: NextFunction, message = FORBIDDEN) => {
+export const forbidden = (
+	next: NextFunction,
+	message: string = COMMON_MESSAGE.FORBIDDEN
+) => {
 	const error = new HttpError(message, HttpStatusCode.HTTP_403);
 	return next(error);
 };
 
-export const notFound = (next: NextFunction, message = NOT_FOUND) => {
+export const notFound = (
+	next: NextFunction,
+	message: string = COMMON_MESSAGE.NOT_FOUND
+) => {
 	const error = new HttpError(message, HttpStatusCode.HTTP_404);
 	return next(error);
 };
 
 export const internalServerError = (
 	next: NextFunction,
-	message = INTERNAL_SERVER_ERROR
+	message: string = COMMON_MESSAGE.INTERNAL_SERVER_ERROR
 ) => {
 	const error = new HttpError(message, HttpStatusCode.HTTP_500);
 	return next(error);

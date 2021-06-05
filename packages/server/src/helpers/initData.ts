@@ -9,7 +9,7 @@ import ProductUnitService from '../services/productUnit';
 
 import data from './initData.json';
 
-const generateProducts = async () => {
+export const generateProducts = async () => {
 	console.log('init products');
 
 	const unit = await ProductUnitService.create({ name: 'kg' });
@@ -34,7 +34,7 @@ const generateProducts = async () => {
 	});
 };
 
-const generateUsers = async () => {
+export const generateUsers = async () => {
 	console.log('init users');
 
 	const users = data.users;
@@ -55,7 +55,7 @@ const generateUsers = async () => {
 	});
 };
 
-const generatePaymentMethods = async () => {
+export const generatePaymentMethods = async () => {
 	console.log('init payment methods');
 
 	const paymentMethods = data.paymentMethods;

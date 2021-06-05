@@ -1,5 +1,10 @@
 import { Types } from 'mongoose';
 
+import {
+	COMMON_MESSAGE,
+	HttpError,
+	HttpStatusCode,
+} from '../helpers/commonResponse';
 import { IProduct } from '../interfaces/IDocuments';
 import { IProductCreate } from '../interfaces';
 import ProductModel from '../models/product';
@@ -27,13 +32,17 @@ const get = async (filter: any): Promise<IProduct[]> => {
 	]);
 };
 
-const getById = async (
-	id: string | Types.ObjectId
-): Promise<IProduct | null> => {
-	return ProductModel.findOne({ _id: id }).populate([
+const getById = async (id: string | Types.ObjectId): Promise<IProduct> => {
+	const product = await ProductModel.findOne({ _id: id }).populate([
 		{ path: 'unit' },
 		{ path: 'images' },
 	]);
+
+	if (!product) {
+		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+	}
+
+	return product;
 };
 
 const getTrending = async (): Promise<IProduct[]> => {

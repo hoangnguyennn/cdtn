@@ -1,15 +1,15 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { IProductCreate, IProductCreateRequest } from '../../interfaces';
 
 import {
 	mapProductToResponse,
 	mapProductToResponseForAdmin,
 } from '../../helpers/mappingResponse';
-import { notFound, success } from '../../helpers/commonResponse';
+import { success } from '../../helpers/commonResponse';
+import { UserType } from '../../interfaces/enums';
 import ImageService from '../../services/image';
 import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
 import ProductService from '../../services/product';
-import { UserType } from '../../interfaces/enums';
 
 const create = async (req: Request, res: Response) => {
 	const productRequest: IProductCreateRequest = req.body;
@@ -42,14 +42,9 @@ const get = async (req: Request, res: Response) => {
 	return success(res, products.map(mappingToResponse));
 };
 
-const getById = async (req: Request, res: Response, next: NextFunction) => {
+const getById = async (req: Request, res: Response) => {
 	const { id } = req.params;
 	const product = await ProductService.getById(id);
-
-	if (!product) {
-		return notFound(next);
-	}
-
 	return success(res, mapProductToResponse(product));
 };
 

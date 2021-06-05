@@ -33,15 +33,17 @@ const update = async (id: string, user: IUserUpdate): Promise<IUser> => {
 		return result;
 	}, {});
 
-	const userUpdated = await UserModel.findByIdAndUpdate(id, userUpdate, {
-		new: true,
-	});
+	const userUpdated = await UserModel.findByIdAndUpdate(
+		id,
+		{ $set: userUpdate },
+		{ new: true }
+	);
 
-	if (!user) {
+	if (!userUpdated) {
 		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
 	}
 
-	return userUpdated as IUser;
+	return userUpdated;
 };
 
 export default {
