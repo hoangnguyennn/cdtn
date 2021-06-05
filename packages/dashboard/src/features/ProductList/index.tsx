@@ -1,17 +1,25 @@
 import { ColumnsType } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
-import { Table, Image, Tag, Space } from 'antd';
+import { Button, Table, Image, Tag, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { getProducts, getProductsAction } from '../../redux/reducers/product';
+import {
+	getProducts,
+	getProductsAction,
+	updateProductStatusAction,
+} from '../../redux/reducers/product';
 
 import { PATH_NAME } from '../../configs';
 import { IImage, IProduct, IProductUnit } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 import { toCurrency } from '../../utils/formatter';
 
-const columns: ColumnsType<IProduct> = [
+const getColumnsConfig = ({
+	updateProductStatus,
+}: {
+	updateProductStatus: Function;
+}): ColumnsType<IProduct> => [
 	{
 		title: 'Image',
 		dataIndex: 'images',
@@ -71,7 +79,19 @@ const columns: ColumnsType<IProduct> = [
 		render: (_: any, product: IProduct) => (
 			<Space size="middle">
 				<Link to={`${PATH_NAME.PRODUCT_LIST}/${product.id}/edit`}>Edit</Link>
-				<a href="/">Stop Business</a>
+				<Button
+					type="link"
+					onClick={() =>
+						updateProductStatus(
+							product.id,
+							product.status === ProductStatus.SELLING
+								? ProductStatus.NOT_SELLING
+								: ProductStatus.SELLING
+						)
+					}
+				>
+					{product.status === ProductStatus.SELLING ? 'Unsell' : 'Sell'}
+				</Button>
 			</Space>
 		),
 	},
@@ -81,13 +101,17 @@ const ProductList = () => {
 	const dispatch = useDispatch();
 	const products = useSelector(getProducts());
 
+	const updateProductStatus = (id: string, newStatus: ProductStatus) => {
+		dispatch(updateProductStatusAction(id, newStatus));
+	};
+
 	useEffect(() => {
 		dispatch(getProductsAction());
 	}, [dispatch]);
 
 	return (
 		<Table
-			columns={columns}
+			columns={getColumnsConfig({ updateProductStatus })}
 			dataSource={products}
 			rowKey={(record) => record.id}
 		/>

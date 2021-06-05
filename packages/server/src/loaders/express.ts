@@ -4,6 +4,9 @@ import cors from 'cors';
 
 import routers from '../apis/routes';
 import { handleError, notFound } from '../helpers/commonResponse';
+import logRequest from '../helpers/logRequest';
+
+const isDev = process.env.NODE_ENV !== 'production';
 
 export default async (app: Application) => {
 	// load middlewares
@@ -14,6 +17,8 @@ export default async (app: Application) => {
 	app.get('/', (req, res) => {
 		return res.send('Hello');
 	});
+
+	isDev && app.use(logRequest());
 
 	// load routes
 	app.use(routers);

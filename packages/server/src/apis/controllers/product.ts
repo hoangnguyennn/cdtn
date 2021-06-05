@@ -6,7 +6,7 @@ import {
 	mapProductToResponseForAdmin,
 } from '../../helpers/mappingResponse';
 import { success } from '../../helpers/commonResponse';
-import { UserType } from '../../interfaces/enums';
+import { ProductStatus, UserType } from '../../interfaces/enums';
 import ImageService from '../../services/image';
 import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
 import ProductService from '../../services/product';
@@ -32,6 +32,11 @@ const create = async (req: Request, res: Response) => {
 const get = async (req: Request, res: Response) => {
 	const { userType } = res.locals;
 	const filter = mapQueryToMongoFilter(req.query);
+
+	if (userType !== UserType.MANAGER) {
+		filter.status = ProductStatus.SELLING;
+	}
+
 	const products = await ProductService.get(filter);
 
 	const mappingToResponse =
@@ -98,10 +103,25 @@ const updateProduct = async (req: Request, res: Response) => {
 	return success(res, mappingToResponse(productUpdated));
 };
 
+const updateProductStatus = async (req: Request, res: Response) => {
+	const { userType } = res.locals;
+	const { id } = req.params;
+	const { status } = req.body;
+
+	const mappingToResponse =
+		userType === UserType.MANAGER
+			? mapProductToResponseForAdmin
+			: mapProductToResponse;
+
+	const productUpdated = await ProductService.updateProductStatus(id, status);
+	return success(res, mappingToResponse(productUpdated));
+};
+
 export default {
 	create,
 	get,
 	getById,
 	getTrending,
 	updateProduct,
+	updateProductStatus,
 };

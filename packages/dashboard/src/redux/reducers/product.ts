@@ -5,8 +5,10 @@ import {
 	fetchProductById,
 	fetchProducts,
 	updateProduct,
+	updateProductStatus,
 } from '../../apis/common';
 import { IProduct, IProductCreate } from '../../interfaces';
+import { ProductStatus } from '../../interfaces/enum';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
 const initialState: IProductState = {
@@ -78,6 +80,18 @@ export const updateProductAction =
 		return updateProduct(id, product)
 			.then((newProduct) => {
 				dispatch(addProduct(newProduct));
+			})
+			.catch((err) => {
+				toast.error(err?.message || 'Default Error');
+				throw err;
+			});
+	};
+
+export const updateProductStatusAction =
+	(id: string, newStatus: ProductStatus) => async (dispatch: Dispatch) => {
+		return updateProductStatus(id, newStatus)
+			.then((product) => {
+				dispatch(addProduct(product));
 			})
 			.catch((err) => {
 				toast.error(err?.message || 'Default Error');

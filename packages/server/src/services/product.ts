@@ -8,6 +8,7 @@ import {
 import { IProduct } from '../interfaces/IDocuments';
 import { IProductCreate } from '../interfaces';
 import ProductModel from '../models/product';
+import { ProductStatus } from '../interfaces/enums';
 
 const create = async (product: IProductCreate): Promise<IProduct> => {
 	const productCreated = await ProductModel.create({
@@ -46,7 +47,7 @@ const getById = async (id: string | Types.ObjectId): Promise<IProduct> => {
 };
 
 const getTrending = async (): Promise<IProduct[]> => {
-	return ProductModel.find()
+	return ProductModel.find({ status: ProductStatus.SELLING })
 		.limit(8)
 		.populate([{ path: 'unit' }, { path: 'images' }]);
 };
@@ -74,10 +75,28 @@ const updateProduct = async (id: string, product: IProductCreate) => {
 	return productUpdated;
 };
 
+const updateProductStatus = async (
+	id: string,
+	newStatus: ProductStatus
+): Promise<IProduct> => {
+	const productUpdated = await ProductModel.findByIdAndUpdate(
+		id,
+		{ $set: { status: newStatus } },
+		{ new: true }
+	).populate([{ path: 'unit' }, { path: 'images' }]);
+
+	if (!productUpdated) {
+		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+	}
+
+	return productUpdated;
+};
+
 export default {
 	create,
 	get,
 	getById,
 	getTrending,
 	updateProduct,
+	updateProductStatus,
 };

@@ -1,5 +1,6 @@
 import { ENDPOINT } from '../configs/endpoint';
 import { IProductCreate, IProductUnitCreate, IUser } from '../interfaces';
+import { ProductStatus } from '../interfaces/enum';
 import axiosInstance from '../services/instance';
 
 export const createProduct = async (product: IProductCreate) => {
@@ -43,6 +44,15 @@ export const loginByToken = async (): Promise<IUser> => {
 export const updateProduct = async (id: string, product: IProductCreate) => {
 	return axiosInstance
 		.patch(`${ENDPOINT.products}/${id}`, product)
+		.then((res) => res.data);
+};
+
+export const updateProductStatus = async (
+	id: string,
+	newStatus: ProductStatus
+) => {
+	return axiosInstance
+		.post(`${ENDPOINT.products}/${id}/update-status`, { status: newStatus })
 		.then((res) => res.data);
 };
 

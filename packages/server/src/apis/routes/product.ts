@@ -18,6 +18,13 @@ router
 
 router.get('/trending', catcherWrapper(ProductController.getTrending));
 
+router.post(
+	'/:id/update-status',
+	AuthMiddleware.checkAuth,
+	AuthMiddleware.checkRole([UserType.MANAGER]),
+	catcherWrapper(ProductController.updateProductStatus)
+);
+
 router
 	.route('/:id')
 	.get(catcherWrapper(ProductController.getById))

@@ -48,10 +48,15 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	const filter = (event: FormEvent) => {
 		event.preventDefault();
 
+		let priceFilter = `${priceFrom}-${priceTo}`;
+		if (priceFrom > priceTo) {
+			priceFilter = `${priceTo}-${priceFrom}`;
+		}
+
 		router.push({
 			pathname: PATH_NAME.PRODUCTS,
 			query: {
-				price: `${priceFrom}-${priceTo}`,
+				price: priceFilter,
 			},
 		});
 	};
