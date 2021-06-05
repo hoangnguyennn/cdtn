@@ -5,6 +5,11 @@ export interface IImageCreate {
 	url: string;
 }
 
+export interface IImageResponse {
+	id: string;
+	url: string;
+}
+
 export interface ILogin {
 	email: string;
 	password: string;
@@ -125,9 +130,14 @@ export interface IProductResponse {
 	images: string[];
 }
 
-export interface IProductResponseForAdmin extends IProductResponse {
+export type IProductResponseForAdmin = Omit<
+	IProductResponse,
+	'unit' | 'images'
+> & {
+	unit?: IProductUnitResponse;
+	images?: IImageResponse[];
 	status: string;
-}
+};
 
 export interface IProductUnitCreate {
 	name: string;

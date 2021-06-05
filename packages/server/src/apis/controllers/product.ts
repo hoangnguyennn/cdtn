@@ -39,7 +39,10 @@ const get = async (req: Request, res: Response) => {
 			? mapProductToResponseForAdmin
 			: mapProductToResponse;
 
-	return success(res, products.map(mappingToResponse));
+	return success(
+		res,
+		products.map((value) => mappingToResponse(value))
+	);
 };
 
 const getById = async (req: Request, res: Response) => {

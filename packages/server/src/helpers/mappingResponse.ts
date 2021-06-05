@@ -1,4 +1,5 @@
 import {
+	IImageResponse,
 	IOrderItemResponse,
 	IOrderResponse,
 	IPaymentMethodResponse,
@@ -8,6 +9,7 @@ import {
 	IUserResponse,
 } from '../interfaces';
 import {
+	IImage,
 	IOrder,
 	IOrderItem,
 	IPaymentMethod,
@@ -15,6 +17,13 @@ import {
 	IProductUnit,
 	IUser,
 } from '../interfaces/IDocuments';
+
+export const mapImageToResponse = (image: IImage): IImageResponse => {
+	return {
+		id: image._id,
+		url: image.url,
+	};
+};
 
 export const mapOrderToResponse = (order: IOrder): IOrderResponse => {
 	return {
@@ -79,8 +88,8 @@ export const mapProductToResponseForAdmin = (
 		name: product.name,
 		price: product.price,
 		description: product.description,
-		unit: product.unit?.name || '',
-		images: product.images?.map((image) => image.url) || [],
+		unit: product.unit ? mapProductUnitToResponse(product.unit) : undefined,
+		images: product.images?.map(mapImageToResponse),
 		status: product.status,
 	};
 };
