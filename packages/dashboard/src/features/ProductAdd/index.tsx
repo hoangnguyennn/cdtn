@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { createProductAction } from '../../redux/reducers/product';
-import { IProductCreate } from '../../interfaces';
-import { PATH_NAME } from '../../configs';
-import { ProductStatus } from '../../interfaces/enum';
 import {
-	fetchProductUnitsAction,
 	getProductUnits,
+	getProductUnitsAction,
 } from '../../redux/reducers/productUnit';
+
+import { PATH_NAME } from '../../configs';
+import { IProductCreate } from '../../interfaces';
+import { ProductStatus } from '../../interfaces/enum';
+
 import UploadImage from '../../components/UploadImage';
 
 const { Option } = Select;
@@ -19,7 +21,7 @@ const { Option } = Select;
 const ProductAdd = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const productUnits = useSelector(getProductUnits);
+	const productUnits = useSelector(getProductUnits());
 	const [isUploaded, setIsUploaded] = useState(true);
 
 	const layout = {
@@ -59,7 +61,7 @@ const ProductAdd = () => {
 
 	useEffect(() => {
 		if (!productUnits.length) {
-			dispatch(fetchProductUnitsAction());
+			dispatch(getProductUnitsAction());
 		}
 	}, [dispatch, productUnits]);
 

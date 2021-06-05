@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import {
-	fetchProductUnitByIdAction,
 	getProductUnit,
+	getProductUnitByIdAction,
 	updateProductUnitAction,
 } from '../../redux/reducers/productUnit';
 import { PATH_NAME } from '../../configs';
@@ -36,7 +36,7 @@ const ProductUnitEdit = () => {
 
 	useEffect(() => {
 		if (!productUnit) {
-			dispatch(fetchProductUnitByIdAction(id));
+			dispatch(getProductUnitByIdAction(id));
 		}
 	}, [dispatch, id, productUnit]);
 

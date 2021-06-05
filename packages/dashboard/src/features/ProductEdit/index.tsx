@@ -1,11 +1,13 @@
 import { Form, Input, InputNumber, Button, Select, Switch } from 'antd';
 import { toast } from 'react-toastify';
+import { UploadFile } from 'antd/lib/upload/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 import {
-	fetchProductUnitsAction,
+	getProductUnitsAction,
 	getProductUnits,
 } from '../../redux/reducers/productUnit';
 import {
@@ -13,11 +15,11 @@ import {
 	getProductByIdAction,
 	updateProductAction,
 } from '../../redux/reducers/product';
-import { IProductCreate } from '../../interfaces';
+
 import { PATH_NAME } from '../../configs';
+import { IProductCreate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
-import { UploadFile } from 'antd/lib/upload/interface';
-import { useParams } from 'react-router-dom';
+
 import UploadImage from '../../components/UploadImage';
 
 const { Option } = Select;
@@ -26,7 +28,7 @@ const ProductEdit = () => {
 	const { id } = useParams<{ id: string }>();
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const productUnits = useSelector(getProductUnits);
+	const productUnits = useSelector(getProductUnits());
 	const product = useSelector(getProduct(id));
 	const [isUploaded, setIsUploaded] = useState(true);
 
@@ -90,7 +92,7 @@ const ProductEdit = () => {
 
 	useEffect(() => {
 		if (!productUnits.length) {
-			dispatch(fetchProductUnitsAction());
+			dispatch(getProductUnitsAction());
 		}
 	}, [dispatch, productUnits]);
 

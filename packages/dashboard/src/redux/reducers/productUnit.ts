@@ -42,7 +42,7 @@ const productUnitSlice = createSlice({
 
 const { addProductUnit, setProductUnits } = productUnitSlice.actions;
 
-const createProductUnitAction =
+export const createProductUnitAction =
 	(productUnit: IProductUnitCreate) => async (dispatch: Dispatch) => {
 		return createProductUnit(productUnit)
 			.then((newProductUnit) => {
@@ -54,7 +54,7 @@ const createProductUnitAction =
 			});
 	};
 
-const fetchProductUnitsAction = () => async (dispatch: Dispatch) => {
+export const getProductUnitsAction = () => async (dispatch: Dispatch) => {
 	return fetchProductUnits()
 		.then((productUnits) => {
 			dispatch(setProductUnits(productUnits));
@@ -65,7 +65,7 @@ const fetchProductUnitsAction = () => async (dispatch: Dispatch) => {
 		});
 };
 
-const fetchProductUnitByIdAction =
+export const getProductUnitByIdAction =
 	(id: string) => async (dispatch: Dispatch) => {
 		return fetchProductUnitById(id)
 			.then((productUnit) => {
@@ -77,7 +77,7 @@ const fetchProductUnitByIdAction =
 			});
 	};
 
-const updateProductUnitAction =
+export const updateProductUnitAction =
 	(id: string, unit: IProductUnitCreate) => async (dispatch: Dispatch) => {
 		return updateProductUnit(id, unit)
 			.then((unitUpdated) => {
@@ -89,22 +89,13 @@ const updateProductUnitAction =
 			});
 	};
 
-export {
-	createProductUnitAction,
-	fetchProductUnitByIdAction,
-	fetchProductUnitsAction,
-	updateProductUnitAction,
-};
-
 const productUnitState = (state: IRootState) => state.productUnit;
 const selector = function <T>(combiner: { (state: IProductUnitState): T }) {
 	return createSelector(productUnitState, combiner);
 };
 
-export const getProductUnits = selector((state) => state.productUnits);
+export const getProductUnits = () => selector((state) => state.productUnits);
 export const getProductUnit = (id: string) =>
-	selector((state) => {
-		return state.productUnits.find((item) => item.id === id);
-	});
+	selector((state) => state.productUnits.find((item) => item.id === id));
 
 export default productUnitSlice.reducer;

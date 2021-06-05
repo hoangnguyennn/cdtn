@@ -48,7 +48,7 @@ const authSlice = createSlice({
 
 const { setToken, setUser, clearUser } = authSlice.actions;
 
-const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
+export const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
 	return login(userLogin)
 		.then((response) => {
 			if (response.user.userType !== 'MANAGER') {
@@ -68,7 +68,7 @@ const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
 		});
 };
 
-const loginByTokenAction = () => async (dispatch: Dispatch) => {
+export const loginByTokenAction = () => async (dispatch: Dispatch) => {
 	const token = localStorage.getItem('access-token');
 	if (!token) {
 		localStorage.removeItem('access-token');
@@ -95,14 +95,12 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 		});
 };
 
-export { loginAction, loginByTokenAction };
-
 const authState = (state: IRootState) => state.auth;
 const selector = function <T>(combiner: { (state: IAuthState): T }) {
 	return createSelector(authState, combiner);
 };
 
-export const getToken = selector((state) => state.token);
-export const getUserType = selector((state) => state.user.userType);
+export const getToken = () => selector((state) => state.token);
+export const getUserType = () => selector((state) => state.user.userType);
 
 export default authSlice.reducer;

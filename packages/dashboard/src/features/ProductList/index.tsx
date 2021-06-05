@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { getProducts, getProductsAction } from '../../redux/reducers/product';
+
+import { PATH_NAME } from '../../configs';
 import { IImage, IProduct, IProductUnit } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 import { toCurrency } from '../../utils/formatter';
-import { PATH_NAME } from '../../configs';
 
 const columns: ColumnsType<IProduct> = [
 	{
@@ -78,7 +79,7 @@ const columns: ColumnsType<IProduct> = [
 
 const ProductList = () => {
 	const dispatch = useDispatch();
-	const products = useSelector(getProducts);
+	const products = useSelector(getProducts());
 
 	useEffect(() => {
 		dispatch(getProductsAction());

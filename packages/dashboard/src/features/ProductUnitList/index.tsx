@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import {
-	fetchProductUnitsAction,
+	getProductUnitsAction,
 	getProductUnits,
 } from '../../redux/reducers/productUnit';
-import { IProductUnit } from '../../interfaces';
 import { PATH_NAME } from '../../configs';
+import { IProductUnit } from '../../interfaces';
 
 const columns: ColumnsType<IProductUnit> = [
 	{
@@ -39,10 +39,10 @@ const columns: ColumnsType<IProductUnit> = [
 
 const ProductUnitList = () => {
 	const dispatch = useDispatch();
-	const productUnits = useSelector(getProductUnits);
+	const productUnits = useSelector(getProductUnits());
 
 	useEffect(() => {
-		dispatch(fetchProductUnitsAction());
+		dispatch(getProductUnitsAction());
 	}, [dispatch]);
 
 	return (
