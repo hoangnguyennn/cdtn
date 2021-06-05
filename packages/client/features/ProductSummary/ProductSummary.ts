@@ -15,6 +15,15 @@ export default styled.div`
 	.info {
 		padding-top: 1.5rem;
 
+		.stop-business {
+			margin-bottom: 1rem;
+			padding: 1.25rem;
+			color: var(--danger);
+			font-size: 1.25rem;
+			font-weight: 700;
+			border: 2px solid var(--danger);
+		}
+
 		.price {
 			margin-bottom: 1rem;
 			color: var(--primary);

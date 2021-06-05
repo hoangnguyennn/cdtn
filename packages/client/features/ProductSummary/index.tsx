@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import Button from '../../components/core/Button';
 import Input from '../../components/core/Input';
 import ProductSummaryStyled from './ProductSummary';
+import { ProductStatus } from '../../interfaces/enums';
 
 type ProductSummaryProps = {
 	product: IProduct;
@@ -30,20 +31,27 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 				<img src={product.images[0] || ''} alt="" />
 			</div>
 			<div className="info">
-				<p className="price">{toCurrency(product.price)}</p>
-				<div className="add-to-cart">
-					<div className="qty">
-						<Input
-							type="number"
-							min="1"
-							value={qty}
-							onChange={(e) => setQty(e.target.value)}
-						/>
-					</div>
-					<Button shadow onClick={handleAddToCart}>
-						{t('Add to cart')}
-					</Button>
-				</div>
+				{product.status === ProductStatus.NOT_SELLING ? (
+					<div className="stop-business">{t('Stop business')}</div>
+				) : (
+					<>
+						<p className="price">{toCurrency(product.price)}</p>
+						<div className="add-to-cart">
+							<div className="qty">
+								<Input
+									type="number"
+									min="1"
+									value={qty}
+									onChange={(e) => setQty(e.target.value)}
+								/>
+							</div>
+							<Button shadow onClick={handleAddToCart}>
+								{t('Add to cart')}
+							</Button>
+						</div>
+					</>
+				)}
+
 				<div className="description">{product.description}</div>
 			</div>
 		</ProductSummaryStyled>

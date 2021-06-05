@@ -1,3 +1,5 @@
+import { ProductStatus } from './enums';
+
 export interface IBreadcrumb {
 	id: string;
 	name: string;
@@ -82,6 +84,7 @@ export interface IProduct {
 	description: string;
 	unit: string;
 	images: string[];
+	status: ProductStatus;
 }
 
 export interface IProductWithLink extends IProduct {

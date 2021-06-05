@@ -128,6 +128,7 @@ export interface IProductResponse {
 	description: string;
 	unit: string;
 	images: string[];
+	status: string;
 }
 
 export type IProductResponseForAdmin = Omit<
@@ -136,7 +137,6 @@ export type IProductResponseForAdmin = Omit<
 > & {
 	unit?: IProductUnitResponse;
 	images?: IImageResponse[];
-	status: string;
 };
 
 export interface IProductUnitCreate {

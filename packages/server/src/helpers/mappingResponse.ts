@@ -77,6 +77,7 @@ export const mapProductToResponse = (product: IProduct): IProductResponse => {
 		description: product.description,
 		unit: product.unit?.name || '',
 		images: product.images?.map((image) => image.url) || [],
+		status: product.status,
 	};
 };
 
