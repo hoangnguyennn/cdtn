@@ -19,8 +19,8 @@ import { IImage } from '../../interfaces/IDocuments';
 const create = async (req: Request, res: Response) => {
 	const productRequest: IProductCreateRequest = req.body;
 
-	const imagesPromise = productRequest.imagesUrl.map((url: string) => {
-		return ImageService.create({ url });
+	const imagesPromise = productRequest.images.map((image) => {
+		return ImageService.create({ url: image.url, publicId: image.publicId });
 	});
 
 	const images = await Promise.all(imagesPromise);
@@ -88,11 +88,11 @@ const updateProduct = async (req: Request, res: Response) => {
 	const { id } = req.params;
 	const productUpdateRequest: IProductUpdateRequest = req.body;
 
-	const imagesPromise = productUpdateRequest.imagesUrl.map((image: any) => {
-		if (typeof image === 'string') {
-			return ImageService.create({ url: image });
-		} else {
+	const imagesPromise = productUpdateRequest.images.map((image: any) => {
+		if (image.id) {
 			return { _id: image.id } as IImage;
+		} else {
+			return ImageService.create({ url: image.url, publicId: image.publicId });
 		}
 	});
 

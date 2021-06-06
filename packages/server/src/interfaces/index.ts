@@ -3,6 +3,7 @@ import { OrderStatus, PaymentStatus, ProductStatus, UserType } from './enums';
 
 export interface IImageCreate {
 	url: string;
+	publicId: string;
 }
 
 export interface IImageResponse {
@@ -118,11 +119,11 @@ export interface IProductCreateRequest {
 	unitId: string | Types.ObjectId;
 	description?: string;
 	status: ProductStatus;
-	imagesUrl: string[];
+	images: IImageCreate[];
 }
 
-export type IProductUpdateRequest = Omit<IProductCreateRequest, 'imagesUrl'> & {
-	imagesUrl: (string | { id: string })[];
+export type IProductUpdateRequest = Omit<IProductCreateRequest, 'images'> & {
+	images: (IImageCreate | { id: string })[];
 };
 
 export interface IProductResponse {

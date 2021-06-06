@@ -59,9 +59,12 @@ const ProductEdit = () => {
 			price: values.price,
 			unitId: values.unit,
 			description: values.description,
-			imagesUrl: values.images.map((image: UploadFile) => {
+			images: values.images.map((image: UploadFile) => {
 				if (image.percent) {
-					return image.response?.url || image.url || '';
+					return {
+						url: image.response?.url || image.url || '',
+						publicId: image.response?.publicId,
+					};
 				}
 
 				return { id: image.uid };

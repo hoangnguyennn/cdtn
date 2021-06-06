@@ -35,7 +35,10 @@ const ProductAdd = () => {
 
 	const normFile = (fileList: any[]) => {
 		console.log('Upload event:', JSON.parse(JSON.stringify(fileList)));
-		return fileList.map((file) => file?.response?.url || '');
+		return fileList.map((file) => ({
+			url: file.response?.url || file.url || '',
+			publicId: file.response?.publicId,
+		}));
 	};
 
 	const onFinish = async (values: any) => {
@@ -44,14 +47,12 @@ const ProductAdd = () => {
 			return;
 		}
 
-		console.log(values.status);
-
 		const productCreate: IProductCreate = {
 			name: values.name,
 			price: values.price,
 			unitId: values.unit,
 			description: values.description,
-			imagesUrl: values.images,
+			images: values.images,
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
 		};
 

@@ -26,7 +26,7 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 	]);
 };
 
-const get = async (filter: any): Promise<IProduct[]> => {
+const get = async (filter: any = {}): Promise<IProduct[]> => {
 	return ProductModel.find(filter).populate([
 		{ path: 'unit' },
 		{ path: 'images' },

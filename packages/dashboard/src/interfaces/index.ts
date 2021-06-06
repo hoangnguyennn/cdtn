@@ -27,11 +27,11 @@ export interface IProductCreate {
 	unitId: string;
 	description: string;
 	status: ProductStatus;
-	imagesUrl: string[];
+	images: IUpload[];
 }
 
-export type IProductUpdate = Omit<IProductCreate, 'imagesUrl'> & {
-	imagesUrl: (string | { id: string })[];
+export type IProductUpdate = Omit<IProductCreate, 'images'> & {
+	images: (IUpload | { id: string })[];
 };
 
 export interface IProductUnit {
@@ -58,4 +58,9 @@ export interface IUser {
 	address: string;
 	phone: string;
 	userType: string;
+}
+
+export interface IUpload {
+	url: string;
+	publicId: string;
 }
