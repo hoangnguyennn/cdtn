@@ -61,10 +61,8 @@ const ProductAdd = () => {
 	};
 
 	useEffect(() => {
-		if (!productUnits.length) {
-			dispatch(getProductUnitsAction());
-		}
-	}, [dispatch, productUnits]);
+		dispatch(getProductUnitsAction());
+	}, [dispatch]);
 
 	return (
 		<Form {...layout} className="form" onFinish={onFinish}>

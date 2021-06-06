@@ -5,7 +5,7 @@ import ImageService from '../services/image';
 import UploadFileHelper from '../helpers/uploadFile';
 
 const cron = () => {
-	// run delete images at 0 AM every day
+	// run delete images every minutes
 	const deleteImagesJob = new CronJob('* * * * *', async function () {
 		const products = await ProductService.get();
 		const productImages = products
@@ -17,7 +17,7 @@ const cron = () => {
 			const indexInProductImages =
 				productImages?.findIndex((productImage) =>
 					productImage._id.equals(image._id)
-				) || -1;
+				) ?? 1;
 
 			return indexInProductImages === -1;
 		});
@@ -26,7 +26,9 @@ const cron = () => {
 			UploadFileHelper.deleteSingle(image.publicId)
 		);
 
-		return Promise.all(deleteImagesPromises);
+		return Promise.all(deleteImagesPromises).then((values) => {
+			console.log(`${values.length} unused images have just been deleted`);
+		});
 	});
 
 	deleteImagesJob.start();
