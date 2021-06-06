@@ -37,4 +37,5 @@ const uploadSingleFile = async (req: Request, res: Response) => {
 	return success(res, fileUrl);
 };
 
-export { uploadSingleFile, UploadFileHelper };
+export { uploadSingleFile };
+export default UploadFileHelper;
