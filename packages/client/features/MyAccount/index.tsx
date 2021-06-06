@@ -22,14 +22,12 @@ const MyAccount = () => {
 	const [initialUserInforValues, setInitialUserInforValues] =
 		useState<IUserUpdateInfo>({
 			fullName: '',
-			email: '',
 			phone: '',
 			address: '',
 		});
 
 	const userInforValidationSchema = Yup.object({
 		fullName: Yup.string().required(t('This field is required')),
-		email: Yup.string().email().required(t('This field is required')),
 		phone: Yup.string().required(t('This field is required')),
 		address: Yup.string().required(t('This field is required')),
 	});
@@ -81,7 +79,6 @@ const MyAccount = () => {
 		setInitialUserInforValues((prevState) => ({
 			...prevState,
 			fullName: userInfo.fullName,
-			email: userInfo.email,
 			phone: userInfo.phone,
 			address: userInfo.address,
 		}));
@@ -116,20 +113,6 @@ const MyAccount = () => {
 					/>
 					{userFormik.errors.phone ? (
 						<Invalid>{userFormik.errors.phone}</Invalid>
-					) : null}
-				</FormGroup>
-
-				<FormGroup>
-					<Input
-						name="email"
-						onBlur={userFormik.handleBlur}
-						onChange={userFormik.handleChange}
-						placeholder={t('Email address')}
-						required
-						value={userFormik.values.email}
-					/>
-					{userFormik.errors.email ? (
-						<Invalid>{userFormik.errors.email}</Invalid>
 					) : null}
 				</FormGroup>
 

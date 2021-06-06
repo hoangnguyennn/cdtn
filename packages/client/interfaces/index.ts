@@ -116,7 +116,6 @@ export interface IUserCreate {
 }
 
 export interface IUserUpdateInfo {
-	email: string;
 	fullName: string;
 	address: string;
 	phone: string;
