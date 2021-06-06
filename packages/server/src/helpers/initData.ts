@@ -1,38 +1,36 @@
 import mongooseLoader from '../loaders/mongoose';
 
-import { ProductStatus, UserType } from '../interfaces/enums';
+import { UserType } from '../interfaces/enums';
 import AuthService from '../services/auth';
-import ImageService from '../services/image';
 import PaymentMethodService from '../services/paymentMethod';
-import ProductService from '../services/product';
-import ProductUnitService from '../services/productUnit';
 
 import data from './initData.json';
 
-export const generateProducts = async () => {
-	console.log('init products');
+// export const generateProducts = async () => {
+// 	console.log('init products');
 
-	const unit = await ProductUnitService.create({ name: 'kg' });
+// 	const unit = await ProductUnitService.create({ name: 'kg' });
 
-	const image = await ImageService.create({
-		url: 'https://res.cloudinary.com/hoangnguyennn/image/upload/v1621465858/yzzutbi4htoulq6zkbwb.png',
-	});
+// 	const image = await ImageService.create({
+// 		url: 'https://res.cloudinary.com/hoangnguyennn/image/upload/v1621465858/yzzutbi4htoulq6zkbwb.png',
+// 		publicId: '',
+// 	});
 
-	const productsPromise = Array.from(new Array(100)).map((_, index) =>
-		ProductService.create({
-			name: `Product ${index + 1}`,
-			price: 100000,
-			unitId: unit._id,
-			description: `Product ${index + 1} description`,
-			imagesId: [image._id],
-			status: ProductStatus.SELLING,
-		})
-	);
+// 	const productsPromise = Array.from(new Array(100)).map((_, index) =>
+// 		ProductService.create({
+// 			name: `Product ${index + 1}`,
+// 			price: 100000,
+// 			unitId: unit._id,
+// 			description: `Product ${index + 1} description`,
+// 			imagesId: [image._id],
+// 			status: ProductStatus.SELLING,
+// 		})
+// 	);
 
-	return Promise.all(productsPromise).then(() => {
-		console.log('Products created');
-	});
-};
+// 	return Promise.all(productsPromise).then(() => {
+// 		console.log('Products created');
+// 	});
+// };
 
 export const generateUsers = async () => {
 	console.log('init users');
