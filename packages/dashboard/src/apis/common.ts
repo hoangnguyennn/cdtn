@@ -1,5 +1,10 @@
 import { ENDPOINT } from '../configs/endpoint';
-import { IProductCreate, IProductUnitCreate, IUser } from '../interfaces';
+import {
+	IProductCreate,
+	IProductUnitCreate,
+	IProductUpdate,
+	IUser,
+} from '../interfaces';
 import { ProductStatus } from '../interfaces/enum';
 import axiosInstance from '../services/instance';
 
@@ -41,7 +46,7 @@ export const loginByToken = async (): Promise<IUser> => {
 	return axiosInstance.post(ENDPOINT.me).then((res) => res.data);
 };
 
-export const updateProduct = async (id: string, product: IProductCreate) => {
+export const updateProduct = async (id: string, product: IProductUpdate) => {
 	return axiosInstance
 		.patch(`${ENDPOINT.products}/${id}`, product)
 		.then((res) => res.data);

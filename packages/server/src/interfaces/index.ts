@@ -121,6 +121,10 @@ export interface IProductCreateRequest {
 	imagesUrl: string[];
 }
 
+export type IProductUpdateRequest = Omit<IProductCreateRequest, 'imagesUrl'> & {
+	imagesUrl: (string | { id: string })[];
+};
+
 export interface IProductResponse {
 	id: string | Types.ObjectId;
 	name: string;

@@ -7,7 +7,7 @@ import {
 	updateProduct,
 	updateProductStatus,
 } from '../../apis/common';
-import { IProduct, IProductCreate } from '../../interfaces';
+import { IProduct, IProductCreate, IProductUpdate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
@@ -76,7 +76,7 @@ export const getProductByIdAction =
 	};
 
 export const updateProductAction =
-	(id: string, product: IProductCreate) => async (dispatch: Dispatch) => {
+	(id: string, product: IProductUpdate) => async (dispatch: Dispatch) => {
 		return updateProduct(id, product)
 			.then((newProduct) => {
 				dispatch(addProduct(newProduct));

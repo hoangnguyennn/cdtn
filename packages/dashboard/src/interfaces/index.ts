@@ -30,6 +30,10 @@ export interface IProductCreate {
 	imagesUrl: string[];
 }
 
+export type IProductUpdate = Omit<IProductCreate, 'imagesUrl'> & {
+	imagesUrl: (string | { id: string })[];
+};
+
 export interface IProductUnit {
 	id: string;
 	name: string;

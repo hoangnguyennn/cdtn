@@ -17,7 +17,7 @@ import {
 } from '../../redux/reducers/product';
 
 import { PATH_NAME } from '../../configs';
-import { IProductCreate } from '../../interfaces';
+import { IProductUpdate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 
 import UploadImage from '../../components/UploadImage';
@@ -54,19 +54,23 @@ const ProductEdit = () => {
 			return;
 		}
 
-		const productCreate: IProductCreate = {
+		const productUpdate: IProductUpdate = {
 			name: values.name,
 			price: values.price,
 			unitId: values.unit,
 			description: values.description,
-			imagesUrl: values.images.map(
-				(image: UploadFile) => image.response?.url || image.url || ''
-			),
+			imagesUrl: values.images.map((image: UploadFile) => {
+				if (image.percent) {
+					return image.response?.url || image.url || '';
+				}
+
+				return { id: image.uid };
+			}),
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
 		};
 
 		try {
-			await dispatch(updateProductAction(id, productCreate));
+			await dispatch(updateProductAction(id, productUpdate));
 			history.push(PATH_NAME.PRODUCT_LIST);
 		} catch {}
 	};

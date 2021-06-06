@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { IProductCreate, IProductCreateRequest } from '../../interfaces';
+import {
+	IProductCreate,
+	IProductCreateRequest,
+	IProductUpdateRequest,
+} from '../../interfaces';
 
 import {
 	mapProductToResponse,
@@ -10,6 +14,7 @@ import { ProductStatus, UserType } from '../../interfaces/enums';
 import ImageService from '../../services/image';
 import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
 import ProductService from '../../services/product';
+import { IImage } from '../../interfaces/IDocuments';
 
 const create = async (req: Request, res: Response) => {
 	const productRequest: IProductCreateRequest = req.body;
@@ -81,10 +86,14 @@ const getTrending = async (req: Request, res: Response) => {
 const updateProduct = async (req: Request, res: Response) => {
 	const { userType } = res.locals;
 	const { id } = req.params;
-	const productUpdateRequest: IProductCreateRequest = req.body;
+	const productUpdateRequest: IProductUpdateRequest = req.body;
 
-	const imagesPromise = productUpdateRequest.imagesUrl.map((url: string) => {
-		return ImageService.create({ url });
+	const imagesPromise = productUpdateRequest.imagesUrl.map((image: any) => {
+		if (typeof image === 'string') {
+			return ImageService.create({ url: image });
+		} else {
+			return { _id: image.id } as IImage;
+		}
 	});
 
 	const images = await Promise.all(imagesPromise);
