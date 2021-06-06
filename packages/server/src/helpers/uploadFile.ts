@@ -1,5 +1,5 @@
-import { v2 as cloudinaryV2 } from 'cloudinary';
 import { Request, Response } from 'express';
+import { v2 as cloudinaryV2 } from 'cloudinary';
 import fs from 'fs';
 
 import configs from '../configs';
@@ -13,16 +13,22 @@ cloudinaryV2.config({
 
 const UploadFileHelper = {
 	uploadSingle: async (file: string) => {
-		return new Promise((resolve) => {
-			cloudinaryV2.uploader.upload(file, (err, res) => {
-				if (err) {
-					console.log('error', err);
-				} else {
-					fs.unlinkSync(file);
-					resolve({ url: res?.secure_url });
-				}
+		return cloudinaryV2.uploader
+			.upload(file)
+			.then((res) => {
+				fs.unlinkSync(file);
+				return {
+					url: res?.secure_url,
+					publicId: res?.public_id,
+				};
+			})
+			.catch((err) => {
+				console.log('error', err);
+				throw err;
 			});
-		});
+	},
+	deleteSingle: async (publicId: string) => {
+		return cloudinaryV2.uploader.destroy(publicId);
 	},
 };
 
@@ -31,4 +37,4 @@ const uploadSingleFile = async (req: Request, res: Response) => {
 	return success(res, fileUrl);
 };
 
-export { uploadSingleFile };
+export { uploadSingleFile, UploadFileHelper };

@@ -3,6 +3,7 @@ import { OrderStatus, PaymentStatus, ProductStatus, UserType } from './enums';
 
 export interface IImage extends Document {
 	url: string;
+	publicId: string;
 }
 
 export interface IOrder extends Document {

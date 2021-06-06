@@ -7,6 +7,10 @@ const imageSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	publicId: {
+		type: String,
+		required: true,
+	},
 });
 
 export default model<IImage>(CollectionName.IMAGE, imageSchema);
