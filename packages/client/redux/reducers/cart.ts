@@ -116,14 +116,14 @@ const selector = function <T>(combiner: { (state: ICartState): T }) {
 	return createSelector(cartState, combiner);
 };
 
-export const getCartItems = selector((state) => state.cartItems);
-export const getCartLength = selector((state) =>
-	state.cartItems.reduce((res, item) => res + item.qty, 0)
-);
+export const getCartItems = () => selector((state) => state.cartItems);
+export const getCartLength = () =>
+	selector((state) => state.cartItems.reduce((res, item) => res + item.qty, 0));
 
-export const getCartSubtotal = selector((state) =>
-	state.cartItems.reduce((res, item) => res + item.price * item.qty, 0)
-);
+export const getCartSubtotal = () =>
+	selector((state) =>
+		state.cartItems.reduce((res, item) => res + item.price * item.qty, 0)
+	);
 
 export const getDeliveryFee = 0;
 

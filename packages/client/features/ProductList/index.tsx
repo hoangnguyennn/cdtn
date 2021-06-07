@@ -7,7 +7,7 @@ import ProductFilter from './components/Filter';
 import Root from './ProductList';
 
 const ProductList = () => {
-	const products = useSelector(getProducts);
+	const products = useSelector(getProducts());
 	const { t } = useTranslation();
 
 	return (

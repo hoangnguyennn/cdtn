@@ -8,7 +8,7 @@ import ProductList from '../../components/Product/List';
 
 const Home = () => {
 	const { t } = useTranslation();
-	const trendingProducts = useSelector(getTrendingProducts);
+	const trendingProducts = useSelector(getTrendingProducts());
 
 	return (
 		<HomeStyled>

@@ -31,9 +31,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 				<img src={product.images[0] || ''} alt="" />
 			</div>
 			<div className="info">
-				{product.status === ProductStatus.NOT_SELLING ? (
-					<div className="stop-business">{t('Stop business')}</div>
-				) : (
+				{product.status === ProductStatus.SELLING ? (
 					<>
 						<p className="price">{toCurrency(product.price)}</p>
 						<div className="add-to-cart">
@@ -50,6 +48,8 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 							</Button>
 						</div>
 					</>
+				) : (
+					<div className="stop-business">{t('Stop business')}</div>
 				)}
 
 				<div className="description">{product.description}</div>

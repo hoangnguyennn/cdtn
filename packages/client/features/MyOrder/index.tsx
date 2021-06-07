@@ -10,7 +10,7 @@ const MyOrder = () => {
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
 
-	const orders = useSelector(getOrders);
+	const orders = useSelector(getOrders());
 
 	useEffect(() => {
 		dispatch(fetchOrders());

@@ -20,7 +20,7 @@ const Login = () => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const token = useSelector(getToken);
+	const token = useSelector(getToken());
 
 	const initialValues: ILogin = {
 		email: '',

@@ -43,6 +43,6 @@ const selector = function <T>(combiner: { (state: IOrderState): T }) {
 	return createSelector(orderState, combiner);
 };
 
-export const getOrders = selector((state) => state.orders);
+export const getOrders = () => selector((state) => state.orders);
 
 export default orderSlice.reducer;

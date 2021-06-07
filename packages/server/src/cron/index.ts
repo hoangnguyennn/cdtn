@@ -10,14 +10,15 @@ const cron = () => {
 		const products = await ProductService.get();
 		const productImages = products
 			.map((product) => product.images)
+			.filter((images) => images)
 			.reduce((total, images) => total?.concat(images || []), []);
 
 		const imagesInDB = await ImageService.get();
 		const imagesWillDelete = imagesInDB.filter((image) => {
 			const indexInProductImages =
-				productImages?.findIndex((productImage) =>
-					productImage._id.equals(image._id)
-				) ?? 1;
+				productImages?.findIndex((productImage) => {
+					return String(productImage._id) === String(image._id);
+				}) ?? -1;
 
 			return indexInProductImages === -1;
 		});

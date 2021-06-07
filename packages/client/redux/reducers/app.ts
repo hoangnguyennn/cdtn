@@ -16,6 +16,6 @@ const selector = function <T>(combiner: { (state: IAppState): T }) {
 	return createSelector(appState, combiner);
 };
 
-export const getLimitOfToast = selector((state) => state.limitOfToast);
+export const getLimitOfToast = () => selector((state) => state.limitOfToast);
 
 export default appSlice.reducer;

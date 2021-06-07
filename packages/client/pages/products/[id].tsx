@@ -13,7 +13,7 @@ import PageContent from '../../components/PageContent';
 import ProductSummary from '../../features/ProductSummary';
 
 const ProductDetailPage = () => {
-	const product = useSelector(getProduct);
+	const product = useSelector(getProduct());
 
 	return (
 		<MainLayout>

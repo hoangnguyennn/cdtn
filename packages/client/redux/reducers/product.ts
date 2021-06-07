@@ -18,6 +18,7 @@ export const initialState: IProductState = {
 		description: '',
 		unit: '',
 		images: [],
+		status: null,
 	},
 };
 
@@ -85,8 +86,9 @@ const selector = function <T>(combiner: { (state: IProductState): T }) {
 	return createSelector(productState, combiner);
 };
 
-export const getProduct = selector((state) => state.product);
-export const getProducts = selector((state) => state.products);
-export const getTrendingProducts = selector((state) => state.trendingProducts);
+export const getProduct = () => selector((state) => state.product);
+export const getProducts = () => selector((state) => state.products);
+export const getTrendingProducts = () =>
+	selector((state) => state.trendingProducts);
 
 export default productSlice.reducer;

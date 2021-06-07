@@ -26,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 			<Auth>
 				<Component {...pageProps} />
 			</Auth>
-			<ToastContainer limit={getLimitOfToast(store.getState())} />
+			<ToastContainer limit={getLimitOfToast()(store.getState())} />
 		</Provider>
 	);
 };

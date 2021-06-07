@@ -38,6 +38,7 @@ const selector = function <T>(combiner: { (state: IPaymentMethodState): T }) {
 	return createSelector(paymentMethodState, combiner);
 };
 
-export const getPaymentMethods = selector((state) => state.paymentMethods);
+export const getPaymentMethods = () =>
+	selector((state) => state.paymentMethods);
 
 export default paymentMethodSlice.reducer;

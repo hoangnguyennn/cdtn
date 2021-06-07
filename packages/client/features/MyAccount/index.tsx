@@ -17,7 +17,7 @@ import Root from './MyAccount';
 const MyAccount = () => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
-	const userInfo = useSelector(getUserInfo);
+	const userInfo = useSelector(getUserInfo());
 
 	const [initialUserInforValues, setInitialUserInforValues] =
 		useState<IUserUpdateInfo>({

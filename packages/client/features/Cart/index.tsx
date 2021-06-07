@@ -35,10 +35,10 @@ const Cart = () => {
 	const { t } = useTranslation();
 	const [isValid, setIsValid] = useState(false);
 
-	const cartItems = useSelector(getCartItems);
-	const cartSubtotal = useSelector(getCartSubtotal);
-	const paymentMethods = useSelector(getPaymentMethods);
-	const userInfo = useSelector(getUserInfo);
+	const cartItems = useSelector(getCartItems());
+	const cartSubtotal = useSelector(getCartSubtotal());
+	const paymentMethods = useSelector(getPaymentMethods());
+	const userInfo = useSelector(getUserInfo());
 	const router = useRouter();
 
 	const dispatch = useDispatch();

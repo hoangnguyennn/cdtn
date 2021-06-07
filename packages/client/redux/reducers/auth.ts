@@ -124,8 +124,8 @@ const selector = function <T>(combiner: { (state: IAuthState): T }) {
 	return createSelector(authState, combiner);
 };
 
-export const getFullName = selector((state) => state.user.fullName);
-export const getToken = selector((state) => state.token);
-export const getUserInfo = selector((state) => state.user);
+export const getFullName = () => selector((state) => state.user.fullName);
+export const getToken = () => selector((state) => state.token);
+export const getUserInfo = () => selector((state) => state.user);
 
 export default AuthSlice.reducer;

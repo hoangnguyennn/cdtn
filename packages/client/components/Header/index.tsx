@@ -13,8 +13,8 @@ import User from './User';
 
 const Header = () => {
 	const { t } = useTranslation();
-	const fullName = useSelector(getFullName);
-	const cartLength = useSelector(getCartLength);
+	const fullName = useSelector(getFullName());
+	const cartLength = useSelector(getCartLength());
 
 	return (
 		<HeaderStyled>
