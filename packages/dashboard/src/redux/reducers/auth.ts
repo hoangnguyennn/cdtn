@@ -1,5 +1,4 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import { IAuthState, IRootState } from '../../interfaces/IState';
 import { login, loginByToken } from '../../apis/common';
 
@@ -49,23 +48,17 @@ const authSlice = createSlice({
 const { setToken, setUser, clearUser } = authSlice.actions;
 
 export const loginAction = (userLogin: any) => async (dispatch: Dispatch) => {
-	return login(userLogin)
-		.then((response) => {
-			if (response.user.userType !== 'MANAGER') {
-				localStorage.removeItem('access-token');
-				dispatch(clearUser());
-				toast.error('Not found');
-				return;
-			}
+	return login(userLogin).then((response) => {
+		if (response.user.userType !== 'MANAGER') {
+			localStorage.removeItem('access-token');
+			dispatch(clearUser());
+			throw new Error('not found');
+		}
 
-			dispatch(setToken(response.token));
-			dispatch(setUser(response.user));
-			window.localStorage.setItem('access-token', response.token);
-		})
-		.catch((err) => {
-			toast.error(err?.message || 'Default Error');
-			throw err;
-		});
+		dispatch(setToken(response.token));
+		dispatch(setUser(response.user));
+		window.localStorage.setItem('access-token', response.token);
+	});
 };
 
 export const loginByTokenAction = () => async (dispatch: Dispatch) => {
@@ -86,7 +79,6 @@ export const loginByTokenAction = () => async (dispatch: Dispatch) => {
 
 			dispatch(setToken(token));
 			dispatch(setUser(user));
-			return;
 		})
 		.catch((err) => {
 			localStorage.removeItem('access-token');

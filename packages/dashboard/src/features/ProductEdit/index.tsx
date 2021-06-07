@@ -75,14 +75,25 @@ const ProductEdit = () => {
 		try {
 			await dispatch(updateProductAction(id, productUpdate));
 			history.push(PATH_NAME.PRODUCT_LIST);
-		} catch {}
+			toast.success('success');
+		} catch (err) {
+			toast.error(err?.message || 'error');
+		}
 	};
 
 	useEffect(() => {
-		if (!product) {
-			dispatch(getProductByIdAction(id));
-		}
-	}, [dispatch, product, id]);
+		const fetchProduct = async () => {
+			if (!product) {
+				try {
+					await dispatch(getProductByIdAction(id));
+				} catch {
+					history.push(PATH_NAME.PRODUCT_LIST);
+				}
+			}
+		};
+
+		fetchProduct();
+	}, [dispatch, product, id, history]);
 
 	useEffect(() => {
 		if (product) {

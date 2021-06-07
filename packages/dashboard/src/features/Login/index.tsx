@@ -1,4 +1,5 @@
 import { Form, Input, Button, Checkbox } from 'antd';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -15,8 +16,13 @@ const Login = () => {
 	const token = useSelector(getToken());
 	const userType = useSelector(getUserType());
 
-	const onFinish = (values: any) => {
-		dispatch(loginAction(values));
+	const onFinish = async (values: any) => {
+		try {
+			await dispatch(loginAction(values));
+			toast.success('success');
+		} catch (err) {
+			toast.error(err?.message || 'error');
+		}
 	};
 
 	useEffect(() => {

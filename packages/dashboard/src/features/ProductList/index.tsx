@@ -1,6 +1,7 @@
+import { Button, Table, Image, Tag, Space } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
-import { Button, Table, Image, Tag, Space } from 'antd';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -101,8 +102,13 @@ const ProductList = () => {
 	const dispatch = useDispatch();
 	const products = useSelector(getProducts());
 
-	const updateProductStatus = (id: string, newStatus: ProductStatus) => {
-		dispatch(updateProductStatusAction(id, newStatus));
+	const updateProductStatus = async (id: string, newStatus: ProductStatus) => {
+		try {
+			await dispatch(updateProductStatusAction(id, newStatus));
+			toast.success('success');
+		} catch (err) {
+			toast.error(err?.message || 'error');
+		}
 	};
 
 	useEffect(() => {

@@ -1,4 +1,5 @@
 import { Form, Input, Button } from 'antd';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -31,7 +32,10 @@ const ProductUnitEdit = () => {
 		try {
 			await dispatch(updateProductUnitAction(id, values));
 			history.push(PATH_NAME.PRODUCT_UNIT_LIST);
-		} catch {}
+			toast.success('success');
+		} catch (err) {
+			toast.error(err?.message || 'error');
+		}
 	};
 
 	useEffect(() => {

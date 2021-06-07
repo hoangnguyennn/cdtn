@@ -1,4 +1,5 @@
 import { Form, Input, Button } from 'antd';
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -19,8 +20,13 @@ const ProductUnitAdd = () => {
 	};
 
 	const onFinish = async (values: any) => {
-		await dispatch(createProductUnitAction(values));
-		history.push(PATH_NAME.PRODUCT_UNIT_LIST);
+		try {
+			await dispatch(createProductUnitAction(values));
+			history.push(PATH_NAME.PRODUCT_UNIT_LIST);
+			toast.success('success');
+		} catch (err) {
+			toast.error(err?.message || 'error');
+		}
 	};
 
 	return (

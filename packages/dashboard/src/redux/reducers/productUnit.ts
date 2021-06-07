@@ -1,5 +1,4 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import {
 	createProductUnit,
 	fetchProductUnitById,
@@ -44,49 +43,29 @@ const { addProductUnit, setProductUnits } = productUnitSlice.actions;
 
 export const createProductUnitAction =
 	(productUnit: IProductUnitCreate) => async (dispatch: Dispatch) => {
-		return createProductUnit(productUnit)
-			.then((newProductUnit) => {
-				dispatch(addProductUnit(newProductUnit));
-			})
-			.catch((err) => {
-				toast.error(err?.message || 'Default Error');
-				throw err;
-			});
+		return createProductUnit(productUnit).then((newProductUnit) => {
+			dispatch(addProductUnit(newProductUnit));
+		});
 	};
 
 export const getProductUnitsAction = () => async (dispatch: Dispatch) => {
-	return fetchProductUnits()
-		.then((productUnits) => {
-			dispatch(setProductUnits(productUnits));
-		})
-		.catch((err) => {
-			toast.error(err?.message || 'Default Error');
-			throw err;
-		});
+	return fetchProductUnits().then((productUnits) => {
+		dispatch(setProductUnits(productUnits));
+	});
 };
 
 export const getProductUnitByIdAction =
 	(id: string) => async (dispatch: Dispatch) => {
-		return fetchProductUnitById(id)
-			.then((productUnit) => {
-				dispatch(addProductUnit(productUnit));
-			})
-			.catch((err) => {
-				toast.error(err?.message || 'Default Error');
-				throw err;
-			});
+		return fetchProductUnitById(id).then((productUnit) => {
+			dispatch(addProductUnit(productUnit));
+		});
 	};
 
 export const updateProductUnitAction =
 	(id: string, unit: IProductUnitCreate) => async (dispatch: Dispatch) => {
-		return updateProductUnit(id, unit)
-			.then((unitUpdated) => {
-				dispatch(addProductUnit(unitUpdated));
-			})
-			.catch((err) => {
-				toast.error(err?.message || 'Default Error');
-				throw err;
-			});
+		return updateProductUnit(id, unit).then((unitUpdated) => {
+			dispatch(addProductUnit(unitUpdated));
+		});
 	};
 
 const productUnitState = (state: IRootState) => state.productUnit;

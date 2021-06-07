@@ -56,8 +56,13 @@ const ProductAdd = () => {
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
 		};
 
-		await dispatch(createProductAction(productCreate));
-		history.push(PATH_NAME.PRODUCT_LIST);
+		try {
+			await dispatch(createProductAction(productCreate));
+			history.push(PATH_NAME.PRODUCT_LIST);
+			toast.success('success');
+		} catch (err) {
+			toast.error(err?.message || 'error');
+		}
 	};
 
 	useEffect(() => {

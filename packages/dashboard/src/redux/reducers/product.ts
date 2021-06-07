@@ -1,5 +1,4 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import {
 	createProduct,
 	fetchProductById,
@@ -43,60 +42,35 @@ const { setProducts, addProduct } = productSlice.actions;
 
 export const createProductAction =
 	(product: IProductCreate) => async (dispatch: Dispatch) => {
-		return createProduct(product)
-			.then((newProduct) => {
-				dispatch(addProduct(newProduct));
-				toast.success('success');
-			})
-			.catch((err) => {
-				toast.error(err?.message || 'Default Error');
-				throw err;
-			});
+		return createProduct(product).then((newProduct) => {
+			dispatch(addProduct(newProduct));
+		});
 	};
 
 export const getProductsAction = () => async (dispatch: Dispatch) => {
-	try {
-		const products = await fetchProducts();
-		dispatch(setProducts(products));
-	} catch (err) {
-		toast.error(err?.message || 'Default Error');
-	}
+	const products = await fetchProducts();
+	dispatch(setProducts(products));
 };
 
 export const getProductByIdAction =
 	(id: string) => async (dispatch: Dispatch) => {
-		return fetchProductById(id)
-			.then((product) => {
-				dispatch(addProduct(product));
-			})
-			.catch((err) => {
-				toast.error(err?.message || 'Default Error');
-				throw err;
-			});
+		return fetchProductById(id).then((product) => {
+			dispatch(addProduct(product));
+		});
 	};
 
 export const updateProductAction =
 	(id: string, product: IProductUpdate) => async (dispatch: Dispatch) => {
-		return updateProduct(id, product)
-			.then((newProduct) => {
-				dispatch(addProduct(newProduct));
-			})
-			.catch((err) => {
-				toast.error(err?.message || 'Default Error');
-				throw err;
-			});
+		return updateProduct(id, product).then((newProduct) => {
+			dispatch(addProduct(newProduct));
+		});
 	};
 
 export const updateProductStatusAction =
 	(id: string, newStatus: ProductStatus) => async (dispatch: Dispatch) => {
-		return updateProductStatus(id, newStatus)
-			.then((product) => {
-				dispatch(addProduct(product));
-			})
-			.catch((err) => {
-				toast.error(err?.message || 'Default Error');
-				throw err;
-			});
+		return updateProductStatus(id, newStatus).then((product) => {
+			dispatch(addProduct(product));
+		});
 	};
 
 const productState = (state: IRootState) => state.product;
