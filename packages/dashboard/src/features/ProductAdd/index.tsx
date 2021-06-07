@@ -99,11 +99,13 @@ const ProductAdd = () => {
 				rules={[{ required: true, message: 'Please select product unit!' }]}
 			>
 				<Select>
-					{productUnits.map((unit) => (
-						<Option key={unit.id} value={unit.id}>
-							{unit.name}
-						</Option>
-					))}
+					{[...productUnits]
+						.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
+						.map((unit) => (
+							<Option key={unit.id} value={unit.id}>
+								{unit.name}
+							</Option>
+						))}
 				</Select>
 			</Form.Item>
 			<Form.Item label="Description" name="description">
