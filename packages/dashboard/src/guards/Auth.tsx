@@ -7,7 +7,7 @@ import { getToken, loginByTokenAction } from '../redux/reducers/auth';
 
 const Auth: FC = ({ children }) => {
 	const dispatch = useDispatch();
-	const token = useSelector(getToken);
+	const token = useSelector(getToken());
 	const history = useHistory();
 
 	useEffect(() => {

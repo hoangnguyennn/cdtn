@@ -5,6 +5,7 @@
 		"be-dev": "cd packages/server && yarn dev",
 		"be-build": "cd packages/server && yarn build",
 		"be-start": "cd packages/server && yarn start",
+		"be-init-data": "cd packages/server && yarn init-data",
 		"fe-dev": "cd packages/client && yarn dev",
 		"fe-build": "cd packages/client && yarn build",
 		"fe-start": "cd packages/client && yarn start",
