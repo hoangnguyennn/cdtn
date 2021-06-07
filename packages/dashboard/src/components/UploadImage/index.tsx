@@ -69,10 +69,6 @@ const UploadImage: FC<UploadImageProps> = ({
 	);
 
 	useEffect(() => {
-		console.log('fileList', fileList);
-	}, [fileList]);
-
-	useEffect(() => {
 		if (images.length !== fileList.length) {
 			if (images.length) {
 				if (images[0].hasOwnProperty('uid')) {
@@ -83,7 +79,7 @@ const UploadImage: FC<UploadImageProps> = ({
 							uid: image.id,
 							name: image.url,
 							status: 'done',
-							response: { url: image.url },
+							response: { url: image.url, publicId: image.publicId },
 							url: image.url,
 						} as UploadFile;
 					});

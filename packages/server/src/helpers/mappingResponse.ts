@@ -22,6 +22,7 @@ export const mapImageToResponse = (image: IImage): IImageResponse => {
 	return {
 		id: image._id,
 		url: image.url,
+		publicId: image.publicId,
 	};
 };
 

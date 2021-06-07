@@ -9,6 +9,7 @@ export interface IImageCreate {
 export interface IImageResponse {
 	id: string;
 	url: string;
+	publicId: string;
 }
 
 export interface ILogin {

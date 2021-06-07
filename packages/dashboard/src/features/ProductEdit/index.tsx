@@ -17,7 +17,7 @@ import {
 } from '../../redux/reducers/product';
 
 import { PATH_NAME } from '../../configs';
-import { IProductUpdate } from '../../interfaces';
+import { IImage, IProductUpdate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 
 import UploadImage from '../../components/UploadImage';
@@ -43,10 +43,7 @@ const ProductEdit = () => {
 		wrapperCol: { offset: 8, span: 16 },
 	};
 
-	const normFile = (fileList: UploadFile[]) => {
-		console.log('Upload event:', JSON.parse(JSON.stringify(fileList)));
-		return fileList;
-	};
+	const normFile = (fileList: UploadFile[]) => fileList;
 
 	const onFinish = async (values: any) => {
 		if (!isUploaded) {
@@ -56,18 +53,20 @@ const ProductEdit = () => {
 
 		const productUpdate: IProductUpdate = {
 			name: values.name,
-			price: values.price,
+			price: Number(values.price),
 			unitId: values.unit,
 			description: values.description,
-			images: values.images.map((image: UploadFile) => {
+			images: values.images.map((image: any) => {
 				if (image.percent) {
+					const img = image as UploadFile;
 					return {
-						url: image.response?.url || image.url || '',
-						publicId: image.response?.publicId,
+						url: img.response?.url || img.url || '',
+						publicId: img.response?.publicId,
 					};
+				} else {
+					const img = image as IImage & { uid?: string };
+					return { id: img.uid || img.id };
 				}
-
-				return { id: image.uid };
 			}),
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
 		};

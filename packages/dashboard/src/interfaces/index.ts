@@ -9,6 +9,7 @@ export interface IBreadCrumb {
 export interface IImage {
 	id: string;
 	url: string;
+	publicId: string;
 }
 
 export interface IProduct {

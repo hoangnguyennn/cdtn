@@ -49,7 +49,7 @@ const ProductAdd = () => {
 
 		const productCreate: IProductCreate = {
 			name: values.name,
-			price: values.price,
+			price: Number(values.price),
 			unitId: values.unit,
 			description: values.description,
 			images: values.images,
