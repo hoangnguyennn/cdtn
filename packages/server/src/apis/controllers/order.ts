@@ -6,6 +6,8 @@ import { success } from '../../helpers/commonResponse';
 import OrderItemService from '../../services/orderItem';
 import OrderService from '../../services/order';
 import ProductService from '../../services/product';
+import { UserType } from '../../interfaces/enums';
+import { IOrder } from '../../interfaces/IDocuments';
 
 const create = async (req: Request, res: Response) => {
 	const orderCreateRequest: IOrderCreateRequest = req.body;
@@ -35,8 +37,14 @@ const create = async (req: Request, res: Response) => {
 };
 
 const get = async (req: Request, res: Response) => {
-	const { userId } = res.locals;
-	const orders = await OrderService.get({ userId });
+	const { userId, userType } = res.locals;
+
+	const filter: Partial<IOrder> = {};
+	if (userType === UserType.CUSTOMER) {
+		filter.userId = userId;
+	}
+
+	const orders = await OrderService.get(filter);
 	return success(res, orders.map(mapOrderToResponse));
 };
 

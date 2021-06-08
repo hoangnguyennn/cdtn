@@ -14,10 +14,12 @@ import {
 	ProductUnitAdd as ProductUnitAddBR,
 	ProductUnitEdit as ProductUnitEditBR,
 	ProductUnitList as ProductUnitListBR,
+	OrderList as OrderListBR,
 } from '../configs/breadcrumb';
 
 const Home = lazy(() => import('../features/Home'));
 const Login = lazy(() => import('../features/Login'));
+const OrderList = lazy(() => import('../features/OrderList'));
 const ProductAdd = lazy(() => import('../features/ProductAdd'));
 const ProductEdit = lazy(() => import('../features/ProductEdit'));
 const ProductList = lazy(() => import('../features/ProductList'));
@@ -75,6 +77,13 @@ const routesConfig: IRoute[] = [
 		layout: MainLayout,
 		component: ProductUnitList,
 		breadcrumb: ProductUnitListBR(),
+	},
+	{
+		path: PATH_NAME.ORDER_LIST,
+		guard: Auth,
+		layout: MainLayout,
+		component: OrderList,
+		breadcrumb: OrderListBR(),
 	},
 	{
 		path: PATH_NAME.LOGIN,

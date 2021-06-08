@@ -18,6 +18,10 @@ export const createProductUnit = async (productUnit: IProductUnitCreate) => {
 		.then((res) => res.data);
 };
 
+export const fetchOrders = async () => {
+	return axiosInstance.get(ENDPOINT.orders).then((res) => res.data);
+};
+
 export const fetchProducts = async () => {
 	return axiosInstance.get(ENDPOINT.products).then((res) => res.data);
 };

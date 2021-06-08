@@ -45,6 +45,25 @@ const menu: IMenu[] = [
 			},
 		],
 	},
+	{
+		id: 4,
+		title: 'Orders',
+		hasItems: true,
+		items: [
+			{
+				id: 41,
+				title: 'List',
+				href: '/orders',
+				hasItems: false,
+			},
+			{
+				id: 42,
+				title: 'Add',
+				href: '/order/add',
+				hasItems: false,
+			},
+		],
+	},
 ];
 
 export default menu;

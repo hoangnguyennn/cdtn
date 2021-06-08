@@ -1,4 +1,4 @@
-import { ProductStatus } from './enum';
+import { OrderStatus, PaymentStatus, ProductStatus } from './enum';
 
 export interface IBreadCrumb {
 	id: string;
@@ -10,6 +10,37 @@ export interface IImage {
 	id: string;
 	url: string;
 	publicId: string;
+}
+
+export interface IOrder {
+	id: string;
+	deliveryFullName: string;
+	deliveryAddress: string;
+	deliveryPhone: string;
+	deliveryEmail: string;
+	deliveryDate?: Date;
+	paymentStatus: PaymentStatus;
+	orderStatus: OrderStatus;
+	orderDate: Date;
+
+	user?: IUser;
+	paymentMethod: IPaymentMethod;
+	items: IOrderItem[];
+}
+
+export interface IOrderItem {
+	id: string;
+	productId: string;
+	price: number;
+	qty: number;
+	product?: { name: string };
+}
+
+export interface IPaymentMethod {
+	id: string;
+	name: string;
+	imageUrl: string;
+	description?: string;
 }
 
 export interface IProduct {
