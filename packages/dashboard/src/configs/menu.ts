@@ -56,12 +56,6 @@ const menu: IMenu[] = [
 				href: '/orders',
 				hasItems: false,
 			},
-			{
-				id: 42,
-				title: 'Add',
-				href: '/order/add',
-				hasItems: false,
-			},
 		],
 	},
 ];
