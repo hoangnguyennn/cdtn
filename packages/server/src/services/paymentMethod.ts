@@ -1,11 +1,12 @@
 import { IPaymentMethod } from '../interfaces/IDocuments';
 import { IPaymentMethodCreate } from '../interfaces';
 import PaymentMethodModel from '../models/paymentMethod';
+import { removeInvalidFields } from '../utils';
 
 const create = async (
 	paymentMethod: IPaymentMethodCreate
 ): Promise<IPaymentMethod> => {
-	return PaymentMethodModel.create({
+	const paymentLint = removeInvalidFields({
 		name: paymentMethod.name,
 		imageUrl: paymentMethod.imageUrl,
 		accessKey: paymentMethod.accessKey,
@@ -14,6 +15,8 @@ const create = async (
 		host: paymentMethod.host,
 		description: paymentMethod.description,
 	});
+
+	return PaymentMethodModel.create(paymentLint);
 };
 
 const get = async (): Promise<IPaymentMethod[]> => {

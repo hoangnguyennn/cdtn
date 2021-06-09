@@ -6,13 +6,15 @@ import {
 import { IProductUnit } from '../interfaces/IDocuments';
 import { IProductUnitCreate, IProductUnitUpdate } from '../interfaces';
 import ProductUnitModel from '../models/productUnit';
+import { removeInvalidFields } from '../utils';
 
 const create = async (
 	productUnit: IProductUnitCreate
 ): Promise<IProductUnit> => {
-	return ProductUnitModel.create({
+	const productUnitLint = removeInvalidFields({
 		name: productUnit.name,
 	});
+	return ProductUnitModel.create(productUnitLint);
 };
 
 const get = async (): Promise<IProductUnit[]> => {
@@ -33,9 +35,13 @@ const update = async (
 	id: string,
 	productUnit: IProductUnitUpdate
 ): Promise<IProductUnit> => {
+	const productUnitLint = removeInvalidFields({
+		name: productUnit.name,
+	});
+
 	const productUnitUpdated = await ProductUnitModel.findByIdAndUpdate(
 		id,
-		{ $set: { name: productUnit.name } },
+		{ $set: productUnitLint },
 		{ new: true }
 	);
 

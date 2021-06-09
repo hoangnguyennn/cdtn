@@ -9,9 +9,10 @@ import { IProduct } from '../interfaces/IDocuments';
 import { IProductCreate } from '../interfaces';
 import ProductModel from '../models/product';
 import { ProductStatus } from '../interfaces/enums';
+import { removeInvalidFields } from '../utils';
 
 const create = async (product: IProductCreate): Promise<IProduct> => {
-	const productCreated = await ProductModel.create({
+	const productLint = removeInvalidFields({
 		name: product.name,
 		price: product.price,
 		unitId: product.unitId,
@@ -19,6 +20,8 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 		status: product.status,
 		imagesId: product.imagesId,
 	});
+
+	const productCreated = await ProductModel.create(productLint);
 
 	return ProductModel.populate(productCreated, [
 		{ path: 'unit' },
@@ -53,18 +56,18 @@ const getTrending = async (): Promise<IProduct[]> => {
 };
 
 const updateProduct = async (id: string, product: IProductCreate) => {
+	const productLint = removeInvalidFields({
+		name: product.name,
+		price: product.price,
+		unitId: product.unitId,
+		description: product.description,
+		status: product.status,
+		imagesId: product.imagesId,
+	});
+
 	const productUpdated = await ProductModel.findByIdAndUpdate(
 		id,
-		{
-			$set: {
-				name: product.name,
-				price: product.price,
-				unitId: product.unitId,
-				description: product.description,
-				status: product.status,
-				imagesId: product.imagesId,
-			},
-		},
+		{ $set: productLint },
 		{ new: true }
 	).populate([{ path: 'unit' }, { path: 'images' }]);
 

@@ -1,13 +1,19 @@
 import { IImage } from '../interfaces/IDocuments';
 import { IImageCreate } from '../interfaces';
 import ImageModel from '../models/image';
+import { removeInvalidFields } from '../utils';
 
 const get = async (): Promise<IImage[]> => {
 	return ImageModel.find();
 };
 
 const create = async (image: IImageCreate): Promise<IImage> => {
-	return ImageModel.create({ url: image.url, publicId: image.publicId });
+	const imageLint = removeInvalidFields({
+		url: image.url,
+		publicId: image.publicId,
+	});
+
+	return ImageModel.create(imageLint);
 };
 
 export default {

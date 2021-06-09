@@ -2,9 +2,10 @@ import { IOrder } from '../interfaces/IDocuments';
 import { IOrderCreate } from '../interfaces';
 import { PaymentStatus } from '../interfaces/enums';
 import OrderModel from '../models/order';
+import { removeInvalidFields } from '../utils';
 
 const create = async (order: IOrderCreate): Promise<IOrder> => {
-	const orderCreated = await OrderModel.create({
+	const orderLint = removeInvalidFields({
 		userId: order.userId,
 		deliveryFullName: order.deliveryFullName,
 		deliveryAddress: order.deliveryAddress,
@@ -16,6 +17,8 @@ const create = async (order: IOrderCreate): Promise<IOrder> => {
 		itemsId: order.itemsId,
 	});
 
+	const orderCreated = await OrderModel.create(orderLint);
+
 	return OrderModel.populate(orderCreated, [
 		{ path: 'user' },
 		{ path: 'paymentMethod' },
@@ -24,16 +27,7 @@ const create = async (order: IOrderCreate): Promise<IOrder> => {
 };
 
 const get = async (order: Partial<IOrder> = {}): Promise<IOrder[]> => {
-	const orderFilter = Object.entries(order).reduce(
-		(result: any, [key, value]) => {
-			if (value) {
-				result[key] = value;
-			}
-			return result;
-		},
-		{}
-	);
-
+	const orderFilter: any = removeInvalidFields(order);
 	return OrderModel.find(orderFilter)
 		.populate([
 			{ path: 'user' },

@@ -7,6 +7,7 @@ import {
 import { IUser } from '../interfaces/IDocuments';
 import { IUserUpdate } from '../interfaces';
 import UserModel from '../models/user';
+import { removeInvalidFields } from '../utils';
 
 const getById = async (id: string | Types.ObjectId): Promise<IUser> => {
 	const user = await UserModel.findOne({ _id: id });
@@ -19,19 +20,13 @@ const getById = async (id: string | Types.ObjectId): Promise<IUser> => {
 };
 
 const update = async (id: string, user: IUserUpdate): Promise<IUser> => {
-	const userUpdate = Object.entries({
+	const userUpdate = removeInvalidFields({
 		email: user.email,
 		fullName: user.fullName,
 		phone: user.phone,
 		address: user.address,
 		passwordHashed: user.passwordHashed,
-	}).reduce((result: any, [key, value]) => {
-		if (value) {
-			result[key] = value;
-		}
-
-		return result;
-	}, {});
+	});
 
 	const userUpdated = await UserModel.findByIdAndUpdate(
 		id,

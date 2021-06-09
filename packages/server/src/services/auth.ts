@@ -6,6 +6,7 @@ import {
 } from '../helpers/commonResponse';
 import { ILogin, IUserCreate } from '../interfaces';
 import { IUser } from '../interfaces/IDocuments';
+import { removeInvalidFields } from '../utils';
 
 const login = async (credential: ILogin): Promise<IUser> => {
 	const user = await UserModel.findOne({ email: credential.email });
@@ -22,7 +23,7 @@ const login = async (credential: ILogin): Promise<IUser> => {
 };
 
 const register = async (user: IUserCreate): Promise<IUser> => {
-	return UserModel.create({
+	const userLint = removeInvalidFields({
 		email: user.email,
 		passwordHashed: user.passwordHashed,
 		fullName: user.fullName,
@@ -30,6 +31,8 @@ const register = async (user: IUserCreate): Promise<IUser> => {
 		userType: user.userType,
 		isActivated: user.isActivated,
 	});
+
+	return UserModel.create(userLint);
 };
 
 export default {
