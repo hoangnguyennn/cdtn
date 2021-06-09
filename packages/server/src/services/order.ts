@@ -26,7 +26,7 @@ const create = async (order: IOrderCreate): Promise<IOrder> => {
 	]);
 };
 
-const get = async (order: Partial<IOrder> = {}): Promise<IOrder[]> => {
+const get = async (order: any = {}): Promise<IOrder[]> => {
 	const orderFilter: any = removeInvalidFields(order);
 	return OrderModel.find(orderFilter)
 		.populate([

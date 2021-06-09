@@ -9,6 +9,7 @@ import productRoute from './product';
 import productUnitRoute from './productUnit';
 import uploadRoute from './upload';
 import userRoute from './user';
+import statisticsRoute from './statistics';
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.use('/product-units', productUnitRoute);
 router.use('/products', productRoute);
 router.use('/upload', uploadRoute);
 router.use('/users', userRoute);
+router.use('/statistics', statisticsRoute);
 
 export default router;
