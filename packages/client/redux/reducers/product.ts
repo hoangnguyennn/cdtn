@@ -1,5 +1,4 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 import {
 	fetchProductById,
@@ -43,36 +42,21 @@ const productSlice = createSlice({
 const { setTrendingProducts, setProduct, setProducts } = productSlice.actions;
 
 const fetchProductsAction = (query: any) => async (dispatch: Dispatch) => {
-	return fetchProducts(query)
-		.then((products) => {
-			return dispatch(setProducts(products));
-		})
-		.catch((err) => {
-			toast.error(err.message);
-			throw err;
-		});
+	return fetchProducts(query).then((products) => {
+		return dispatch(setProducts(products));
+	});
 };
 
 const fetchTrendingProductsAction = () => async (dispatch: Dispatch) => {
-	return fetchTrendingProducts()
-		.then((trendingProducts) => {
-			return dispatch(setTrendingProducts(trendingProducts));
-		})
-		.catch((err) => {
-			toast.error(err.message);
-			throw err;
-		});
+	return fetchTrendingProducts().then((trendingProducts) => {
+		return dispatch(setTrendingProducts(trendingProducts));
+	});
 };
 
 const fetchProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
-	return fetchProductById(id)
-		.then((product) => {
-			dispatch(setProduct(product));
-		})
-		.catch((err) => {
-			toast.error(err.message);
-			throw err;
-		});
+	return fetchProductById(id).then((product) => {
+		dispatch(setProduct(product));
+	});
 };
 
 export {

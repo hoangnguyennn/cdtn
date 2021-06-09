@@ -73,8 +73,9 @@ const Cart = () => {
 		try {
 			await dispatch(orderAction(order));
 			router.replace(PATH_NAME.MY_ORDER);
-		} catch {
-			console.log('order failed');
+			console.log('success');
+		} catch (err) {
+			console.log(err.message || 'error');
 		}
 
 		setSubmitting(false);

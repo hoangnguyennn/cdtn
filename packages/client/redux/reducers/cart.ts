@@ -1,5 +1,4 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 import { ICartState, IRootState } from '../../interfaces/IState';
 import { IOrder } from '../../interfaces/index';
@@ -33,7 +32,6 @@ const cartSlice = createSlice({
 			}
 
 			localStorage.setItem('cart', JSON.stringify(state.cartItems));
-			toast.info('Add to cart');
 		},
 		removeFromCart(state, action) {
 			const indexInCart = state.cartItems.findIndex(
@@ -98,17 +96,11 @@ export const {
 
 export const orderAction =
 	(orderRequest: IOrder) => async (dispatch: Dispatch) => {
-		return order(orderRequest)
-			.then(() => {
-				setTimeout(() => {
-					dispatch(clearCart());
-				}, 1000);
-				toast.success('success');
-			})
-			.catch((err) => {
-				toast.error(err.message);
-				throw err;
-			});
+		return order(orderRequest).then(() => {
+			setTimeout(() => {
+				dispatch(clearCart());
+			}, 1000);
+		});
 	};
 
 const cartState = (state: IRootState) => state.cart;

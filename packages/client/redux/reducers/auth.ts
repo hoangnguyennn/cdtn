@@ -1,5 +1,4 @@
 import { createSlice, createSelector, Dispatch } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 import { IAuthState, IRootState } from '../../interfaces/IState';
 import { ILogin, IUserCreate, IUserUpdate } from '../../interfaces/index';
@@ -52,23 +51,15 @@ const AuthSlice = createSlice({
 const { setToken, setUser, clearUser } = AuthSlice.actions;
 
 const registerAction = (user: IUserCreate) => async () => {
-	return register(user).catch((err) => {
-		toast.error(err.message);
-		throw err;
-	});
+	return register(user);
 };
 
 const loginAction = (userLogin: ILogin) => async (dispatch: Dispatch) => {
-	return login(userLogin)
-		.then((response) => {
-			dispatch(setToken(response.token));
-			dispatch(setUser(response.user));
-			window.localStorage.setItem('access-token', response.token);
-		})
-		.catch((err) => {
-			toast.error(err.message);
-			throw err;
-		});
+	return login(userLogin).then((response) => {
+		dispatch(setToken(response.token));
+		dispatch(setUser(response.user));
+		window.localStorage.setItem('access-token', response.token);
+	});
 };
 
 const loginByTokenAction = () => async (dispatch: Dispatch) => {
@@ -96,18 +87,13 @@ const updateUserInfoAction = (userId: string, userInfo: IUserUpdate) => {
 		const token = localStorage.getItem('access-token');
 		if (!token) {
 			localStorage.removeItem('access-token');
-			return dispatch(clearUser());
+			dispatch(clearUser());
+			throw new Error('token not found');
 		}
 
-		return updateUserInfo(userId, userInfo, token)
-			.then((userUpdated) => {
-				dispatch(setUser(userUpdated));
-				toast.success('success');
-			})
-			.catch((err) => {
-				toast.error(err.message);
-				throw err;
-			});
+		return updateUserInfo(userId, userInfo, token).then((userUpdated) => {
+			dispatch(setUser(userUpdated));
+		});
 	};
 };
 

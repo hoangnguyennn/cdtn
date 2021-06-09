@@ -13,6 +13,7 @@ import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 
 import Root from './MyAccount';
+import { toast } from 'react-toastify';
 
 const MyAccount = () => {
 	const { t } = useTranslation();
@@ -32,9 +33,17 @@ const MyAccount = () => {
 		address: Yup.string().required(t('This field is required')),
 	});
 
-	const handleUserFormSubmit = (values: IUserUpdateInfo, { setSubmitting }) => {
-		dispatch(updateUserInfoAction(userInfo.id, values));
-		setSubmitting(false);
+	const handleUserFormSubmit = async (
+		values: IUserUpdateInfo,
+		{ setSubmitting }
+	) => {
+		try {
+			await dispatch(updateUserInfoAction(userInfo.id, values));
+			setSubmitting(false);
+			toast.success('success');
+		} catch (err) {
+			toast.error(err.message || 'error');
+		}
 	};
 
 	const userFormik = useFormik({
@@ -60,11 +69,15 @@ const MyAccount = () => {
 			.required(t('This field is required')),
 	});
 
-	const handleChangePasswordSubmit = (values: any, { setSubmitting }) => {
-		dispatch(
-			updateUserInfoAction(userInfo.id, { password: values.newPassword })
-		);
-		setSubmitting(false);
+	const handleChangePasswordSubmit = async (values: any, { setSubmitting }) => {
+		const newValues = { password: values.newPassword };
+		try {
+			await dispatch(updateUserInfoAction(userInfo.id, newValues));
+			setSubmitting(false);
+			toast.success('success');
+		} catch (err) {
+			toast.error(err.message || 'error');
+		}
 	};
 
 	const changePasswordFormik = useFormik({
