@@ -68,6 +68,7 @@ const vi = {
 	'There are no products to display': 'Không có sản phẩm nào để hiển thị',
 	'Delete all': 'Xóa tất cả',
 	'Stop business': 'Sản phẩm đã ngừng kinh doanh',
+	Order: 'Đơn hàng',
 };
 
 export default vi;

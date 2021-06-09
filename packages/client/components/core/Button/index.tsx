@@ -1,13 +1,12 @@
 import styled from 'styled-components';
-
-type Color = 'primary';
+import { Variant } from '../../../interfaces/types';
 
 type ButtonProps = {
-	variant?: Color;
+	variant?: Variant;
 	shadow?: boolean;
 };
 
-const renderShadow = (shadow?: boolean, variant?: Color) => {
+const renderShadow = (shadow?: boolean, variant?: Variant) => {
 	if (shadow) {
 		return `0 0.5rem 1.125rem -0.5rem var(--${variant}-shadow)`;
 	}

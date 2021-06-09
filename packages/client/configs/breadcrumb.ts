@@ -22,6 +22,11 @@ export const myOrderPage = (): IBreadcrumb[] => [
 	{ id: 'p2', name: i18n.t('My orders'), url: PATH_NAME.MY_ORDER },
 ];
 
+export const orderNotificationPage = (): IBreadcrumb[] => [
+	{ id: 'p1', name: i18n.t('Home'), url: PATH_NAME.HOME },
+	{ id: 'p2', name: i18n.t('Order'), url: PATH_NAME.MY_ORDER },
+];
+
 export const productPage = (
 	title: string,
 	id: string | number

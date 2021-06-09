@@ -1,6 +1,7 @@
 import { ICartItem } from '../interfaces';
+import { Variant } from '../interfaces/types';
 
-const isProductInCart = (product: any): product is ICartItem => {
+export const isProductInCart = (product: any): product is ICartItem => {
 	return (
 		'id' in product &&
 		'name' in product &&
@@ -12,4 +13,6 @@ const isProductInCart = (product: any): product is ICartItem => {
 	);
 };
 
-export default isProductInCart;
+export const isVariant = (key: string): boolean => {
+	return Object.keys(Variant).includes(key);
+};

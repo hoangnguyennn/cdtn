@@ -31,6 +31,7 @@ import {
 import { getUserInfo } from '../../redux/reducers/auth';
 import { ICartForm, IOrder } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
+import { Variant } from '../../interfaces/types';
 
 const Cart = () => {
 	const { t } = useTranslation();
@@ -73,7 +74,7 @@ const Cart = () => {
 
 		try {
 			await dispatch(orderAction(order));
-			router.replace(PATH_NAME.MY_ORDER);
+			router.replace(`${PATH_NAME.ORDERS}?status=${Variant.success}`);
 			toast.success('success');
 		} catch (err) {
 			toast.error(err.message || 'error');
