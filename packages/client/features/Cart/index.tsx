@@ -1,6 +1,8 @@
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import classNames from 'classnames';
@@ -27,9 +29,8 @@ import {
 	updateQty,
 } from '../../redux/reducers/cart';
 import { getUserInfo } from '../../redux/reducers/auth';
-import { ICartForm, IOrder } from '../../interfaces/index';
+import { ICartForm, IOrder } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
-import { useRouter } from 'next/router';
 
 const Cart = () => {
 	const { t } = useTranslation();
@@ -73,9 +74,9 @@ const Cart = () => {
 		try {
 			await dispatch(orderAction(order));
 			router.replace(PATH_NAME.MY_ORDER);
-			console.log('success');
+			toast.success('success');
 		} catch (err) {
-			console.log(err.message || 'error');
+			toast.error(err.message || 'error');
 		}
 
 		setSubmitting(false);

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
 import { addToCart } from '../../../redux/reducers/cart';
-import { IProduct } from '../../../interfaces/index';
+import { IProduct } from '../../../interfaces';
 import { PATH_NAME } from '../../../configs/pathName';
 import Button from '../../core/Button';
 import ProductItem from '../Item';

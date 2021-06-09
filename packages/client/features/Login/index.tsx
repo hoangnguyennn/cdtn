@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
@@ -13,7 +14,7 @@ import Invalid from '../../components/core/Invalid';
 import LoginStyled from './Login';
 
 import { getToken, loginAction } from '../../redux/reducers/auth';
-import { ILogin } from '../../interfaces/index';
+import { ILogin } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
 
 const Login = () => {
@@ -33,8 +34,13 @@ const Login = () => {
 	});
 
 	const handleSubmit = async (values: ILogin, { setSubmitting }) => {
-		await dispatch(loginAction(values));
-		setSubmitting(false);
+		try {
+			await dispatch(loginAction(values));
+			setSubmitting(false);
+			toast.success('success');
+		} catch (err) {
+			toast.error(err.message || 'error');
+		}
 
 		if (token) {
 			router.replace(PATH_NAME.HOME);

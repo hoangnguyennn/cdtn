@@ -1,7 +1,7 @@
 import { createSlice, createSelector, Dispatch } from '@reduxjs/toolkit';
 
 import { IAuthState, IRootState } from '../../interfaces/IState';
-import { ILogin, IUserCreate, IUserUpdate } from '../../interfaces/index';
+import { ILogin, IUserCreate, IUserUpdate } from '../../interfaces';
 import { login, loginByToken, register } from '../../apis/auth.api';
 import { updateUserInfo } from '../../apis/user.api';
 

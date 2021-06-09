@@ -1,7 +1,7 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 
 import { ICartState, IRootState } from '../../interfaces/IState';
-import { IOrder } from '../../interfaces/index';
+import { IOrder } from '../../interfaces';
 import { order } from '../../apis/order.api';
 import isProductInCart from '../../helpers/isProductInCart';
 

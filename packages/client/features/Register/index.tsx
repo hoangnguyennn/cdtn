@@ -1,10 +1,12 @@
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import Link from 'next/link';
 
-import { IRegisterForm } from '../../interfaces/index';
+import { IRegisterForm } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
 import { registerAction } from '../../redux/reducers/auth';
 import Button from '../../components/core/Button';
@@ -13,7 +15,6 @@ import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 import RegisterStyled from './Register';
-import { useRouter } from 'next/router';
 
 const Register = () => {
 	const { t } = useTranslation();
@@ -49,8 +50,9 @@ const Register = () => {
 				})
 			);
 			router.push(PATH_NAME.LOGIN);
-		} catch {
-			console.log('register failed');
+			toast.success('success');
+		} catch (err) {
+			toast.error(err.message || 'error');
 		}
 
 		setSubmitting(false);
