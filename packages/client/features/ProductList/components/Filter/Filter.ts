@@ -19,6 +19,22 @@ export default styled(Form)`
 			}
 		}
 
+		.product-name {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			input {
+				flex: 1;
+				padding: 0 8px;
+				width: 0;
+				height: 30px;
+				border: 1px solid #dae1e7;
+				border-radius: 2px;
+				outline: none;
+			}
+		}
+
 		.title {
 			padding-bottom: 0.875rem;
 			font-size: 0.8125rem;

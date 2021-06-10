@@ -69,6 +69,8 @@ const vi = {
 	'Delete all': 'Xóa tất cả',
 	'Stop business': 'Sản phẩm đã ngừng kinh doanh',
 	Order: 'Đơn hàng',
+	'Product name': 'Tên sản phẩm',
+	'Enter product name': 'Nhập tên sản phẩm',
 };
 
 export default vi;

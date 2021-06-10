@@ -3,15 +3,18 @@ import {
 	ChangeEvent,
 	Dispatch,
 	FC,
-	FormEvent,
 	KeyboardEvent,
+	MouseEvent,
 	SetStateAction,
 	useEffect,
 	useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PATH_NAME } from '../../../../configs/pathName';
+
 import { numberWithDot } from '../../../../utils/formatter';
+import { PATH_NAME } from '../../../../configs/pathName';
+import { removeFalsyFields } from '../../../../utils/converter';
+import { sameObject } from '../../../../utils/comparison';
 
 import Root from './Filter';
 
@@ -23,6 +26,7 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	const { t } = useTranslation();
 	const router = useRouter();
 
+	const [productName, setProductName] = useState('');
 	const [priceFrom, setPriceFrom] = useState('0');
 	const [priceTo, setPriceTo] = useState('0');
 
@@ -39,30 +43,68 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 		}
 	};
 
+	const clearAllFilter = () => {
+		router.push({ pathname: PATH_NAME.PRODUCTS, query: {} });
+	};
+
 	const disableKeyPressCharacter = (event: KeyboardEvent<HTMLInputElement>) => {
 		if (isNaN(Number(event.key))) {
 			event.preventDefault();
 		}
 	};
 
-	const filter = (event: FormEvent) => {
-		event.preventDefault();
+	const filterByName = () => {
+		if (!productName.length) {
+			return;
+		}
 
-		let priceFilter = `${priceFrom}-${priceTo}`;
-		if (priceFrom > priceTo) {
-			priceFilter = `${priceTo}-${priceFrom}`;
+		const query = removeFalsyFields({
+			...router.query,
+			name: productName,
+		});
+
+		if (sameObject(query, router.query)) {
+			return;
 		}
 
 		router.push({
 			pathname: PATH_NAME.PRODUCTS,
-			query: {
-				price: priceFilter,
-			},
+			query,
 		});
 	};
 
-	const clearAllFilter = () => {
-		router.push({ pathname: PATH_NAME.PRODUCTS, query: {} });
+	const filterByPrice = (event: MouseEvent) => {
+		event.preventDefault();
+
+		let priceFilter = undefined;
+		if (Number(priceFrom) && Number(priceTo)) {
+			priceFilter = `${priceFrom}-${priceTo}`;
+
+			if (priceFrom > priceTo) {
+				priceFilter = `${priceTo}-${priceFrom}`;
+			}
+		}
+
+		const query = removeFalsyFields({
+			...router.query,
+			price: priceFilter,
+		});
+
+		if (sameObject(query, router.query)) {
+			return;
+		}
+
+		router.push({
+			pathname: PATH_NAME.PRODUCTS,
+			query,
+		});
+	};
+
+	const handleInputNameKeyPress = (event: KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			filterByName();
+		}
 	};
 
 	useEffect(() => {
@@ -83,11 +125,28 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	}, [JSON.stringify(router.query)]);
 
 	return (
-		<Root className={className} onSubmit={filter} method="post">
+		<Root
+			className={className}
+			onSubmit={() => false}
+			method="post"
+			name="form"
+		>
 			<div className="filter-item">
 				<button className="delete-all" type="button" onClick={clearAllFilter}>
 					{t('Delete all')}
 				</button>
+			</div>
+			<div className="filter-item">
+				<h4 className="title">{t('Product name')}</h4>
+				<div className="product-name">
+					<input
+						name="name"
+						value={productName}
+						onChange={(event) => setProductName(event.target.value)}
+						onKeyPress={handleInputNameKeyPress}
+						placeholder={t('Enter product name')}
+					/>
+				</div>
 			</div>
 			<div className="filter-item">
 				<h4 className="title">{t('Price')}</h4>
@@ -107,7 +166,7 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 						onPaste={() => false}
 					/>
 				</div>
-				<button className="submit-filter-price" type="submit">
+				<button className="submit-filter-price" onClick={filterByPrice}>
 					{t('Apply')}
 				</button>
 			</div>

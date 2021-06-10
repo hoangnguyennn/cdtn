@@ -1,3 +1,5 @@
+import { convertNotUnicode } from '../utils';
+
 /* eslint-disable indent */
 const mapping = (query: any): Record<string, any> => {
 	return Object.entries(query)
@@ -11,6 +13,11 @@ const mapping = (query: any): Record<string, any> => {
 							$lte: Number(tmp[1]) || 0,
 							$gte: Number(tmp[0]) || 0,
 						},
+					};
+				case 'name':
+					tmp = convertNotUnicode(value);
+					return {
+						nameNonUnicode: { $regex: new RegExp(`${tmp}`, 'i') },
 					};
 				default:
 					return null;

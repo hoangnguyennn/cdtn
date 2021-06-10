@@ -41,3 +41,5 @@ export const endOfDay = (date?: Date) => {
 
 	return new Date(years, months, dates + 1);
 };
+
+export const convertNotUnicode = (value: string) => value;
