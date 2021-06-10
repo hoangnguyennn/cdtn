@@ -5,11 +5,12 @@ import { initialStore } from '../redux/store';
 import Banner from '../components/Banner';
 import Home from '../features/Home';
 import MainLayout from '../layouts/MainLayout';
+import bannerBg from '../assets/images/banner.jpg';
 
 const HomePage = () => {
 	return (
 		<MainLayout>
-			<Banner background="http://vikinoko.com/resources/css/img/Mhero.jpg" />
+			<Banner background={bannerBg} />
 			<Home />
 		</MainLayout>
 	);
