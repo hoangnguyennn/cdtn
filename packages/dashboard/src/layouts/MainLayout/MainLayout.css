@@ -7,3 +7,12 @@
 .site-layout .site-layout-background {
 	background: #fff;
 }
+
+.site-layout .header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.topbar-actions {
+	min-width: 200px;
+}

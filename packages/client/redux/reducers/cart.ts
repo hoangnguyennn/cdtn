@@ -13,7 +13,7 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addToCart(state, action) {
+		addToCartAction(state, action) {
 			const indexInCart = state.cartItems.findIndex(
 				(cartItem) => action.payload.id === cartItem.id
 			);
@@ -33,7 +33,7 @@ const cartSlice = createSlice({
 
 			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 		},
-		removeFromCart(state, action) {
+		removeFromCartAction(state, action) {
 			const indexInCart = state.cartItems.findIndex(
 				(cartItem) => action.payload.id === cartItem.id
 			);
@@ -47,7 +47,7 @@ const cartSlice = createSlice({
 				localStorage.setItem('cart', JSON.stringify(state.cartItems));
 			}
 		},
-		updateCartFromLocalStorage(state) {
+		updateCartFromLocalStorageAction(state) {
 			let cartItems = [];
 			if (typeof window !== 'undefined') {
 				if (localStorage.getItem('cart')) {
@@ -59,7 +59,7 @@ const cartSlice = createSlice({
 			}
 			state.cartItems = cartItems;
 		},
-		updateQty(state, action) {
+		updateQtyAction(state, action) {
 			const indexInCart = state.cartItems.findIndex(
 				(cartItem) => action.payload.id === cartItem.id
 			);
@@ -79,7 +79,7 @@ const cartSlice = createSlice({
 
 			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 		},
-		clearCart(state) {
+		clearCartAction(state) {
 			state.cartItems = [];
 			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 		},
@@ -87,18 +87,18 @@ const cartSlice = createSlice({
 });
 
 export const {
-	addToCart,
-	clearCart,
-	removeFromCart,
-	updateCartFromLocalStorage,
-	updateQty,
+	addToCartAction,
+	clearCartAction,
+	removeFromCartAction,
+	updateCartFromLocalStorageAction,
+	updateQtyAction,
 } = cartSlice.actions;
 
 export const orderAction =
 	(orderRequest: IOrder) => async (dispatch: Dispatch) => {
 		return order(orderRequest).then(() => {
 			setTimeout(() => {
-				dispatch(clearCart());
+				dispatch(clearCartAction());
 			}, 1000);
 		});
 	};

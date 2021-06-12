@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Root from './MyOrder';
-import { fetchOrders, getOrders } from '../../redux/reducers/order';
+import { getOrdersAction, getOrders } from '../../redux/reducers/order';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 
 const MyOrder = () => {
@@ -13,7 +13,7 @@ const MyOrder = () => {
 	const orders = useSelector(getOrders());
 
 	useEffect(() => {
-		dispatch(fetchOrders());
+		dispatch(getOrdersAction());
 	}, []);
 
 	return (

@@ -1,5 +1,5 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { get } from '../../apis/order.api';
+import { fetchOrders } from '../../apis/order.api';
 import { IOrderState, IRootState } from '../../interfaces/IState';
 
 export const initialState: IOrderState = {
@@ -10,27 +10,27 @@ const orderSlice = createSlice({
 	name: 'order',
 	initialState,
 	reducers: {
-		setOrders(state, action) {
+		setOrdersAction(state, action) {
 			state.orders = action.payload;
 		},
 	},
 });
 
-const { setOrders } = orderSlice.actions;
+const { setOrdersAction } = orderSlice.actions;
 
-const fetchOrders = () => async (dispatch: Dispatch) => {
+const getOrdersAction = () => async (dispatch: Dispatch) => {
 	const token = localStorage.getItem('access-token');
 	if (!token) {
 		console.log('token not found');
 		return;
 	}
 
-	return get(token).then((orders) => {
-		dispatch(setOrders(orders));
+	return fetchOrders(token).then((orders) => {
+		dispatch(setOrdersAction(orders));
 	});
 };
 
-export { fetchOrders };
+export { getOrdersAction };
 
 const orderState = (state: IRootState) => state.order;
 const selector = function <T>(combiner: { (state: IOrderState): T }) {

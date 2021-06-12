@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import { addToCart } from '../../../redux/reducers/cart';
+import { addToCartAction } from '../../../redux/reducers/cart';
 import { IProduct } from '../../../interfaces';
 import { PATH_NAME } from '../../../configs/pathName';
 import Button from '../../core/Button';
@@ -37,7 +37,9 @@ const ProductList: FC<ProductListProps> = ({
 						<ProductItem
 							key={product.id}
 							link={`${PATH_NAME.PRODUCTS}/${product.id}`}
-							addToCart={() => dispatch(addToCart({ ...product, qty: 1 }))}
+							addToCart={() =>
+								dispatch(addToCartAction({ ...product, qty: 1 }))
+							}
 							{...product}
 						/>
 					))}

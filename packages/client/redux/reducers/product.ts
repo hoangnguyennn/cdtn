@@ -25,45 +25,42 @@ const productSlice = createSlice({
 	name: 'product',
 	initialState,
 	reducers: {
-		setTrendingProducts: (state, action) => {
+		setTrendingProductsAction: (state, action) => {
 			state.trendingProducts = action.payload;
 		},
 
-		setProduct: (state, action) => {
+		setProductAction: (state, action) => {
 			state.product = action.payload;
 		},
 
-		setProducts: (state, action) => {
+		setProductsAction: (state, action) => {
 			state.products = action.payload;
 		},
 	},
 });
 
-const { setTrendingProducts, setProduct, setProducts } = productSlice.actions;
+const { setTrendingProductsAction, setProductAction, setProductsAction } =
+	productSlice.actions;
 
-const fetchProductsAction = (query: any) => async (dispatch: Dispatch) => {
+const getProductsAction = (query: any) => async (dispatch: Dispatch) => {
 	return fetchProducts(query).then((products) => {
-		return dispatch(setProducts(products));
+		return dispatch(setProductsAction(products));
 	});
 };
 
-const fetchTrendingProductsAction = () => async (dispatch: Dispatch) => {
+const getTrendingProductsAction = () => async (dispatch: Dispatch) => {
 	return fetchTrendingProducts().then((trendingProducts) => {
-		return dispatch(setTrendingProducts(trendingProducts));
+		return dispatch(setTrendingProductsAction(trendingProducts));
 	});
 };
 
-const fetchProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
+const gethProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
 	return fetchProductById(id).then((product) => {
-		dispatch(setProduct(product));
+		dispatch(setProductAction(product));
 	});
 };
 
-export {
-	fetchProductByIdAction,
-	fetchProductsAction,
-	fetchTrendingProductsAction,
-};
+export { gethProductByIdAction, getProductsAction, getTrendingProductsAction };
 
 const productState = (state: IRootState) => state.product;
 const selector = function <T>(combiner: { (state: IProductState): T }) {

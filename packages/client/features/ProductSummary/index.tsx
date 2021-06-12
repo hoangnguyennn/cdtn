@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { addToCart } from '../../redux/reducers/cart';
+import { addToCartAction } from '../../redux/reducers/cart';
 import { IProduct } from '../../interfaces';
 import { toCurrency } from '../../utils/formatter';
 import { useDispatch } from 'react-redux';
@@ -21,7 +21,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 
 	const handleAddToCart = () => {
 		if (Number(qty) > 0) {
-			dispatch(addToCart({ ...product, qty: Number(qty) }));
+			dispatch(addToCartAction({ ...product, qty: Number(qty) }));
 		}
 	};
 

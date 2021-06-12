@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 
-import { fetchTrendingProductsAction } from '../redux/reducers/product';
+import { getTrendingProductsAction } from '../redux/reducers/product';
 import { initialStore } from '../redux/store';
 import Banner from '../components/Banner';
 import Home from '../features/Home';
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	const reduxStore = initialStore();
 	const { dispatch } = reduxStore;
 
-	await dispatch(fetchTrendingProductsAction());
+	await dispatch(getTrendingProductsAction());
 
 	return {
 		props: { initialReduxState: reduxStore.getState() },

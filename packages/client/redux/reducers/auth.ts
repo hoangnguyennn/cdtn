@@ -21,10 +21,10 @@ const AuthSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		setToken(state, action) {
+		setTokenAction(state, action) {
 			state.token = action.payload;
 		},
-		setUser(state, action) {
+		setUserAction(state, action) {
 			state.user = {
 				id: action.payload.id,
 				email: action.payload.email,
@@ -34,7 +34,7 @@ const AuthSlice = createSlice({
 				userType: action.payload.userType,
 			};
 		},
-		clearUser(state) {
+		clearUserAction(state) {
 			state.token = '';
 			state.user = {
 				id: '',
@@ -48,7 +48,7 @@ const AuthSlice = createSlice({
 	},
 });
 
-const { setToken, setUser, clearUser } = AuthSlice.actions;
+const { setTokenAction, setUserAction, clearUserAction } = AuthSlice.actions;
 
 const registerAction = (user: IUserCreate) => async () => {
 	return register(user);
@@ -56,8 +56,8 @@ const registerAction = (user: IUserCreate) => async () => {
 
 const loginAction = (userLogin: ILogin) => async (dispatch: Dispatch) => {
 	return login(userLogin).then((response) => {
-		dispatch(setToken(response.token));
-		dispatch(setUser(response.user));
+		dispatch(setTokenAction(response.token));
+		dispatch(setUserAction(response.user));
 		window.localStorage.setItem('access-token', response.token);
 	});
 };
@@ -66,13 +66,13 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
 	const token = localStorage.getItem('access-token');
 	if (!token) {
 		localStorage.removeItem('access-token');
-		return dispatch(clearUser());
+		return dispatch(clearUserAction());
 	}
 
 	return loginByToken(token)
 		.then((user) => {
-			dispatch(setToken(token));
-			dispatch(setUser(user));
+			dispatch(setTokenAction(token));
+			dispatch(setUserAction(user));
 		})
 		.catch((err) => {
 			localStorage.removeItem('access-token');
@@ -87,12 +87,12 @@ const updateUserInfoAction = (userId: string, userInfo: IUserUpdate) => {
 		const token = localStorage.getItem('access-token');
 		if (!token) {
 			localStorage.removeItem('access-token');
-			dispatch(clearUser());
+			dispatch(clearUserAction());
 			throw new Error('token not found');
 		}
 
 		return updateUserInfo(userId, userInfo, token).then((userUpdated) => {
-			dispatch(setUser(userUpdated));
+			dispatch(setUserAction(userUpdated));
 		});
 	};
 };

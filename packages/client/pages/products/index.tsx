@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useTranslation } from 'react-i18next';
 
-import { fetchProductsAction } from '../../redux/reducers/product';
+import { getProductsAction } from '../../redux/reducers/product';
 import { initialStore } from '../../redux/store';
 import { productsPage } from '../../configs/breadcrumb';
 import MainLayout from '../../layouts/MainLayout';
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { dispatch } = reduxStore;
 
 	const query = context.query;
-	await dispatch(fetchProductsAction(query));
+	await dispatch(getProductsAction(query));
 
 	return {
 		props: { initialReduxState: reduxStore.getState() },

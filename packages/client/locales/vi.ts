@@ -71,6 +71,7 @@ const vi = {
 	Order: 'Đơn hàng',
 	'Product name': 'Tên sản phẩm',
 	'Enter product name': 'Nhập tên sản phẩm',
+	'New products': 'Sản phẩm mới',
 };
 
 export default vi;

@@ -17,7 +17,7 @@ import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 
 import {
-	fetchPaymentMethodsAction,
+	getPaymentMethodsAction,
 	getPaymentMethods,
 } from '../../redux/reducers/paymentMethod';
 import {
@@ -25,8 +25,8 @@ import {
 	getCartSubtotal,
 	getDeliveryFee,
 	orderAction,
-	removeFromCart,
-	updateQty,
+	removeFromCartAction,
+	updateQtyAction,
 } from '../../redux/reducers/cart';
 import { getUserInfo } from '../../redux/reducers/auth';
 import { ICartForm, IOrder } from '../../interfaces';
@@ -97,7 +97,7 @@ const Cart = () => {
 	}, [cartItems.length]);
 
 	useEffect(() => {
-		dispatch(fetchPaymentMethodsAction());
+		dispatch(getPaymentMethodsAction());
 	}, []);
 
 	useEffect(() => {
@@ -144,7 +144,7 @@ const Cart = () => {
 											onClick={() => {
 												if (item.qty > 0) {
 													dispatch(
-														updateQty({ id: item.id, qty: item.qty - 1 })
+														updateQtyAction({ id: item.id, qty: item.qty - 1 })
 													);
 												}
 											}}
@@ -164,7 +164,7 @@ const Cart = () => {
 											onClick={() => {
 												if (item.qty < 99) {
 													dispatch(
-														updateQty({ id: item.id, qty: item.qty + 1 })
+														updateQtyAction({ id: item.id, qty: item.qty + 1 })
 													);
 												}
 											}}
@@ -176,7 +176,7 @@ const Cart = () => {
 								<div className="actions">
 									<span
 										className="action"
-										onClick={() => dispatch(removeFromCart(item))}
+										onClick={() => dispatch(removeFromCartAction(item))}
 									>
 										{t('Delete')}
 									</span>

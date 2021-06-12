@@ -16,7 +16,7 @@ const Home = () => {
 				<ProductList
 					columns={1}
 					lg-columns={4}
-					title={t('Trending products')}
+					title={t('New products')}
 					items={trendingProducts}
 				/>
 			</Container>

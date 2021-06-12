@@ -87,6 +87,13 @@ export const loginByTokenAction = () => async (dispatch: Dispatch) => {
 		});
 };
 
+export const logoutAction = () => async (dispatch: Dispatch) => {
+	return Promise.resolve().then(() => {
+		localStorage.removeItem('access-token');
+		dispatch(clearUser());
+	});
+};
+
 const authState = (state: IRootState) => state.auth;
 const selector = function <T>(combiner: { (state: IAuthState): T }) {
 	return createSelector(authState, combiner);
@@ -94,5 +101,6 @@ const selector = function <T>(combiner: { (state: IAuthState): T }) {
 
 export const getToken = () => selector((state) => state.token);
 export const getUserType = () => selector((state) => state.user.userType);
+export const getUserInfo = () => selector((state) => state.user);
 
 export default authSlice.reducer;

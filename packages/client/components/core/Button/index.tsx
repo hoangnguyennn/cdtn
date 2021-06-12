@@ -41,7 +41,7 @@ const Button = styled.button<ButtonProps>`
 `;
 
 Button.defaultProps = {
-	variant: 'primary',
+	variant: Variant.primary,
 	shadow: false,
 };
 

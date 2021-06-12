@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useSelector } from 'react-redux';
 
 import {
-	fetchProductByIdAction,
+	gethProductByIdAction,
 	getProduct,
 } from '../../redux/reducers/product';
 
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { dispatch } = reduxStore;
 
 	try {
-		await dispatch(fetchProductByIdAction(id as string));
+		await dispatch(gethProductByIdAction(id as string));
 
 		return {
 			props: { initialReduxState: reduxStore.getState() },
