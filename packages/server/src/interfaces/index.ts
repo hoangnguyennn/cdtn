@@ -1,6 +1,17 @@
 import { Types } from 'mongoose';
 import { OrderStatus, PaymentStatus, ProductStatus, UserType } from './enums';
 
+export interface ICategoryCreate {
+	name: string;
+	slug: string;
+}
+
+export interface ICategoryResponse {
+	id: string;
+	name: string;
+	slug: string;
+}
+
 export interface IImageCreate {
 	url: string;
 	publicId: string;

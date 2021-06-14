@@ -1,4 +1,5 @@
 export enum CollectionName {
+	CATEGORY = 'categories',
 	IMAGE = 'images',
 	ORDER = 'orders',
 	ORDER_ITEM = 'orderItems',

@@ -1,4 +1,5 @@
 import {
+	ICategoryResponse,
 	IImageResponse,
 	IOrderItemResponse,
 	IOrderResponse,
@@ -9,6 +10,7 @@ import {
 	IUserResponse,
 } from '../interfaces';
 import {
+	ICategory,
 	IImage,
 	IOrder,
 	IOrderItem,
@@ -17,6 +19,16 @@ import {
 	IProductUnit,
 	IUser,
 } from '../interfaces/IDocuments';
+
+export const mappingCategoryToResponse = (
+	category: ICategory
+): ICategoryResponse => {
+	return {
+		id: category._id,
+		name: category.name,
+		slug: category.slug,
+	};
+};
 
 export const mapImageToResponse = (image: IImage): IImageResponse => {
 	return {

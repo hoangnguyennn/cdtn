@@ -1,6 +1,11 @@
 import { Types, Document } from 'mongoose';
 import { OrderStatus, PaymentStatus, ProductStatus, UserType } from './enums';
 
+export interface ICategory extends Document {
+	name: string;
+	slug: string;
+}
+
 export interface IImage extends Document {
 	url: string;
 	publicId: string;
