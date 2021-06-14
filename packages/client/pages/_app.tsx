@@ -10,6 +10,7 @@ import useStore from '../redux/store';
 
 import '../locales';
 import '../assets/styles/index.scss';
+import 'react-quill/dist/quill.snow.css';
 
 Router.events.on('routeChangeStart', (url) => {
 	console.log(`Loading: ${url}`);

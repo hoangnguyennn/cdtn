@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
@@ -37,9 +38,10 @@ const ProductList: FC<ProductListProps> = ({
 						<ProductItem
 							key={product.id}
 							link={`${PATH_NAME.PRODUCTS}/${product.id}`}
-							addToCart={() =>
-								dispatch(addToCartAction({ ...product, qty: 1 }))
-							}
+							addToCart={() => {
+								dispatch(addToCartAction({ ...product, qty: 1 }));
+								toast.info('add to cart');
+							}}
 							{...product}
 						/>
 					))}

@@ -21,6 +21,7 @@ import { IImage, IProductUpdate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 
 import UploadImage from '../../components/UploadImage';
+import TextEditor from '../../components/TextEditor';
 
 const { Option } = Select;
 
@@ -35,15 +36,17 @@ const ProductEdit = () => {
 	const [form] = Form.useForm();
 
 	const layout = {
-		labelCol: { span: 8 },
+		labelCol: { span: 4 },
 		wrapperCol: { span: 16 },
 	};
 
 	const tailLayout = {
-		wrapperCol: { offset: 8, span: 16 },
+		wrapperCol: { offset: 4, span: 16 },
 	};
 
 	const normFile = (fileList: UploadFile[]) => fileList;
+
+	const getDescription = (description: string) => description;
 
 	const onFinish = async (values: any) => {
 		if (!isUploaded) {
@@ -147,9 +150,6 @@ const ProductEdit = () => {
 						))}
 				</Select>
 			</Form.Item>
-			<Form.Item label="Description" name="description">
-				<Input.TextArea />
-			</Form.Item>
 			<Form.Item
 				label="Images"
 				name="images"
@@ -158,6 +158,14 @@ const ProductEdit = () => {
 				getValueFromEvent={normFile}
 			>
 				<UploadImage onChange={normFile} setIsUploaded={setIsUploaded} />
+			</Form.Item>
+			<Form.Item
+				label="Description"
+				name="description"
+				valuePropName="description"
+				getValueFromEvent={getDescription}
+			>
+				<TextEditor onChange={getDescription} />
 			</Form.Item>
 			<Form.Item {...tailLayout}>
 				<Button type="primary" htmlType="submit">

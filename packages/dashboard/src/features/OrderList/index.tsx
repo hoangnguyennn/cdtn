@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { getOrders, getOrdersAction } from '../../redux/reducers/order';
-import { IOrder, IOrderItem, IProductUnit, IUser } from '../../interfaces';
+import { IOrder, IOrderItem, IUser } from '../../interfaces';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import { PATH_NAME } from '../../configs';
 import { PaymentStatus, ProductStatus } from '../../interfaces/enum';
@@ -62,12 +62,6 @@ const getColumnsConfig = (): ColumnsType<IOrder> => [
 		sorter: (a: IOrder, b: IOrder) => {
 			return a.orderDate.getTime() - b.orderDate.getTime();
 		},
-	},
-	{
-		title: 'Unit',
-		dataIndex: 'unit',
-		key: 'unit',
-		render: (unit?: IProductUnit) => unit?.name,
 	},
 	{
 		title: 'Payment Status',

@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
 import { addToCartAction } from '../../redux/reducers/cart';
@@ -22,6 +23,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 	const handleAddToCart = () => {
 		if (Number(qty) > 0) {
 			dispatch(addToCartAction({ ...product, qty: Number(qty) }));
+			toast.info('add to cart');
 		}
 	};
 
@@ -52,7 +54,10 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 					<div className="stop-business">{t('Stop business')}</div>
 				)}
 
-				<div className="description">{product.description}</div>
+				<div
+					className="description ql-editor"
+					dangerouslySetInnerHTML={{ __html: product.description }}
+				/>
 			</div>
 		</ProductSummaryStyled>
 	);
