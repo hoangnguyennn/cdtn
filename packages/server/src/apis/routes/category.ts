@@ -9,6 +9,7 @@ const router = Router();
 
 router
 	.route('/')
+	.get(catcherWrapper(CategoryController.get))
 	.post(
 		AuthMiddleware.checkAuth,
 		AuthMiddleware.checkRole([UserType.MANAGER]),

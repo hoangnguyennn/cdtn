@@ -10,4 +10,12 @@ const create = async (req: Request, res: Response) => {
 	return success(res, mappingCategoryToResponse(categoryCreated));
 };
 
-export default { create };
+const get = async (req: Request, res: Response) => {
+	const categories = await CategoryService.get();
+	return success(res, categories.map(mappingCategoryToResponse));
+};
+
+export default {
+	create,
+	get,
+};
