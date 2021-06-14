@@ -6,6 +6,12 @@ export interface IBreadCrumb {
 	url: string;
 }
 
+export interface ICategory {
+	id: string;
+	name: string;
+	slug: string;
+}
+
 export interface IImage {
 	id: string;
 	url: string;
@@ -81,6 +87,13 @@ export interface IMenu {
 	href?: string;
 	hasItems: boolean;
 	items?: IMenu[];
+}
+
+export interface IMenuWithoutId {
+	title: string;
+	href?: string;
+	hasItems: boolean;
+	items?: IMenuWithoutId[];
 }
 
 export interface IUser {

@@ -1,4 +1,6 @@
 export const PATH_NAME = {
+	CATEGORY_ADD: '/categorie/add',
+	CATEGORY_LIST: '/categories',
 	HOME: '/',
 	LOGIN: '/login',
 	ORDER_LIST: '/orders',

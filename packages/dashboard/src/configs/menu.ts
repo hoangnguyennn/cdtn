@@ -1,63 +1,93 @@
-import { IMenu } from '../interfaces';
+import { PATH_NAME } from '.';
+import { IMenu, IMenuWithoutId } from '../interfaces';
 
-const menu: IMenu[] = [
+const menuWithoutId: IMenuWithoutId[] = [
 	{
-		id: 1,
 		title: 'Dashboard',
-		href: '/',
+		href: PATH_NAME.HOME,
 		hasItems: false,
 	},
 	{
-		id: 2,
 		title: 'Products',
 		hasItems: true,
 		items: [
 			{
-				id: 21,
 				title: 'List',
-				href: '/products',
+				href: PATH_NAME.PRODUCT_LIST,
 				hasItems: false,
 			},
 			{
-				id: 22,
 				title: 'Add',
-				href: '/product/add',
+				href: PATH_NAME.PRODUCT_ADD,
 				hasItems: false,
 			},
 		],
 	},
 	{
-		id: 3,
 		title: 'Product Units',
 		hasItems: true,
 		items: [
 			{
-				id: 31,
 				title: 'List',
-				href: '/product-units',
+				href: PATH_NAME.PRODUCT_UNIT_LIST,
 				hasItems: false,
 			},
 			{
-				id: 32,
 				title: 'Add',
-				href: '/product-unit/add',
+				href: PATH_NAME.PRODUCT_UNIT_ADD,
 				hasItems: false,
 			},
 		],
 	},
 	{
-		id: 4,
+		title: 'Categories',
+		hasItems: true,
+		items: [
+			{
+				title: 'List',
+				href: PATH_NAME.CATEGORY_LIST,
+				hasItems: false,
+			},
+			{
+				title: 'Add',
+				href: PATH_NAME.CATEGORY_ADD,
+				hasItems: false,
+			},
+		],
+	},
+	{
 		title: 'Orders',
 		hasItems: true,
 		items: [
 			{
-				id: 41,
 				title: 'List',
-				href: '/orders',
+				href: PATH_NAME.ORDER_LIST,
 				hasItems: false,
 			},
 		],
 	},
 ];
+
+const menu: IMenu[] = menuWithoutId.map((menu, index) => {
+	if (!menu.hasItems) {
+		return {
+			...menu,
+			id: index,
+			items: undefined,
+		};
+	}
+
+	return {
+		...menu,
+		id: index,
+		items: menu.items?.map((item, idx) => {
+			return {
+				...item,
+				id: `${index}${idx}`,
+				items: undefined,
+			};
+		}),
+	};
+});
 
 export default menu;

@@ -1,6 +1,11 @@
 import { PATH_NAME } from '.';
 import { IBreadCrumb } from '../interfaces';
 
+export const Category = (): IBreadCrumb[] => [
+	{ id: 'p1', title: 'Home', url: PATH_NAME.HOME },
+	{ id: 'p2', title: 'Categories', url: PATH_NAME.CATEGORY_LIST },
+];
+
 export const Dashboard = (): IBreadCrumb[] => [
 	{ id: 'p1', title: 'Home', url: PATH_NAME.HOME },
 ];

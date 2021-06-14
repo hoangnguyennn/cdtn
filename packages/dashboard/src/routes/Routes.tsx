@@ -7,16 +7,18 @@ import IRoute from '../interfaces/IRoute';
 import MainLayout from '../layouts/MainLayout';
 
 import {
+	Category as CategoryBR,
 	Dashboard as DashboardBR,
+	OrderList as OrderListBR,
 	ProductAdd as ProductAddBR,
 	ProductEdit as ProductEditBR,
 	ProductList as ProductListBR,
 	ProductUnitAdd as ProductUnitAddBR,
 	ProductUnitEdit as ProductUnitEditBR,
 	ProductUnitList as ProductUnitListBR,
-	OrderList as OrderListBR,
 } from '../configs/breadcrumb';
 
+const CategoryList = lazy(() => import('../features/CategoryList'));
 const Home = lazy(() => import('../features/Home'));
 const Login = lazy(() => import('../features/Login'));
 const OrderList = lazy(() => import('../features/OrderList'));
@@ -85,6 +87,14 @@ const routesConfig: IRoute[] = [
 		component: OrderList,
 		breadcrumb: OrderListBR(),
 	},
+	{
+		path: PATH_NAME.CATEGORY_LIST,
+		guard: Auth,
+		layout: MainLayout,
+		component: CategoryList,
+		breadcrumb: CategoryBR(),
+	},
+
 	{
 		path: PATH_NAME.LOGIN,
 		component: Login,

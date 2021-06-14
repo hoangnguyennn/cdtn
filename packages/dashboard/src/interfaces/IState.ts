@@ -1,8 +1,12 @@
-import { IProduct, IUser, IProductUnit, IOrder } from '.';
+import { IProduct, IUser, IProductUnit, IOrder, ICategory } from '.';
 
 export interface IAuthState {
 	token: string;
 	user: IUser;
+}
+
+export interface ICategoryState {
+	categories: ICategory[];
 }
 
 export interface IOrderState {
@@ -19,6 +23,7 @@ export interface IProductUnitState {
 
 export interface IRootState {
 	auth: IAuthState;
+	category: ICategoryState;
 	order: IOrderState;
 	product: IProductState;
 	productUnit: IProductUnitState;
