@@ -19,6 +19,10 @@ import { IProductCreate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 
 import UploadImage from '../../components/UploadImage';
+import {
+	getCategories,
+	gethCategoriesAction,
+} from '../../redux/reducers/category';
 
 const { Option } = Select;
 
@@ -26,6 +30,7 @@ const ProductAdd = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const productUnits = useSelector(getProductUnits());
+	const categories = useSelector(getCategories());
 	const [isUploaded, setIsUploaded] = useState(true);
 
 	const normFile = (fileList: any[]) => {
@@ -62,8 +67,16 @@ const ProductAdd = () => {
 	};
 
 	useEffect(() => {
-		dispatch(getProductUnitsAction());
-	}, [dispatch]);
+		if (!productUnits.length) {
+			dispatch(getProductUnitsAction());
+		}
+	}, [dispatch, productUnits]);
+
+	useEffect(() => {
+		if (!categories.length) {
+			dispatch(gethCategoriesAction());
+		}
+	}, [dispatch, categories]);
 
 	return (
 		<Form {...layout} className="form" onFinish={onFinish}>
@@ -100,6 +113,21 @@ const ProductAdd = () => {
 						.map((unit) => (
 							<Option key={unit.id} value={unit.id}>
 								{unit.name}
+							</Option>
+						))}
+				</Select>
+			</Form.Item>
+			<Form.Item
+				label="Category"
+				name="category"
+				rules={[{ required: true, message: 'Please select category!' }]}
+			>
+				<Select>
+					{[...categories]
+						.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
+						.map((category) => (
+							<Option key={category.id} value={category.id}>
+								{category.name}
 							</Option>
 						))}
 				</Select>
