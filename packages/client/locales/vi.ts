@@ -72,6 +72,8 @@ const vi = {
 	'Product name': 'Tên sản phẩm',
 	'Enter product name': 'Nhập tên sản phẩm',
 	'New products': 'Sản phẩm mới',
+	Category: 'Danh mục sản phẩm',
+	Layered: 'Quy cách',
 };
 
 export default vi;

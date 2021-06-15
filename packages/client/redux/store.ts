@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { initialState as initialAppState } from './reducers/app';
 import { initialState as initialAuthState } from './reducers/auth';
 import { initialState as initialCartState } from './reducers/cart';
+import { initialState as initialCategoryState } from './reducers/category';
 import { initialState as initialOrderState } from './reducers/order';
 import { initialState as initialPaymentMethodState } from './reducers/paymentMethod';
 import { initialState as initialProductState } from './reducers/product';
@@ -18,6 +19,7 @@ const initStore = (
 		app: initialAppState,
 		auth: initialAuthState,
 		cart: initialCartState,
+		category: initialCategoryState,
 		order: initialOrderState,
 		paymentMethod: initialPaymentMethodState,
 		product: initialProductState,

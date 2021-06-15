@@ -1,5 +1,6 @@
 import {
 	ICategoryResponse,
+	ICategoryWithLength,
 	IImageResponse,
 	IOrderItemResponse,
 	IOrderResponse,
@@ -28,6 +29,14 @@ export const mapCategoryToResponse = (
 		name: category.name,
 		slug: category.slug,
 	};
+};
+
+export const mapCategoryWithProductListToResponse = (
+	category: ICategoryWithLength
+) => {
+	return Object.assign(mapCategoryToResponse(category), {
+		productsLength: category.productsLength,
+	});
 };
 
 export const mapImageToResponse = (image: IImage): IImageResponse => {

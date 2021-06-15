@@ -42,25 +42,24 @@ const productSlice = createSlice({
 const { setTrendingProductsAction, setProductAction, setProductsAction } =
 	productSlice.actions;
 
-const getProductsAction = (query: any) => async (dispatch: Dispatch) => {
+export const getProductsAction = (query: any) => async (dispatch: Dispatch) => {
 	return fetchProducts(query).then((products) => {
-		return dispatch(setProductsAction(products));
+		dispatch(setProductsAction(products));
 	});
 };
 
-const getTrendingProductsAction = () => async (dispatch: Dispatch) => {
+export const getTrendingProductsAction = () => async (dispatch: Dispatch) => {
 	return fetchTrendingProducts().then((trendingProducts) => {
-		return dispatch(setTrendingProductsAction(trendingProducts));
+		dispatch(setTrendingProductsAction(trendingProducts));
 	});
 };
 
-const gethProductByIdAction = (id: string) => async (dispatch: Dispatch) => {
-	return fetchProductById(id).then((product) => {
-		dispatch(setProductAction(product));
-	});
-};
-
-export { gethProductByIdAction, getProductsAction, getTrendingProductsAction };
+export const gethProductByIdAction =
+	(id: string) => async (dispatch: Dispatch) => {
+		return fetchProductById(id).then((product) => {
+			dispatch(setProductAction(product));
+		});
+	};
 
 const productState = (state: IRootState) => state.product;
 const selector = function <T>(combiner: { (state: IProductState): T }) {

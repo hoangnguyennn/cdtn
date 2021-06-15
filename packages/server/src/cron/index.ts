@@ -4,7 +4,7 @@ import ProductService from '../services/product';
 import ImageService from '../services/image';
 import UploadFileHelper from '../helpers/uploadFile';
 
-const cron = () => {
+export const cron = () => {
 	// run delete images every minutes
 	const deleteImagesJob = new CronJob('* * * * *', async function () {
 		const products = await ProductService.get();
@@ -35,4 +35,4 @@ const cron = () => {
 	deleteImagesJob.start();
 };
 
-export default cron;
+export default () => undefined;

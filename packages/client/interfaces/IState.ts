@@ -1,5 +1,6 @@
 import {
 	ICartItem,
+	ICategoryWithProductLength,
 	IOrderResponse,
 	IPaymentMethod,
 	IProduct,
@@ -17,6 +18,10 @@ export interface IAuthState {
 
 export interface ICartState {
 	cartItems: ICartItem[];
+}
+
+export interface ICategoryState {
+	categories: ICategoryWithProductLength[];
 }
 
 export interface IOrderState {
@@ -37,6 +42,7 @@ export interface IRootState {
 	app: IAppState;
 	auth: IAuthState;
 	cart: ICartState;
+	category: ICategoryState;
 	order: IOrderState;
 	paymentMethod: IPaymentMethodState;
 	product: IProductState;

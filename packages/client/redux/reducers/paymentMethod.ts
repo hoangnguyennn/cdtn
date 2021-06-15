@@ -19,13 +19,11 @@ const paymentMethodSlice = createSlice({
 
 const { setPaymentMethodsAction } = paymentMethodSlice.actions;
 
-const getPaymentMethodsAction = () => async (dispatch: Dispatch) => {
+export const getPaymentMethodsAction = () => async (dispatch: Dispatch) => {
 	return fetchPaymentMethods().then((paymentMethods) => {
 		dispatch(setPaymentMethodsAction(paymentMethods));
 	});
 };
-
-export { getPaymentMethodsAction };
 
 const paymentMethodState = (state: IRootState) => state.paymentMethod;
 const selector = function <T>(combiner: { (state: IPaymentMethodState): T }) {

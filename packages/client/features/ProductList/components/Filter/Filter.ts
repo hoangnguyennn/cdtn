@@ -35,16 +35,29 @@ export default styled(Form)`
 			}
 		}
 
+		.categories {
+			a {
+				color: var(--primary);
+				font-size: 0.875rem;
+				text-decoration: none;
+
+				&:hover {
+					color: var(--primary-hover);
+					text-decoration: underline;
+				}
+			}
+		}
+
 		.title {
 			padding-bottom: 0.875rem;
-			font-size: 0.8125rem;
+			font-size: 0.875rem;
 			font-weight: 500;
 		}
 
 		.price-small-text {
 			padding-top: 0.3125rem;
 			padding-bottom: 0.3125rem;
-			font-size: 0.8125rem;
+			font-size: 0.875rem;
 			color: var(--secondary);
 		}
 

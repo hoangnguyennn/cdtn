@@ -19,6 +19,13 @@ export interface ICartItem extends IProduct {
 	qty: number;
 }
 
+export interface ICategoryWithProductLength {
+	id: string;
+	name: string;
+	slug: string;
+	productsLength: number;
+}
+
 export interface ILogin {
 	email: string;
 	password: string;
