@@ -73,8 +73,8 @@ export const getProductByIdAction =
 	};
 
 export const fetchProductsByCategorySlugAction =
-	(slug: string) => async (dispatch: Dispatch) => {
-		return fetchProductsByCategorySlug(slug).then((products) => {
+	(slug: string, query: any) => async (dispatch: Dispatch) => {
+		return fetchProductsByCategorySlug(slug, query).then((products) => {
 			dispatch(
 				setCategoryProductsAction({
 					products,

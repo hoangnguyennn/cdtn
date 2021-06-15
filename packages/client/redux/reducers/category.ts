@@ -30,5 +30,7 @@ const selector = function <T>(combiner: { (state: ICategoryState): T }) {
 };
 
 export const getCategories = () => selector((state) => state.categories);
+export const getCategoryBySlug = (slug: string) =>
+	selector((state) => state.categories.find((item) => item.slug === slug));
 
 export default categorySlice.reducer;

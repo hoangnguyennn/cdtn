@@ -7,9 +7,12 @@ import {
 	fetchProductsByCategorySlugAction,
 	getProductsByCategorySlug,
 } from '../redux/reducers/product';
-import { getCategoriesAction } from '../redux/reducers/category';
+import {
+	getCategoriesAction,
+	getCategoryBySlug,
+} from '../redux/reducers/category';
 import { initialStore } from '../redux/store';
-import { productsPage } from '../configs/breadcrumb';
+import { productsByCategoryPage } from '../configs/breadcrumb';
 import MainLayout from '../layouts/MainLayout';
 import PageContent from '../components/PageContent';
 import ProductList from '../features/ProductList';
@@ -20,11 +23,18 @@ const CategoryPage = () => {
 	const { category } = router.query;
 
 	const products = useSelector(getProductsByCategorySlug(category as string));
+	const categoryInfo = useSelector(getCategoryBySlug(category as string));
 
 	return (
 		<MainLayout>
-			<PageContent breadcrumb={productsPage()} title={t('Products')}>
-				<ProductList products={products} />
+			<PageContent
+				breadcrumb={productsByCategoryPage(categoryInfo)}
+				title={t(categoryInfo?.name || 'Products')}
+			>
+				<ProductList
+					title={t(categoryInfo?.name || 'Products')}
+					products={products}
+				/>
 			</PageContent>
 		</MainLayout>
 	);
@@ -36,8 +46,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const reduxStore = initialStore();
 	const { dispatch } = reduxStore;
 
+	const query = context.query;
 	try {
-		await dispatch(fetchProductsByCategorySlugAction(category as string));
+		await dispatch(
+			fetchProductsByCategorySlugAction(category as string, query)
+		);
 		await dispatch(getCategoriesAction());
 
 		return {

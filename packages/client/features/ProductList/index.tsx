@@ -8,9 +8,13 @@ import Root from './ProductList';
 
 type ProductListProps = {
 	products: IProduct[];
+	title?: string;
 };
 
-const ProductList: FC<ProductListProps> = ({ products }) => {
+const ProductList: FC<ProductListProps> = ({
+	products,
+	title = 'Products',
+}) => {
 	const { t } = useTranslation();
 
 	return (
@@ -21,7 +25,7 @@ const ProductList: FC<ProductListProps> = ({ products }) => {
 				lg-columns={3}
 				items={products}
 				viewMore={false}
-				title={t('Products')}
+				title={t(title)}
 				className="product-list"
 			/>
 		</Root>

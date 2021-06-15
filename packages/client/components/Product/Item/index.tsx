@@ -29,6 +29,7 @@ const ProductItem: FC<ProductItemProps> = ({
 	name,
 	price,
 	images,
+	unit,
 	addToCart,
 }) => {
 	const isDesktop = useMatchMedia('(min-width: 992px)');
@@ -48,7 +49,10 @@ const ProductItem: FC<ProductItemProps> = ({
 				</div>
 				<div className="info">
 					<p className="name">{name}</p>
-					<p className="price">{toCurrency(price)}</p>
+					<p className="price">
+						{toCurrency(price)}
+						<span className="unit"> / {unit}</span>
+					</p>
 				</div>
 			</div>
 			{isDesktop ? (

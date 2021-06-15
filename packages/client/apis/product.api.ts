@@ -12,9 +12,11 @@ export const fetchTrendingProducts = async (): Promise<IProduct[]> => {
 	return axiosInstance.get(ENDPOINT.trendingProducts).then((res) => res.data);
 };
 
-export const fetchProductsByCategorySlug = async (slug: string) => {
+export const fetchProductsByCategorySlug = async (slug: string, query: any) => {
 	return axiosInstance
-		.get(`${ENDPOINT.categories}/slug/${slug}${ENDPOINT.products}`)
+		.get(`${ENDPOINT.categories}/slug/${slug}${ENDPOINT.products}`, {
+			params: query,
+		})
 		.then((res) => res.data);
 };
 

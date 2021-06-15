@@ -1,4 +1,4 @@
-import { IBreadcrumb } from '../interfaces';
+import { IBreadcrumb, ICategoryWithProductLength } from '../interfaces';
 import { PATH_NAME } from './pathName';
 import i18n from '../locales';
 
@@ -39,6 +39,14 @@ export const productPage = (
 export const productsPage = (): IBreadcrumb[] => [
 	{ id: 'p1', name: i18n.t('Home'), url: PATH_NAME.HOME },
 	{ id: 'p2', name: i18n.t('Products'), url: PATH_NAME.PRODUCTS },
+];
+
+export const productsByCategoryPage = (
+	category: ICategoryWithProductLength
+): IBreadcrumb[] => [
+	{ id: 'p1', name: i18n.t('Home'), url: PATH_NAME.HOME },
+	{ id: 'p2', name: i18n.t('Products'), url: PATH_NAME.PRODUCTS },
+	{ id: 'p3', name: category.name, url: category.slug },
 ];
 
 export const registerPage = (): IBreadcrumb[] => [

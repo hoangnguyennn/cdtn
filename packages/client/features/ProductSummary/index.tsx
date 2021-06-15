@@ -1,15 +1,15 @@
-import { FC, useState } from 'react';
+import { FC, KeyboardEvent, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { addToCartAction } from '../../redux/reducers/cart';
 import { IProduct } from '../../interfaces';
+import { ProductStatus } from '../../interfaces/enums';
 import { toCurrency } from '../../utils/formatter';
-import { useDispatch } from 'react-redux';
 import Button from '../../components/core/Button';
 import Input from '../../components/core/Input';
 import ProductSummaryStyled from './ProductSummary';
-import { ProductStatus } from '../../interfaces/enums';
 
 type ProductSummaryProps = {
 	product: IProduct;
@@ -24,6 +24,12 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 		if (Number(qty) > 0) {
 			dispatch(addToCartAction({ ...product, qty: Number(qty) }));
 			toast.info('add to cart');
+		}
+	};
+
+	const handleInputKeyDown = (event: KeyboardEvent) => {
+		if (event.key === 'e') {
+			event.preventDefault();
 		}
 	};
 
@@ -43,6 +49,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 									min="1"
 									value={qty}
 									onChange={(e) => setQty(e.target.value)}
+									onKeyDown={handleInputKeyDown}
 								/>
 							</div>
 							<Button shadow onClick={handleAddToCart}>

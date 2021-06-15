@@ -36,6 +36,10 @@ export default styled.a`
 			color: var(--primary);
 			font-size: 0.9375rem;
 		}
+
+		.unit {
+			color: var(--main-text-color);
+		}
 	}
 
 	@media (min-width: 992px) {

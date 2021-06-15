@@ -5,11 +5,12 @@ import {
 	mapCategoryWithProductListToResponse,
 	mapProductToResponse,
 } from '../../helpers/mappingResponse';
-import { success } from '../../helpers/commonResponse';
-import CategoryService from '../../services/category';
-import ProductService from '../../services/product';
 import { ICategory } from '../../interfaces/IDocuments';
 import { ICategoryWithLength } from '../../interfaces';
+import { success } from '../../helpers/commonResponse';
+import CategoryService from '../../services/category';
+import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
+import ProductService from '../../services/product';
 
 const create = async (req: Request, res: Response) => {
 	const categoryRequest = req.body;
@@ -51,8 +52,15 @@ const get = async (req: Request, res: Response) => {
 
 const getProductsByCategorySlug = async (req: Request, res: Response) => {
 	const { slug } = req.params;
+
+	const filter = mapQueryToMongoFilter(req.query);
+
 	const category = await CategoryService.getBySlug(slug);
-	const products = await ProductService.get({ categoryId: category._id });
+	const products = await ProductService.get({
+		categoryId: category._id,
+		...filter,
+	});
+
 	return success(res, products.map(mapProductToResponse));
 };
 

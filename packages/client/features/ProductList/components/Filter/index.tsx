@@ -14,7 +14,6 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { numberWithDot } from '../../../../utils/formatter';
-import { PATH_NAME } from '../../../../configs/pathName';
 import { removeFalsyFields } from '../../../../utils/converter';
 import { sameObject } from '../../../../utils/comparison';
 
@@ -49,7 +48,12 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	};
 
 	const clearAllFilter = () => {
-		router.push({ pathname: PATH_NAME.PRODUCTS, query: {} });
+		const query = { category: router.query.category };
+		if (sameObject(query, router.query)) {
+			return;
+		}
+
+		router.push({ query });
 	};
 
 	const disableKeyPressCharacter = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -72,17 +76,13 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 			return;
 		}
 
-		router.push({
-			pathname: PATH_NAME.PRODUCTS,
-			query,
-		});
+		router.push({ query });
 	};
 
 	const filterByPrice = (event: MouseEvent) => {
 		event.preventDefault();
-
 		let priceFilter = undefined;
-		if (Number(priceFrom) && Number(priceTo)) {
+		if (!isNaN(Number(priceFrom)) && !isNaN(Number(priceTo))) {
 			priceFilter = `${priceFrom}-${priceTo}`;
 
 			if (Number(priceFrom) > Number(priceTo)) {
@@ -99,10 +99,7 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 			return;
 		}
 
-		router.push({
-			pathname: PATH_NAME.PRODUCTS,
-			query,
-		});
+		router.push({ query });
 	};
 
 	const handleInputNameKeyPress = (event: KeyboardEvent) => {
