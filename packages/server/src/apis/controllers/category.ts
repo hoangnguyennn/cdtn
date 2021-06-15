@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import {
 	mapCategoryToResponse,
 	mapCategoryWithProductListToResponse,
+	mapProductToResponse,
 } from '../../helpers/mappingResponse';
 import { success } from '../../helpers/commonResponse';
 import CategoryService from '../../services/category';
@@ -48,7 +49,15 @@ const get = async (req: Request, res: Response) => {
 	return success(res, categories.map(mapCategoryToResponse));
 };
 
+const getProductsByCategorySlug = async (req: Request, res: Response) => {
+	const { slug } = req.params;
+	const category = await CategoryService.getBySlug(slug);
+	const products = await ProductService.get({ categoryId: category._id });
+	return success(res, products.map(mapProductToResponse));
+};
+
 export default {
 	create,
 	get,
+	getProductsByCategorySlug,
 };

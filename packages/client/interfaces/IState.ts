@@ -36,6 +36,7 @@ export interface IProductState {
 	products: IProduct[];
 	trendingProducts: IProduct[];
 	product: IProduct;
+	[key: string]: any;
 }
 
 export interface IRootState {

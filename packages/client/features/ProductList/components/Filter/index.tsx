@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
 import {
 	ChangeEvent,
 	Dispatch,
@@ -18,11 +19,8 @@ import { removeFalsyFields } from '../../../../utils/converter';
 import { sameObject } from '../../../../utils/comparison';
 
 import Root from './Filter';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-	getCategories,
-	getCategoriesAction,
-} from '../../../../redux/reducers/category';
+
+import { getCategories } from '../../../../redux/reducers/category';
 
 type ProductFilterProps = {
 	[key: string]: any;
@@ -31,7 +29,6 @@ type ProductFilterProps = {
 const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	const { t } = useTranslation();
 	const router = useRouter();
-	const dispatch = useDispatch();
 	const categories = useSelector(getCategories());
 
 	const [productName, setProductName] = useState('');
@@ -132,10 +129,6 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 		}
 	}, [JSON.stringify(router.query)]);
 
-	useEffect(() => {
-		dispatch(getCategoriesAction());
-	}, []);
-
 	return (
 		<Root
 			className={className}
@@ -165,7 +158,7 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 				<ul className="categories">
 					{categories.map((category) => (
 						<li key={category.id}>
-							<Link href={category.slug}>
+							<Link href={`/${category.slug}`}>
 								<a>
 									{category.name} ({category.productsLength})
 								</a>

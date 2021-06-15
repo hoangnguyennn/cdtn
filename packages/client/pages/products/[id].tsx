@@ -1,11 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useSelector } from 'react-redux';
 
-import {
-	gethProductByIdAction,
-	getProduct,
-} from '../../redux/reducers/product';
-
+import { getProductByIdAction, getProduct } from '../../redux/reducers/product';
 import { initialStore } from '../../redux/store';
 import { productPage } from '../../configs/breadcrumb';
 import MainLayout from '../../layouts/MainLayout';
@@ -34,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { dispatch } = reduxStore;
 
 	try {
-		await dispatch(gethProductByIdAction(id as string));
+		await dispatch(getProductByIdAction(id as string));
 
 		return {
 			props: { initialReduxState: reduxStore.getState() },

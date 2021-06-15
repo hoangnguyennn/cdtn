@@ -1,7 +1,55 @@
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
+import {
+	fetchProductsByCategorySlugAction,
+	getProductsByCategorySlug,
+} from '../redux/reducers/product';
+import { getCategoriesAction } from '../redux/reducers/category';
+import { initialStore } from '../redux/store';
+import { productsPage } from '../configs/breadcrumb';
 import MainLayout from '../layouts/MainLayout';
+import PageContent from '../components/PageContent';
+import ProductList from '../features/ProductList';
 
 const CategoryPage = () => {
-	return <MainLayout>CategoryPage</MainLayout>;
+	const { t } = useTranslation();
+	const router = useRouter();
+	const { category } = router.query;
+
+	const products = useSelector(getProductsByCategorySlug(category as string));
+
+	return (
+		<MainLayout>
+			<PageContent breadcrumb={productsPage()} title={t('Products')}>
+				<ProductList products={products} />
+			</PageContent>
+		</MainLayout>
+	);
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const { category } = context.query;
+
+	const reduxStore = initialStore();
+	const { dispatch } = reduxStore;
+
+	try {
+		await dispatch(fetchProductsByCategorySlugAction(category as string));
+		await dispatch(getCategoriesAction());
+
+		return {
+			props: { initialReduxState: reduxStore.getState() },
+		};
+	} catch (err) {
+		console.log(err);
+
+		return {
+			notFound: true,
+		};
+	}
 };
 
 export default CategoryPage;

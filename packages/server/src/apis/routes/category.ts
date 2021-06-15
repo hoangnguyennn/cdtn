@@ -16,4 +16,9 @@ router
 		catcherWrapper(CategoryController.create)
 	);
 
+router.get(
+	'/slug/:slug/products',
+	catcherWrapper(CategoryController.getProductsByCategorySlug)
+);
+
 export default router;

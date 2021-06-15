@@ -1,13 +1,16 @@
-import { useSelector } from 'react-redux';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { default as ProductListComponent } from '../../components/Product/List';
-import { getProducts } from '../../redux/reducers/product';
+import { IProduct } from '../../interfaces';
 import ProductFilter from './components/Filter';
+import ProductListComponent from '../../components/Product/List';
 import Root from './ProductList';
 
-const ProductList = () => {
-	const products = useSelector(getProducts());
+type ProductListProps = {
+	products: IProduct[];
+};
+
+const ProductList: FC<ProductListProps> = ({ products }) => {
 	const { t } = useTranslation();
 
 	return (

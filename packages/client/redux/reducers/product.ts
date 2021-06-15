@@ -3,8 +3,10 @@ import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import {
 	fetchProductById,
 	fetchProducts,
+	fetchProductsByCategorySlug,
 	fetchTrendingProducts,
 } from '../../apis/product.api';
+import { IProduct } from '../../interfaces';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
 export const initialState: IProductState = {
@@ -36,11 +38,20 @@ const productSlice = createSlice({
 		setProductsAction: (state, action) => {
 			state.products = action.payload;
 		},
+		setCategoryProductsAction: (state, action) => {
+			const products: IProduct[] = action.payload.products;
+			const categorySlug: string = action.payload.categorySlug;
+			state[categorySlug] = products;
+		},
 	},
 });
 
-const { setTrendingProductsAction, setProductAction, setProductsAction } =
-	productSlice.actions;
+const {
+	setTrendingProductsAction,
+	setProductAction,
+	setProductsAction,
+	setCategoryProductsAction,
+} = productSlice.actions;
 
 export const getProductsAction = (query: any) => async (dispatch: Dispatch) => {
 	return fetchProducts(query).then((products) => {
@@ -54,10 +65,22 @@ export const getTrendingProductsAction = () => async (dispatch: Dispatch) => {
 	});
 };
 
-export const gethProductByIdAction =
+export const getProductByIdAction =
 	(id: string) => async (dispatch: Dispatch) => {
 		return fetchProductById(id).then((product) => {
 			dispatch(setProductAction(product));
+		});
+	};
+
+export const fetchProductsByCategorySlugAction =
+	(slug: string) => async (dispatch: Dispatch) => {
+		return fetchProductsByCategorySlug(slug).then((products) => {
+			dispatch(
+				setCategoryProductsAction({
+					products,
+					categorySlug: slug,
+				})
+			);
 		});
 	};
 
@@ -70,5 +93,8 @@ export const getProduct = () => selector((state) => state.product);
 export const getProducts = () => selector((state) => state.products);
 export const getTrendingProducts = () =>
 	selector((state) => state.trendingProducts);
+
+export const getProductsByCategorySlug = (slug: string) =>
+	selector((state) => (state[slug] || []) as IProduct[]);
 
 export default productSlice.reducer;
