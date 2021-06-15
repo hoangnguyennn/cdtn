@@ -23,6 +23,7 @@ import {
 	getCategories,
 	gethCategoriesAction,
 } from '../../redux/reducers/category';
+import TextEditor from '../../components/TextEditor';
 
 const { Option } = Select;
 
@@ -40,6 +41,8 @@ const ProductAdd = () => {
 			publicId: file.response?.publicId,
 		}));
 	};
+
+	const getDescription = (description: string) => description;
 
 	const onFinish = async (values: any) => {
 		if (!isUploaded) {
@@ -132,9 +135,6 @@ const ProductAdd = () => {
 						))}
 				</Select>
 			</Form.Item>
-			<Form.Item label="Description" name="description">
-				<Input.TextArea />
-			</Form.Item>
 			<Form.Item
 				label="Images"
 				name="images"
@@ -143,6 +143,14 @@ const ProductAdd = () => {
 				getValueFromEvent={normFile}
 			>
 				<UploadImage onChange={normFile} setIsUploaded={setIsUploaded} />
+			</Form.Item>
+			<Form.Item
+				label="Description"
+				name="description"
+				valuePropName="description"
+				getValueFromEvent={getDescription}
+			>
+				<TextEditor onChange={getDescription} />
 			</Form.Item>
 			<Form.Item {...tailLayout}>
 				<Button type="primary" htmlType="submit">

@@ -20,6 +20,7 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 		description: product.description,
 		status: product.status,
 		imagesId: product.imagesId,
+		categoryId: product.categoryId,
 	});
 
 	const productCreated = await ProductModel.create(productLint);

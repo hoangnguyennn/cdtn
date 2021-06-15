@@ -85,7 +85,7 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 		if (Number(priceFrom) && Number(priceTo)) {
 			priceFilter = `${priceFrom}-${priceTo}`;
 
-			if (priceFrom > priceTo) {
+			if (Number(priceFrom) > Number(priceTo)) {
 				priceFilter = `${priceTo}-${priceFrom}`;
 			}
 		}
