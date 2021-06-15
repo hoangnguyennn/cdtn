@@ -20,7 +20,7 @@ import {
 	IUser,
 } from '../interfaces/IDocuments';
 
-export const mappingCategoryToResponse = (
+export const mapCategoryToResponse = (
 	category: ICategory
 ): ICategoryResponse => {
 	return {
@@ -91,6 +91,7 @@ export const mapProductToResponse = (product: IProduct): IProductResponse => {
 		unit: product.unit?.name || '',
 		images: product.images?.map((image) => image.url) || [],
 		status: product.status,
+		category: product.category?.name || '',
 	};
 };
 
@@ -105,6 +106,9 @@ export const mapProductToResponseForAdmin = (
 		unit: product.unit ? mapProductUnitToResponse(product.unit) : undefined,
 		images: product.images?.map(mapImageToResponse),
 		status: product.status,
+		category: product.category
+			? mapCategoryToResponse(product.category)
+			: undefined,
 	};
 };
 

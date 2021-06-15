@@ -54,9 +54,11 @@ export interface IProduct extends Document {
 	description: string;
 	status: ProductStatus;
 	imagesId: Types.ObjectId[];
+	categoryId: Types.ObjectId;
 
 	unit?: IProductUnit;
 	images?: IImage[];
+	category?: ICategory;
 }
 
 export interface IProductUnit extends Document {

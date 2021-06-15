@@ -123,6 +123,7 @@ export interface IProductCreate {
 	description: string;
 	status: ProductStatus;
 	imagesId: Types.ObjectId[];
+	categoryId: string | Types.ObjectId;
 }
 
 export interface IProductCreateRequest {
@@ -132,6 +133,7 @@ export interface IProductCreateRequest {
 	description?: string;
 	status: ProductStatus;
 	images: IImageCreate[];
+	categoryId: string | Types.ObjectId;
 }
 
 export type IProductUpdateRequest = Omit<IProductCreateRequest, 'images'> & {
@@ -146,14 +148,16 @@ export interface IProductResponse {
 	unit: string;
 	images: string[];
 	status: string;
+	category: string;
 }
 
 export type IProductResponseForAdmin = Omit<
 	IProductResponse,
-	'unit' | 'images'
+	'unit' | 'images' | 'category'
 > & {
 	unit?: IProductUnitResponse;
 	images?: IImageResponse[];
+	category?: ICategoryResponse;
 };
 
 export interface IProductUnitCreate {

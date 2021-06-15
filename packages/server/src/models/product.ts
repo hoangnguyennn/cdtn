@@ -32,6 +32,11 @@ const productSchema = new Schema({
 			required: true,
 		},
 	],
+	categoryId: {
+		type: Types.ObjectId,
+		ref: CollectionName.CATEGORY,
+		required: true,
+	},
 });
 
 productSchema.virtual('unit', {
@@ -45,6 +50,13 @@ productSchema.virtual('images', {
 	ref: CollectionName.IMAGE,
 	localField: 'imagesId',
 	foreignField: '_id',
+});
+
+productSchema.virtual('category', {
+	ref: CollectionName.CATEGORY,
+	localField: 'categoryId',
+	foreignField: '_id',
+	justOne: true,
 });
 
 export default model<IProduct>(CollectionName.PRODUCT, productSchema);

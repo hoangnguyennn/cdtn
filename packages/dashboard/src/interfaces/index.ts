@@ -62,6 +62,7 @@ export interface IProduct {
 	unit?: IProductUnit;
 	images?: IImage[];
 	status: string;
+	category?: ICategory;
 }
 
 export interface IProductCreate {
@@ -71,6 +72,7 @@ export interface IProductCreate {
 	description: string;
 	status: ProductStatus;
 	images: IUpload[];
+	categoryId: string;
 }
 
 export type IProductUpdate = Omit<IProductCreate, 'images'> & {

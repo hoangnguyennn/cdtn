@@ -49,6 +49,7 @@ const ProductAdd = () => {
 			description: values.description,
 			images: values.images,
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
+			categoryId: values.category,
 		};
 
 		try {

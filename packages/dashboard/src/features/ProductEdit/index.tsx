@@ -26,6 +26,10 @@ import { ProductStatus } from '../../interfaces/enum';
 
 import UploadImage from '../../components/UploadImage';
 import TextEditor from '../../components/TextEditor';
+import {
+	getCategories,
+	gethCategoriesAction,
+} from '../../redux/reducers/category';
 
 const { Option } = Select;
 
@@ -34,6 +38,7 @@ const ProductEdit = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const productUnits = useSelector(getProductUnits());
+	const categories = useSelector(getCategories());
 	const product = useSelector(getProduct(id));
 	const [isUploaded, setIsUploaded] = useState(true);
 
@@ -67,6 +72,7 @@ const ProductEdit = () => {
 				}
 			}),
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
+			categoryId: values.category,
 		};
 
 		try {
@@ -93,6 +99,7 @@ const ProductEdit = () => {
 	}, [dispatch, product, id, history]);
 
 	useEffect(() => {
+		console.log(product);
 		if (product) {
 			form.setFieldsValue({
 				name: product.name,
@@ -101,6 +108,7 @@ const ProductEdit = () => {
 				description: product.description,
 				images: product.images,
 				status: product.status === ProductStatus.SELLING,
+				category: product.category?.id,
 			});
 		}
 	}, [form, product]);
@@ -110,6 +118,12 @@ const ProductEdit = () => {
 			dispatch(getProductUnitsAction());
 		}
 	}, [dispatch, productUnits]);
+
+	useEffect(() => {
+		if (!categories.length) {
+			dispatch(gethCategoriesAction());
+		}
+	}, [dispatch, categories]);
 
 	return (
 		<Form {...layout} form={form} className="form" onFinish={onFinish}>
@@ -141,6 +155,21 @@ const ProductEdit = () => {
 						.map((unit) => (
 							<Option key={unit.id} value={unit.id}>
 								{unit.name}
+							</Option>
+						))}
+				</Select>
+			</Form.Item>
+			<Form.Item
+				label="Category"
+				name="category"
+				rules={[{ required: true, message: 'Please select category!' }]}
+			>
+				<Select>
+					{[...categories]
+						.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
+						.map((category) => (
+							<Option key={category.id} value={category.id}>
+								{category.name}
 							</Option>
 						))}
 				</Select>
