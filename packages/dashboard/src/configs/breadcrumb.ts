@@ -1,9 +1,15 @@
 import { PATH_NAME } from '.';
 import { IBreadCrumb } from '../interfaces';
 
-export const Category = (): IBreadCrumb[] => [
+export const CategoryList = (): IBreadCrumb[] => [
 	{ id: 'p1', title: 'Home', url: PATH_NAME.HOME },
 	{ id: 'p2', title: 'Categories', url: PATH_NAME.CATEGORY_LIST },
+];
+
+export const CategoryAdd = (): IBreadCrumb[] => [
+	{ id: 'p1', title: 'Home', url: PATH_NAME.HOME },
+	{ id: 'p2', title: 'Categories', url: PATH_NAME.CATEGORY_LIST },
+	{ id: 'p3', title: 'Add', url: PATH_NAME.CATEGORY_ADD },
 ];
 
 export const Dashboard = (): IBreadCrumb[] => [

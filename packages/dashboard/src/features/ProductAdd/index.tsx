@@ -2,7 +2,7 @@ import { Form, Input, InputNumber, Button, Select, Switch } from 'antd';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import { createProductAction } from '../../redux/reducers/product';
 import {
@@ -10,7 +10,11 @@ import {
 	getProductUnitsAction,
 } from '../../redux/reducers/productUnit';
 
-import { PATH_NAME } from '../../configs';
+import {
+	PATH_NAME,
+	formLayout as layout,
+	formTailLayout as tailLayout,
+} from '../../configs';
 import { IProductCreate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 
@@ -23,15 +27,6 @@ const ProductAdd = () => {
 	const history = useHistory();
 	const productUnits = useSelector(getProductUnits());
 	const [isUploaded, setIsUploaded] = useState(true);
-
-	const layout = {
-		labelCol: { span: 8 },
-		wrapperCol: { span: 16 },
-	};
-
-	const tailLayout = {
-		wrapperCol: { offset: 8, span: 16 },
-	};
 
 	const normFile = (fileList: any[]) => {
 		console.log('Upload event:', JSON.parse(JSON.stringify(fileList)));

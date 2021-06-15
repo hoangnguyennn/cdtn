@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { UploadFile } from 'antd/lib/upload/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -16,7 +16,11 @@ import {
 	updateProductAction,
 } from '../../redux/reducers/product';
 
-import { PATH_NAME } from '../../configs';
+import {
+	PATH_NAME,
+	formLayout as layout,
+	formTailLayout as tailLayout,
+} from '../../configs';
 import { IImage, IProductUpdate } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enum';
 
@@ -34,15 +38,6 @@ const ProductEdit = () => {
 	const [isUploaded, setIsUploaded] = useState(true);
 
 	const [form] = Form.useForm();
-
-	const layout = {
-		labelCol: { span: 4 },
-		wrapperCol: { span: 16 },
-	};
-
-	const tailLayout = {
-		wrapperCol: { offset: 4, span: 16 },
-	};
 
 	const normFile = (fileList: UploadFile[]) => fileList;
 

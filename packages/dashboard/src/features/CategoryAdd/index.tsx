@@ -3,21 +3,27 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { createProductUnitAction } from '../../redux/reducers/productUnit';
 import {
-	PATH_NAME,
 	formLayout as layout,
 	formTailLayout as tailLayout,
+	PATH_NAME,
 } from '../../configs';
+import { ICategoryCreate } from '../../interfaces';
+import { createCategoryAction } from '../../redux/reducers/category';
 
-const ProductUnitAdd = () => {
+const CategoryAdd = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const onFinish = async (values: any) => {
+		const categoryCreate: ICategoryCreate = {
+			name: values.name,
+			slug: values.slug,
+		};
+
 		try {
-			await dispatch(createProductUnitAction(values));
-			history.push(PATH_NAME.PRODUCT_UNIT_LIST);
+			await dispatch(createCategoryAction(categoryCreate));
+			history.push(PATH_NAME.CATEGORY_LIST);
 			toast.success('success');
 		} catch (err) {
 			toast.error(err?.message || 'error');
@@ -29,7 +35,14 @@ const ProductUnitAdd = () => {
 			<Form.Item
 				label="Name"
 				name="name"
-				rules={[{ required: true, message: 'Please input product unit name!' }]}
+				rules={[{ required: true, message: 'Please input category name!' }]}
+			>
+				<Input />
+			</Form.Item>
+			<Form.Item
+				label="Slug"
+				name="slug"
+				rules={[{ required: true, message: 'Please input category slug!' }]}
 			>
 				<Input />
 			</Form.Item>
@@ -42,4 +55,4 @@ const ProductUnitAdd = () => {
 	);
 };
 
-export default ProductUnitAdd;
+export default CategoryAdd;

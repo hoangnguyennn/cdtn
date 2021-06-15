@@ -12,6 +12,11 @@ export interface ICategory {
 	slug: string;
 }
 
+export interface ICategoryCreate {
+	name: string;
+	slug: string;
+}
+
 export interface IImage {
 	id: string;
 	url: string;

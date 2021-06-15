@@ -1,5 +1,6 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { fetchCategories } from '../../apis/common';
+import { createCategory, fetchCategories } from '../../apis/common';
+import { ICategory, ICategoryCreate } from '../../interfaces';
 import { ICategoryState, IRootState } from '../../interfaces/IState';
 
 const initialState: ICategoryState = {
@@ -13,10 +14,33 @@ const categorySlice = createSlice({
 		setCategories(state, action) {
 			state.categories = action.payload;
 		},
+		addCategory(state, action) {
+			const category: ICategory = action.payload;
+			const index = state.categories.findIndex(
+				(item) => item.id === category.id
+			);
+
+			if (index === -1) {
+				state.categories = [...state.categories, category];
+			} else {
+				state.categories = [
+					...state.categories.slice(0, index),
+					category,
+					...state.categories.slice(index + 1),
+				];
+			}
+		},
 	},
 });
 
-const { setCategories } = categorySlice.actions;
+const { setCategories, addCategory } = categorySlice.actions;
+
+export const createCategoryAction =
+	(category: ICategoryCreate) => async (dispatch: Dispatch) => {
+		return createCategory(category).then((newCategory) => {
+			dispatch(addCategory(newCategory));
+		});
+	};
 
 export const gethCategoriesAction = () => async (dispatch: Dispatch) => {
 	return fetchCategories().then((categories) => {

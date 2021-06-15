@@ -2,7 +2,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import { getToken, getUserType, loginAction } from '../../redux/reducers/auth';
 import { PATH_NAME } from '../../configs';

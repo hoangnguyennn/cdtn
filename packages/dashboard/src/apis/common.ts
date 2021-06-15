@@ -1,5 +1,6 @@
 import { ENDPOINT } from '../configs/endpoint';
 import {
+	ICategoryCreate,
 	IProductCreate,
 	IProductUnitCreate,
 	IProductUpdate,
@@ -7,6 +8,12 @@ import {
 } from '../interfaces';
 import { ProductStatus } from '../interfaces/enum';
 import axiosInstance from '../services/instance';
+
+export const createCategory = async (category: ICategoryCreate) => {
+	return axiosInstance
+		.post(ENDPOINT.categories, category)
+		.then((res) => res.data);
+};
 
 export const createProduct = async (product: IProductCreate) => {
 	return axiosInstance.post(ENDPOINT.products, product).then((res) => res.data);

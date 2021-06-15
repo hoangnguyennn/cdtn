@@ -9,7 +9,11 @@ import {
 	getProductUnitByIdAction,
 	updateProductUnitAction,
 } from '../../redux/reducers/productUnit';
-import { PATH_NAME } from '../../configs';
+import {
+	PATH_NAME,
+	formLayout as layout,
+	formTailLayout as tailLayout,
+} from '../../configs';
 
 const ProductUnitEdit = () => {
 	const { id } = useParams<{ id: string }>();
@@ -18,15 +22,6 @@ const ProductUnitEdit = () => {
 	const productUnit = useSelector(getProductUnit(id));
 
 	const [form] = Form.useForm();
-
-	const layout = {
-		labelCol: { span: 8 },
-		wrapperCol: { span: 16 },
-	};
-
-	const tailLayout = {
-		wrapperCol: { offset: 8, span: 16 },
-	};
 
 	const onFinish = async (values: any) => {
 		try {
