@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { CollectionName } from '../interfaces/enums';
 import { ICategory } from '../interfaces/IDocuments';
 
-const categorySchema = new Schema({
+const categorySchema = new Schema<ICategory>({
 	name: {
 		type: String,
 		required: true,

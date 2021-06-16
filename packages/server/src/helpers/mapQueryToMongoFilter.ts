@@ -1,4 +1,4 @@
-import { convertNotUnicode } from '../utils';
+import { normalize } from '../utils';
 
 /* eslint-disable indent */
 const mapping = (query: any): Record<string, any> => {
@@ -15,7 +15,7 @@ const mapping = (query: any): Record<string, any> => {
 						},
 					};
 				case 'name':
-					tmp = convertNotUnicode(value);
+					tmp = normalize(value);
 					return {
 						nameNonUnicode: { $regex: new RegExp(`${tmp}`, 'i') },
 					};

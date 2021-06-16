@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { CollectionName } from '../interfaces/enums';
 import { IProductUnit } from '../interfaces/IDocuments';
 
-const productUnitSchema = new Schema({
+const productUnitSchema = new Schema<IProductUnit>({
 	name: {
 		type: String,
 		required: true,

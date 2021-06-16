@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { CollectionName } from '../interfaces/enums';
 import { IPaymentMethod } from '../interfaces/IDocuments';
 
-const paymentMethodSchema = new Schema({
+const paymentMethodSchema = new Schema<IPaymentMethod>({
 	name: {
 		type: String,
 		required: true,

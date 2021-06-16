@@ -6,7 +6,7 @@ import {
 	PaymentStatus,
 } from '../interfaces/enums';
 
-const orderSchema = new Schema({
+const orderSchema = new Schema<IOrder>({
 	userId: {
 		type: Types.ObjectId,
 		ref: CollectionName.USER,

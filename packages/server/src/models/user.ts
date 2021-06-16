@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { IUser } from '../interfaces/IDocuments';
 import { CollectionName, UserType } from '../interfaces/enums';
 
-const userSchema = new Schema({
+const userSchema = new Schema<IUser>({
 	email: {
 		type: String,
 		required: true,
@@ -30,17 +30,14 @@ const userSchema = new Schema({
 		default: UserType.CUSTOMER,
 	},
 	isActivated: {
-		type: String,
-		default: function () {
-			const userType = (this as any)['userType'] || UserType.MANAGER;
-
-			if (userType === UserType.CUSTOMER) {
-				return true;
-			}
-
-			return false;
-		},
+		type: Boolean,
 	},
+});
+
+userSchema.pre('save', function (next) {
+	const userType = this.userType || UserType.MANAGER;
+	this.isActivated = userType === UserType.CUSTOMER;
+	next();
 });
 
 export default model<IUser>(CollectionName.USER, userSchema);

@@ -2,7 +2,7 @@ import { model, Schema, Types } from 'mongoose';
 import { CollectionName } from '../interfaces/enums';
 import { IOrderItem } from '../interfaces/IDocuments';
 
-const orderItemSchema = new Schema({
+const orderItemSchema = new Schema<IOrderItem>({
 	productId: {
 		type: Types.ObjectId,
 		ref: CollectionName.PRODUCT,
