@@ -42,7 +42,7 @@ const ProductAdd = () => {
 		}));
 	};
 
-	const getDescription = (description: string) => description;
+	const handleTextChange = (text: string) => text;
 
 	const onFinish = async (values: any) => {
 		if (!isUploaded) {
@@ -58,6 +58,7 @@ const ProductAdd = () => {
 			images: values.images,
 			status: values.status ? ProductStatus.SELLING : ProductStatus.NOT_SELLING,
 			categoryId: values.category,
+			longDescription: values.longDescription,
 		};
 
 		try {
@@ -144,13 +145,11 @@ const ProductAdd = () => {
 			>
 				<UploadImage onChange={normFile} setIsUploaded={setIsUploaded} />
 			</Form.Item>
-			<Form.Item
-				label="Description"
-				name="description"
-				valuePropName="description"
-				getValueFromEvent={getDescription}
-			>
-				<TextEditor onChange={getDescription} />
+			<Form.Item label="Description" name="description">
+				<TextEditor onChange={handleTextChange} />
+			</Form.Item>
+			<Form.Item label="Long Description" name="longDescription">
+				<TextEditor onChange={handleTextChange} />
 			</Form.Item>
 			<Form.Item {...tailLayout}>
 				<Button type="primary" htmlType="submit">

@@ -1,24 +1,17 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import ReactQuill from 'react-quill';
 
 import 'react-quill/dist/quill.snow.css';
 
 type TextEditorProps = {
-	onChange: Function;
-	description?: string;
+	onChange?: Function;
+	value?: string;
 };
 
 const TextEditor: FC<TextEditorProps> = ({
 	onChange = () => {},
-	description = '',
+	value = '',
 }) => {
-	const [value, setValue] = useState(description);
-
-	const setEditorValue = (newValue: string) => {
-		setValue(newValue);
-		onChange(newValue);
-	};
-
 	const modules = {
 		toolbar: [
 			[{ font: [] }],
@@ -56,15 +49,11 @@ const TextEditor: FC<TextEditorProps> = ({
 		'align',
 	];
 
-	useEffect(() => {
-		setValue(description);
-	}, [description]);
-
 	return (
 		<ReactQuill
 			theme="snow"
 			value={value}
-			onChange={setEditorValue}
+			onChange={(content) => onChange(content)}
 			modules={modules}
 			formats={formats}
 		/>

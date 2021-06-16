@@ -42,9 +42,12 @@ const productSchema = new Schema<IProduct>({
 		type: String,
 		required: true,
 	},
+	longDescription: {
+		type: String,
+	},
 });
 
-productSchema.pre('save', function (next) {
+productSchema.pre('validate', function (next) {
 	this.nameNonUnicode = normalize(this.name);
 	next();
 });

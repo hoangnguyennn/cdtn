@@ -21,6 +21,7 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 		status: product.status,
 		imagesId: product.imagesId,
 		categoryId: product.categoryId,
+		longDescription: product.longDescription,
 	});
 
 	const productCreated = await ProductModel.create(productLint);
@@ -59,6 +60,7 @@ const updateProduct = async (id: string, product: IProductCreate) => {
 		status: product.status,
 		imagesId: product.imagesId,
 		categoryId: product.categoryId,
+		longDescription: product.longDescription,
 	});
 
 	const productUpdated = await ProductModel.findByIdAndUpdate(

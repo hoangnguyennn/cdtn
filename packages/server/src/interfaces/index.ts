@@ -127,6 +127,7 @@ export interface IProductCreate {
 	status: ProductStatus;
 	imagesId: Types.ObjectId[];
 	categoryId: string | Types.ObjectId;
+	longDescription?: string;
 }
 
 export interface IProductCreateRequest {
@@ -137,6 +138,7 @@ export interface IProductCreateRequest {
 	status: ProductStatus;
 	images: IImageCreate[];
 	categoryId: string | Types.ObjectId;
+	longDescription?: string;
 }
 
 export type IProductUpdateRequest = Omit<IProductCreateRequest, 'images'> & {
@@ -152,6 +154,7 @@ export interface IProductResponse {
 	images: string[];
 	status: string;
 	category: string;
+	longDescription: string;
 }
 
 export type IProductResponseForAdmin = Omit<

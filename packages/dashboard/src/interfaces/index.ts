@@ -63,6 +63,7 @@ export interface IProduct {
 	images?: IImage[];
 	status: string;
 	category?: ICategory;
+	longDescription: string;
 }
 
 export interface IProductCreate {
@@ -73,6 +74,7 @@ export interface IProductCreate {
 	status: ProductStatus;
 	images: IUpload[];
 	categoryId: string;
+	longDescription: string;
 }
 
 export type IProductUpdate = Omit<IProductCreate, 'images'> & {

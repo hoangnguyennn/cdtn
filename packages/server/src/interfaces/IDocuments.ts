@@ -56,6 +56,7 @@ export interface IProduct extends Document {
 	imagesId: Types.ObjectId[];
 	categoryId: Types.ObjectId;
 	nameNonUnicode: string;
+	longDescription?: string;
 
 	unit?: IProductUnit;
 	images?: IImage[];

@@ -101,6 +101,7 @@ export const mapProductToResponse = (product: IProduct): IProductResponse => {
 		images: product.images?.map((image) => image.url) || [],
 		status: product.status,
 		category: product.category?.name || '',
+		longDescription: product.longDescription || '',
 	};
 };
 
@@ -118,6 +119,7 @@ export const mapProductToResponseForAdmin = (
 		category: product.category
 			? mapCategoryToResponse(product.category)
 			: undefined,
+		longDescription: product.longDescription || '',
 	};
 };
 
