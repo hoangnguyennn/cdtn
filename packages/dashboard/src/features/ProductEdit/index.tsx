@@ -100,7 +100,6 @@ const ProductEdit = () => {
 	}, [dispatch, product, id, history]);
 
 	useEffect(() => {
-		console.log(product);
 		if (product) {
 			form.setFieldsValue({
 				name: product.name,
@@ -110,6 +109,7 @@ const ProductEdit = () => {
 				images: product.images,
 				status: product.status === ProductStatus.SELLING,
 				category: product.category?.id,
+				longDescription: product.longDescription,
 			});
 		}
 	}, [form, product]);

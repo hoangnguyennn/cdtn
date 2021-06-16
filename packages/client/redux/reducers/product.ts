@@ -20,6 +20,7 @@ export const initialState: IProductState = {
 		unit: '',
 		images: [],
 		status: null,
+		longDescription: '',
 	},
 };
 

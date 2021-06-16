@@ -92,6 +92,7 @@ export interface IProduct {
 	unit: string;
 	images: string[];
 	status: ProductStatus;
+	longDescription: string;
 }
 
 export interface IProductWithLink extends IProduct {

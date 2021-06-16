@@ -84,3 +84,10 @@ export const updateProductUnit = async (
 		.patch(`${ENDPOINT.productUnits}/${id}`, unit)
 		.then((res) => res.data);
 };
+
+export const uploadImage = async (image: File) => {
+	const formData = new FormData();
+	formData.append('file', image);
+
+	return axiosInstance.post(ENDPOINT.upload, formData).then((res) => res.data);
+};

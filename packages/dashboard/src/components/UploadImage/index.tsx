@@ -1,7 +1,10 @@
+import { FC, useEffect, useMemo, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import { Upload, Modal } from 'antd';
-import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { getToken } from '../../redux/reducers/auth';
 import { IImage } from '../../interfaces';
 
 function getBase64(file: RcFile): Promise<string | ArrayBuffer | null> {
@@ -32,6 +35,8 @@ const UploadImage: FC<UploadImageProps> = ({
 		title: '',
 	});
 
+	const token = useSelector(getToken());
+
 	const handlePreview = async (file: UploadFile) => {
 		if (!file.url && !file.preview) {
 			file.preview = (await getBase64(file.originFileObj as RcFile)) as string;
@@ -56,10 +61,9 @@ const UploadImage: FC<UploadImageProps> = ({
 		onChange(fileList);
 	};
 
-	const requestHeaders = () => {
-		const token = localStorage.getItem('access-token');
+	const requestHeaders = useMemo(() => {
 		return { Authorization: `Bearer ${token}` };
-	};
+	}, [token]);
 
 	const uploadButton = (
 		<div>
@@ -94,7 +98,7 @@ const UploadImage: FC<UploadImageProps> = ({
 		<>
 			<Upload
 				action="http://localhost:5000/upload"
-				headers={requestHeaders()}
+				headers={requestHeaders}
 				listType="picture-card"
 				fileList={fileList}
 				onPreview={handlePreview}

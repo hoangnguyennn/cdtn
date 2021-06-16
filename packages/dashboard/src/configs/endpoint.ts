@@ -10,4 +10,5 @@ export const ENDPOINT = {
 	productUnits: '/product-units',
 	register: '/auth/register',
 	trendingProducts: '/products/trending',
+	upload: '/upload',
 };

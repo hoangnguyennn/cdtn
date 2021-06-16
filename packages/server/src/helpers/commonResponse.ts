@@ -83,7 +83,7 @@ export const handleError = (
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	next: NextFunction
 ) => {
-	return res.status(err.httpStatusCode).json({
+	return res.status(err.httpStatusCode || 500).json({
 		message: err.message,
 		stack: isDev ? err.stack : undefined,
 	});
