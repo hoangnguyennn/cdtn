@@ -48,7 +48,7 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	};
 
 	const clearAllFilter = () => {
-		const query = { category: router.query.category };
+		const query = removeFalsyFields({ category: router.query.category });
 		if (sameObject(query, router.query)) {
 			return;
 		}
