@@ -1,14 +1,20 @@
-import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import 'react-toastify/dist/ReactToastify.css';
+
 import './assets/styles/index.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './redux/store';
+import { interceptors } from './services/instance';
+
+interceptors(store);
 
 ReactDOM.render(
-	// <React.StrictMode>
-	<App />,
-	// </React.StrictMode>,
+	<Provider store={store}>
+		<App />
+	</Provider>,
 	document.getElementById('root')
 );
 

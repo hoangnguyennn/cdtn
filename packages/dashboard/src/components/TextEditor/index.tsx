@@ -2,7 +2,9 @@ import { ChangeEvent, FC, useCallback, useMemo, useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 
 import 'react-quill/dist/quill.snow.css';
+import { useDispatch } from 'react-redux';
 import { uploadImage } from '../../apis/common';
+import { setLoading } from '../../redux/reducers/app';
 
 type TextEditorProps = {
 	onChange?: Function;
@@ -13,6 +15,7 @@ const TextEditor: FC<TextEditorProps> = ({
 	onChange = () => {},
 	value = '',
 }) => {
+	const dispatch = useDispatch();
 	const inputImageRef = useRef<HTMLInputElement>(null);
 	const [quillRef, setQuillRef] = useState<ReactQuill | null>(null);
 
@@ -25,6 +28,7 @@ const TextEditor: FC<TextEditorProps> = ({
 		console.log('image change');
 		const file = event.target.files?.[0];
 		if (file) {
+			dispatch(setLoading(true));
 			uploadImage(file)
 				.then((res) => {
 					if (quillRef) {
@@ -37,6 +41,7 @@ const TextEditor: FC<TextEditorProps> = ({
 					}
 				})
 				.finally(() => {
+					dispatch(setLoading(false));
 					if (inputImageRef.current) {
 						inputImageRef.current.value = '';
 					}

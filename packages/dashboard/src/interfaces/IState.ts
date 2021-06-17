@@ -1,5 +1,9 @@
 import { IProduct, IUser, IProductUnit, IOrder, ICategory } from '.';
 
+export interface IAppState {
+	isLoading: boolean;
+}
+
 export interface IAuthState {
 	token: string;
 	user: IUser;
@@ -22,6 +26,7 @@ export interface IProductUnitState {
 }
 
 export interface IRootState {
+	app: IAppState;
 	auth: IAuthState;
 	category: ICategoryState;
 	order: IOrderState;
