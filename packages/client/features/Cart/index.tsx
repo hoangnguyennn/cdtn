@@ -273,6 +273,7 @@ const Cart = () => {
 
 					<FormGroup>
 						<Input
+							rightPlaceholder={'Optional'}
 							placeholder={t('Note')}
 							name="deliveryNote"
 							onChange={formik.handleChange}
