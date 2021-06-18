@@ -5,8 +5,8 @@ type BannerProps = {
 };
 
 export default styled.div<BannerProps>`
-	margin-bottom: 100px;
-	height: 700px;
+	margin-bottom: 6.25rem;
+	height: 43.75rem;
 	background-image: linear-gradient(rgba(87, 87, 87, 0.53), rgba(13, 5, 1, 0.7)),
 		url(${(props) => props.background});
 	background-size: cover;

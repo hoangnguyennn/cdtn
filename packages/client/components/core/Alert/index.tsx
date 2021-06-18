@@ -10,8 +10,8 @@ const Alert = styled.div<AlertProps>`
 	width: 100%;
 	color: var(--${(props) => props.variant});
 	font-size: 1rem;
-	border: 1px solid var(--${(props) => props.variant});
-	border-radius: 2px;
+	border: 0.0625rem solid var(--${(props) => props.variant});
+	border-radius: 0.125rem;
 
 	> * {
 		color: var(--primary);

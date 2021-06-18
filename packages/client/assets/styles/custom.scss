@@ -2,7 +2,11 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	transition: background-color 0.2s linear, color 0.2s linear;
+	transition: linear 3s linear;
+}
+
+html {
+	font-size: 18px;
 }
 
 body {
@@ -17,14 +21,6 @@ a {
 
 ul {
 	list-style-type: none;
-}
-
-.container {
-	width: 100%;
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
 }
 
 .disabled {

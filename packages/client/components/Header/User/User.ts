@@ -7,16 +7,16 @@ export default styled.div`
 		.dropdown-menu {
 			display: none;
 			position: absolute;
-			top: 72px;
+			top: 4.5rem;
 			left: 0;
 			width: 100vw;
-			padding-top: 12px;
-			padding-bottom: 12px;
+			padding-top: 0.75rem;
+			padding-bottom: 0.75rem;
 			background-color: white;
 
 			.dropdown-item {
 				display: block;
-				padding: 6px 12px;
+				padding: 0.375rem 0.75rem;
 				font-size: 0.875rem;
 
 				&,
@@ -52,9 +52,9 @@ export default styled.div`
 				top: 100%;
 				left: 50%;
 				transform: translateX(-50%);
-				width: 200px;
-				border: 1px solid var(--light);
-				border-radius: 2px;
+				width: 12.5rem;
+				border: 0.0625rem solid var(--light);
+				border-radius: 0.125rem;
 			}
 		}
 	}

@@ -31,7 +31,7 @@ const ProductList = styled.div<RootProps>`
 		margin: 1rem;
 		padding: 1rem 1.5rem;
 		color: var(--danger);
-		border: 1px solid var(--danger);
+		border: 0.0625rem solid var(--danger);
 		border-radius: 0.25rem;
 	}
 

@@ -4,7 +4,7 @@ export default styled.div`
 	margin-right: 0.5rem;
 	padding-top: 0.65625rem;
 	padding-bottom: 0.65625rem;
-	width: 74px;
+	width: 4.625rem;
 
 	a {
 		display: flex;
@@ -18,6 +18,6 @@ export default styled.div`
 	}
 
 	@media (min-width: 992px) {
-		width: 142px;
+		width: 8.875rem;
 	}
 `;

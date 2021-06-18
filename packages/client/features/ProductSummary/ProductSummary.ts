@@ -49,9 +49,8 @@ export default styled.div`
 
 			.description {
 				padding: 1.25rem;
-				/* font-size: 0.875rem; */
-				border: 1px solid #dae1e7;
-				border-radius: 2px;
+				border: 0.0625rem solid #dae1e7;
+				border-radius: 0.125rem;
 
 				.list {
 					list-style-type: disc;
@@ -67,6 +66,9 @@ export default styled.div`
 
 	.ql-editor {
 		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
 			width: 60%;
 		}
 	}
@@ -99,7 +101,7 @@ export default styled.div`
 			> * {
 				width: 60%;
 				padding-top: 1.5rem;
-				border-top: 1px solid #dae1e7;
+				border-top: 0.0625rem solid #dae1e7;
 			}
 		}
 	}

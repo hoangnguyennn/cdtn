@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import Form from '../../../../components/core/Form';
 
 export default styled(Form)`
-	border-right: 1px solid #dae1e7;
+	border-right: 0.0625rem solid #dae1e7;
 
 	.filter-item {
 		padding: 1rem 1rem 0.75rem 0;
-		border-top: 1px solid #dae1e7;
+		border-top: 0.0625rem solid #dae1e7;
 
 		.delete-all {
 			background-color: transparent;
@@ -26,11 +26,11 @@ export default styled(Form)`
 
 			input {
 				flex: 1;
-				padding: 0 8px;
+				padding: 0 0.5rem;
 				width: 0;
-				height: 30px;
-				border: 1px solid #dae1e7;
-				border-radius: 2px;
+				height: 1.875rem;
+				border: 0.0625rem solid #dae1e7;
+				border-radius: 0.125rem;
 				outline: none;
 			}
 		}
@@ -68,11 +68,11 @@ export default styled(Form)`
 
 			input {
 				flex: 1;
-				padding: 0 8px;
+				padding: 0 0.5rem;
 				width: 0;
-				height: 30px;
-				border: 1px solid #dae1e7;
-				border-radius: 2px;
+				height: 1.875rem;
+				border: 0.0625rem solid #dae1e7;
+				border-radius: 0.125rem;
 				outline: none;
 			}
 		}
@@ -83,8 +83,8 @@ export default styled(Form)`
 			background-color: var(--white);
 			color: var(--primary);
 			font-size: 0.75rem;
-			border: 1px solid var(--primary);
-			border-radius: 4px;
+			border: 0.0625rem solid var(--primary);
+			border-radius: 0.25rem;
 			cursor: pointer;
 		}
 	}

@@ -16,7 +16,7 @@ export default styled.div`
 		.update-password {
 			padding: 1rem;
 			margin-bottom: 0;
-			border: 1px solid #dae1e7;
+			border: 0.0625rem solid #dae1e7;
 		}
 
 		.user-info {

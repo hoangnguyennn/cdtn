@@ -19,7 +19,7 @@ export default styled.div`
 			font-size: 0.9375rem;
 			font-weight: 400;
 			text-align: left;
-			border-bottom: 1px solid var(--light);
+			border-bottom: 0.0625rem solid var(--light);
 
 			&:last-child {
 				text-align: right;

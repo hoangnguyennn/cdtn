@@ -4,7 +4,7 @@ export default styled.a`
 	margin-bottom: 1rem;
 	width: 100%;
 	text-decoration: none;
-	border-bottom: 1px solid #e3e9ef;
+	border-bottom: 0.0625rem solid #e3e9ef;
 
 	position: relative;
 
@@ -45,7 +45,7 @@ export default styled.a`
 	@media (min-width: 992px) {
 		padding: 1.25rem;
 		border-bottom-color: transparent;
-		border-radius: 2px;
+		border-radius: 0.125rem;
 
 		.add-to-cart {
 			position: absolute;
@@ -69,7 +69,7 @@ export default styled.a`
 				font-weight: 400;
 				line-height: 1.5;
 				border: none;
-				border-radius: 2px;
+				border-radius: 0.125rem;
 				outline: none;
 				cursor: pointer;
 				z-index: 1;
@@ -94,8 +94,8 @@ export default styled.a`
 				box-shadow: 0 1.15rem 1.525rem -0.375rem rgb(0 0 0 / 0.5);
 				border-top-left-radius: 0;
 				border-top-right-radius: 0;
-				border-bottom-left-radius: 2px;
-				border-bottom-right-radius: 2px;
+				border-bottom-left-radius: 0.125rem;
+				border-bottom-right-radius: 0.125rem;
 			}
 		}
 	}

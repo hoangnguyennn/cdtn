@@ -3,7 +3,7 @@ import Container from '../core/Container';
 
 export default styled.header`
 	padding: 0.75rem 1rem;
-	border-bottom: 1px solid #dae1e7;
+	border-bottom: 0.0625rem solid #dae1e7;
 
 	${Container} {
 		display: flex;
