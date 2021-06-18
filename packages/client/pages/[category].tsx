@@ -16,6 +16,7 @@ import { productsByCategoryPage } from '../configs/breadcrumb';
 import MainLayout from '../layouts/MainLayout';
 import PageContent from '../components/PageContent';
 import ProductList from '../features/ProductList';
+import { getProductUnitsAction } from '../redux/reducers/productUnit';
 
 const CategoryPage = () => {
 	const { t } = useTranslation();
@@ -52,6 +53,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			fetchProductsByCategorySlugAction(category as string, query)
 		);
 		await dispatch(getCategoriesAction());
+		await dispatch(
+			getProductUnitsAction({ slug: category as string, ...query })
+		);
 
 		return {
 			props: { initialReduxState: reduxStore.getState() },

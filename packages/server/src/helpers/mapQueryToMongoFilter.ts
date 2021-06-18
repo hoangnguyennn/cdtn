@@ -19,6 +19,8 @@ const mapping = (query: any): Record<string, any> => {
 					return {
 						nameNonUnicode: { $regex: new RegExp(`${tmp}`, 'i') },
 					};
+				case 'unit':
+					return { unitId: value };
 				default:
 					return null;
 			}

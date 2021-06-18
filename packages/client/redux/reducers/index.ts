@@ -8,6 +8,7 @@ import categoryReducer from './category';
 import orderReducer from './order';
 import paymentMethodReducer from './paymentMethod';
 import productReducer from './product';
+import productUnitReducer from './productUnit';
 
 export default combineReducers<IRootState>({
 	app: appReducer,
@@ -17,4 +18,5 @@ export default combineReducers<IRootState>({
 	order: orderReducer,
 	paymentMethod: paymentMethodReducer,
 	product: productReducer,
+	productUnit: productUnitReducer,
 });

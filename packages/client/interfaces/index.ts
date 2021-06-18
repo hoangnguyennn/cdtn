@@ -95,6 +95,13 @@ export interface IProduct {
 	longDescription: string;
 }
 
+export interface IProductUnitWithLength {
+	id: string;
+	name: string;
+	description: string;
+	productsLength: number;
+}
+
 export interface IProductWithLink extends IProduct {
 	link: string;
 }

@@ -8,6 +8,7 @@ import { initialState as initialCategoryState } from './reducers/category';
 import { initialState as initialOrderState } from './reducers/order';
 import { initialState as initialPaymentMethodState } from './reducers/paymentMethod';
 import { initialState as initialProductState } from './reducers/product';
+import { initialState as initialProduutUnitState } from './reducers/productUnit';
 
 import { IRootState } from '../interfaces/IState';
 import rootReducer from './reducers';
@@ -23,6 +24,7 @@ const initStore = (
 		order: initialOrderState,
 		paymentMethod: initialPaymentMethodState,
 		product: initialProductState,
+		productUnit: initialProduutUnitState,
 	}
 ) => {
 	return configureStore({

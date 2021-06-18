@@ -32,9 +32,7 @@ const get = async (req: Request, res: Response) => {
 			(category, idx) => {
 				return Object.assign<ICategory, { productsLength: number }>(
 					Object.create(category),
-					{
-						productsLength: productsList[idx].length,
-					}
+					{ productsLength: productsList[idx].length }
 				);
 			}
 		);

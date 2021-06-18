@@ -11,6 +11,7 @@ export default styled(Form)`
 		.delete-all {
 			background-color: transparent;
 			color: var(--primary);
+			font-size: 0.875rem;
 			border: none;
 			cursor: pointer;
 
@@ -27,7 +28,6 @@ export default styled(Form)`
 			input {
 				flex: 1;
 				padding: 0 0.5rem;
-				width: 0;
 				height: 1.875rem;
 				border: 0.0625rem solid #dae1e7;
 				border-radius: 0.125rem;
@@ -35,12 +35,17 @@ export default styled(Form)`
 			}
 		}
 
-		.categories {
+		.categories,
+		.units {
+			font-size: 0.875rem;
+
+			li,
 			a {
 				color: var(--primary);
-				font-size: 0.875rem;
 				text-decoration: none;
+				cursor: pointer;
 
+				&.active,
 				&:hover {
 					color: var(--primary-hover);
 					text-decoration: underline;

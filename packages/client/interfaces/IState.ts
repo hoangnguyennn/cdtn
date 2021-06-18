@@ -4,6 +4,7 @@ import {
 	IOrderResponse,
 	IPaymentMethod,
 	IProduct,
+	IProductUnitWithLength,
 	IUser,
 } from './index';
 
@@ -39,6 +40,10 @@ export interface IProductState {
 	[key: string]: any;
 }
 
+export interface IProductUnitState {
+	productUnits: IProductUnitWithLength[];
+}
+
 export interface IRootState {
 	app: IAppState;
 	auth: IAuthState;
@@ -47,4 +52,5 @@ export interface IRootState {
 	order: IOrderState;
 	paymentMethod: IPaymentMethodState;
 	product: IProductState;
+	productUnit: IProductUnitState;
 }

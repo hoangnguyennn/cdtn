@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import classNames from 'classnames';
 import Link from 'next/link';
 import {
 	ChangeEvent,
@@ -20,6 +21,7 @@ import { sameObject } from '../../../../utils/comparison';
 import Root from './Filter';
 
 import { getCategories } from '../../../../redux/reducers/category';
+import { getProductUnits } from '../../../../redux/reducers/productUnit';
 
 type ProductFilterProps = {
 	[key: string]: any;
@@ -29,10 +31,13 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	const { t } = useTranslation();
 	const router = useRouter();
 	const categories = useSelector(getCategories());
+	const productUnits = useSelector(getProductUnits());
 
 	const [productName, setProductName] = useState('');
 	const [priceFrom, setPriceFrom] = useState('0');
 	const [priceTo, setPriceTo] = useState('0');
+
+	const { category: currentCategory, unit: currentUnit } = router.query;
 
 	const setPrice = (
 		event: ChangeEvent<HTMLInputElement>,
@@ -102,6 +107,15 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 		router.push({ query });
 	};
 
+	const filterByUnit = (unitId: string) => {
+		const query = removeFalsyFields({
+			...router.query,
+			unit: unitId,
+		});
+
+		router.push({ query });
+	};
+
 	const handleInputNameKeyPress = (event: KeyboardEvent) => {
 		if (event.key === 'Enter') {
 			event.preventDefault();
@@ -110,6 +124,8 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	};
 
 	useEffect(() => {
+		console.log('router query change');
+		const { name } = router.query;
 		let { price } = router.query;
 
 		if (price) {
@@ -123,6 +139,12 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 		} else {
 			setPriceFrom('0');
 			setPriceTo('0');
+		}
+
+		if (name) {
+			setProductName(name as string);
+		} else {
+			setProductName('');
 		}
 	}, [JSON.stringify(router.query)]);
 
@@ -154,7 +176,12 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 				<h4 className="title">{t('Category')}</h4>
 				<ul className="categories">
 					{categories.map((category) => (
-						<li key={category.id}>
+						<li
+							key={category.id}
+							className={classNames({
+								active: currentCategory === category.slug,
+							})}
+						>
 							<Link href={`/${category.slug}`}>
 								<a>
 									{category.name} ({category.productsLength})
@@ -166,7 +193,19 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 			</div>
 			<div className="filter-item">
 				<h4 className="title">{t('Layered')}</h4>
-				<div className="product-units"></div>
+				<div className="product-units">
+					<ul className="units">
+						{productUnits.map((unit) => (
+							<li
+								key={unit.id}
+								onClick={() => filterByUnit(unit.id)}
+								className={classNames({ active: currentUnit === unit.id })}
+							>
+								{unit.name} ({unit.productsLength})
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
 			<div className="filter-item">
 				<h4 className="title">{t('Price')}</h4>

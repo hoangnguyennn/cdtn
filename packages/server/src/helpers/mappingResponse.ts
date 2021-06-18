@@ -8,6 +8,7 @@ import {
 	IProductResponse,
 	IProductResponseForAdmin,
 	IProductUnitResponse,
+	IProductUnitWithLength,
 	IUserResponse,
 } from '../interfaces';
 import {
@@ -131,6 +132,14 @@ export const mapProductUnitToResponse = (
 		name: productUnit.name,
 		description: '',
 	};
+};
+
+export const mapProductUnitWithProductListToResponse = (
+	productUnit: IProductUnitWithLength
+) => {
+	return Object.assign(mapProductUnitToResponse(productUnit), {
+		productsLength: productUnit.productsLength,
+	});
 };
 
 export const mapUserToResponse = (user: IUser): IUserResponse => {

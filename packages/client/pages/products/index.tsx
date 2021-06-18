@@ -9,6 +9,7 @@ import MainLayout from '../../layouts/MainLayout';
 import PageContent from '../../components/PageContent';
 import ProductList from '../../features/ProductList';
 import { getCategoriesAction } from '../../redux/reducers/category';
+import { getProductUnitsAction } from '../../redux/reducers/productUnit';
 
 const ProductDetailPage = () => {
 	const { t } = useTranslation();
@@ -31,6 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	try {
 		await dispatch(getProductsAction(query));
 		await dispatch(getCategoriesAction());
+		await dispatch(getProductUnitsAction(query));
 
 		return {
 			props: { initialReduxState: reduxStore.getState() },
