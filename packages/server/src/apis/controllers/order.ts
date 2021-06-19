@@ -48,7 +48,16 @@ const get = async (req: Request, res: Response) => {
 	return success(res, orders.map(mapOrderToResponse));
 };
 
+const updateOrderStatus = async (req: Request, res: Response) => {
+	const { id } = req.params;
+	const { status } = req.body;
+
+	const orderUpdated = await OrderService.updateStatus(id, status);
+	return success(res, mapOrderToResponse(orderUpdated));
+};
+
 export default {
 	create,
 	get,
+	updateOrderStatus,
 };

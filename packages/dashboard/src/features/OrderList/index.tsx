@@ -1,16 +1,59 @@
 import { ColumnsType } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { getOrders, getOrdersAction } from '../../redux/reducers/order';
+import {
+	getOrders,
+	getOrdersAction,
+	updateOrderStatusAction,
+} from '../../redux/reducers/order';
 import { IOrder, IOrderItem, IUser } from '../../interfaces';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import { PATH_NAME } from '../../configs';
-import { PaymentStatus, ProductStatus } from '../../interfaces/enum';
+import {
+	OrderStatus,
+	PaymentStatus,
+	ProductStatus,
+} from '../../interfaces/enum';
+import { toast } from 'react-toastify';
 
-const getColumnsConfig = (): ColumnsType<IOrder> => [
+const renderActionSwitch = (order: IOrder, actionCallback: Function) => {
+	switch (order.orderStatus) {
+		case OrderStatus.ORDERED:
+			return (
+				<Button
+					type="link"
+					onClick={() => actionCallback(order.id, OrderStatus.VERIFIED)}
+				>
+					Verify
+				</Button>
+			);
+		case OrderStatus.VERIFIED:
+			return (
+				<Button
+					type="link"
+					onClick={() => actionCallback(order.id, OrderStatus.DELIVERING)}
+				>
+					Delivering
+				</Button>
+			);
+		case OrderStatus.DELIVERING:
+			return (
+				<Button
+					type="link"
+					onClick={() => actionCallback(order.id, OrderStatus.DELIVERED)}
+				>
+					Delivered
+				</Button>
+			);
+		default:
+			return '';
+	}
+};
+
+const getColumnsConfig = (actionCallback: Function): ColumnsType<IOrder> => [
 	{
 		title: 'User',
 		dataIndex: 'user',
@@ -100,8 +143,9 @@ const getColumnsConfig = (): ColumnsType<IOrder> => [
 		title: 'Action',
 		key: 'action',
 		render: (_: any, order: IOrder) => (
-			<Space size="middle">
+			<Space size="small">
 				<Link to={`${PATH_NAME.ORDER_LIST}/${order.id}`}>View</Link>
+				{renderActionSwitch(order, actionCallback)}
 			</Space>
 		),
 	},
@@ -111,13 +155,22 @@ const OrderList = () => {
 	const dispatch = useDispatch();
 	const orders = useSelector(getOrders());
 
+	const updateStatus = async (id: string, status: OrderStatus) => {
+		try {
+			await dispatch(updateOrderStatusAction(id, status));
+			toast.success('success');
+		} catch (err) {
+			toast.error(err.message || 'error');
+		}
+	};
+
 	useEffect(() => {
 		dispatch(getOrdersAction());
 	}, [dispatch]);
 
 	return (
 		<Table
-			columns={getColumnsConfig()}
+			columns={getColumnsConfig(updateStatus)}
 			dataSource={orders}
 			rowKey={(record) => record.id}
 		/>

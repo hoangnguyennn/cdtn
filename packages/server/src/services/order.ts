@@ -1,8 +1,14 @@
 import { IOrder } from '../interfaces/IDocuments';
 import { IOrderCreate } from '../interfaces';
-import { PaymentStatus } from '../interfaces/enums';
+import { OrderStatus, PaymentStatus } from '../interfaces/enums';
 import OrderModel from '../models/order';
 import { removeInvalidFields } from '../utils';
+import {
+	COMMON_MESSAGE,
+	HttpError,
+	HttpStatusCode,
+} from '../helpers/commonResponse';
+import { orderPopulate } from '../helpers/populate';
 
 const create = async (order: IOrderCreate): Promise<IOrder> => {
 	const orderLint = removeInvalidFields({
@@ -19,25 +25,35 @@ const create = async (order: IOrderCreate): Promise<IOrder> => {
 
 	const orderCreated = await OrderModel.create(orderLint);
 
-	return OrderModel.populate(orderCreated, [
-		{ path: 'user' },
-		{ path: 'paymentMethod' },
-		{ path: 'items' },
-	]);
+	return OrderModel.populate(orderCreated, orderPopulate);
 };
 
 const get = async (filter: any = {}): Promise<IOrder[]> => {
 	const orderFilter: any = removeInvalidFields(filter);
 	return OrderModel.find(orderFilter)
-		.populate([
-			{ path: 'user' },
-			{ path: 'paymentMethod' },
-			{ path: 'items', populate: { path: 'product' } },
-		])
+		.populate(orderPopulate)
 		.sort({ orderDate: -1 });
+};
+
+const updateStatus = async (
+	id: string,
+	status: OrderStatus
+): Promise<IOrder> => {
+	const orderUpdated = await OrderModel.findByIdAndUpdate(
+		id,
+		{ $set: { orderStatus: status } },
+		{ new: true }
+	).populate(orderPopulate);
+
+	if (!orderUpdated) {
+		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+	}
+
+	return orderUpdated;
 };
 
 export default {
 	create,
 	get,
+	updateStatus,
 };
