@@ -79,6 +79,12 @@ export const loginByToken = async (): Promise<IUser> => {
 	return axiosInstance.post(ENDPOINT.me).then((res) => res.data);
 };
 
+export const payOrder = async (id: string) => {
+	return axiosInstance
+		.post(`${ENDPOINT.orders}/${id}/pay`)
+		.then((res) => res.data);
+};
+
 export const updateOrderStatus = async (id: string, status: OrderStatus) => {
 	return axiosInstance
 		.post(`${ENDPOINT.orders}/${id}/update-status`, { status })

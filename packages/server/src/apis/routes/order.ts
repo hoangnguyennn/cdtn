@@ -20,4 +20,12 @@ router
 		catcherWrapper(OrderController.updateOrderStatus)
 	);
 
+router
+	.route('/:id/pay')
+	.post(
+		AuthMiddleware.checkAuth,
+		AuthMiddleware.checkRole([UserType.MANAGER]),
+		catcherWrapper(OrderController.payOrder)
+	);
+
 export default router;

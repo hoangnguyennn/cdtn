@@ -2,6 +2,7 @@ import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 import {
 	fetchOrders,
 	fetchOrdersUnProcessed,
+	payOrder,
 	updateOrderStatus,
 } from '../../apis/common';
 import { IOrder } from '../../interfaces';
@@ -50,6 +51,12 @@ export const getOrdersUnProcessedAction = () => async (dispatch: Dispatch) => {
 	return fetchOrdersUnProcessed().then((orders) =>
 		dispatch(addOrdersUnProcessed(orders))
 	);
+};
+
+export const payOrderAction = (id: string) => async (dispatch: Dispatch) => {
+	return payOrder(id).then((orderUpdated) => {
+		dispatch(updateOrder(orderUpdated));
+	});
 };
 
 export const updateOrderStatusAction =

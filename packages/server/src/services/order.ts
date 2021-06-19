@@ -52,8 +52,26 @@ const updateStatus = async (
 	return orderUpdated;
 };
 
+const updatePaymentStatus = async (
+	id: string,
+	paymentStatus: PaymentStatus
+): Promise<IOrder> => {
+	const orderUpdated = await OrderModel.findByIdAndUpdate(
+		id,
+		{ $set: { paymentStatus: paymentStatus } },
+		{ new: true }
+	).populate(orderPopulate);
+
+	if (!orderUpdated) {
+		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+	}
+
+	return orderUpdated;
+};
+
 export default {
 	create,
 	get,
 	updateStatus,
+	updatePaymentStatus,
 };

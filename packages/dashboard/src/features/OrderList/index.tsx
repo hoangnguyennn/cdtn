@@ -7,25 +7,22 @@ import { useEffect } from 'react';
 import {
 	getOrders,
 	getOrdersAction,
+	payOrderAction,
 	updateOrderStatusAction,
 } from '../../redux/reducers/order';
 import { IOrder, IOrderItem, IUser } from '../../interfaces';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import { PATH_NAME } from '../../configs';
-import {
-	OrderStatus,
-	PaymentStatus,
-	ProductStatus,
-} from '../../interfaces/enum';
+import { OrderStatus, PaymentStatus } from '../../interfaces/enum';
 import { toast } from 'react-toastify';
 
-const renderActionSwitch = (order: IOrder, actionCallback: Function) => {
+const renderActionSwitch = (order: IOrder, updateStatus: Function) => {
 	switch (order.orderStatus) {
 		case OrderStatus.ORDERED:
 			return (
 				<Button
 					type="link"
-					onClick={() => actionCallback(order.id, OrderStatus.VERIFIED)}
+					onClick={() => updateStatus(order.id, OrderStatus.VERIFIED)}
 				>
 					Verify
 				</Button>
@@ -34,7 +31,7 @@ const renderActionSwitch = (order: IOrder, actionCallback: Function) => {
 			return (
 				<Button
 					type="link"
-					onClick={() => actionCallback(order.id, OrderStatus.DELIVERING)}
+					onClick={() => updateStatus(order.id, OrderStatus.DELIVERING)}
 				>
 					Delivering
 				</Button>
@@ -43,7 +40,7 @@ const renderActionSwitch = (order: IOrder, actionCallback: Function) => {
 			return (
 				<Button
 					type="link"
-					onClick={() => actionCallback(order.id, OrderStatus.DELIVERED)}
+					onClick={() => updateStatus(order.id, OrderStatus.DELIVERED)}
 				>
 					Delivered
 				</Button>
@@ -53,7 +50,27 @@ const renderActionSwitch = (order: IOrder, actionCallback: Function) => {
 	}
 };
 
-const getColumnsConfig = (actionCallback: Function): ColumnsType<IOrder> => [
+const renderOrderStatus = (status: OrderStatus) => {
+	switch (status) {
+		case OrderStatus.CANCEL:
+			return <Tag color="error">{status}</Tag>;
+		case OrderStatus.DELIVERED:
+			return <Tag color="green">{status}</Tag>;
+		case OrderStatus.DELIVERING:
+			return <Tag color="blue">{status}</Tag>;
+		case OrderStatus.ORDERED:
+			return <Tag color="orange">{status}</Tag>;
+		case OrderStatus.VERIFIED:
+			return <Tag color="cyan">{status}</Tag>;
+		default:
+			return null;
+	}
+};
+
+const getColumnsConfig = (
+	updateStatus: Function,
+	updatePaymentStatus: Function
+): ColumnsType<IOrder> => [
 	{
 		title: 'User',
 		dataIndex: 'user',
@@ -110,7 +127,9 @@ const getColumnsConfig = (actionCallback: Function): ColumnsType<IOrder> => [
 		dataIndex: 'paymentStatus',
 		key: 'paymentStatus',
 		render: (status: PaymentStatus) => (
-			<Tag color={status ? 'geekblue' : 'green'}>{status}</Tag>
+			<Tag color={status === PaymentStatus.UNPAID ? 'geekblue' : 'green'}>
+				{status}
+			</Tag>
 		),
 		sorter: (a: IOrder, b: IOrder) => {
 			if (a.paymentStatus > b.paymentStatus) {
@@ -126,9 +145,7 @@ const getColumnsConfig = (actionCallback: Function): ColumnsType<IOrder> => [
 		title: 'Status',
 		dataIndex: 'orderStatus',
 		key: 'orderStatus',
-		render: (status: ProductStatus) => (
-			<Tag color={status ? 'geekblue' : 'green'}>{status}</Tag>
-		),
+		render: (status: OrderStatus) => renderOrderStatus(status),
 		sorter: (a: IOrder, b: IOrder) => {
 			if (a.orderStatus > b.orderStatus) {
 				return 1;
@@ -145,7 +162,13 @@ const getColumnsConfig = (actionCallback: Function): ColumnsType<IOrder> => [
 		render: (_: any, order: IOrder) => (
 			<Space size="small">
 				<Link to={`${PATH_NAME.ORDER_LIST}/${order.id}`}>View</Link>
-				{renderActionSwitch(order, actionCallback)}
+				{order.paymentStatus === PaymentStatus.UNPAID && (
+					<Button type="link" onClick={() => updatePaymentStatus(order.id)}>
+						Pay
+					</Button>
+				)}
+
+				{renderActionSwitch(order, updateStatus)}
 			</Space>
 		),
 	},
@@ -164,13 +187,22 @@ const OrderList = () => {
 		}
 	};
 
+	const payOrder = async (id: string) => {
+		try {
+			await dispatch(payOrderAction(id));
+			toast.success('success');
+		} catch (err) {
+			toast.error(err.message || 'error');
+		}
+	};
+
 	useEffect(() => {
 		dispatch(getOrdersAction());
 	}, [dispatch]);
 
 	return (
 		<Table
-			columns={getColumnsConfig(updateStatus)}
+			columns={getColumnsConfig(updateStatus, payOrder)}
 			dataSource={orders}
 			rowKey={(record) => record.id}
 		/>

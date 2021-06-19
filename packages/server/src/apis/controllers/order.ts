@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { IOrderCreate, IOrderCreateRequest } from '../../interfaces';
 import { mapOrderToResponse } from '../../helpers/mappingResponse';
 import { success } from '../../helpers/commonResponse';
-import { UserType } from '../../interfaces/enums';
+import { PaymentStatus, UserType } from '../../interfaces/enums';
 import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
 import OrderItemService from '../../services/orderItem';
 import OrderService from '../../services/order';
@@ -56,8 +56,19 @@ const updateOrderStatus = async (req: Request, res: Response) => {
 	return success(res, mapOrderToResponse(orderUpdated));
 };
 
+const payOrder = async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	const orderUpdated = await OrderService.updatePaymentStatus(
+		id,
+		PaymentStatus.PAID
+	);
+	return success(res, mapOrderToResponse(orderUpdated));
+};
+
 export default {
 	create,
 	get,
+	payOrder,
 	updateOrderStatus,
 };

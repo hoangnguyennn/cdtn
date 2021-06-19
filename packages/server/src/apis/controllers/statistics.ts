@@ -11,7 +11,7 @@ const statistic = async (req: Request, res: Response) => {
 
 	const ordersInDay = await OrderService.get({
 		orderDate: { $gte: startOfDay(now), $lt: endOfDay(now) },
-		paymentStatus: PaymentStatus.UNPAID,
+		paymentStatus: PaymentStatus.PAID,
 	});
 
 	const ordersInPreviousDay = await OrderService.get({
@@ -19,7 +19,7 @@ const statistic = async (req: Request, res: Response) => {
 			$gte: startOfDay(now.getTime() - ONE_DAY_IN_MILISECONDS),
 			$lt: endOfDay(now.getTime() - ONE_DAY_IN_MILISECONDS),
 		},
-		paymentStatus: PaymentStatus.UNPAID,
+		paymentStatus: PaymentStatus.PAID,
 	});
 
 	const revenueOfTheDay = ordersInDay.reduce((result, order) => {
