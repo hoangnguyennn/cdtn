@@ -9,6 +9,7 @@ export const ENDPOINT = {
 	products: '/products',
 	productUnits: '/product-units',
 	register: '/auth/register',
+	statistics: '/statistics',
 	trendingProducts: '/products/trending',
 	upload: '/upload',
 };

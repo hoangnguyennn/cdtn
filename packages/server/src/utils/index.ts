@@ -283,33 +283,33 @@ export const removeInvalidFields = function <T>(obj: T): T {
 	return result;
 };
 
-export const startOfDay = (date?: Date) => {
-	if (date) {
-		const years = date.getFullYear();
-		const months = date.getMonth();
-		const dates = date.getDate();
-
-		return new Date(years, months, dates);
-	}
-
-	const newDate = new Date();
-	const years = newDate.getFullYear();
-	const months = newDate.getMonth();
-	const dates = newDate.getDate();
-
-	return new Date(years, months, dates);
-};
-
-export const endOfDay = (date?: Date) => {
+export const startOfDay = (date?: Date | number) => {
 	const newDate = new Date();
 	let years = newDate.getFullYear();
 	let months = newDate.getMonth();
 	let dates = newDate.getDate();
 
 	if (date) {
-		years = date.getFullYear();
-		months = date.getMonth();
-		dates = date.getDate();
+		const newDate = new Date(date);
+		years = newDate.getFullYear();
+		months = newDate.getMonth();
+		dates = newDate.getDate();
+	}
+
+	return new Date(years, months, dates);
+};
+
+export const endOfDay = (date?: Date | number) => {
+	const newDate = new Date();
+	let years = newDate.getFullYear();
+	let months = newDate.getMonth();
+	let dates = newDate.getDate();
+
+	if (date) {
+		const newDate = new Date(date);
+		years = newDate.getFullYear();
+		months = newDate.getMonth();
+		dates = newDate.getDate();
 	}
 
 	return new Date(years, months, dates + 1);

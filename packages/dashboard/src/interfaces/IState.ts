@@ -15,6 +15,7 @@ export interface ICategoryState {
 
 export interface IOrderState {
 	orders: IOrder[];
+	ordersUnProcessed: IOrder[];
 }
 
 export interface IProductState {
@@ -25,6 +26,13 @@ export interface IProductUnitState {
 	productUnits: IProductUnit[];
 }
 
+export interface IStatisticsState {
+	revenueOfTheDay: number;
+	revenueOfPreviousDay: number;
+	numberOfOrders: number;
+	numberOfOrdersOfPreviousDay: number;
+}
+
 export interface IRootState {
 	app: IAppState;
 	auth: IAuthState;
@@ -32,4 +40,5 @@ export interface IRootState {
 	order: IOrderState;
 	product: IProductState;
 	productUnit: IProductUnitState;
+	statistics: IStatisticsState;
 }

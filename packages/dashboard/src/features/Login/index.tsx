@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { getToken, getUserType, loginAction } from '../../redux/reducers/auth';
 import { PATH_NAME } from '../../configs';
 
+import bg from '../../assets/images/login-bg.jpg';
+
 import './Login.css';
 
 const Login = () => {
@@ -32,7 +34,12 @@ const Login = () => {
 	}, [history, token, userType]);
 
 	return (
-		<div className="login-form">
+		<div
+			className="login-form"
+			style={{
+				backgroundImage: `url(${bg})`,
+			}}
+		>
 			<Form
 				name="basic"
 				className="form"

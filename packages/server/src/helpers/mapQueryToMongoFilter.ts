@@ -21,6 +21,14 @@ const mapping = (query: any): Record<string, any> => {
 					};
 				case 'unit':
 					return { unitId: value };
+				case 'orderStatus':
+					if (value instanceof Array) {
+						return {
+							orderStatus: { $in: value },
+						};
+					} else {
+						return { orderStatus: value };
+					}
 				default:
 					return null;
 			}

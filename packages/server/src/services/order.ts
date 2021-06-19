@@ -26,8 +26,8 @@ const create = async (order: IOrderCreate): Promise<IOrder> => {
 	]);
 };
 
-const get = async (order: any = {}): Promise<IOrder[]> => {
-	const orderFilter: any = removeInvalidFields(order);
+const get = async (filter: any = {}): Promise<IOrder[]> => {
+	const orderFilter: any = removeInvalidFields(filter);
 	return OrderModel.find(orderFilter)
 		.populate([
 			{ path: 'user' },

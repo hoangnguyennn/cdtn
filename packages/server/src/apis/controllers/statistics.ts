@@ -1,16 +1,24 @@
 import { Request, Response } from 'express';
-import { success } from '../../helpers/commonResponse';
 import { PaymentStatus } from '../../interfaces/enums';
-import OrderService from '../../services/order';
 import { startOfDay, endOfDay } from '../../utils';
+import { success } from '../../helpers/commonResponse';
+import OrderService from '../../services/order';
+
+const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000;
 
 const statistic = async (req: Request, res: Response) => {
 	const now = new Date();
-	const startOfDate = startOfDay(now);
-	const endOfDate = endOfDay(now);
 
 	const ordersInDay = await OrderService.get({
-		orderDate: { $gte: startOfDate, $lt: endOfDate },
+		orderDate: { $gte: startOfDay(now), $lt: endOfDay(now) },
+		paymentStatus: PaymentStatus.UNPAID,
+	});
+
+	const ordersInPreviousDay = await OrderService.get({
+		orderDate: {
+			$gte: startOfDay(now.getTime() - ONE_DAY_IN_MILISECONDS),
+			$lt: endOfDay(now.getTime() - ONE_DAY_IN_MILISECONDS),
+		},
 		paymentStatus: PaymentStatus.UNPAID,
 	});
 
@@ -24,9 +32,22 @@ const statistic = async (req: Request, res: Response) => {
 
 	const numberOfOrders = ordersInDay.length;
 
+	const revenueOfPreviousDay = ordersInPreviousDay.reduce((result, order) => {
+		console.log(order.items);
+		const orderTotal = order.items.reduce(
+			(total, item) => total + item.price * item.qty,
+			0
+		);
+		return result + orderTotal;
+	}, 0);
+
+	const numberOfOrdersOfPreviousDay = ordersInPreviousDay.length;
+
 	return success(res, {
 		revenueOfTheDay,
+		revenueOfPreviousDay,
 		numberOfOrders,
+		numberOfOrdersOfPreviousDay,
 	});
 };
 

@@ -6,7 +6,7 @@ import {
 	IProductUpdate,
 	IUser,
 } from '../interfaces';
-import { ProductStatus } from '../interfaces/enum';
+import { OrderStatus, ProductStatus } from '../interfaces/enum';
 import axiosInstance from '../services/instance';
 
 export const createCategory = async (category: ICategoryCreate) => {
@@ -33,6 +33,20 @@ export const fetchOrders = async () => {
 	return axiosInstance.get(ENDPOINT.orders).then((res) => res.data);
 };
 
+export const fetchOrdersUnProcessed = async () => {
+	return axiosInstance
+		.get(ENDPOINT.orders, {
+			params: {
+				orderStatus: [
+					OrderStatus.ORDERED,
+					OrderStatus.VERIFIED,
+					OrderStatus.DELIVERING,
+				],
+			},
+		})
+		.then((res) => res.data);
+};
+
 export const fetchProducts = async () => {
 	return axiosInstance.get(ENDPOINT.products).then((res) => res.data);
 };
@@ -51,6 +65,10 @@ export const fetchProductUnitById = async (id: string) => {
 	return axiosInstance
 		.get(`${ENDPOINT.productUnits}/${id}`)
 		.then((res) => res.data);
+};
+
+export const fetchStatistics = async () => {
+	return axiosInstance.get(ENDPOINT.statistics).then((res) => res.data);
 };
 
 export const login = async (userLogin: any) => {

@@ -32,7 +32,7 @@ export interface IOrder {
 	deliveryDate?: Date;
 	paymentStatus: PaymentStatus;
 	orderStatus: OrderStatus;
-	orderDate: Date;
+	orderDate: string;
 
 	user?: IUser;
 	paymentMethod: IPaymentMethod;

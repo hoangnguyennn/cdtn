@@ -53,14 +53,13 @@ const getColumnsConfig = (): ColumnsType<IOrder> => [
 			return <>{toCurrency(total)}</>;
 		},
 	},
-
 	{
 		title: 'Ordered Date',
 		dataIndex: 'orderDate',
 		key: 'orderDate',
 		render: (date: Date) => <>{isoDateToNativeDate(date)}</>,
 		sorter: (a: IOrder, b: IOrder) => {
-			return a.orderDate.getTime() - b.orderDate.getTime();
+			return new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime();
 		},
 	},
 	{

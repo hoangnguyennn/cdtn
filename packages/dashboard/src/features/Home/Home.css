@@ -1,0 +1,22 @@
+.dashboard-top {
+	margin-bottom: 32px;
+}
+
+.dashboard-top .number {
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+.dashboard-top .number .anticon {
+	margin-right: 0.5rem;
+	font-size: 0.8em;
+}
+
+.dashboard-top .number .anticon-arrow-up {
+	color: green;
+}
+
+.dashboard-top .number .anticon-arrow-down {
+	color: red;
+}

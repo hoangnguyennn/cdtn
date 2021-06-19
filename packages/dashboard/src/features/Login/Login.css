@@ -3,8 +3,8 @@
 	padding: 0;
 	width: 100vw;
 	height: 100vh;
-	background: no-repeat center center
-		url(https://images.wallpaperscraft.com/image/fresh_juice_fruit_apple_orange_113491_1920x1080.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
 	background-size: cover;
 	font-family: Roboto, sans-serif;
 	display: flex;

@@ -7,6 +7,7 @@ import categoryReducer from './category';
 import orderReducer from './order';
 import productReducer from './product';
 import productUnitReducer from './productUnit';
+import statisticsReducer from './statistics';
 
 export default combineReducers<IRootState>({
 	app: appReducer,
@@ -15,4 +16,5 @@ export default combineReducers<IRootState>({
 	order: orderReducer,
 	product: productReducer,
 	productUnit: productUnitReducer,
+	statistics: statisticsReducer,
 });
