@@ -5,6 +5,7 @@ export default styled.div`
 
 	.list {
 		display: flex;
+		flex-wrap: wrap;
 
 		.item {
 			display: flex;

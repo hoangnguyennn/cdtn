@@ -55,11 +55,11 @@ const ProductItem: FC<ProductItemProps> = ({
 					</p>
 				</div>
 			</div>
-			{isDesktop ? (
+			{isDesktop && (
 				<div className="add-to-cart">
 					<button onClick={handleAddToCartClick}>{t('Add to cart')}</button>
 				</div>
-			) : null}
+			)}
 		</Wrap>
 	);
 };

@@ -9,7 +9,7 @@ export default styled.div`
 
 		tr {
 			&:hover {
-				background-color: var(--primary-shadow);
+				background-color: var(--order-hover);
 			}
 		}
 
@@ -24,6 +24,11 @@ export default styled.div`
 			&:last-child {
 				text-align: right;
 			}
+		}
+
+		.order-id {
+			color: var(--primary);
+			text-decoration: none;
 		}
 	}
 `;

@@ -24,6 +24,7 @@ const ProductList: FC<ProductListProps> = ({
 	title,
 	viewMore = true,
 	items,
+	sorterUI,
 	...rest
 }: ProductListProps) => {
 	const { t } = useTranslation();
@@ -32,6 +33,7 @@ const ProductList: FC<ProductListProps> = ({
 	return (
 		<ProductListStyled hasTitle={!!title} {...rest}>
 			{title ? <h3 className="title">{title}</h3> : null}
+			{sorterUI}
 			{items.length ? (
 				<div className="list">
 					{items.map((product) => (
@@ -51,7 +53,6 @@ const ProductList: FC<ProductListProps> = ({
 					{t('There are no products to display')}
 				</div>
 			)}
-
 			{viewMore ? (
 				<div className="view-more">
 					<Link href={PATH_NAME.PRODUCTS}>

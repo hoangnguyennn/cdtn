@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
 import Root from './MyOrder';
 import { getOrdersAction, getOrders } from '../../redux/reducers/order';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
+import { PATH_NAME } from '../../configs/pathName';
 
 const MyOrder = () => {
 	const dispatch = useDispatch();
@@ -31,7 +33,11 @@ const MyOrder = () => {
 				<tbody>
 					{orders.map((order) => (
 						<tr key={order.id}>
-							<td>{order.id}</td>
+							<td>
+								<Link href={`${PATH_NAME.MY_ORDER}/${order.id}`}>
+									<a className="order-id">{order.id}</a>
+								</Link>
+							</td>
 							<td>{isoDateToNativeDate(order.orderDate)}</td>
 							<td>{order.items.map((item) => item.product.name).join(', ')}</td>
 							<td>

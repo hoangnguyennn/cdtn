@@ -5,6 +5,7 @@ import { IProduct } from '../../interfaces';
 import ProductFilter from './components/Filter';
 import ProductListComponent from '../../components/Product/List';
 import Root from './ProductList';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 type ProductListProps = {
 	products: IProduct[];
@@ -15,17 +16,18 @@ const ProductList: FC<ProductListProps> = ({
 	products,
 	title = 'Products',
 }) => {
+	const isDesktop = useMatchMedia('(min-width: 992px)');
 	const { t } = useTranslation();
 
 	return (
 		<Root>
-			<ProductFilter className="filter" />
+			{isDesktop && <ProductFilter className="filter" />}
 			<ProductListComponent
 				columns={1}
 				lg-columns={3}
 				items={products}
 				viewMore={false}
-				title={t(title)}
+				title={isDesktop && t(title)}
 				className="product-list"
 			/>
 		</Root>

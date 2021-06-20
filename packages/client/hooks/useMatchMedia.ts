@@ -14,8 +14,20 @@ const useMatchMedia = (query: string) => {
 	useEffect(() => {
 		if (!canMatch) return;
 		const queryList = queryMedia();
-		if (queryList) queryList.addListener(queryMedia);
-		return () => queryList && queryList.removeListener(queryMedia);
+
+		if (queryList)
+			Object.keys(window).forEach((key) => {
+				if (/^on/.test(key)) {
+					queryList.addEventListener(key.slice(2), queryMedia);
+				}
+			});
+		return () =>
+			queryList &&
+			Object.keys(window).forEach((key) => {
+				if (/^on/.test(key)) {
+					queryList.addEventListener(key.slice(2), queryMedia);
+				}
+			});
 	}, [queryMedia, canMatch]);
 
 	return match;
