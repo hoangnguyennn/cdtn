@@ -11,6 +11,9 @@
 		"fe-start": "cd packages/client && yarn start",
 		"dashboard-start": "cd packages/dashboard && yarn start",
 		"dashboard-build": "cd packages/dashboard && yarn build",
+		"deploy-client": "pm2 start yarn --interpreter bash --name client -- fe-start",
+		"deploy-server": "pm2 start yarn --interpreter bash --name server -- be-start",
+		"deploy": "yarn deploy-server && yarn deploy-client",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix --ext .ts,.tsx .",
 		"prepare": "husky install"
@@ -24,5 +27,8 @@
 		"husky": "^6.0.0",
 		"lerna": "^4.0.0",
 		"typescript": "^4.2.4"
+	},
+	"dependencies": {
+		"pm2": "^5.1.0"
 	}
 }
