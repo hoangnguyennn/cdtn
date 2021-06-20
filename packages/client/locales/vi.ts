@@ -74,6 +74,7 @@ const vi = {
 	'New products': 'Sản phẩm mới',
 	Category: 'Danh mục sản phẩm',
 	Layered: 'Quy cách',
+	All: 'Tất cả',
 };
 
 export default vi;

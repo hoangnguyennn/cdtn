@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		await dispatch(
 			fetchProductsByCategorySlugAction(category as string, query)
 		);
-		await dispatch(getCategoriesAction());
+		await dispatch(getCategoriesAction(query));
 		await dispatch(
 			getProductUnitsAction({ slug: category as string, ...query })
 		);

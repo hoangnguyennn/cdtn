@@ -46,7 +46,9 @@ export default styled(Form)`
 				cursor: pointer;
 
 				&.active,
-				&:hover {
+				&:hover,
+				&.active a,
+				&:hover a {
 					color: var(--primary-hover);
 					text-decoration: underline;
 				}

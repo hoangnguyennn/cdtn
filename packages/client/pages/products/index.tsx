@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const query = context.query;
 	try {
 		await dispatch(getProductsAction(query));
-		await dispatch(getCategoriesAction());
+		await dispatch(getCategoriesAction(query));
 		await dispatch(getProductUnitsAction(query));
 
 		return {

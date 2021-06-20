@@ -32,8 +32,6 @@ const get = async (req: Request, res: Response) => {
 			category = await CategoryService.getBySlug(slug as string);
 		}
 
-		console.log('filter', filter, rest, productUnits);
-
 		const productsPromises = productUnits.map((productUnit) =>
 			ProductService.get(
 				removeInvalidFields({
@@ -45,8 +43,6 @@ const get = async (req: Request, res: Response) => {
 		);
 
 		const productsList = await Promise.all(productsPromises);
-
-		console.log(productsList.map((list) => list.length));
 
 		const productUnitsWithLength: IProductUnitWithLength[] = productUnits
 			.map((productUnit, idx) => {

@@ -18,11 +18,12 @@ const categorySlice = createSlice({
 
 const { setCategories } = categorySlice.actions;
 
-export const getCategoriesAction = () => async (dispatch: Dispatch) => {
-	return fetchCategories().then((categories) => {
-		dispatch(setCategories(categories));
-	});
-};
+export const getCategoriesAction =
+	(query: any) => async (dispatch: Dispatch) => {
+		return fetchCategories(query).then((categories) => {
+			dispatch(setCategories(categories));
+		});
+	};
 
 const categoryState = (state: IRootState) => state.category;
 const selector = function <T>(combiner: { (state: ICategoryState): T }) {

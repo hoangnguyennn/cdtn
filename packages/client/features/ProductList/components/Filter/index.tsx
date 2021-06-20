@@ -22,6 +22,7 @@ import Root from './Filter';
 
 import { getCategories } from '../../../../redux/reducers/category';
 import { getProductUnits } from '../../../../redux/reducers/productUnit';
+import { PATH_NAME } from '../../../../configs/pathName';
 
 type ProductFilterProps = {
 	[key: string]: any;
@@ -53,7 +54,14 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	};
 
 	const clearAllFilter = () => {
-		const query = removeFalsyFields({ category: router.query.category });
+		router.push(PATH_NAME.PRODUCTS);
+	};
+
+	const clearFilterByUnit = () => {
+		const query = removeFalsyFields({
+			...router.query,
+			unit: undefined,
+		});
 		if (sameObject(query, router.query)) {
 			return;
 		}
@@ -182,7 +190,15 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 								active: currentCategory === category.slug,
 							})}
 						>
-							<Link href={`/${category.slug}`}>
+							<Link
+								href={{
+									pathname: `/${category.slug}`,
+									query: removeFalsyFields({
+										...router.query,
+										category: undefined,
+									}),
+								}}
+							>
 								<a>
 									{category.name} ({category.productsLength})
 								</a>
@@ -195,6 +211,12 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 				<h4 className="title">{t('Layered')}</h4>
 				<div className="product-units">
 					<ul className="units">
+						<li
+							onClick={clearFilterByUnit}
+							className={classNames({ active: !currentUnit })}
+						>
+							{t('All')}
+						</li>
 						{productUnits.map((unit) => (
 							<li
 								key={unit.id}

@@ -22,9 +22,12 @@ const get = async (req: Request, res: Response) => {
 	const withProductLength = req.query['with-product-length'];
 	const categories: ICategory[] = await CategoryService.get();
 
+	const filter = mapQueryToMongoFilter(req.query);
+	console.log(filter, req.query);
+
 	if (withProductLength === 'true') {
 		const productsPromises = categories.map((category) =>
-			ProductService.get({ categoryId: category.id })
+			ProductService.get({ ...filter, categoryId: category.id })
 		);
 
 		const productsList = await Promise.all(productsPromises);
