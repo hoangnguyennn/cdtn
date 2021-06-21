@@ -7,7 +7,7 @@ import OrderService from '../../services/order';
 const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000;
 
 const statistic = async (req: Request, res: Response) => {
-	const now = new Date();
+	const now = new Date().getTime();
 
 	const ordersInDay = await OrderService.get({
 		orderDate: { $gte: startOfDay(now), $lt: endOfDay(now) },
@@ -16,8 +16,8 @@ const statistic = async (req: Request, res: Response) => {
 
 	const ordersInPreviousDay = await OrderService.get({
 		orderDate: {
-			$gte: startOfDay(now.getTime() - ONE_DAY_IN_MILISECONDS),
-			$lt: endOfDay(now.getTime() - ONE_DAY_IN_MILISECONDS),
+			$gte: startOfDay(now - ONE_DAY_IN_MILISECONDS),
+			$lt: endOfDay(now - ONE_DAY_IN_MILISECONDS),
 		},
 		paymentStatus: PaymentStatus.PAID,
 	});

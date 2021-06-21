@@ -42,7 +42,7 @@ export interface IOrderCreate {
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryDate?: Date;
+	deliveryDate?: number;
 	paymentMethodId: string | Types.ObjectId;
 	itemsId: string[] | Types.ObjectId[];
 }
@@ -53,7 +53,7 @@ export interface IOrderCreateRequest {
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryDate?: Date;
+	deliveryDate?: number;
 	paymentMethodId: string | Types.ObjectId;
 	items: IOrderItemCreateRequest[];
 }
@@ -88,10 +88,10 @@ export interface IOrderResponse {
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryDate?: Date;
+	deliveryDate?: number;
 	paymentStatus: PaymentStatus;
 	orderStatus: OrderStatus;
-	orderDate: Date;
+	orderDate: number;
 
 	user?: IUserResponse;
 	paymentMethod: IPaymentMethodResponse;

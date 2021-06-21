@@ -41,7 +41,7 @@ const updateStatus = async (
 ): Promise<IOrder> => {
 	let now;
 	if (status === OrderStatus.DELIVERED) {
-		now = new Date();
+		now = new Date().getTime();
 	}
 
 	const orderUpdated = await OrderModel.findByIdAndUpdate(

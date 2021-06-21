@@ -66,7 +66,7 @@ const columns = [
 		title: 'Ordered Date',
 		dataIndex: 'orderDate',
 		key: 'orderDate',
-		render: (date: Date) => <>{isoDateToNativeDate(date)}</>,
+		render: (date: number) => <>{isoDateToNativeDate(date)}</>,
 		sorter: (a: IOrder, b: IOrder) => {
 			return new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime();
 		},

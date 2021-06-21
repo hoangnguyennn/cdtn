@@ -5,7 +5,7 @@ export const toCurrency = (num: number) => {
 	});
 };
 
-export const isoDateToNativeDate = (date: string | Date) => {
+export const isoDateToNativeDate = (date: number) => {
 	const dateObject = new Date(date);
 
 	const currentDate = toNDigits(dateObject.getDate());

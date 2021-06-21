@@ -28,7 +28,7 @@ const orderSchema = new Schema<IOrder>({
 		required: true,
 	},
 	deliveryDate: {
-		type: String,
+		type: Number,
 	},
 	paymentMethodId: {
 		type: Types.ObjectId,
@@ -46,8 +46,8 @@ const orderSchema = new Schema<IOrder>({
 		default: OrderStatus.ORDERED,
 	},
 	orderDate: {
-		type: Date,
-		default: Date.now,
+		type: Number,
+		default: () => new Date().getTime(),
 	},
 	itemsId: [
 		{

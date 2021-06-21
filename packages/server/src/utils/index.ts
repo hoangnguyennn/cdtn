@@ -283,7 +283,7 @@ export const removeInvalidFields = function <T>(obj: T): T {
 	return result;
 };
 
-export const startOfDay = (date?: Date | number) => {
+export const startOfDay = (date?: number) => {
 	const newDate = new Date();
 	let years = newDate.getFullYear();
 	let months = newDate.getMonth();
@@ -299,7 +299,7 @@ export const startOfDay = (date?: Date | number) => {
 	return new Date(years, months, dates);
 };
 
-export const endOfDay = (date?: Date | number) => {
+export const endOfDay = (date?: number) => {
 	const newDate = new Date();
 	let years = newDate.getFullYear();
 	let months = newDate.getMonth();

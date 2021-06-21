@@ -17,11 +17,11 @@ export interface IOrder extends Document {
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryDate?: Date;
+	deliveryDate?: number;
 	paymentMethodId: Types.ObjectId;
 	paymentStatus: PaymentStatus;
 	orderStatus: OrderStatus;
-	orderDate: Date;
+	orderDate: number;
 	itemsId: Types.ObjectId[];
 
 	user?: IUser;

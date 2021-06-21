@@ -29,10 +29,10 @@ export interface IOrder {
 	deliveryAddress: string;
 	deliveryPhone: string;
 	deliveryEmail: string;
-	deliveryDate?: Date;
+	deliveryDate?: number;
 	paymentStatus: PaymentStatus;
 	orderStatus: OrderStatus;
-	orderDate: string;
+	orderDate: number;
 
 	user?: IUser;
 	paymentMethod: IPaymentMethod;
