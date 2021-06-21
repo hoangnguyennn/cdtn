@@ -5,8 +5,9 @@ type BannerProps = {
 };
 
 export default styled.div<BannerProps>`
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 	margin-bottom: 6.25rem;
-	height: 43.75rem;
 	background-image: linear-gradient(rgba(87, 87, 87, 0.53), rgba(13, 5, 1, 0.7)),
 		url(${(props) => props.background});
 	background-size: cover;
@@ -18,14 +19,25 @@ export default styled.div<BannerProps>`
 	.intro {
 		.title {
 			margin-bottom: 1rem;
-			padding-bottom: 1rem;
 			color: var(--white);
-			font-size: 3rem;
+			font-size: 1.75rem;
+			font-weight: 300;
 		}
 
 		.actions {
 			a {
+				display: inline-block;
 				text-decoration: none;
+			}
+		}
+	}
+
+	@media (min-width: 992px) {
+		height: 43.75rem;
+
+		.intro {
+			.title {
+				font-size: 3rem;
 			}
 		}
 	}

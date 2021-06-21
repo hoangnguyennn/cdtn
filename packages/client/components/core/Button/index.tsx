@@ -4,6 +4,7 @@ import { Variant } from '../../../interfaces/types';
 type ButtonProps = {
 	variant?: Variant;
 	shadow?: boolean;
+	inline?: boolean;
 };
 
 const renderShadow = (shadow?: boolean, variant?: Variant) => {
@@ -16,7 +17,7 @@ const renderShadow = (shadow?: boolean, variant?: Variant) => {
 
 const Button = styled.button<ButtonProps>`
 	padding: 0.625rem 1.373rem;
-	width: 100%;
+	width: ${(props) => (props.inline ? '' : '100%')};
 	background-color: var(--${(props) => props.variant});
 	color: var(--white);
 	font-size: 1rem;
@@ -41,8 +42,9 @@ const Button = styled.button<ButtonProps>`
 `;
 
 Button.defaultProps = {
-	variant: Variant.primary,
+	variant: 'primary',
 	shadow: false,
+	inline: false,
 };
 
 export default Button;

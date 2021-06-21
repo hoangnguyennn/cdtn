@@ -21,7 +21,7 @@ const Banner: FC<BannerProps> = ({ background }) => {
 					<h2 className="title">{t('Slogan')}</h2>
 					<div className="actions">
 						<Link href={PATH_NAME.PRODUCTS}>
-							<Button as="a" href={PATH_NAME.PRODUCTS} shadow>
+							<Button as="a" href={PATH_NAME.PRODUCTS} shadow inline>
 								{t('Shop Now')}
 							</Button>
 						</Link>

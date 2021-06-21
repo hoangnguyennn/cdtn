@@ -1,23 +1,22 @@
-export enum Variant {
-	'blue' = 'blue',
-	'indigo' = 'indigo',
-	'purple' = 'purple',
-	'pink' = 'pink',
-	'red' = 'red',
-	'orange' = 'orange',
-	'yellow' = 'yellow',
-	'green' = 'green',
-	'teal' = 'teal',
-	'cyan' = 'cyan',
-	'white' = 'white',
-	'gray' = 'gray',
-	'gray-dark' = 'gray-dark',
-	'primary' = 'primary',
-	'secondary' = 'secondary',
-	'success' = 'success',
-	'info' = 'info',
-	'warning' = 'warning',
-	'danger' = 'danger',
-	'light' = 'light',
-	'dark' = 'dark',
-}
+export type Variant =
+	| 'blue'
+	| 'indigo'
+	| 'purple'
+	| 'pink'
+	| 'red'
+	| 'orange'
+	| 'yellow'
+	| 'green'
+	| 'teal'
+	| 'cyan'
+	| 'white'
+	| 'gray'
+	| 'gray-dark'
+	| 'primary'
+	| 'secondary'
+	| 'success'
+	| 'info'
+	| 'warning'
+	| 'danger'
+	| 'light'
+	| 'dark';
