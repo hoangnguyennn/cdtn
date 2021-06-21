@@ -120,6 +120,7 @@ export default styled.div`
 	}
 
 	.back-to-my-orders {
+		padding: 1rem;
 		color: var(--primary);
 		text-decoration: none;
 

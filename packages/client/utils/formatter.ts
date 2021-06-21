@@ -5,8 +5,12 @@ export const toCurrency = (num: number) => {
 	});
 };
 
-export const isoDateToNativeDate = (date?: string) => {
-	const dateObject = new Date(date);
+export const isoDateToNativeDate = (date?: string, showTimeBefore = false) => {
+	let dateObject = new Date();
+
+	if (date) {
+		dateObject = new Date(date);
+	}
 
 	const currentDate = toNDigits(dateObject.getDate());
 	const currentMonth = toNDigits(dateObject.getMonth() + 1);
@@ -17,6 +21,10 @@ export const isoDateToNativeDate = (date?: string) => {
 	const currentMin = toNDigits(dateObject.getMinutes());
 	const currentSec = toNDigits(dateObject.getSeconds());
 	const timeArr = [currentHour, currentMin, currentSec];
+
+	if (showTimeBefore) {
+		return `${timeArr.join(':')} ${dateArr.join('/')}`;
+	}
 
 	return `${dateArr.join('/')} ${timeArr.join(':')}`;
 };

@@ -2,7 +2,7 @@ import { ProductStatus } from './enums';
 
 export interface IBreadcrumb {
 	id: string;
-	name: string;
+	name: any;
 	url: string;
 }
 

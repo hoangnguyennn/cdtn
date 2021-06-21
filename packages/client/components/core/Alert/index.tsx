@@ -27,7 +27,7 @@ const Alert = styled.div<AlertProps>`
 `;
 
 Alert.defaultProps = {
-	variant: Variant.gray,
+	variant: 'gray',
 };
 
 export default Alert;

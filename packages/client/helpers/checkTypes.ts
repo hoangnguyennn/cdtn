@@ -1,5 +1,5 @@
 import { ICartItem } from '../interfaces';
-import { Variant } from '../interfaces/types';
+import { variant } from '../interfaces/types';
 
 export const isProductInCart = (product: any): product is ICartItem => {
 	return (
@@ -14,5 +14,5 @@ export const isProductInCart = (product: any): product is ICartItem => {
 };
 
 export const isVariant = (key: string): boolean => {
-	return Object.keys(Variant).includes(key);
+	return variant.includes(key);
 };

@@ -39,9 +39,14 @@ const updateStatus = async (
 	id: string,
 	status: OrderStatus
 ): Promise<IOrder> => {
+	let now;
+	if (status === OrderStatus.DELIVERED) {
+		now = new Date();
+	}
+
 	const orderUpdated = await OrderModel.findByIdAndUpdate(
 		id,
-		{ $set: { orderStatus: status } },
+		{ $set: removeInvalidFields({ orderStatus: status, deliveryDate: now }) },
 		{ new: true }
 	).populate(orderPopulate);
 

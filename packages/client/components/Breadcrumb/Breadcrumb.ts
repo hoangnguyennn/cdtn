@@ -32,6 +32,15 @@ export default styled.div`
 					font-size: 0.8rem;
 				}
 			}
+
+			a {
+				display: flex;
+				align-items: center;
+
+				i {
+					margin-right: 0.25rem;
+				}
+			}
 		}
 	}
 

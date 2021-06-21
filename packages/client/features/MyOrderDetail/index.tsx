@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { getOrderById, getOrdersAction } from '../../redux/reducers/order';
 import { orderStatus } from '../../constants';
 import { PATH_NAME } from '../../configs/pathName';
-import { toCurrency } from '../../utils/formatter';
+import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import Root from './MyOrderDetail';
 
 const MyOrderDetail = () => {
@@ -31,25 +31,22 @@ const MyOrderDetail = () => {
 		<Root>
 			<div className="info">
 				<div className="info-item">
-					<div className="title">
-						<b>{t('Delivery information')}</b>
-					</div>
 					<div className="content">
-						<p className="name">
-							{t('Delivery name')}: <b>{order.deliveryFullName}</b>
-						</p>
-						<p className="address">
-							{t('Delivery address')}: <b>{order.deliveryAddress}</b>
-						</p>
-						<p className="phone">
-							{t('Delivery phone')}: <b>{order.deliveryPhone}</b>
-						</p>
-						<p className="payment-method">
-							{t('Payment method')}: <b>{order.paymentMethod.name}</b>
-						</p>
 						<p className="order-status">
 							{t('Order status')}: <b>{t(orderStatus[order.orderStatus])}</b>
 						</p>
+
+						<p className="order-date">
+							{t('Order date')}:{' '}
+							<b>{isoDateToNativeDate(order.orderDate, true)}</b>
+						</p>
+
+						{order.deliveryDate && (
+							<p className="delivery-date">
+								{t('Delivery date')}:{' '}
+								<b>{isoDateToNativeDate(order.deliveryDate, true)}</b>
+							</p>
+						)}
 					</div>
 				</div>
 			</div>
@@ -59,6 +56,7 @@ const MyOrderDetail = () => {
 						<th>{t('Products')}</th>
 						<th>{t('Price')}</th>
 						<th>{t('Quantity')}</th>
+						<th>{t('Promotion')}</th>
 						<th>{t('Subtotal')}</th>
 					</tr>
 				</thead>
@@ -82,13 +80,14 @@ const MyOrderDetail = () => {
 								</td>
 								<td>{toCurrency(item.price)}</td>
 								<td>{item.qty}</td>
+								<td>{toCurrency(0)}</td>
 								<td>{toCurrency(item.price * item.qty)}</td>
 							</tr>
 						))}
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colSpan={3}>{t('Subtotal')}</td>
+						<td colSpan={4}>{t('Subtotal')}</td>
 						<td className="price">
 							{toCurrency(
 								items.reduce((total, item) => total + item.price * item.qty, 0)
@@ -96,11 +95,11 @@ const MyOrderDetail = () => {
 						</td>
 					</tr>
 					<tr>
-						<td colSpan={3}>{t('Delivery fee')}</td>
+						<td colSpan={4}>{t('Delivery fee')}</td>
 						<td className="price">{t('Free')}</td>
 					</tr>
 					<tr>
-						<td colSpan={3}>{t('Total')}</td>
+						<td colSpan={4}>{t('Total')}</td>
 						<td className="price total-price">
 							{toCurrency(
 								items.reduce((total, item) => total + item.price * item.qty, 0)
@@ -110,6 +109,27 @@ const MyOrderDetail = () => {
 				</tfoot>
 			</table>
 
+			<div className="info">
+				<div className="info-item">
+					<div className="title">
+						<b>{t('Delivery information')}</b>
+					</div>
+					<div className="content">
+						<p className="name">
+							{t('Delivery name')}: <b>{order.deliveryFullName}</b>
+						</p>
+						<p className="address">
+							{t('Delivery address')}: <b>{order.deliveryAddress}</b>
+						</p>
+						<p className="phone">
+							{t('Delivery phone')}: <b>{order.deliveryPhone}</b>
+						</p>
+						<p className="payment-method">
+							{t('Payment method')}: <b>{order.paymentMethod.name}</b>
+						</p>
+					</div>
+				</div>
+			</div>
 			<Link href={PATH_NAME.MY_ORDER}>
 				<a className="back-to-my-orders">{t('Back to my orders')}</a>
 			</Link>

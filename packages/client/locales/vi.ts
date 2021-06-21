@@ -89,6 +89,9 @@ const vi = {
 	ORDER_ORDERED: 'Đã đặt hàng',
 	ORDER_VERIFIED: 'Đã xác nhận',
 	'Order status': 'Trạng thái đơn hàng',
+	Promotion: 'Khuyến mãi',
+	'Delivery date': 'Ngày giao hàng',
+	'Order date': 'Ngày đặt hàng',
 };
 
 export default vi;
