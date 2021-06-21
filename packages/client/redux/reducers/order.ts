@@ -38,5 +38,7 @@ const selector = function <T>(combiner: { (state: IOrderState): T }) {
 };
 
 export const getOrders = () => selector((state) => state.orders);
+export const getOrderById = (id: string) =>
+	selector((state) => state.orders.find((item) => item.id === id));
 
 export default orderSlice.reducer;

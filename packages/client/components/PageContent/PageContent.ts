@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
 	margin-top: -4.875rem;
 
-	.content {
+	.page-content {
 		padding: 1rem;
 		background-color: var(--white);
 		border-radius: 0.125rem;

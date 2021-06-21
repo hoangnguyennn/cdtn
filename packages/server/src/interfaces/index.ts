@@ -79,6 +79,7 @@ export interface IOrderItemResponse {
 
 export interface IOrderItemProductResponse {
 	name: string;
+	image: string;
 }
 
 export interface IOrderResponse {

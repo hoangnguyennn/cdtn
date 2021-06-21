@@ -21,17 +21,12 @@ export default styled.div`
 
 				&,
 				& a {
-					color: var(--primary);
+					color: var(--main-text-color-2);
 					text-decoration: none;
 				}
 
 				&:hover {
 					background-color: var(--light-hover);
-
-					&,
-					& a {
-						color: var(--primary-hover);
-					}
 				}
 			}
 		}
@@ -55,6 +50,7 @@ export default styled.div`
 				width: 12.5rem;
 				border: 0.0625rem solid var(--light);
 				border-radius: 0.125rem;
+				box-shadow: rgb(0 0 0 / 18%) 0px 6px 12px 0px;
 			}
 		}
 	}

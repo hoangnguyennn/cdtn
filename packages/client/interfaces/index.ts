@@ -58,6 +58,7 @@ export interface IOrderItemResponse {
 	qty: number;
 	product: {
 		name: string;
+		image: string;
 	};
 }
 

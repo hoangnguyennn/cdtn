@@ -11,7 +11,7 @@ const PageContent: FC<PageContentProps> = ({ children, breadcrumb, title }) => {
 			<PageTitle breadcrumb={breadcrumb} title={title} />
 			<PageContentStyled>
 				<Container>
-					<div className="content">{children}</div>
+					<div className="page-content">{children}</div>
 				</Container>
 			</PageContentStyled>
 		</>

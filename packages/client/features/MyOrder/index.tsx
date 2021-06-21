@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import Root from './MyOrder';
 import { getOrdersAction, getOrders } from '../../redux/reducers/order';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
+import { orderStatus } from '../../constants';
 import { PATH_NAME } from '../../configs/pathName';
+import Root from './MyOrder';
 
 const MyOrder = () => {
 	const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const MyOrder = () => {
 									)
 								)}
 							</td>
-							<td>{order.orderStatus}</td>
+							<td>{t(orderStatus[order.orderStatus])}</td>
 						</tr>
 					))}
 				</tbody>

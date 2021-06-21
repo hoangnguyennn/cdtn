@@ -31,7 +31,6 @@ import {
 import { getUserInfo } from '../../redux/reducers/auth';
 import { ICartForm, IOrder } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
-import { Variant } from '../../interfaces/types';
 
 const Cart = () => {
 	const { t } = useTranslation();
@@ -74,7 +73,7 @@ const Cart = () => {
 
 		try {
 			await dispatch(orderAction(order));
-			router.replace(`${PATH_NAME.ORDERS}?status=${Variant.success}`);
+			router.replace(`${PATH_NAME.ORDERS}?status=success`);
 			toast.success('success');
 		} catch (err) {
 			toast.error(err.message || 'error');
@@ -273,7 +272,7 @@ const Cart = () => {
 
 					<FormGroup>
 						<Input
-							rightPlaceholder={'Optional'}
+							rightPlaceholder={t('Optional')}
 							placeholder={t('Note')}
 							name="deliveryNote"
 							onChange={formik.handleChange}

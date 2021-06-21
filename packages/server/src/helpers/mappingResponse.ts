@@ -78,6 +78,7 @@ export const mapOrderItemToResponse = (
 		qty: orderItem.qty,
 		product: {
 			name: orderItem.product?.name || '',
+			image: orderItem.product?.images?.[0].url || '',
 		},
 	};
 };

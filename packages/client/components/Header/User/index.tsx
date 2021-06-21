@@ -34,15 +34,15 @@ const User: FC<UserProps> = ({ fullName }) => {
 				</div>
 				<div className="dropdown-menu">
 					<Link href={PATH_NAME.MY_ORDER}>
-						<a className="dropdown-item">My order</a>
+						<a className="dropdown-item">{t('My orders')}</a>
 					</Link>
 
 					<Link href={PATH_NAME.MY_ACCOUNT}>
-						<a className="dropdown-item">My account</a>
+						<a className="dropdown-item">{t('My account')}</a>
 					</Link>
 
 					<span className="dropdown-item" onClick={handleLogout}>
-						Logout
+						{t('Logout')}
 					</span>
 				</div>
 			</div>
