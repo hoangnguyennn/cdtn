@@ -4,7 +4,7 @@ export default styled.div`
 	display: flex;
 
 	@media (min-width: 992px) {
-		margin-right: -1rem;
+		/* margin-right: -1rem; */
 
 		.filter {
 			flex: 1;

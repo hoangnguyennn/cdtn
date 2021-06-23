@@ -10,14 +10,15 @@ export default styled.div`
 			top: 4.5rem;
 			left: 0;
 			width: 100vw;
-			padding-top: 0.75rem;
-			padding-bottom: 0.75rem;
+			padding: 0.75rem;
 			background-color: white;
 
 			.dropdown-item {
 				display: block;
 				padding: 0.375rem 0.75rem;
 				font-size: 0.875rem;
+				border-radius: 0.5rem;
+				transition: all 0.3s linear;
 
 				&,
 				& a {
@@ -49,7 +50,7 @@ export default styled.div`
 				transform: translateX(-50%);
 				width: 12.5rem;
 				border: 0.0625rem solid var(--light);
-				border-radius: 0.125rem;
+				border-radius: 0.5rem;
 				box-shadow: rgb(0 0 0 / 18%) 0px 6px 12px 0px;
 			}
 		}

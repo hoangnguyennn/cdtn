@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import Form from '../../../../components/core/Form';
 
 export default styled(Form)`
-	border-right: 0.0625rem solid #dae1e7;
+	margin-right: 1rem;
+	padding-right: 1rem;
+	box-shadow: 1rem 0 1rem -1rem rgb(0 0 0 / 10%);
 
 	.filter-item {
-		padding: 1rem 1rem 0.75rem 0;
+		padding: 1rem 0 0.75rem 0;
 		border-top: 0.0625rem solid #dae1e7;
 
 		.delete-all {
@@ -14,6 +16,7 @@ export default styled(Form)`
 			font-size: 0.875rem;
 			border: none;
 			cursor: pointer;
+			transition: all 0.3s linear;
 
 			&:hover {
 				text-decoration: underline;
@@ -44,6 +47,7 @@ export default styled(Form)`
 				color: var(--primary);
 				text-decoration: none;
 				cursor: pointer;
+				transition: all 0.3s linear;
 
 				&.active,
 				&:hover,
@@ -93,6 +97,13 @@ export default styled(Form)`
 			border: 0.0625rem solid var(--primary);
 			border-radius: 0.25rem;
 			cursor: pointer;
+			transition: all 0.3s linear;
+
+			&:hover {
+				background-color: var(--primary);
+				color: var(--white);
+				border: 0.0625rem solid var(--white);
+			}
 		}
 	}
 `;

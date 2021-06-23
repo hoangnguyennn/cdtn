@@ -36,7 +36,7 @@ const ProductList = styled.div<RootProps>`
 	}
 
 	.view-more {
-		padding-top: 1rem;
+		padding-top: 3rem;
 		text-align: center;
 
 		a {

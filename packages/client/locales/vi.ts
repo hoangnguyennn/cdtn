@@ -92,6 +92,8 @@ const vi = {
 	Promotion: 'Khuyến mãi',
 	'Delivery date': 'Ngày giao hàng',
 	'Order date': 'Ngày đặt hàng',
+	'Leave a comment': 'Viết đánh giá',
+	Repurchase: 'Mua lại',
 };
 
 export default vi;

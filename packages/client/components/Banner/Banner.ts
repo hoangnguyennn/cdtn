@@ -27,6 +27,7 @@ export default styled.div<BannerProps>`
 		.actions {
 			a {
 				display: inline-block;
+				line-height: normal;
 				text-decoration: none;
 			}
 		}

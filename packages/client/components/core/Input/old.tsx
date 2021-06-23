@@ -5,5 +5,5 @@ export default styled.input`
 	width: 100%;
 	font-size: 1rem;
 	border: 0.0625rem solid #dae1e7;
-	border-radius: 0.125rem;
+	border-radius: 0.375rem;
 `;

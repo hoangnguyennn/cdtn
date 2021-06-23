@@ -11,7 +11,7 @@ const Alert = styled.div<AlertProps>`
 	color: var(--${(props) => props.variant});
 	font-size: 1rem;
 	border: 0.0625rem solid var(--${(props) => props.variant});
-	border-radius: 0.125rem;
+	border-radius: 0.5rem;
 
 	> * {
 		color: var(--primary);
