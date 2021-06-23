@@ -19,7 +19,6 @@ export default styled(Form)`
 
 	.sign-up {
 		padding-top: 1rem;
-		padding-bottom: 1rem;
 		text-align: center;
 
 		a {
