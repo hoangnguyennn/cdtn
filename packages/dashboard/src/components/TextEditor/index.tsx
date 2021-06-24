@@ -20,12 +20,10 @@ const TextEditor: FC<TextEditorProps> = ({
 	const [quillRef, setQuillRef] = useState<ReactQuill | null>(null);
 
 	const selectImageFile = () => {
-		console.log('click to select image file');
 		inputImageRef.current?.click();
 	};
 
 	const handleInputImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-		console.log('image change');
 		const file = event.target.files?.[0];
 		if (file) {
 			dispatch(setLoading(true));
@@ -49,15 +47,9 @@ const TextEditor: FC<TextEditorProps> = ({
 		}
 	};
 
-	const imageHandler = useCallback(
-		(image: any, callback: any) => {
-			console.log('image', image, callback, quillRef);
-			if (quillRef) {
-				selectImageFile();
-			}
-		},
-		[quillRef]
-	);
+	const imageHandler = useCallback(() => {
+		quillRef && selectImageFile();
+	}, [quillRef]);
 
 	const modules = useMemo(
 		() => ({

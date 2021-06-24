@@ -25,6 +25,7 @@ const Root = styled.div`
 		color: #999;
 		font-size: 0.8em;
 		font-style: italic;
+		user-select: none;
 	}
 `;
 

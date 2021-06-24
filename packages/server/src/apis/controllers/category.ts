@@ -11,6 +11,7 @@ import { success } from '../../helpers/commonResponse';
 import CategoryService from '../../services/category';
 import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
 import ProductService from '../../services/product';
+import { removeInvalidFields } from '../../utils';
 
 const create = async (req: Request, res: Response) => {
 	const categoryRequest = req.body;
@@ -23,11 +24,16 @@ const get = async (req: Request, res: Response) => {
 	const categories: ICategory[] = await CategoryService.get();
 
 	const filter = mapQueryToMongoFilter(req.query);
-	console.log(filter, req.query);
 
 	if (withProductLength === 'true') {
 		const productsPromises = categories.map((category) =>
-			ProductService.get({ ...filter, categoryId: category.id })
+			ProductService.get(
+				removeInvalidFields({
+					...filter,
+					unitId: undefined,
+					categoryId: category.id,
+				})
+			)
 		);
 
 		const productsList = await Promise.all(productsPromises);

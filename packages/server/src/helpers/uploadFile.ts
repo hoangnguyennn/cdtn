@@ -13,19 +13,13 @@ cloudinaryV2.config({
 
 const UploadFileHelper = {
 	uploadSingle: async (file: string) => {
-		return cloudinaryV2.uploader
-			.upload(file)
-			.then((res) => {
-				fs.unlinkSync(file);
-				return {
-					url: res?.secure_url,
-					publicId: res?.public_id,
-				};
-			})
-			.catch((err) => {
-				console.log('error', err);
-				throw err;
-			});
+		return cloudinaryV2.uploader.upload(file).then((res) => {
+			fs.unlinkSync(file);
+			return {
+				url: res?.secure_url,
+				publicId: res?.public_id,
+			};
+		});
 	},
 	deleteSingle: async (publicId: string) => {
 		return cloudinaryV2.uploader.destroy(publicId);

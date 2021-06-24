@@ -21,7 +21,6 @@ const { setOrdersAction } = orderSlice.actions;
 const getOrdersAction = () => async (dispatch: Dispatch) => {
 	const token = localStorage.getItem('access-token');
 	if (!token) {
-		console.log('token not found');
 		return;
 	}
 

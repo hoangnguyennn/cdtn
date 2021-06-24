@@ -17,45 +17,40 @@ export default styled.div`
 
 		.info {
 			padding-top: 1.5rem;
+		}
 
-			.stop-business {
-				margin-bottom: 1rem;
-				padding: 1.25rem;
-				color: var(--danger);
-				font-size: 1.25rem;
-				font-weight: 700;
-				border: 2px solid var(--danger);
-			}
+		.stop-business {
+			margin-bottom: 1rem;
+			padding: 1.25rem;
+			color: var(--danger);
+			font-size: 1.25rem;
+			font-weight: 700;
+			border: 2px solid var(--danger);
+		}
 
-			.price {
-				margin-bottom: 1rem;
-				color: var(--primary);
-				font-size: 1.75rem;
-			}
+		.price {
+			margin-bottom: 1rem;
+			color: var(--primary);
+			font-size: 1.75rem;
+		}
 
-			.add-to-cart {
-				margin-bottom: 1.875rem;
-				display: flex;
+		.add-to-cart {
+			margin-bottom: 1.875rem;
 
-				.qty {
-					margin-right: 1rem;
-					width: 7rem;
+			.qty {
+				margin-bottom: 0.5rem;
 
-					input {
-						padding: 0.625rem 1rem;
-					}
+				input {
+					padding: 0.625rem 1rem;
+					text-align: center;
 				}
 			}
+		}
 
-			.description {
-				padding: 1.25rem;
-				border: 0.0625rem solid #dae1e7;
-				border-radius: 0.5rem;
-
-				.list {
-					list-style-type: disc;
-					padding-left: 1.25rem;
-				}
+		.description {
+			.list {
+				list-style-type: disc;
+				padding-left: 1.25rem;
 			}
 		}
 	}
@@ -65,6 +60,8 @@ export default styled.div`
 	}
 
 	.ql-editor {
+		padding: 0;
+
 		img {
 			display: block;
 			margin-left: auto;
@@ -91,6 +88,26 @@ export default styled.div`
 				padding-right: 1rem;
 				display: flex;
 				flex-direction: column;
+			}
+
+			.add-to-cart {
+				display: flex;
+
+				.qty {
+					margin-right: 1rem;
+					margin-bottom: 0;
+					width: 7rem;
+
+					input {
+						text-align: left;
+					}
+				}
+			}
+
+			.description {
+				padding: 1.25rem;
+				border: 0.0625rem solid #dae1e7;
+				border-radius: 0.5rem;
 			}
 		}
 

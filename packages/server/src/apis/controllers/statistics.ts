@@ -33,7 +33,6 @@ const statistic = async (req: Request, res: Response) => {
 	const numberOfOrders = ordersInDay.length;
 
 	const revenueOfPreviousDay = ordersInPreviousDay.reduce((result, order) => {
-		console.log(order.items);
 		const orderTotal = order.items.reduce(
 			(total, item) => total + item.price * item.qty,
 			0

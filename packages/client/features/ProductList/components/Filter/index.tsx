@@ -132,7 +132,6 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	};
 
 	useEffect(() => {
-		console.log('router query change');
 		const { name } = router.query;
 		let { price } = router.query;
 

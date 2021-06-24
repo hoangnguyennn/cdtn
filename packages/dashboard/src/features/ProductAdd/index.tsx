@@ -35,7 +35,6 @@ const ProductAdd = () => {
 	const [isUploaded, setIsUploaded] = useState(true);
 
 	const normFile = (fileList: any[]) => {
-		console.log('Upload event:', JSON.parse(JSON.stringify(fileList)));
 		return fileList.map((file) => ({
 			url: file.response?.url || file.url || '',
 			publicId: file.response?.publicId,
