@@ -6,6 +6,7 @@ import Banner from '../components/Banner';
 import Home from '../features/Home';
 import MainLayout from '../layouts/MainLayout';
 import bannerBg from '../assets/images/banner.jpg';
+import i18n from '../locales';
 
 const HomePage = () => {
 	return (
@@ -23,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	await dispatch(getTrendingProductsAction());
 
 	return {
-		props: { initialReduxState: reduxStore.getState() },
+		props: { initialReduxState: reduxStore.getState(), title: i18n.t('Home') },
 	};
 };
 

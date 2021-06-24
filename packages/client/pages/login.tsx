@@ -1,6 +1,8 @@
+import { GetServerSideProps } from 'next';
 import { useTranslation } from 'react-i18next';
 
 import { loginPage } from '../configs/breadcrumb';
+import i18n from '../locales';
 import Login from '../features/Login';
 import MainLayout from '../layouts/MainLayout';
 import PageContent from '../components/PageContent';
@@ -15,6 +17,12 @@ const LoginPage = () => {
 			</PageContent>
 		</MainLayout>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	return {
+		props: { title: i18n.t('Login') },
+	};
 };
 
 export default LoginPage;

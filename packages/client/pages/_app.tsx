@@ -11,6 +11,7 @@ import useStore from '../redux/store';
 import '../locales';
 import '../assets/styles/index.scss';
 import 'react-quill/dist/quill.snow.css';
+import Seo from '../components/Seo';
 
 Router.events.on('routeChangeStart', (url) => {
 	console.log(`Loading: ${url}`);
@@ -25,6 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 	return (
 		<Provider store={store}>
 			<Auth>
+				<Seo title={pageProps.title} />
 				<Component {...pageProps} />
 			</Auth>
 			<ToastContainer limit={getLimitOfToast()(store.getState())} />

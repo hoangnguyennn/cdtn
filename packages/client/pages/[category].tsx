@@ -58,11 +58,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		);
 
 		return {
-			props: { initialReduxState: reduxStore.getState() },
+			props: {
+				initialReduxState: reduxStore.getState(),
+				title: getCategoryBySlug(category as string)(reduxStore.getState())
+					?.name,
+			},
 		};
 	} catch (err) {
-		console.log(err);
-
 		return {
 			notFound: true,
 		};

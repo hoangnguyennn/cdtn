@@ -33,7 +33,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		await dispatch(getProductByIdAction(id as string));
 
 		return {
-			props: { initialReduxState: reduxStore.getState() },
+			props: {
+				initialReduxState: reduxStore.getState(),
+				title: getProduct()(reduxStore.getState())?.name,
+			},
 		};
 	} catch (err) {
 		console.log(err);
