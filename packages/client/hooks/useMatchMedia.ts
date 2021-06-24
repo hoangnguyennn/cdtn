@@ -15,17 +15,18 @@ const useMatchMedia = (query: string) => {
 		if (!canMatch) return;
 		const queryList = queryMedia();
 
-		if (queryList)
+		queryList &&
 			Object.keys(window).forEach((key) => {
 				if (/^on/.test(key)) {
 					queryList.addEventListener(key.slice(2), queryMedia);
 				}
 			});
+
 		return () =>
 			queryList &&
 			Object.keys(window).forEach((key) => {
 				if (/^on/.test(key)) {
-					queryList.addEventListener(key.slice(2), queryMedia);
+					queryList.removeEventListener(key.slice(2), queryMedia);
 				}
 			});
 	}, [queryMedia, canMatch]);

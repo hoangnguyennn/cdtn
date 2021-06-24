@@ -132,27 +132,36 @@ const ProductFilter: FC<ProductFilterProps> = ({ className }) => {
 	};
 
 	useEffect(() => {
-		const { name } = router.query;
-		let { price } = router.query;
+		let isMounted = true;
+		if (isMounted) {
+			const { name } = router.query;
+			let { price } = router.query;
 
-		if (price) {
-			if (price instanceof Array) {
-				price = price[0];
+			if (price) {
+				if (price instanceof Array) {
+					price = price[0];
+				}
+
+				const priceSplit = price.split('-');
+				setPriceFrom(String(Number(priceSplit[0]) || 0));
+				setPriceTo(String(Number(priceSplit[1]) || 0));
+			} else {
+				setPriceFrom('0');
+				setPriceTo('0');
 			}
 
-			const priceSplit = price.split('-');
-			setPriceFrom(String(Number(priceSplit[0]) || 0));
-			setPriceTo(String(Number(priceSplit[1]) || 0));
+			if (name) {
+				setProductName(name as string);
+			} else {
+				setProductName('');
+			}
 		} else {
-			setPriceFrom('0');
-			setPriceTo('0');
+			console.log('unmounted');
 		}
 
-		if (name) {
-			setProductName(name as string);
-		} else {
-			setProductName('');
-		}
+		return () => {
+			isMounted = false;
+		};
 	}, [JSON.stringify(router.query)]);
 
 	return (

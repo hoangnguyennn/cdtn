@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { v2 as cloudinaryV2 } from 'cloudinary';
 import fs from 'fs';
 
 import configs from '../configs';
-import { success } from './commonResponse';
+import { badRequest, success } from './commonResponse';
 
 cloudinaryV2.config({
 	cloud_name: configs.cloudName,
@@ -26,9 +26,17 @@ const UploadFileHelper = {
 	},
 };
 
-const uploadSingleFile = async (req: Request, res: Response) => {
-	const fileUrl = await UploadFileHelper.uploadSingle(req.file.path);
-	return success(res, fileUrl);
+const uploadSingleFile = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	if (req.file?.path) {
+		const fileUrl = await UploadFileHelper.uploadSingle(req.file?.path);
+		return success(res, fileUrl);
+	}
+
+	return badRequest(next);
 };
 
 export { uploadSingleFile };

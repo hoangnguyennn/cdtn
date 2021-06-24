@@ -1,6 +1,6 @@
 import { FC, MouseEvent } from 'react';
-import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
