@@ -20,7 +20,7 @@ const Seo: FC<SeoProps> = ({ title }) => {
 			<link rel="preconnect" href={BASE_URL} />
 			<link rel="preconnect" href={IMG_BASE_URL} />
 
-			<title>{title ? `${title} | ` : ''}</title>
+			<title>{title ? `${title} | ${seo.brand}` : seo.brand}</title>
 		</Head>
 	);
 };
