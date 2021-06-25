@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
 	.summary {
@@ -70,7 +71,7 @@ export default styled.div`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		.summary {
 			flex-direction: row;
 

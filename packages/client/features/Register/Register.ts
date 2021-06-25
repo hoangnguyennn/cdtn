@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
 	.register-form {
@@ -27,7 +28,7 @@ export default styled.div`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		.register-form {
 			width: 40%;
 			margin-left: auto;

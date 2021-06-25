@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
 	.content {
@@ -35,7 +36,7 @@ export default styled.div`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		padding-top: 3rem;
 		padding-bottom: 3rem;
 	}

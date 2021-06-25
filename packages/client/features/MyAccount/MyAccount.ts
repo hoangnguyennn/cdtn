@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
 	display: flex;
@@ -8,7 +9,7 @@ export default styled.div`
 		margin-bottom: 3rem;
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		flex-direction: row;
 		align-items: flex-start;
 

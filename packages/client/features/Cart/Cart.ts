@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import FormGroup from '../../components/core/FormGroup';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
 	.cart-sidebar {
@@ -171,7 +172,7 @@ export default styled.div`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		display: flex;
 		flex-direction: row-reverse;
 		align-items: flex-start;

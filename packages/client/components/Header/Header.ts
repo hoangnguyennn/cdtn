@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 import Container from '../core/Container';
 
 export default styled.header`
@@ -70,7 +71,7 @@ export default styled.header`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		.tools {
 			.tool-item {
 				.text {

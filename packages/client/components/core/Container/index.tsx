@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../../helpers/checkTypes';
 
 export default styled.div`
 	width: 100%;
@@ -7,7 +8,7 @@ export default styled.div`
 	margin-right: auto;
 	margin-left: auto;
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		max-width: 1260px;
 	}
 `;

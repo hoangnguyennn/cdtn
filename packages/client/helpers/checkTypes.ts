@@ -16,3 +16,15 @@ export const isProductInCart = (product: any): product is ICartItem => {
 export const isVariant = (key: string): boolean => {
 	return variant.includes(key);
 };
+
+const breakpoints = {
+	xs: '0',
+	sm: '576px',
+	md: '768px',
+	lg: '992px',
+	xl: '1200px',
+};
+
+export const mediaQueries = (breakpoint: keyof typeof breakpoints) => {
+	return `@media (min-width: ${breakpoints[breakpoint]})`;
+};

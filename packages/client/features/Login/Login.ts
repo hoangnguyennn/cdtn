@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Form from '../../components/core/Form';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled(Form)`
 	.actions {
@@ -32,7 +33,7 @@ export default styled(Form)`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		width: 40%;
 		margin-left: auto;
 		margin-right: auto;

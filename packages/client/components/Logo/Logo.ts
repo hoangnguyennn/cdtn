@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
 	margin-right: 0.5rem;
@@ -17,7 +18,7 @@ export default styled.div`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		width: 8.875rem;
 	}
 `;

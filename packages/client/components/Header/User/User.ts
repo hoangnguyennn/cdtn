@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../../helpers/checkTypes';
 
 export default styled.div`
 	cursor: pointer;
@@ -39,7 +40,7 @@ export default styled.div`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		.dropdown {
 			position: relative;
 

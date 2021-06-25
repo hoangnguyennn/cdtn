@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 import Container from '../core/Container';
 
 export default styled.div`
@@ -18,7 +19,7 @@ export default styled.div`
 		text-align: center;
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		${Container} {
 			display: flex;
 			flex-direction: row-reverse;

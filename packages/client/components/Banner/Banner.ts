@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../helpers/checkTypes';
 
 type BannerProps = {
 	background?: string;
@@ -33,7 +34,7 @@ export default styled.div<BannerProps>`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		height: 43.75rem;
 
 		.intro {

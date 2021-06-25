@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../../helpers/checkTypes';
 
 export default styled.a`
 	margin-bottom: 1rem;
@@ -43,7 +44,7 @@ export default styled.a`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		padding: 1.25rem;
 		border-bottom-color: transparent;
 		border-radius: 0.5rem;

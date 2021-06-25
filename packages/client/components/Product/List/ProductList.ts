@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../../helpers/checkTypes';
 
 type RootProps = {
 	columns: number;
@@ -44,7 +45,7 @@ const ProductList = styled.div<RootProps>`
 		}
 	}
 
-	@media (min-width: 992px) {
+	${mediaQueries('lg')} {
 		padding-top: ${(props) => (props.hasTitle ? '1rem' : '0')};
 
 		.list {
