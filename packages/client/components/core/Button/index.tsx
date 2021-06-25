@@ -26,7 +26,8 @@ const Button = styled.button<ButtonProps>`
 	border-radius: 0.375rem;
 	box-shadow: ${(props) => renderShadow(props.shadow, props.variant)};
 	cursor: pointer;
-	transition: all 0.3s linear;
+	transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+		border 1ms;
 
 	&:hover {
 		background-color: var(--${(props) => props.variant}-hover);

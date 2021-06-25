@@ -68,7 +68,8 @@ export default styled.div`
 				color: inherit;
 				text-decoration: none;
 				margin-bottom: 0.75rem;
-				transition: all 0.3s linear;
+				transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+					border 1ms;
 
 				&:hover {
 					color: var(--primary);
@@ -124,7 +125,8 @@ export default styled.div`
 		padding: 1rem;
 		color: var(--primary);
 		text-decoration: none;
-		transition: all 0.3s linear;
+		transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+			border 1ms;
 
 		&:hover {
 			color: var(--primary-hover);

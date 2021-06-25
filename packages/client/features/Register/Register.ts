@@ -20,7 +20,8 @@ export default styled.div`
 		a {
 			color: var(--primary);
 			text-decoration: none;
-			transition: all 0.3s linear;
+			transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+				border 1ms;
 
 			&:hover {
 				color: var(--primary-hover);

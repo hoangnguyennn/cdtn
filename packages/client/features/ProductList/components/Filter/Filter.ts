@@ -16,7 +16,8 @@ export default styled(Form)`
 			font-size: 0.875rem;
 			border: none;
 			cursor: pointer;
-			transition: all 0.3s linear;
+			transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+				border 1ms;
 
 			&:hover {
 				text-decoration: underline;
@@ -47,7 +48,8 @@ export default styled(Form)`
 				color: var(--primary);
 				text-decoration: none;
 				cursor: pointer;
-				transition: all 0.3s linear;
+				transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+					border 1ms;
 
 				&.active,
 				&:hover,
@@ -97,7 +99,8 @@ export default styled(Form)`
 			border: 0.0625rem solid var(--primary);
 			border-radius: 0.25rem;
 			cursor: pointer;
-			transition: all 0.3s linear;
+			transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+				border 1ms;
 
 			&:hover {
 				background-color: var(--primary);

@@ -29,7 +29,8 @@ export default styled.div`
 						color: inherit;
 						font-size: 0.8125rem;
 						text-decoration: none;
-						transition: all 0.3s linear;
+						transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+							border 1ms;
 
 						&:hover {
 							color: var(--primary);
@@ -72,7 +73,8 @@ export default styled.div`
 						.qty-increase {
 							cursor: pointer;
 							user-select: none;
-							transition: all 0.3s linear;
+							transition: all 0.3s linear, font-size 1ms, padding 1ms,
+								margin 1ms, border 1ms;
 
 							&:hover {
 								background-color: #aaa;
@@ -90,7 +92,8 @@ export default styled.div`
 					.action {
 						color: var(--main-text-color);
 						font-size: 0.8125rem;
-						transition: all 0.3s linear;
+						transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+							border 1ms;
 
 						&:hover {
 							text-decoration: underline;

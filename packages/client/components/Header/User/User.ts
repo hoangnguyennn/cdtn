@@ -19,7 +19,8 @@ export default styled.div`
 				padding: 0.375rem 0.75rem;
 				font-size: 0.875rem;
 				border-radius: 0.5rem;
-				transition: all 0.3s linear;
+				transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
+					border 1ms;
 
 				&,
 				& a {
