@@ -1,4 +1,5 @@
 export const BASE_URL = 'http://localhost:5000/';
+export const IMG_BASE_URL = 'https://res.cloudinary.com/';
 
 export const ENDPOINT = {
 	categories: '/categories',
