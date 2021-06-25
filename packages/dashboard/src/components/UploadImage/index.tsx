@@ -111,7 +111,12 @@ const UploadImage: FC<UploadImageProps> = ({
 				title={preview.title}
 				onCancel={handleCancel}
 			>
-				<img alt="example" style={{ width: '100%' }} src={preview.image} />
+				<img
+					alt=""
+					style={{ width: '100%' }}
+					src={preview.image}
+					loading="lazy"
+				/>
 			</Modal>
 		</>
 	);

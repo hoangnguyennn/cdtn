@@ -37,7 +37,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 		<Root>
 			<div className="summary">
 				<div className="thumbnail">
-					<img src={product.images[0] || ''} alt="" />
+					<img src={product.images[0] || ''} alt="" loading="lazy" />
 				</div>
 				<div className="info">
 					{product.status === ProductStatus.SELLING ? (

@@ -66,7 +66,7 @@ const MyOrderDetail = () => {
 							<tr key={item.id}>
 								<td>
 									<div>
-										<img src={item.product.image} />
+										<img src={item.product.image} alt="" loading="lazy" />
 										<div className="product-info">
 											<Link href={`${PATH_NAME.PRODUCTS}/${item.productId}`}>
 												<a>{item.product.name}</a>

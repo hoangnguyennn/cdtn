@@ -45,7 +45,7 @@ const ProductItem: FC<ProductItemProps> = ({
 		<Wrap link={link}>
 			<div className="wrap">
 				<div className="thumbnail">
-					<img src={images[0]} alt={name} />
+					<img src={images[0]} alt={name} loading="lazy" />
 				</div>
 				<div className="info">
 					<p className="name">{name}</p>
