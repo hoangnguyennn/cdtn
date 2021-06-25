@@ -11,7 +11,9 @@ import { ProductStatus } from '../../interfaces/enum';
 import { IProductState, IRootState } from '../../interfaces/IState';
 
 const initialState: IProductState = {
-	products: [],
+	products: {},
+	pages: [],
+	total: 0,
 };
 
 const productSlice = createSlice({
@@ -19,26 +21,35 @@ const productSlice = createSlice({
 	initialState,
 	reducers: {
 		setProducts(state, action) {
-			state.products = action.payload;
+			const data: IProduct[] = action.payload.data;
+			const total: number = action.payload.total;
+			const page: number = action.payload.page;
+
+			state.products[page] = data;
+			state.total = total;
 		},
 		addProduct(state, action) {
 			const product: IProduct = action.payload;
-			const index = state.products.findIndex((item) => item.id === product.id);
+			for (const [page, pageItems] of Object.entries(state.products)) {
+				const index = pageItems.findIndex((item) => item.id === product.id);
+				if (index !== -1) {
+					state.products[page][index] = product;
+					return;
+				}
+			}
 
-			if (index === -1) {
-				state.products = [product, ...state.products];
-			} else {
-				state.products = [
-					...state.products.slice(0, index),
-					product,
-					...state.products.slice(index + 1),
-				];
+			state.products[0] = [...(state.products[0] || []), product];
+		},
+		addPage(state, action) {
+			const page: number = action.payload;
+			if (!state.pages.includes(page)) {
+				state.pages = [...state.pages, page];
 			}
 		},
 	},
 });
 
-const { setProducts, addProduct } = productSlice.actions;
+const { setProducts, addProduct, addPage } = productSlice.actions;
 
 export const createProductAction =
 	(product: IProductCreate) => async (dispatch: Dispatch) => {
@@ -47,10 +58,19 @@ export const createProductAction =
 		});
 	};
 
-export const getProductsAction = () => async (dispatch: Dispatch) => {
-	const products = await fetchProducts();
-	dispatch(setProducts(products));
-};
+export const getProductsAction =
+	(page: number, pageSize: number) =>
+	async (dispatch: Dispatch, getState: { (): IRootState }) => {
+		const pages = getPages()(getState());
+		if (pages.includes(page)) {
+			return;
+		}
+
+		return fetchProducts(page, pageSize).then(({ data, total }) => {
+			dispatch(setProducts({ data, total, page }));
+			dispatch(addPage(page));
+		});
+	};
 
 export const getProductByIdAction =
 	(id: string) => async (dispatch: Dispatch) => {
@@ -78,8 +98,22 @@ const selector = function <T>(combiner: { (state: IProductState): T }) {
 	return createSelector(productState, combiner);
 };
 
-export const getProducts = () => selector((state) => state.products);
+export const getProducts = (page = 1) =>
+	selector((state) => {
+		return state.products[page] || [];
+	});
 export const getProduct = (id: string) =>
-	selector((state) => state.products.find((item) => item.id === id));
+	selector((state) => {
+		for (const pageItems of Object.values(state.products)) {
+			const product = pageItems.find((item) => item.id === id);
+			if (product) {
+				return product;
+			}
+		}
+
+		return null;
+	});
+export const getTotal = () => selector((state) => state.total);
+export const getPages = () => selector((state) => state.pages);
 
 export default productSlice.reducer;

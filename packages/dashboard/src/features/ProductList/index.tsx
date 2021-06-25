@@ -3,11 +3,12 @@ import { ColumnsType } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
 	getProducts,
 	getProductsAction,
+	getTotal,
 	updateProductStatusAction,
 } from '../../redux/reducers/product';
 
@@ -100,7 +101,10 @@ const getColumnsConfig = ({
 
 const ProductList = () => {
 	const dispatch = useDispatch();
-	const products = useSelector(getProducts());
+	const [page, setPage] = useState(1);
+	const [pageSize, setPageSize] = useState(5);
+	const products = useSelector(getProducts(page));
+	const total = useSelector(getTotal());
 
 	const updateProductStatus = async (id: string, newStatus: ProductStatus) => {
 		try {
@@ -111,15 +115,28 @@ const ProductList = () => {
 		}
 	};
 
+	const onPaginationChange = (page: number, pageSize?: number) => {
+		setPage(page);
+		if (pageSize) {
+			setPageSize(pageSize);
+		}
+	};
+
 	useEffect(() => {
-		dispatch(getProductsAction());
-	}, [dispatch]);
+		dispatch(getProductsAction(page, pageSize));
+	}, [dispatch, page, pageSize]);
 
 	return (
 		<Table
 			columns={getColumnsConfig({ updateProductStatus })}
 			dataSource={products}
 			rowKey={(record) => record.id}
+			pagination={{
+				defaultPageSize: 1,
+				pageSize: pageSize,
+				total: total,
+				onChange: onPaginationChange,
+			}}
 		/>
 	);
 };

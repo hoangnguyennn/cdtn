@@ -19,7 +19,11 @@ export interface IOrderState {
 }
 
 export interface IProductState {
-	products: IProduct[];
+	products: {
+		[page: string]: IProduct[];
+	};
+	pages: number[];
+	total: number;
 }
 
 export interface IProductUnitState {

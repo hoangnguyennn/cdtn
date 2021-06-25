@@ -47,8 +47,10 @@ export const fetchOrdersUnProcessed = async () => {
 		.then((res) => res.data);
 };
 
-export const fetchProducts = async () => {
-	return axiosInstance.get(ENDPOINT.products).then((res) => res.data);
+export const fetchProducts = async (page: number, pageSize: number) => {
+	return axiosInstance
+		.get(ENDPOINT.products, { params: { page, pageSize } })
+		.then((res) => res.data);
 };
 
 export const fetchProductById = async (id: string) => {

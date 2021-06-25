@@ -37,22 +37,30 @@ const create = async (req: Request, res: Response) => {
 const get = async (req: Request, res: Response) => {
 	const { userType } = res.locals;
 	const filter = mapQueryToMongoFilter(req.query);
+	const page = Number(req.query.page) || 1;
+	const pageSize = Number(req.query.pageSize) || 10;
 
 	if (userType !== UserType.MANAGER) {
 		filter.status = ProductStatus.SELLING;
 	}
 
-	const products = await ProductService.get(filter);
+	const products = await ProductService.get(
+		filter,
+		(page - 1) * pageSize,
+		pageSize
+	);
+
+	const productsCount = await ProductService.count();
 
 	const mappingToResponse =
 		userType === UserType.MANAGER
 			? mapProductToResponseForAdmin
 			: mapProductToResponse;
 
-	return success(
-		res,
-		products.map((value) => mappingToResponse(value))
-	);
+	return success(res, {
+		data: products.map((value) => mappingToResponse(value)),
+		total: productsCount,
+	});
 };
 
 const getById = async (req: Request, res: Response) => {

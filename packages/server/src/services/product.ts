@@ -29,8 +29,26 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 	return ProductModel.populate(productCreated, productPopulate);
 };
 
-const get = async (filter: any = {}): Promise<IProduct[]> => {
-	return ProductModel.find(filter).populate(productPopulate);
+const get = async (
+	filter: any = {},
+	skip?: number,
+	limit?: number
+): Promise<IProduct[]> => {
+	const query = ProductModel.find(filter);
+
+	if (skip) {
+		query.skip(skip);
+	}
+
+	if (limit) {
+		query.limit(limit);
+	}
+
+	return query.populate(productPopulate);
+};
+
+const count = async (): Promise<number> => {
+	return ProductModel.countDocuments();
 };
 
 const getById = async (id: string | Types.ObjectId): Promise<IProduct> => {
@@ -94,6 +112,7 @@ const updateProductStatus = async (
 };
 
 export default {
+	count,
 	create,
 	get,
 	getById,

@@ -55,8 +55,8 @@ const {
 } = productSlice.actions;
 
 export const getProductsAction = (query: any) => async (dispatch: Dispatch) => {
-	return fetchProducts(query).then((products) => {
-		dispatch(setProductsAction(products));
+	return fetchProducts(query).then(({ data }) => {
+		dispatch(setProductsAction(data));
 	});
 };
 

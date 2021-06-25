@@ -2,7 +2,9 @@ import { ENDPOINT } from '../configs/endpoint';
 import { IProduct } from '../interfaces';
 import axiosInstance from '../services/instance';
 
-export const fetchProducts = async (query: any): Promise<IProduct[]> => {
+export const fetchProducts = async (
+	query: any
+): Promise<{ data: IProduct[]; total: number }> => {
 	return axiosInstance
 		.get(ENDPOINT.products, { params: query })
 		.then((res) => res.data);
