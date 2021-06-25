@@ -99,7 +99,7 @@ export default styled.div`
 				text-align: right;
 
 				&:first-child {
-					color: var(--gray);
+					color: var(--gray-2);
 				}
 
 				&.price {

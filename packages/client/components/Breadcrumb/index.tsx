@@ -21,7 +21,7 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ breadcrumb }: BreadcrumbProps) => {
 							{index === lastIndex ? (
 								<>
 									<div className="icon czi-arrow-right"></div>
-									<a>{item.name}</a>
+									<span>{item.name}</span>
 								</>
 							) : (
 								<>

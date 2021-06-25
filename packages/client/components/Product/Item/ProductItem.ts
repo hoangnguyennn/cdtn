@@ -49,6 +49,13 @@ export default styled.a`
 		border-radius: 0.5rem;
 		transition: all 0.3s linear;
 
+		.thumbnail {
+			img {
+				width: 262.5px;
+				height: 262.5px;
+			}
+		}
+
 		.add-to-cart {
 			position: absolute;
 			top: 100%;
