@@ -30,7 +30,6 @@ const get = async (req: Request, res: Response) => {
 			ProductService.get(
 				removeInvalidFields({
 					...filter,
-					unitId: undefined,
 					categoryId: category.id,
 				})
 			)
