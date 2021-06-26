@@ -13,39 +13,39 @@ import PageContent from '../../components/PageContent';
 import ProductList from '../../features/ProductList';
 
 const ProductDetailPage = () => {
-	const { t } = useTranslation();
-	const products = useSelector(getProducts());
+  const { t } = useTranslation();
+  const products = useSelector(getProducts());
 
-	return (
-		<MainLayout>
-			<PageContent breadcrumb={productsPage()} title={t('Products')}>
-				<ProductList products={products} />
-			</PageContent>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <PageContent breadcrumb={productsPage()} title={t('Products')}>
+        <ProductList products={products} />
+      </PageContent>
+    </MainLayout>
+  );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const reduxStore = initialStore();
-	const { dispatch } = reduxStore;
+export const getServerSideProps: GetServerSideProps = async context => {
+  const reduxStore = initialStore();
+  const { dispatch } = reduxStore;
 
-	const query = context.query;
-	try {
-		await dispatch(getProductsAction(query));
-		await dispatch(getCategoriesAction(query));
-		await dispatch(getProductUnitsAction(query));
+  const query = context.query;
+  try {
+    await dispatch(getProductsAction(query));
+    await dispatch(getCategoriesAction(query));
+    await dispatch(getProductUnitsAction(query));
 
-		return {
-			props: {
-				initialReduxState: reduxStore.getState(),
-				title: i18n.t('Products'),
-			},
-		};
-	} catch {
-		return {
-			notFound: true,
-		};
-	}
+    return {
+      props: {
+        initialReduxState: reduxStore.getState(),
+        title: i18n.t('Products')
+      }
+    };
+  } catch {
+    return {
+      notFound: true
+    };
+  }
 };
 
 export default ProductDetailPage;

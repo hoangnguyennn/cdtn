@@ -3,13 +3,13 @@ import { IOrder, IOrderResponse } from '../interfaces';
 import axiosInstance from '../services/instance';
 
 export const order = async (order: IOrder): Promise<IOrderResponse> => {
-	return axiosInstance.post(ENDPOINT.orders, order).then((res) => res.data);
+  return axiosInstance.post(ENDPOINT.orders, order).then(res => res.data);
 };
 
 export const fetchOrders = async (token: string): Promise<IOrderResponse[]> => {
-	return axiosInstance
-		.get(ENDPOINT.orders, {
-			headers: { Authorization: `Bearer ${token}` },
-		})
-		.then((res) => res.data);
+  return axiosInstance
+    .get(ENDPOINT.orders, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data);
 };

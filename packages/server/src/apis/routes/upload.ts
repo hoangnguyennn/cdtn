@@ -10,11 +10,11 @@ const upload = multer({ dest: 'uploads/' });
 const router = Router();
 
 router.post(
-	'/',
-	AuthMiddleware.checkAuth,
-	AuthMiddleware.checkRole([UserType.MANAGER]),
-	upload.single('file'),
-	catcherWrapper(uploadSingleFile)
+  '/',
+  AuthMiddleware.checkAuth,
+  AuthMiddleware.checkRole([UserType.MANAGER]),
+  upload.single('file'),
+  catcherWrapper(uploadSingleFile)
 );
 
 export default router;

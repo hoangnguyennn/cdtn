@@ -16,46 +16,46 @@ import rootReducer from './reducers';
 let store: ReturnType<typeof initStore>;
 
 const initStore = (
-	preloadedState: IRootState = {
-		app: initialAppState,
-		auth: initialAuthState,
-		cart: initialCartState,
-		category: initialCategoryState,
-		order: initialOrderState,
-		paymentMethod: initialPaymentMethodState,
-		product: initialProductState,
-		productUnit: initialProduutUnitState,
-	}
+  preloadedState: IRootState = {
+    app: initialAppState,
+    auth: initialAuthState,
+    cart: initialCartState,
+    category: initialCategoryState,
+    order: initialOrderState,
+    paymentMethod: initialPaymentMethodState,
+    product: initialProductState,
+    productUnit: initialProduutUnitState
+  }
 ) => {
-	return configureStore({
-		preloadedState: preloadedState,
-		reducer: rootReducer,
-	});
+  return configureStore({
+    preloadedState: preloadedState,
+    reducer: rootReducer
+  });
 };
 
 export const initialStore = (preloadedState?: IRootState) => {
-	let _store = store ?? initStore(preloadedState);
+  let _store = store ?? initStore(preloadedState);
 
-	if (preloadedState && store) {
-		_store = initStore({
-			...store.getState(),
-			...preloadedState,
-		});
-		// Reset the current store
-		store = undefined;
-	}
+  if (preloadedState && store) {
+    _store = initStore({
+      ...store.getState(),
+      ...preloadedState
+    });
+    // Reset the current store
+    store = undefined;
+  }
 
-	// For SSG and SSR always create a new store
-	if (typeof window === 'undefined') return _store;
-	// Create the store once in the client
-	if (!store) store = _store;
+  // For SSG and SSR always create a new store
+  if (typeof window === 'undefined') return _store;
+  // Create the store once in the client
+  if (!store) store = _store;
 
-	return _store;
+  return _store;
 };
 
 const useStore = (initialState: IRootState) => {
-	const store = useMemo(() => initialStore(initialState), [initialState]);
-	return store;
+  const store = useMemo(() => initialStore(initialState), [initialState]);
+  return store;
 };
 
 export default useStore;

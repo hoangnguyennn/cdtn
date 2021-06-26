@@ -1,150 +1,150 @@
 import { ProductStatus } from './enums';
 
 export interface IBreadcrumb {
-	id: string;
-	name: any;
-	url: string;
+  id: string;
+  name: any;
+  url: string;
 }
 
 export interface ICartForm {
-	deliveryFullName: string;
-	deliveryAddress: string;
-	deliveryPhone: string;
-	deliveryEmail: string;
-	deliveryNote?: string;
-	paymentMethodId: string;
+  deliveryFullName: string;
+  deliveryAddress: string;
+  deliveryPhone: string;
+  deliveryEmail: string;
+  deliveryNote?: string;
+  paymentMethodId: string;
 }
 
 export interface ICartItem extends IProduct {
-	qty: number;
+  qty: number;
 }
 
 export interface ICategoryWithProductLength {
-	id: string;
-	name: string;
-	slug: string;
-	productsLength: number;
+  id: string;
+  name: string;
+  slug: string;
+  productsLength: number;
 }
 
 export interface ILogin {
-	email: string;
-	password: string;
+  email: string;
+  password: string;
 }
 
 export interface ILoginResponse {
-	token: string;
-	user: IUser;
+  token: string;
+  user: IUser;
 }
 
 export interface IOrder {
-	userId?: string;
-	deliveryFullName: string;
-	deliveryAddress: string;
-	deliveryPhone: string;
-	deliveryEmail: string;
-	paymentMethodId: string;
-	items: IOrderItem[];
+  userId?: string;
+  deliveryFullName: string;
+  deliveryAddress: string;
+  deliveryPhone: string;
+  deliveryEmail: string;
+  paymentMethodId: string;
+  items: IOrderItem[];
 }
 
 export interface IOrderItem {
-	productId: string;
-	qty: number;
+  productId: string;
+  qty: number;
 }
 
 export interface IOrderItemResponse {
-	id: string;
-	productId: string;
-	price: number;
-	qty: number;
-	product: {
-		name: string;
-		image: string;
-	};
+  id: string;
+  productId: string;
+  price: number;
+  qty: number;
+  product: {
+    name: string;
+    image: string;
+  };
 }
 
 export interface IOrderResponse {
-	id: string;
-	deliveryFullName: string;
-	deliveryAddress: string;
-	deliveryPhone: string;
-	deliveryEmail: string;
-	deliveryDate?: string;
-	paymentStatus: string;
-	orderStatus: string;
-	orderDate: string;
+  id: string;
+  deliveryFullName: string;
+  deliveryAddress: string;
+  deliveryPhone: string;
+  deliveryEmail: string;
+  deliveryDate?: string;
+  paymentStatus: string;
+  orderStatus: string;
+  orderDate: string;
 
-	user?: IUser;
-	paymentMethod: IPaymentMethod;
-	items: IOrderItemResponse[];
+  user?: IUser;
+  paymentMethod: IPaymentMethod;
+  items: IOrderItemResponse[];
 }
 
 export interface IPaymentMethod {
-	id: string;
-	name: string;
-	imageUrl: string;
-	description?: string;
+  id: string;
+  name: string;
+  imageUrl: string;
+  description?: string;
 }
 
 export interface IProduct {
-	id: string;
-	name: string;
-	price: number;
-	description: string;
-	unit: string;
-	images: string[];
-	status: ProductStatus;
-	longDescription: string;
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  unit: string;
+  images: string[];
+  status: ProductStatus;
+  longDescription: string;
 }
 
 export interface IProductUnitWithLength {
-	id: string;
-	name: string;
-	description: string;
-	productsLength: number;
+  id: string;
+  name: string;
+  description: string;
+  productsLength: number;
 }
 
 export interface IProductWithLink extends IProduct {
-	link: string;
+  link: string;
 }
 
 export interface IRegisterForm {
-	email: string;
-	password: string;
-	confirmPassword: string;
-	fullName: string;
-	phone: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  fullName: string;
+  phone: string;
 }
 
 export interface IUser {
-	id: string;
-	email: string;
-	fullName: string;
-	address: string;
-	phone: string;
-	userType: string;
+  id: string;
+  email: string;
+  fullName: string;
+  address: string;
+  phone: string;
+  userType: string;
 }
 
 export interface IUserCreate {
-	email: string;
-	password: string;
-	fullName: string;
-	phone: string;
+  email: string;
+  password: string;
+  fullName: string;
+  phone: string;
 }
 
 export interface IUserUpdateInfo {
-	fullName: string;
-	address: string;
-	phone: string;
+  fullName: string;
+  address: string;
+  phone: string;
 }
 
 export interface IUserUpdatePassword {
-	password: string;
+  password: string;
 }
 
 export type IUserUpdate = IUserUpdateInfo | IUserUpdatePassword;
 
 export interface IWidget {
-	id: string;
-	title: string;
-	url: string;
+  id: string;
+  title: string;
+  url: string;
 }

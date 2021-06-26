@@ -8,28 +8,28 @@ import Button from '../core/Button';
 import Container from '../core/Container';
 
 type BannerProps = {
-	background?: string;
+  background?: string;
 };
 
 const Banner: FC<BannerProps> = ({ background }) => {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
 
-	return (
-		<BannerStyled background={background}>
-			<Container>
-				<div className="intro">
-					<h2 className="title">{t('Slogan')}</h2>
-					<div className="actions">
-						<Link href={PATH_NAME.PRODUCTS}>
-							<Button as="a" href={PATH_NAME.PRODUCTS} shadow inline>
-								{t('Shop Now')}
-							</Button>
-						</Link>
-					</div>
-				</div>
-			</Container>
-		</BannerStyled>
-	);
+  return (
+    <BannerStyled background={background}>
+      <Container>
+        <div className="intro">
+          <h2 className="title">{t('Slogan')}</h2>
+          <div className="actions">
+            <Link href={PATH_NAME.PRODUCTS}>
+              <Button as="a" href={PATH_NAME.PRODUCTS} shadow inline>
+                {t('Shop Now')}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </Container>
+    </BannerStyled>
+  );
 };
 
 export default Banner;

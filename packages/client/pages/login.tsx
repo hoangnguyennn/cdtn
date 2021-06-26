@@ -8,21 +8,21 @@ import MainLayout from '../layouts/MainLayout';
 import PageContent from '../components/PageContent';
 
 const LoginPage = () => {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
 
-	return (
-		<MainLayout>
-			<PageContent breadcrumb={loginPage()} title={t('Login')}>
-				<Login />
-			</PageContent>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <PageContent breadcrumb={loginPage()} title={t('Login')}>
+        <Login />
+      </PageContent>
+    </MainLayout>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	return {
-		props: { title: i18n.t('Login') },
-	};
+  return {
+    props: { title: i18n.t('Login') }
+  };
 };
 
 export default LoginPage;

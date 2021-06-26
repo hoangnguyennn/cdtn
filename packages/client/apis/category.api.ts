@@ -3,11 +3,11 @@ import { ICategoryWithProductLength } from '../interfaces';
 import axiosInstance from '../services/instance';
 
 export const fetchCategories = async (
-	query: any
+  query: any
 ): Promise<ICategoryWithProductLength> => {
-	return axiosInstance
-		.get(ENDPOINT.categories, {
-			params: { ...query, 'with-product-length': 'true' },
-		})
-		.then((res) => res.data);
+  return axiosInstance
+    .get(ENDPOINT.categories, {
+      params: { ...query, 'with-product-length': 'true' }
+    })
+    .then(res => res.data);
 };

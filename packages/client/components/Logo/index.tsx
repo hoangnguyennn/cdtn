@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next';
 import LogoStyled from './Logo';
 
 const Logo = () => {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
 
-	return (
-		<LogoStyled>
-			<Link href="/">
-				<a>{t('Logo')}</a>
-			</Link>
-		</LogoStyled>
-	);
+  return (
+    <LogoStyled>
+      <Link href="/">
+        <a>{t('Logo')}</a>
+      </Link>
+    </LogoStyled>
+  );
 };
 
 export default Logo;

@@ -9,9 +9,9 @@ const router = Router();
 router.post('/login', catcherWrapper(AuthController.login));
 router.post('/register', catcherWrapper(AuthController.register));
 router.post(
-	'/me',
-	AuthMiddleware.checkAuth,
-	catcherWrapper(AuthController.getCurrentUser)
+  '/me',
+  AuthMiddleware.checkAuth,
+  catcherWrapper(AuthController.getCurrentUser)
 );
 
 export default router;

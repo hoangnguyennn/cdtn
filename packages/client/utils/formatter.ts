@@ -1,32 +1,32 @@
 export const toCurrency = (num: number) => {
-	return Number(num).toLocaleString('vi-VN', {
-		style: 'currency',
-		currency: 'VND',
-	});
+  return Number(num).toLocaleString('vi-VN', {
+    style: 'currency',
+    currency: 'VND'
+  });
 };
 
 export const isoDateToNativeDate = (date?: string, showTimeBefore = false) => {
-	let dateObject = new Date();
+  let dateObject = new Date();
 
-	if (date) {
-		dateObject = new Date(date);
-	}
+  if (date) {
+    dateObject = new Date(date);
+  }
 
-	const currentDate = toNDigits(dateObject.getDate());
-	const currentMonth = toNDigits(dateObject.getMonth() + 1);
-	const currentYear = toNDigits(dateObject.getFullYear(), 4);
-	const dateArr = [currentDate, currentMonth, currentYear];
+  const currentDate = toNDigits(dateObject.getDate());
+  const currentMonth = toNDigits(dateObject.getMonth() + 1);
+  const currentYear = toNDigits(dateObject.getFullYear(), 4);
+  const dateArr = [currentDate, currentMonth, currentYear];
 
-	const currentHour = toNDigits(dateObject.getHours());
-	const currentMin = toNDigits(dateObject.getMinutes());
-	const currentSec = toNDigits(dateObject.getSeconds());
-	const timeArr = [currentHour, currentMin, currentSec];
+  const currentHour = toNDigits(dateObject.getHours());
+  const currentMin = toNDigits(dateObject.getMinutes());
+  const currentSec = toNDigits(dateObject.getSeconds());
+  const timeArr = [currentHour, currentMin, currentSec];
 
-	if (showTimeBefore) {
-		return `${timeArr.join(':')} ${dateArr.join('/')}`;
-	}
+  if (showTimeBefore) {
+    return `${timeArr.join(':')} ${dateArr.join('/')}`;
+  }
 
-	return `${dateArr.join('/')} ${timeArr.join(':')}`;
+  return `${dateArr.join('/')} ${timeArr.join(':')}`;
 };
 
 /**
@@ -37,16 +37,18 @@ export const isoDateToNativeDate = (date?: string, showTimeBefore = false) => {
  * @returns
  */
 export const toNDigits = (num: number | string, numberOfDigits = 2) => {
-	const zeroBefore = Array.from(new Array(numberOfDigits)).fill(0).join('');
-	return `${zeroBefore}${num}`.slice(-numberOfDigits);
+  const zeroBefore = Array.from(new Array(numberOfDigits))
+    .fill(0)
+    .join('');
+  return `${zeroBefore}${num}`.slice(-numberOfDigits);
 };
 
 export const numberWithDot = (num: number | string) => {
-	return String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+  return String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 };
 
 export default {
-	isoDateToNativeDate,
-	numberWithDot,
-	toCurrency,
+  isoDateToNativeDate,
+  numberWithDot,
+  toCurrency
 };

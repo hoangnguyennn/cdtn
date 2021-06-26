@@ -6,16 +6,16 @@ import PageContentStyled from './PageContent';
 type PageContentProps = PageTitleProps;
 
 const PageContent: FC<PageContentProps> = ({ children, breadcrumb, title }) => {
-	return (
-		<>
-			<PageTitle breadcrumb={breadcrumb} title={title} />
-			<PageContentStyled>
-				<Container>
-					<div className="page-content">{children}</div>
-				</Container>
-			</PageContentStyled>
-		</>
-	);
+  return (
+    <>
+      <PageTitle breadcrumb={breadcrumb} title={title} />
+      <PageContentStyled>
+        <Container>
+          <div className="page-content">{children}</div>
+        </Container>
+      </PageContentStyled>
+    </>
+  );
 };
 
 export default PageContent;

@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getToken, loginByTokenAction } from '../redux/reducers/auth';
 
 const Auth: FC = ({ children }) => {
-	const dispatch = useDispatch();
-	const token = useSelector(getToken());
+  const dispatch = useDispatch();
+  const token = useSelector(getToken());
 
-	useEffect(() => {
-		if (!token) {
-			dispatch(loginByTokenAction());
-		}
-	}, [token]);
+  useEffect(() => {
+    if (!token) {
+      dispatch(loginByTokenAction());
+    }
+  }, [token]);
 
-	return <>{children}</>;
+  return <>{children}</>;
 };
 
 export default Auth;

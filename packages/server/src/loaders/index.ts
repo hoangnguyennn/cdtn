@@ -5,9 +5,9 @@ import expressLoader from './express';
 import cron from '../cron';
 
 export default async (app: Application) => {
-	await mongooseLoader();
-	await expressLoader(app);
+  await mongooseLoader();
+  await expressLoader(app);
 
-	// register crons
-	cron();
+  // register crons
+  cron();
 };

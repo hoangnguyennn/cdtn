@@ -8,21 +8,21 @@ import ProductUnitController from '../controllers/productUnit';
 const router = Router();
 
 router
-	.route('/')
-	.get(catcherWrapper(ProductUnitController.get))
-	.post(
-		AuthMiddleware.checkAuth,
-		AuthMiddleware.checkRole([UserType.MANAGER]),
-		catcherWrapper(ProductUnitController.create)
-	);
+  .route('/')
+  .get(catcherWrapper(ProductUnitController.get))
+  .post(
+    AuthMiddleware.checkAuth,
+    AuthMiddleware.checkRole([UserType.MANAGER]),
+    catcherWrapper(ProductUnitController.create)
+  );
 
 router
-	.route('/:id')
-	.get(catcherWrapper(ProductUnitController.getById))
-	.patch(
-		AuthMiddleware.checkAuth,
-		AuthMiddleware.checkRole([UserType.MANAGER]),
-		catcherWrapper(ProductUnitController.update)
-	);
+  .route('/:id')
+  .get(catcherWrapper(ProductUnitController.getById))
+  .patch(
+    AuthMiddleware.checkAuth,
+    AuthMiddleware.checkRole([UserType.MANAGER]),
+    catcherWrapper(ProductUnitController.update)
+  );
 
 export default router;

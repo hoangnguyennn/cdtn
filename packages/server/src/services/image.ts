@@ -4,19 +4,19 @@ import ImageModel from '../models/image';
 import { removeInvalidFields } from '../utils';
 
 const get = async (): Promise<IImage[]> => {
-	return ImageModel.find();
+  return ImageModel.find();
 };
 
 const create = async (image: IImageCreate): Promise<IImage> => {
-	const imageLint = removeInvalidFields({
-		url: image.url,
-		publicId: image.publicId,
-	});
+  const imageLint = removeInvalidFields({
+    url: image.url,
+    publicId: image.publicId
+  });
 
-	return ImageModel.create(imageLint);
+  return ImageModel.create(imageLint);
 };
 
 export default {
-	create,
-	get,
+  create,
+  get
 };

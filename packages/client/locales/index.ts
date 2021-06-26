@@ -5,12 +5,12 @@ import en from './en';
 import vi from './vi';
 
 i18n.use(initReactI18next).init({
-	resources: {
-		en: { translation: en },
-		vi: { translation: vi },
-	},
-	lng: 'vi',
-	fallbackLng: 'vi',
+  resources: {
+    en: { translation: en },
+    vi: { translation: vi }
+  },
+  lng: 'vi',
+  fallbackLng: 'vi'
 });
 
 export default i18n;

@@ -1,28 +1,28 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 body {
-	color: var(--main-text-color-2);
-	font-family: sans-serif;
-	line-height: 1.5;
+  color: var(--main-text-color-2);
+  font-family: sans-serif;
+  line-height: 1.5;
 }
 
 a {
-	outline: none;
+  outline: none;
 }
 
 ul {
-	list-style-type: none;
+  list-style-type: none;
 }
 
 .disabled {
-	cursor: not-allowed !important;
-	pointer-events: none !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
 }

@@ -10,52 +10,52 @@ import { PATH_NAME } from '../../configs/pathName';
 import Root from './MyOrder';
 
 const MyOrder = () => {
-	const dispatch = useDispatch();
-	const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-	const orders = useSelector(getOrders());
+  const orders = useSelector(getOrders());
 
-	useEffect(() => {
-		dispatch(getOrdersAction());
-	}, []);
+  useEffect(() => {
+    dispatch(getOrdersAction());
+  }, []);
 
-	return (
-		<Root>
-			<table className="order-list">
-				<thead>
-					<tr>
-						<th>{t('Order Id')}</th>
-						<th>{t('Order Date')}</th>
-						<th>{t('Products')}</th>
-						<th>{t('Total')}</th>
-						<th>{t('Order Status')}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{orders.map((order) => (
-						<tr key={order.id}>
-							<td>
-								<Link href={`${PATH_NAME.MY_ORDER}/${order.id}`}>
-									<a className="order-id">{order.id}</a>
-								</Link>
-							</td>
-							<td>{isoDateToNativeDate(order.orderDate)}</td>
-							<td>{order.items.map((item) => item.product.name).join(', ')}</td>
-							<td>
-								{toCurrency(
-									order.items.reduce(
-										(total, item) => total + item.price * item.qty,
-										0
-									)
-								)}
-							</td>
-							<td>{t(orderStatus[order.orderStatus])}</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
-		</Root>
-	);
+  return (
+    <Root>
+      <table className="order-list">
+        <thead>
+          <tr>
+            <th>{t('Order Id')}</th>
+            <th>{t('Order Date')}</th>
+            <th>{t('Products')}</th>
+            <th>{t('Total')}</th>
+            <th>{t('Order Status')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map(order => (
+            <tr key={order.id}>
+              <td>
+                <Link href={`${PATH_NAME.MY_ORDER}/${order.id}`}>
+                  <a className="order-id">{order.id}</a>
+                </Link>
+              </td>
+              <td>{isoDateToNativeDate(order.orderDate)}</td>
+              <td>{order.items.map(item => item.product.name).join(', ')}</td>
+              <td>
+                {toCurrency(
+                  order.items.reduce(
+                    (total, item) => total + item.price * item.qty,
+                    0
+                  )
+                )}
+              </td>
+              <td>{t(orderStatus[order.orderStatus])}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Root>
+  );
 };
 
 export default MyOrder;

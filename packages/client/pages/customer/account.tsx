@@ -8,21 +8,21 @@ import MyAccount from '../../features/MyAccount';
 import PageContent from '../../components/PageContent';
 
 const MyAccountPage = () => {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
 
-	return (
-		<MainLayout>
-			<PageContent breadcrumb={myAccountPage()} title={t('My account')}>
-				<MyAccount />
-			</PageContent>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <PageContent breadcrumb={myAccountPage()} title={t('My account')}>
+        <MyAccount />
+      </PageContent>
+    </MainLayout>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	return {
-		props: { title: i18n.t('My account') },
-	};
+  return {
+    props: { title: i18n.t('My account') }
+  };
 };
 
 export default MyAccountPage;

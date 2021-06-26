@@ -6,22 +6,22 @@ import Container from '../core/Container';
 import PageTitleStyled from './PageTitle';
 
 export type PageTitleProps = {
-	breadcrumb: IBreadcrumb[];
-	title: string;
+  breadcrumb: IBreadcrumb[];
+  title: string;
 };
 
 const PageTitle: FC<PageTitleProps> = ({
-	breadcrumb,
-	title,
+  breadcrumb,
+  title
 }: PageTitleProps) => {
-	return (
-		<PageTitleStyled>
-			<Container>
-				<Breadcrumb breadcrumb={breadcrumb} />
-				<h3 className="title">{title}</h3>
-			</Container>
-		</PageTitleStyled>
-	);
+  return (
+    <PageTitleStyled>
+      <Container>
+        <Breadcrumb breadcrumb={breadcrumb} />
+        <h3 className="title">{title}</h3>
+      </Container>
+    </PageTitleStyled>
+  );
 };
 
 export default PageTitle;

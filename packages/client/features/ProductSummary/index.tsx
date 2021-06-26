@@ -12,70 +12,70 @@ import Input from '../../components/core/Input';
 import Root from './ProductSummary';
 
 type ProductSummaryProps = {
-	product: IProduct;
+  product: IProduct;
 };
 
 const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
-	const [qty, setQty] = useState('1');
-	const { t } = useTranslation();
-	const dispatch = useDispatch();
+  const [qty, setQty] = useState('1');
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
 
-	const handleAddToCart = () => {
-		if (Number(qty) > 0) {
-			dispatch(addToCartAction({ ...product, qty: Number(qty) }));
-			toast.info('add to cart');
-		}
-	};
+  const handleAddToCart = () => {
+    if (Number(qty) > 0) {
+      dispatch(addToCartAction({ ...product, qty: Number(qty) }));
+      toast.info('add to cart');
+    }
+  };
 
-	const handleInputKeyDown = (event: KeyboardEvent) => {
-		if (event.key === 'e') {
-			event.preventDefault();
-		}
-	};
+  const handleInputKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'e') {
+      event.preventDefault();
+    }
+  };
 
-	return (
-		<Root>
-			<div className="summary">
-				<div className="thumbnail">
-					<img src={product.images[0] || ''} alt="" loading="lazy" />
-				</div>
-				<div className="info">
-					{product.status === ProductStatus.SELLING ? (
-						<>
-							<p className="price">{toCurrency(product.price)}</p>
-							<div className="add-to-cart">
-								<div className="qty">
-									<Input
-										type="number"
-										min="1"
-										value={qty}
-										onChange={(e) => setQty(e.target.value)}
-										onKeyDown={handleInputKeyDown}
-									/>
-								</div>
-								<Button shadow onClick={handleAddToCart}>
-									{t('Add to cart')}
-								</Button>
-							</div>
-						</>
-					) : (
-						<div className="stop-business">{t('Stop business')}</div>
-					)}
+  return (
+    <Root>
+      <div className="summary">
+        <div className="thumbnail">
+          <img src={product.images[0] || ''} alt="" loading="lazy" />
+        </div>
+        <div className="info">
+          {product.status === ProductStatus.SELLING ? (
+            <>
+              <p className="price">{toCurrency(product.price)}</p>
+              <div className="add-to-cart">
+                <div className="qty">
+                  <Input
+                    type="number"
+                    min="1"
+                    value={qty}
+                    onChange={e => setQty(e.target.value)}
+                    onKeyDown={handleInputKeyDown}
+                  />
+                </div>
+                <Button shadow onClick={handleAddToCart}>
+                  {t('Add to cart')}
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div className="stop-business">{t('Stop business')}</div>
+          )}
 
-					<div
-						className="description ql-editor"
-						dangerouslySetInnerHTML={{ __html: product.description }}
-					/>
-				</div>
-			</div>
-			<div className="more-info">
-				<div
-					className="ql-editor"
-					dangerouslySetInnerHTML={{ __html: product.longDescription }}
-				/>
-			</div>
-		</Root>
-	);
+          <div
+            className="description ql-editor"
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          />
+        </div>
+      </div>
+      <div className="more-info">
+        <div
+          className="ql-editor"
+          dangerouslySetInnerHTML={{ __html: product.longDescription }}
+        />
+      </div>
+    </Root>
+  );
 };
 
 export default ProductSummary;

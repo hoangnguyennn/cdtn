@@ -12,58 +12,58 @@ import ProductItem from '../Item';
 import ProductListStyled from './ProductList';
 
 type ProductListProps = {
-	columns: number;
-	'lg-columns': number;
-	title?: string;
-	viewMore?: boolean;
-	items: IProduct[];
-	[key: string]: any;
+  columns: number;
+  'lg-columns': number;
+  title?: string;
+  viewMore?: boolean;
+  items: IProduct[];
+  [key: string]: any;
 };
 
 const ProductList: FC<ProductListProps> = ({
-	title,
-	viewMore = true,
-	items,
-	sorterUI,
-	...rest
+  title,
+  viewMore = true,
+  items,
+  sorterUI,
+  ...rest
 }: ProductListProps) => {
-	const { t } = useTranslation();
-	const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
 
-	return (
-		<ProductListStyled hasTitle={!!title} {...rest}>
-			{title ? <h3 className="title">{title}</h3> : null}
-			{sorterUI}
-			{items.length ? (
-				<div className="list">
-					{items.map((product) => (
-						<ProductItem
-							key={product.id}
-							link={`${PATH_NAME.PRODUCTS}/${product.id}`}
-							addToCart={() => {
-								dispatch(addToCartAction({ ...product, qty: 1 }));
-								toast.info('add to cart');
-							}}
-							{...product}
-						/>
-					))}
-				</div>
-			) : (
-				<div className="not-found-products">
-					{t('There are no products to display')}
-				</div>
-			)}
-			{viewMore ? (
-				<div className="view-more">
-					<Link href={PATH_NAME.PRODUCTS}>
-						<Button as="a" href={PATH_NAME.PRODUCTS} shadow>
-							{t('More products')}
-						</Button>
-					</Link>
-				</div>
-			) : null}
-		</ProductListStyled>
-	);
+  return (
+    <ProductListStyled hasTitle={!!title} {...rest}>
+      {title ? <h3 className="title">{title}</h3> : null}
+      {sorterUI}
+      {items.length ? (
+        <div className="list">
+          {items.map(product => (
+            <ProductItem
+              key={product.id}
+              link={`${PATH_NAME.PRODUCTS}/${product.id}`}
+              addToCart={() => {
+                dispatch(addToCartAction({ ...product, qty: 1 }));
+                toast.info('add to cart');
+              }}
+              {...product}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="not-found-products">
+          {t('There are no products to display')}
+        </div>
+      )}
+      {viewMore ? (
+        <div className="view-more">
+          <Link href={PATH_NAME.PRODUCTS}>
+            <Button as="a" href={PATH_NAME.PRODUCTS} shadow>
+              {t('More products')}
+            </Button>
+          </Link>
+        </div>
+      ) : null}
+    </ProductListStyled>
+  );
 };
 
 export default ProductList;

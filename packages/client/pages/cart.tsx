@@ -8,21 +8,21 @@ import MainLayout from '../layouts/MainLayout';
 import PageContent from '../components/PageContent';
 
 const CartPage = () => {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
 
-	return (
-		<MainLayout>
-			<PageContent breadcrumb={cartPage()} title={t('Cart')}>
-				<Cart />
-			</PageContent>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <PageContent breadcrumb={cartPage()} title={t('Cart')}>
+        <Cart />
+      </PageContent>
+    </MainLayout>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	return {
-		props: { title: i18n.t('Cart') },
-	};
+  return {
+    props: { title: i18n.t('Cart') }
+  };
 };
 
 export default CartPage;

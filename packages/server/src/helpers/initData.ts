@@ -33,50 +33,50 @@ import data from './initData.json';
 // };
 
 export const generateUsers = async () => {
-	console.log('init users');
+  console.log('init users');
 
-	const users = data.users;
+  const users = data.users;
 
-	const usersPromise = users.map((user) =>
-		AuthService.register({
-			email: user.email,
-			passwordHashed: user.passwordHashed,
-			fullName: user.fullName,
-			phone: user.phone,
-			userType: user.userType as UserType,
-			isActivated: user.isActivated,
-		})
-	);
+  const usersPromise = users.map(user =>
+    AuthService.register({
+      email: user.email,
+      passwordHashed: user.passwordHashed,
+      fullName: user.fullName,
+      phone: user.phone,
+      userType: user.userType as UserType,
+      isActivated: user.isActivated
+    })
+  );
 
-	return Promise.all(usersPromise).then(() => {
-		console.log('users created');
-	});
+  return Promise.all(usersPromise).then(() => {
+    console.log('users created');
+  });
 };
 
 export const generatePaymentMethods = async () => {
-	console.log('init payment methods');
+  console.log('init payment methods');
 
-	const paymentMethods = data.paymentMethods;
-	const promises = paymentMethods.map((paymentMethod) =>
-		PaymentMethodService.create({
-			name: paymentMethod.name,
-			imageUrl: paymentMethod.imageUrl,
-		})
-	);
+  const paymentMethods = data.paymentMethods;
+  const promises = paymentMethods.map(paymentMethod =>
+    PaymentMethodService.create({
+      name: paymentMethod.name,
+      imageUrl: paymentMethod.imageUrl
+    })
+  );
 
-	return Promise.all(promises).then(() => {
-		console.log('payment methods created');
-	});
+  return Promise.all(promises).then(() => {
+    console.log('payment methods created');
+  });
 };
 
 const generate = async () => {
-	await mongooseLoader();
+  await mongooseLoader();
 
-	// await generateProducts();
-	await generateUsers();
-	await generatePaymentMethods();
+  // await generateProducts();
+  await generateUsers();
+  await generatePaymentMethods();
 
-	return 1;
+  return 1;
 };
 
 generate();

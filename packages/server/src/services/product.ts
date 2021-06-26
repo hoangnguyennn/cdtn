@@ -1,9 +1,9 @@
 import { Types } from 'mongoose';
 
 import {
-	COMMON_MESSAGE,
-	HttpError,
-	HttpStatusCode,
+  COMMON_MESSAGE,
+  HttpError,
+  HttpStatusCode
 } from '../helpers/commonResponse';
 import { IProduct } from '../interfaces/IDocuments';
 import { IProductCreate } from '../interfaces';
@@ -13,110 +13,110 @@ import { removeInvalidFields } from '../utils';
 import { productPopulate } from '../helpers/populate';
 
 const create = async (product: IProductCreate): Promise<IProduct> => {
-	const productLint = removeInvalidFields({
-		name: product.name,
-		price: product.price,
-		unitId: product.unitId,
-		description: product.description,
-		status: product.status,
-		imagesId: product.imagesId,
-		categoryId: product.categoryId,
-		longDescription: product.longDescription,
-	});
+  const productLint = removeInvalidFields({
+    name: product.name,
+    price: product.price,
+    unitId: product.unitId,
+    description: product.description,
+    status: product.status,
+    imagesId: product.imagesId,
+    categoryId: product.categoryId,
+    longDescription: product.longDescription
+  });
 
-	const productCreated = await ProductModel.create(productLint);
+  const productCreated = await ProductModel.create(productLint);
 
-	return ProductModel.populate(productCreated, productPopulate);
+  return ProductModel.populate(productCreated, productPopulate);
 };
 
 const get = async (
-	filter: any = {},
-	skip?: number,
-	limit?: number
+  filter: any = {},
+  skip?: number,
+  limit?: number
 ): Promise<IProduct[]> => {
-	const query = ProductModel.find(filter);
+  const query = ProductModel.find(filter);
 
-	if (skip) {
-		query.skip(skip);
-	}
+  if (skip) {
+    query.skip(skip);
+  }
 
-	if (limit) {
-		query.limit(limit);
-	}
+  if (limit) {
+    query.limit(limit);
+  }
 
-	return query.populate(productPopulate);
+  return query.populate(productPopulate);
 };
 
 const count = async (): Promise<number> => {
-	return ProductModel.countDocuments();
+  return ProductModel.countDocuments();
 };
 
 const getById = async (id: string | Types.ObjectId): Promise<IProduct> => {
-	const product = await ProductModel.findOne({ _id: id }).populate(
-		productPopulate
-	);
+  const product = await ProductModel.findOne({ _id: id }).populate(
+    productPopulate
+  );
 
-	if (!product) {
-		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
-	}
+  if (!product) {
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+  }
 
-	return product;
+  return product;
 };
 
 const getTrending = async (): Promise<IProduct[]> => {
-	return ProductModel.find({ status: ProductStatus.SELLING })
-		.limit(8)
-		.populate(productPopulate);
+  return ProductModel.find({ status: ProductStatus.SELLING })
+    .limit(8)
+    .populate(productPopulate);
 };
 
 const updateProduct = async (id: string, product: IProductCreate) => {
-	const productLint = removeInvalidFields({
-		name: product.name,
-		price: product.price,
-		unitId: product.unitId,
-		description: product.description,
-		status: product.status,
-		imagesId: product.imagesId,
-		categoryId: product.categoryId,
-		longDescription: product.longDescription,
-	});
+  const productLint = removeInvalidFields({
+    name: product.name,
+    price: product.price,
+    unitId: product.unitId,
+    description: product.description,
+    status: product.status,
+    imagesId: product.imagesId,
+    categoryId: product.categoryId,
+    longDescription: product.longDescription
+  });
 
-	const productUpdated = await ProductModel.findByIdAndUpdate(
-		id,
-		{ $set: productLint },
-		{ new: true }
-	).populate(productPopulate);
+  const productUpdated = await ProductModel.findByIdAndUpdate(
+    id,
+    { $set: productLint },
+    { new: true }
+  ).populate(productPopulate);
 
-	if (!productUpdated) {
-		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
-	}
+  if (!productUpdated) {
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+  }
 
-	return productUpdated;
+  return productUpdated;
 };
 
 const updateProductStatus = async (
-	id: string,
-	newStatus: ProductStatus
+  id: string,
+  newStatus: ProductStatus
 ): Promise<IProduct> => {
-	const productUpdated = await ProductModel.findByIdAndUpdate(
-		id,
-		{ $set: { status: newStatus } },
-		{ new: true }
-	).populate(productPopulate);
+  const productUpdated = await ProductModel.findByIdAndUpdate(
+    id,
+    { $set: { status: newStatus } },
+    { new: true }
+  ).populate(productPopulate);
 
-	if (!productUpdated) {
-		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
-	}
+  if (!productUpdated) {
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+  }
 
-	return productUpdated;
+  return productUpdated;
 };
 
 export default {
-	count,
-	create,
-	get,
-	getById,
-	getTrending,
-	updateProduct,
-	updateProductStatus,
+  count,
+  create,
+  get,
+  getById,
+  getTrending,
+  updateProduct,
+  updateProductStatus
 };

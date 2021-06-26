@@ -5,20 +5,20 @@ import { useDispatch } from 'react-redux';
 import { updateCartFromLocalStorageAction } from '../../redux/reducers/cart';
 
 const MainLayout: FC = ({ children }) => {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(updateCartFromLocalStorageAction());
-	}, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(updateCartFromLocalStorageAction());
+  }, []);
 
-	return (
-		<>
-			<Header />
+  return (
+    <>
+      <Header />
 
-			{children}
+      {children}
 
-			<Footer />
-		</>
-	);
+      <Footer />
+    </>
+  );
 };
 
 export default MainLayout;

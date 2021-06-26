@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import {
-	fetchProductsByCategorySlugAction,
-	getProductsByCategorySlug,
+  fetchProductsByCategorySlugAction,
+  getProductsByCategorySlug
 } from '../redux/reducers/product';
 import {
-	getCategoriesAction,
-	getCategoryBySlug,
+  getCategoriesAction,
+  getCategoryBySlug
 } from '../redux/reducers/category';
 import { initialStore } from '../redux/store';
 import { productsByCategoryPage } from '../configs/breadcrumb';
@@ -19,56 +19,56 @@ import ProductList from '../features/ProductList';
 import { getProductUnitsAction } from '../redux/reducers/productUnit';
 
 const CategoryPage = () => {
-	const { t } = useTranslation();
-	const router = useRouter();
-	const { category } = router.query;
+  const { t } = useTranslation();
+  const router = useRouter();
+  const { category } = router.query;
 
-	const products = useSelector(getProductsByCategorySlug(category as string));
-	const categoryInfo = useSelector(getCategoryBySlug(category as string));
+  const products = useSelector(getProductsByCategorySlug(category as string));
+  const categoryInfo = useSelector(getCategoryBySlug(category as string));
 
-	return (
-		<MainLayout>
-			<PageContent
-				breadcrumb={productsByCategoryPage(categoryInfo)}
-				title={t(categoryInfo?.name || 'Products')}
-			>
-				<ProductList
-					title={t(categoryInfo?.name || 'Products')}
-					products={products}
-				/>
-			</PageContent>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <PageContent
+        breadcrumb={productsByCategoryPage(categoryInfo)}
+        title={t(categoryInfo?.name || 'Products')}
+      >
+        <ProductList
+          title={t(categoryInfo?.name || 'Products')}
+          products={products}
+        />
+      </PageContent>
+    </MainLayout>
+  );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const { category } = context.query;
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { category } = context.query;
 
-	const reduxStore = initialStore();
-	const { dispatch } = reduxStore;
+  const reduxStore = initialStore();
+  const { dispatch } = reduxStore;
 
-	const query = context.query;
-	try {
-		await dispatch(
-			fetchProductsByCategorySlugAction(category as string, query)
-		);
-		await dispatch(getCategoriesAction(query));
-		await dispatch(
-			getProductUnitsAction({ slug: category as string, ...query })
-		);
+  const query = context.query;
+  try {
+    await dispatch(
+      fetchProductsByCategorySlugAction(category as string, query)
+    );
+    await dispatch(getCategoriesAction(query));
+    await dispatch(
+      getProductUnitsAction({ slug: category as string, ...query })
+    );
 
-		return {
-			props: {
-				initialReduxState: reduxStore.getState(),
-				title: getCategoryBySlug(category as string)(reduxStore.getState())
-					?.name,
-			},
-		};
-	} catch (err) {
-		return {
-			notFound: true,
-		};
-	}
+    return {
+      props: {
+        initialReduxState: reduxStore.getState(),
+        title: getCategoryBySlug(category as string)(reduxStore.getState())
+          ?.name
+      }
+    };
+  } catch (err) {
+    return {
+      notFound: true
+    };
+  }
 };
 
 export default CategoryPage;

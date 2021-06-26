@@ -4,79 +4,79 @@ import { OrderStatus, PaymentStatus } from '../interfaces/enums';
 import OrderModel from '../models/order';
 import { removeInvalidFields } from '../utils';
 import {
-	COMMON_MESSAGE,
-	HttpError,
-	HttpStatusCode,
+  COMMON_MESSAGE,
+  HttpError,
+  HttpStatusCode
 } from '../helpers/commonResponse';
 import { orderPopulate } from '../helpers/populate';
 
 const create = async (order: IOrderCreate): Promise<IOrder> => {
-	const orderLint = removeInvalidFields({
-		userId: order.userId,
-		deliveryFullName: order.deliveryFullName,
-		deliveryAddress: order.deliveryAddress,
-		deliveryPhone: order.deliveryPhone,
-		deliveryEmail: order.deliveryEmail,
-		deliveryDate: order.deliveryDate,
-		paymentMethodId: order.paymentMethodId,
-		paymentStatus: PaymentStatus.UNPAID,
-		itemsId: order.itemsId,
-	});
+  const orderLint = removeInvalidFields({
+    userId: order.userId,
+    deliveryFullName: order.deliveryFullName,
+    deliveryAddress: order.deliveryAddress,
+    deliveryPhone: order.deliveryPhone,
+    deliveryEmail: order.deliveryEmail,
+    deliveryDate: order.deliveryDate,
+    paymentMethodId: order.paymentMethodId,
+    paymentStatus: PaymentStatus.UNPAID,
+    itemsId: order.itemsId
+  });
 
-	const orderCreated = await OrderModel.create(orderLint);
+  const orderCreated = await OrderModel.create(orderLint);
 
-	return OrderModel.populate(orderCreated, orderPopulate);
+  return OrderModel.populate(orderCreated, orderPopulate);
 };
 
 const get = async (filter: any = {}): Promise<IOrder[]> => {
-	const orderFilter: any = removeInvalidFields(filter);
-	return OrderModel.find(orderFilter)
-		.populate(orderPopulate)
-		.sort({ orderDate: -1 });
+  const orderFilter: any = removeInvalidFields(filter);
+  return OrderModel.find(orderFilter)
+    .populate(orderPopulate)
+    .sort({ orderDate: -1 });
 };
 
 const updateStatus = async (
-	id: string,
-	status: OrderStatus
+  id: string,
+  status: OrderStatus
 ): Promise<IOrder> => {
-	let now;
-	if (status === OrderStatus.DELIVERED) {
-		now = new Date().getTime();
-	}
+  let now;
+  if (status === OrderStatus.DELIVERED) {
+    now = new Date().getTime();
+  }
 
-	const orderUpdated = await OrderModel.findByIdAndUpdate(
-		id,
-		{ $set: removeInvalidFields({ orderStatus: status, deliveryDate: now }) },
-		{ new: true }
-	).populate(orderPopulate);
+  const orderUpdated = await OrderModel.findByIdAndUpdate(
+    id,
+    { $set: removeInvalidFields({ orderStatus: status, deliveryDate: now }) },
+    { new: true }
+  ).populate(orderPopulate);
 
-	if (!orderUpdated) {
-		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
-	}
+  if (!orderUpdated) {
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+  }
 
-	return orderUpdated;
+  return orderUpdated;
 };
 
 const updatePaymentStatus = async (
-	id: string,
-	paymentStatus: PaymentStatus
+  id: string,
+  paymentStatus: PaymentStatus
 ): Promise<IOrder> => {
-	const orderUpdated = await OrderModel.findByIdAndUpdate(
-		id,
-		{ $set: { paymentStatus: paymentStatus } },
-		{ new: true }
-	).populate(orderPopulate);
+  const orderUpdated = await OrderModel.findByIdAndUpdate(
+    id,
+    { $set: { paymentStatus: paymentStatus } },
+    { new: true }
+  ).populate(orderPopulate);
 
-	if (!orderUpdated) {
-		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
-	}
+  if (!orderUpdated) {
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+  }
 
-	return orderUpdated;
+  return orderUpdated;
 };
 
 export default {
-	create,
-	get,
-	updateStatus,
-	updatePaymentStatus,
+  create,
+  get,
+  updateStatus,
+  updatePaymentStatus
 };

@@ -15,35 +15,35 @@ import MainLayout from '../../layouts/MainLayout';
 import PageContent from '../../components/PageContent';
 
 const OrderSuccessPage = () => {
-	const { t } = useTranslation();
-	const token = useSelector(getToken());
-	const router = useRouter();
-	const { status } = router.query;
+  const { t } = useTranslation();
+  const token = useSelector(getToken());
+  const router = useRouter();
+  const { status } = router.query;
 
-	return (
-		<MainLayout>
-			<PageContent breadcrumb={orderNotificationPage()} title={t('Order')}>
-				<Alert
-					variant={
-						isVariant(status as string) ? (status as Variant) : undefined
-					}
-				>
-					Đặt hàng thành công{' '}
-					{token ? (
-						<Link href={PATH_NAME.MY_ORDER}>{t('My orders')}</Link>
-					) : (
-						<Link href={PATH_NAME.HOME}>{t('Home')}</Link>
-					)}
-				</Alert>
-			</PageContent>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <PageContent breadcrumb={orderNotificationPage()} title={t('Order')}>
+        <Alert
+          variant={
+            isVariant(status as string) ? (status as Variant) : undefined
+          }
+        >
+          Đặt hàng thành công{' '}
+          {token ? (
+            <Link href={PATH_NAME.MY_ORDER}>{t('My orders')}</Link>
+          ) : (
+            <Link href={PATH_NAME.HOME}>{t('Home')}</Link>
+          )}
+        </Alert>
+      </PageContent>
+    </MainLayout>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	return {
-		props: { title: i18n.t('Đặt hàng thành công') },
-	};
+  return {
+    props: { title: i18n.t('Đặt hàng thành công') }
+  };
 };
 
 export default OrderSuccessPage;

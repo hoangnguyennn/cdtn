@@ -6,25 +6,25 @@ import { PATH_NAME } from '../configs';
 import { getToken, loginByTokenAction } from '../redux/reducers/auth';
 
 const Auth: FC = ({ children }) => {
-	const dispatch = useDispatch();
-	const token = useSelector(getToken());
-	const history = useHistory();
+  const dispatch = useDispatch();
+  const token = useSelector(getToken());
+  const history = useHistory();
 
-	useEffect(() => {
-		const login = async () => {
-			if (!token) {
-				try {
-					await dispatch(loginByTokenAction());
-				} catch {
-					history.push(PATH_NAME.LOGIN);
-				}
-			}
-		};
+  useEffect(() => {
+    const login = async () => {
+      if (!token) {
+        try {
+          await dispatch(loginByTokenAction());
+        } catch {
+          history.push(PATH_NAME.LOGIN);
+        }
+      }
+    };
 
-		login();
-	}, [dispatch, history, token]);
+    login();
+  }, [dispatch, history, token]);
 
-	return <>{children}</>;
+  return <>{children}</>;
 };
 
 export default Auth;

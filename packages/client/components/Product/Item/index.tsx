@@ -9,59 +9,59 @@ import { toCurrency } from '../../../utils/formatter';
 import ProductItemStyled from './ProductItem';
 
 type ProductItemProps = IProductWithLink & {
-	addToCart: () => any;
+  addToCart: () => any;
 };
 
 const Wrap: FC<{ link?: string }> = ({ children, link }) => {
-	if (link) {
-		return (
-			<Link href={link}>
-				<ProductItemStyled href={link}>{children}</ProductItemStyled>
-			</Link>
-		);
-	}
+  if (link) {
+    return (
+      <Link href={link}>
+        <ProductItemStyled href={link}>{children}</ProductItemStyled>
+      </Link>
+    );
+  }
 
-	return <ProductItemStyled as="div">{children}</ProductItemStyled>;
+  return <ProductItemStyled as="div">{children}</ProductItemStyled>;
 };
 
 const ProductItem: FC<ProductItemProps> = ({
-	link,
-	name,
-	price,
-	images,
-	unit,
-	addToCart,
+  link,
+  name,
+  price,
+  images,
+  unit,
+  addToCart
 }) => {
-	const isDesktop = useMatchMedia('(min-width: 992px)');
-	const { t } = useTranslation();
+  const isDesktop = useMatchMedia('(min-width: 992px)');
+  const { t } = useTranslation();
 
-	const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
-		event.preventDefault();
+  const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
 
-		addToCart();
-	};
+    addToCart();
+  };
 
-	return (
-		<Wrap link={link}>
-			<div className="wrap">
-				<div className="thumbnail">
-					<img src={images[0]} alt={name} loading="lazy" />
-				</div>
-				<div className="info">
-					<p className="name">{name}</p>
-					<p className="price">
-						{toCurrency(price)}
-						<span className="unit"> / {unit}</span>
-					</p>
-				</div>
-			</div>
-			{isDesktop && (
-				<div className="add-to-cart">
-					<button onClick={handleAddToCartClick}>{t('Add to cart')}</button>
-				</div>
-			)}
-		</Wrap>
-	);
+  return (
+    <Wrap link={link}>
+      <div className="wrap">
+        <div className="thumbnail">
+          <img src={images[0]} alt={name} loading="lazy" />
+        </div>
+        <div className="info">
+          <p className="name">{name}</p>
+          <p className="price">
+            {toCurrency(price)}
+            <span className="unit"> / {unit}</span>
+          </p>
+        </div>
+      </div>
+      {isDesktop && (
+        <div className="add-to-cart">
+          <button onClick={handleAddToCartClick}>{t('Add to cart')}</button>
+        </div>
+      )}
+    </Wrap>
+  );
 };
 
 export default ProductItem;

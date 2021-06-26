@@ -8,17 +8,17 @@ import CategoryController from '../controllers/category';
 const router = Router();
 
 router
-	.route('/')
-	.get(catcherWrapper(CategoryController.get))
-	.post(
-		AuthMiddleware.checkAuth,
-		AuthMiddleware.checkRole([UserType.MANAGER]),
-		catcherWrapper(CategoryController.create)
-	);
+  .route('/')
+  .get(catcherWrapper(CategoryController.get))
+  .post(
+    AuthMiddleware.checkAuth,
+    AuthMiddleware.checkRole([UserType.MANAGER]),
+    catcherWrapper(CategoryController.create)
+  );
 
 router.get(
-	'/slug/:slug/products',
-	catcherWrapper(CategoryController.getProductsByCategorySlug)
+  '/slug/:slug/products',
+  catcherWrapper(CategoryController.getProductsByCategorySlug)
 );
 
 export default router;

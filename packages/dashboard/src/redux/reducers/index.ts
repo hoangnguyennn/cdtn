@@ -10,11 +10,11 @@ import productUnitReducer from './productUnit';
 import statisticsReducer from './statistics';
 
 export default combineReducers<IRootState>({
-	app: appReducer,
-	auth: authReducer,
-	category: categoryReducer,
-	order: orderReducer,
-	product: productReducer,
-	productUnit: productUnitReducer,
-	statistics: statisticsReducer,
+  app: appReducer,
+  auth: authReducer,
+  category: categoryReducer,
+  order: orderReducer,
+  product: productReducer,
+  productUnit: productUnitReducer,
+  statistics: statisticsReducer
 });

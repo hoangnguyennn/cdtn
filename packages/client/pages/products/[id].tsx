@@ -9,42 +9,42 @@ import PageContent from '../../components/PageContent';
 import ProductSummary from '../../features/ProductSummary';
 
 const ProductDetailPage = () => {
-	const product = useSelector(getProduct());
+  const product = useSelector(getProduct());
 
-	return (
-		<MainLayout>
-			<PageContent
-				breadcrumb={productPage(product.name, product.id as string)}
-				title={product.name}
-			>
-				<ProductSummary product={product} />
-			</PageContent>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <PageContent
+        breadcrumb={productPage(product.name, product.id as string)}
+        title={product.name}
+      >
+        <ProductSummary product={product} />
+      </PageContent>
+    </MainLayout>
+  );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const { id } = context.query;
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { id } = context.query;
 
-	const reduxStore = initialStore();
-	const { dispatch } = reduxStore;
+  const reduxStore = initialStore();
+  const { dispatch } = reduxStore;
 
-	try {
-		await dispatch(getProductByIdAction(id as string));
+  try {
+    await dispatch(getProductByIdAction(id as string));
 
-		return {
-			props: {
-				initialReduxState: reduxStore.getState(),
-				title: getProduct()(reduxStore.getState())?.name,
-			},
-		};
-	} catch (err) {
-		console.log(err);
+    return {
+      props: {
+        initialReduxState: reduxStore.getState(),
+        title: getProduct()(reduxStore.getState())?.name
+      }
+    };
+  } catch (err) {
+    console.log(err);
 
-		return {
-			notFound: true,
-		};
-	}
+    return {
+      notFound: true
+    };
+  }
 };
 
 export default ProductDetailPage;

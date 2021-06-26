@@ -1,7 +1,7 @@
 import {
-	COMMON_MESSAGE,
-	HttpError,
-	HttpStatusCode,
+  COMMON_MESSAGE,
+  HttpError,
+  HttpStatusCode
 } from '../helpers/commonResponse';
 import { IProductUnit } from '../interfaces/IDocuments';
 import { IProductUnitCreate, IProductUnitUpdate } from '../interfaces';
@@ -9,52 +9,52 @@ import ProductUnitModel from '../models/productUnit';
 import { removeInvalidFields } from '../utils';
 
 const create = async (
-	productUnit: IProductUnitCreate
+  productUnit: IProductUnitCreate
 ): Promise<IProductUnit> => {
-	const productUnitLint = removeInvalidFields({
-		name: productUnit.name,
-	});
-	return ProductUnitModel.create(productUnitLint);
+  const productUnitLint = removeInvalidFields({
+    name: productUnit.name
+  });
+  return ProductUnitModel.create(productUnitLint);
 };
 
 const get = async (): Promise<IProductUnit[]> => {
-	return ProductUnitModel.find();
+  return ProductUnitModel.find();
 };
 
 const getById = async (id: string): Promise<IProductUnit> => {
-	const productUnit = await ProductUnitModel.findOne({ _id: id });
+  const productUnit = await ProductUnitModel.findOne({ _id: id });
 
-	if (!productUnit) {
-		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
-	}
+  if (!productUnit) {
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+  }
 
-	return productUnit;
+  return productUnit;
 };
 
 const update = async (
-	id: string,
-	productUnit: IProductUnitUpdate
+  id: string,
+  productUnit: IProductUnitUpdate
 ): Promise<IProductUnit> => {
-	const productUnitLint = removeInvalidFields({
-		name: productUnit.name,
-	});
+  const productUnitLint = removeInvalidFields({
+    name: productUnit.name
+  });
 
-	const productUnitUpdated = await ProductUnitModel.findByIdAndUpdate(
-		id,
-		{ $set: productUnitLint },
-		{ new: true }
-	);
+  const productUnitUpdated = await ProductUnitModel.findByIdAndUpdate(
+    id,
+    { $set: productUnitLint },
+    { new: true }
+  );
 
-	if (!productUnitUpdated) {
-		throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
-	}
+  if (!productUnitUpdated) {
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+  }
 
-	return productUnitUpdated;
+  return productUnitUpdated;
 };
 
 export default {
-	create,
-	get,
-	getById,
-	update,
+  create,
+  get,
+  getById,
+  update
 };

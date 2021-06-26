@@ -1,48 +1,48 @@
 import { IProduct, IUser, IProductUnit, IOrder, ICategory } from '.';
 
 export interface IAppState {
-	isLoading: boolean;
+  isLoading: boolean;
 }
 
 export interface IAuthState {
-	token: string;
-	user: IUser;
+  token: string;
+  user: IUser;
 }
 
 export interface ICategoryState {
-	categories: ICategory[];
+  categories: ICategory[];
 }
 
 export interface IOrderState {
-	orders: IOrder[];
-	ordersUnProcessed: IOrder[];
+  orders: IOrder[];
+  ordersUnProcessed: IOrder[];
 }
 
 export interface IProductState {
-	products: {
-		[page: string]: IProduct[];
-	};
-	pages: number[];
-	total: number;
+  products: {
+    [page: string]: IProduct[];
+  };
+  pages: number[];
+  total: number;
 }
 
 export interface IProductUnitState {
-	productUnits: IProductUnit[];
+  productUnits: IProductUnit[];
 }
 
 export interface IStatisticsState {
-	revenueOfTheDay: number;
-	revenueOfPreviousDay: number;
-	numberOfOrders: number;
-	numberOfOrdersOfPreviousDay: number;
+  revenueOfTheDay: number;
+  revenueOfPreviousDay: number;
+  numberOfOrders: number;
+  numberOfOrdersOfPreviousDay: number;
 }
 
 export interface IRootState {
-	app: IAppState;
-	auth: IAuthState;
-	category: ICategoryState;
-	order: IOrderState;
-	product: IProductState;
-	productUnit: IProductUnitState;
-	statistics: IStatisticsState;
+  app: IAppState;
+  auth: IAuthState;
+  category: ICategoryState;
+  order: IOrderState;
+  product: IProductState;
+  productUnit: IProductUnitState;
+  statistics: IStatisticsState;
 }

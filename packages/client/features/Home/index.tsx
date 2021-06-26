@@ -7,21 +7,21 @@ import HomeStyled from './Home';
 import ProductList from '../../components/Product/List';
 
 const Home = () => {
-	const { t } = useTranslation();
-	const trendingProducts = useSelector(getTrendingProducts());
+  const { t } = useTranslation();
+  const trendingProducts = useSelector(getTrendingProducts());
 
-	return (
-		<HomeStyled>
-			<Container>
-				<ProductList
-					columns={1}
-					lg-columns={4}
-					title={t('New products')}
-					items={trendingProducts}
-				/>
-			</Container>
-		</HomeStyled>
-	);
+  return (
+    <HomeStyled>
+      <Container>
+        <ProductList
+          columns={1}
+          lg-columns={4}
+          title={t('New products')}
+          items={trendingProducts}
+        />
+      </Container>
+    </HomeStyled>
+  );
 };
 
 export default Home;
