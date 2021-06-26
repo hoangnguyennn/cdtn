@@ -5,12 +5,14 @@ type AlertProps = {
   variant?: Variant;
 };
 
+const renderColor = (props) => `var(--${props.variant})`;
+
 const Alert = styled.div<AlertProps>`
   padding: 0.625rem 1.373rem;
   width: 100%;
-  color: var(-- ${props => props.variant});
+  color: ${renderColor};
   font-size: 1rem;
-  border: 0.0625rem solid var(-- ${props => props.variant});
+  border: 0.0625rem solid ${renderColor};
   border-radius: 0.5rem;
 
   > * {
