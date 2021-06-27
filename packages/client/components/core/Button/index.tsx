@@ -28,8 +28,9 @@ const Button = styled.button<ButtonProps>`
   border-radius: 0.375rem;
   box-shadow: ${renderShadow};
   cursor: pointer;
-  transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-    border 1ms;
+  transition-property: color, background-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
 
   &:hover {
     background-color: ${renderHoverColor};

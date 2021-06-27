@@ -8,8 +8,9 @@ export default styled.div`
     border-collapse: collapse;
 
     tr {
-      transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-        border 1ms;
+      transition-property: background-color;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
 
       &:hover {
         background-color: var(--order-hover);

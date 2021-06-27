@@ -14,8 +14,9 @@ export default styled.div`
       margin-bottom: 0.375rem;
       color: var(--gray);
       font-size: 0.875rem;
-      transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-        border 1ms;
+      transition-property: color;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
 
       a {
         color: inherit;

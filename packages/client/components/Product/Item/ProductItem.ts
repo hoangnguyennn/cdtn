@@ -27,8 +27,9 @@ export default styled.a`
       color: var(--main-text-color);
       font-size: 0.875rem;
       font-weight: 500;
-      transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-        border 1ms;
+      transition-property: color;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
 
       &:hover {
         color: var(--primary);
@@ -49,8 +50,9 @@ export default styled.a`
     padding: 1.25rem;
     border-bottom-color: transparent;
     border-radius: 0.5rem;
-    transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-      border 1ms;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-timing-function: linear;
 
     .add-to-cart {
       position: absolute;
@@ -62,8 +64,9 @@ export default styled.a`
       background-color: var(--white);
       visibility: hidden;
       opacity: 0;
-      transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-        border 1ms;
+      transition-property: color;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
 
       button {
         padding: 0.75rem 1.25rem;
@@ -78,8 +81,9 @@ export default styled.a`
         outline: none;
         cursor: pointer;
         z-index: 1;
-        transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-          border 1ms;
+        transition-property: color, background-color;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
 
         &:hover {
           background-color: var(--primary-hover);

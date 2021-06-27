@@ -22,8 +22,9 @@ export default styled.footer`
     .copyright {
       color: var(--white);
       text-decoration: none;
-      transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
-        border 1ms;
+      transition-property: color;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
 
       &:hover {
         color: var(--gray);
