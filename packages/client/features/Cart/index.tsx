@@ -130,7 +130,11 @@ const Cart = () => {
             cartItems.map(item => (
               <FormGroup className="cart-item" key={item.id}>
                 <div className="thumbnail">
-                  <img src={item.images[0] || ''} alt="" loading="lazy" />
+                  <img
+                    src={item.images[0] || ''}
+                    alt={item.name}
+                    loading="lazy"
+                  />
                 </div>
                 <div className="info">
                   <Link href={`${PATH_NAME.PRODUCTS}/${item.id}`}>

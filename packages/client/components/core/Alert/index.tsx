@@ -5,7 +5,7 @@ type AlertProps = {
   variant?: Variant;
 };
 
-const renderColor = (props) => `var(--${props.variant})`;
+const renderColor = props => `var(--${props.variant})`;
 
 const Alert = styled.div<AlertProps>`
   padding: 0.625rem 1.373rem;

@@ -10,7 +10,7 @@ const NotFound = () => {
     <Root>
       <Container>
         <div className="content">
-          <img src={sadIcon} alt="" loading="lazy" />
+          <img src={sadIcon} alt="Not found" loading="lazy" />
           <h2>404</h2>
           <p>
             Xin lỗi, trang bạn tìm kiếm không tồn tại!

@@ -10,9 +10,21 @@ export default styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
 
-      img {
+      img:nth-child(1) {
         width: 100%;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
       }
     }
 
@@ -78,8 +90,24 @@ export default styled.div`
       .thumbnail {
         flex: 1;
         margin-left: 10%;
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        cursor: zoom-in;
+
+        img:nth-child(2) {
+          position: absolute;
+          width: 300%;
+          opacity: 0;
+          z-index: -1;
+        }
+
+        &:hover {
+          img:nth-child(2) {
+            opacity: 1;
+            z-index: 0;
+          }
+        }
       }
 
       .info {

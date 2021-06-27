@@ -8,7 +8,8 @@ type ButtonProps = {
 };
 
 const renderColor = (props: ButtonProps) => `var(--${props.variant})`;
-const renderHoverColor = (props: ButtonProps) => `var(--${props.variant}-hover)`;
+const renderHoverColor = (props: ButtonProps) =>
+  `var(--${props.variant}-hover)`;
 
 const renderShadow = (props: ButtonProps) => {
   if (props.shadow) {
