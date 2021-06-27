@@ -38,7 +38,7 @@ const get = async (req: Request, res: Response) => {
   const { userType } = res.locals;
   const filter = mapQueryToMongoFilter(req.query);
   const page = Number(req.query.page) || 1;
-  const pageSize = Number(req.query.pageSize) || 10;
+  const pageSize = Number(req.query.pageSize) || 999;
 
   if (userType !== UserType.MANAGER) {
     filter.status = ProductStatus.SELLING;
