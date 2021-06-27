@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +28,7 @@ import {
 import { getUserInfo } from '../../redux/reducers/auth';
 import { ICartForm, IOrder } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
+import { imageUrlToSpecificSize } from '../../utils/converter';
 
 const Cart = () => {
   const { t } = useTranslation();
@@ -38,6 +39,8 @@ const Cart = () => {
   const paymentMethods = useSelector(getPaymentMethods());
   const userInfo = useSelector(getUserInfo());
   const router = useRouter();
+  const thumbnailRef = useRef<HTMLDivElement | null>(null);
+  const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
 
   const dispatch = useDispatch();
 
@@ -113,6 +116,16 @@ const Cart = () => {
     }
   }, [paymentMethods]);
 
+  useEffect(() => {
+    const thumbnail = thumbnailRef.current;
+    if (thumbnail) {
+      setImgSize({
+        width: thumbnail.offsetWidth,
+        height: thumbnail.offsetWidth
+      });
+    }
+  }, [thumbnailRef.current]);
+
   return (
     <CartStyled>
       <div className="cart-sidebar">
@@ -122,9 +135,13 @@ const Cart = () => {
           {cartItems.length ? (
             cartItems.map(item => (
               <FormGroup className="cart-item" key={item.id}>
-                <div className="thumbnail">
+                <div className="thumbnail" ref={thumbnailRef}>
                   <img
-                    src={item.images[0] || ''}
+                    src={imageUrlToSpecificSize(
+                      item.images[0] || '',
+                      imgSize.width,
+                      imgSize.height
+                    )}
                     alt={item.name}
                     loading="lazy"
                   />

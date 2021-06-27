@@ -13,7 +13,7 @@ export default styled.a`
     display: flex;
 
     img {
-      width: 100%;
+      max-width: 100%;
       object-fit: contain;
     }
   }
@@ -51,13 +51,6 @@ export default styled.a`
     border-radius: 0.5rem;
     transition: all 0.3s linear, font-size 1ms, padding 1ms, margin 1ms,
       border 1ms;
-
-    .thumbnail {
-      img {
-        width: 262.5px;
-        height: 262.5px;
-      }
-    }
 
     .add-to-cart {
       position: absolute;

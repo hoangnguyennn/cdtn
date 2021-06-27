@@ -14,7 +14,8 @@ export default styled.div`
     text-decoration: none;
 
     img {
-      width: 100%;
+      max-width: 100%;
+      object-fit: contain;
     }
   }
 

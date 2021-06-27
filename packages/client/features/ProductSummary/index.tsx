@@ -1,16 +1,16 @@
-import { FC, KeyboardEvent, useRef, useState } from 'react';
+import { FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { addToCartAction } from '../../redux/reducers/cart';
+import { imageUrlToSpecificSize } from '../../utils/converter';
 import { IProduct } from '../../interfaces';
 import { ProductStatus } from '../../interfaces/enums';
 import { toCurrency } from '../../utils/formatter';
 import Button from '../../components/core/Button';
 import Input from '../../components/core/Input';
 import Root from './ProductSummary';
-import { useEffect } from 'react';
 import useMatchMedia from '../../hooks/useMatchMedia';
 
 type ProductSummaryProps = {
@@ -23,6 +23,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
   const dispatch = useDispatch();
   const thumbnailRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
+  const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
   const isDesktop = useMatchMedia('(min-width: 992px)');
 
   const handleAddToCart = () => {
@@ -64,12 +65,26 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
     }
   }, [isDesktop, thumbnailRef, imageRef]);
 
+  useEffect(() => {
+    const thumbnail = thumbnailRef.current;
+    if (thumbnail) {
+      setImgSize({
+        width: thumbnail.offsetWidth,
+        height: thumbnail.offsetWidth
+      });
+    }
+  }, [thumbnailRef.current]);
+
   return (
     <Root>
       <div className="summary">
         <div className="thumbnail" ref={thumbnailRef}>
           <img
-            src={product.images[0] || ''}
+            src={imageUrlToSpecificSize(
+              product.images[0] || '',
+              imgSize.width,
+              imgSize.height
+            )}
             alt={product.name}
             loading="lazy"
           />

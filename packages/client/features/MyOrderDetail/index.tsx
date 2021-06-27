@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
 import { getOrderById, getOrdersAction } from '../../redux/reducers/order';
+import { imageUrlToSpecificSize } from '../../utils/converter';
+import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import { orderStatus } from '../../constants';
 import { PATH_NAME } from '../../configs/pathName';
-import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import Root from './MyOrderDetail';
 
 const MyOrderDetail = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
+  const thumbnailRef = useRef<HTMLDivElement | null>(null);
+  const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
 
   const { id } = router.query;
   const order = useSelector(getOrderById(id as string));
@@ -22,6 +25,16 @@ const MyOrderDetail = () => {
   useEffect(() => {
     dispatch(getOrdersAction());
   }, []);
+
+  useEffect(() => {
+    const thumbnail = thumbnailRef.current;
+    if (thumbnail) {
+      setImgSize({
+        width: thumbnail.offsetWidth,
+        height: thumbnail.offsetWidth
+      });
+    }
+  }, [thumbnailRef.current]);
 
   if (!items) {
     return null;
@@ -65,9 +78,13 @@ const MyOrderDetail = () => {
             items.map(item => (
               <tr key={item.id}>
                 <td>
-                  <div>
+                  <div ref={thumbnailRef}>
                     <img
-                      src={item.product.image}
+                      src={imageUrlToSpecificSize(
+                        item.product.image,
+                        imgSize.width,
+                        imgSize.height
+                      )}
                       alt={item.product.name}
                       loading="lazy"
                     />

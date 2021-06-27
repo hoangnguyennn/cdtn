@@ -26,7 +26,7 @@ const Header = () => {
             <User fullName={fullName} />
           ) : (
             <Link href={PATH_NAME.LOGIN}>
-              <a className="tool-item user">
+              <a className="tool-item user" aria-label="user">
                 <div className="icon">
                   <i className="czi-user"></i>
                 </div>
@@ -39,7 +39,7 @@ const Header = () => {
           )}
 
           <Link href={PATH_NAME.CART}>
-            <a className="tool-item cart ml-3">
+            <a className="tool-item cart ml-3" aria-label="cart">
               <div className="icon">
                 <i className="czi-cart"></i>
                 <div className="label">{cartLength}</div>
