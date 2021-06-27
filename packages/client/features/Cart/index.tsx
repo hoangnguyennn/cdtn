@@ -16,10 +16,7 @@ import FormGroup from '../../components/core/FormGroup';
 import Input from '../../components/core/Input';
 import Invalid from '../../components/core/Invalid';
 
-import {
-  getPaymentMethodsAction,
-  getPaymentMethods
-} from '../../redux/reducers/paymentMethod';
+import { getPaymentMethods } from '../../redux/reducers/paymentMethod';
 import {
   getCartItems,
   getCartSubtotal,
@@ -96,10 +93,6 @@ const Cart = () => {
   useEffect(() => {
     setIsValid(cartItems.length !== 0);
   }, [cartItems.length]);
-
-  useEffect(() => {
-    dispatch(getPaymentMethodsAction());
-  }, []);
 
   useEffect(() => {
     setInitialValues(prevState => ({

@@ -66,7 +66,7 @@ const loginByTokenAction = () => async (dispatch: Dispatch) => {
   const token = localStorage.getItem('access-token');
   if (!token) {
     localStorage.removeItem('access-token');
-    return dispatch(clearUserAction());
+    return;
   }
 
   return loginByToken(token)

@@ -74,7 +74,7 @@ export const getProductByIdAction = (id: string) => async (
   });
 };
 
-export const fetchProductsByCategorySlugAction = (
+export const getProductsByCategorySlugAction = (
   slug: string,
   query: any
 ) => async (dispatch: Dispatch) => {

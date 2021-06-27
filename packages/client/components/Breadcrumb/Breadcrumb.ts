@@ -19,7 +19,7 @@ export default styled.div`
       }
 
       &:last-child {
-        a {
+        span {
           color: rgba(255, 255, 255, 0.6);
         }
       }

@@ -6,6 +6,8 @@ import Cart from '../features/Cart';
 import i18n from '../locales';
 import MainLayout from '../layouts/MainLayout';
 import PageContent from '../components/PageContent';
+import { initialStore } from '../redux/store';
+import { getPaymentMethodsAction } from '../redux/reducers/paymentMethod';
 
 const CartPage = () => {
   const { t } = useTranslation();
@@ -20,8 +22,12 @@ const CartPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const reduxStore = initialStore();
+  const { dispatch } = reduxStore;
+  await dispatch(getPaymentMethodsAction());
+
   return {
-    props: { title: i18n.t('Cart') }
+    props: { title: i18n.t('Cart'), initialReduxState: reduxStore.getState() }
   };
 };
 

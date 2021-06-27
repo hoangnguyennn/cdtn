@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import {
-  fetchProductsByCategorySlugAction,
+  getProductsByCategorySlugAction,
   getProductsByCategorySlug
 } from '../redux/reducers/product';
 import {
@@ -21,10 +21,10 @@ import { getProductUnitsAction } from '../redux/reducers/productUnit';
 const CategoryPage = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { category } = router.query;
+  const category = router.query.category as string;
 
-  const products = useSelector(getProductsByCategorySlug(category as string));
-  const categoryInfo = useSelector(getCategoryBySlug(category as string));
+  const products = useSelector(getProductsByCategorySlug(category));
+  const categoryInfo = useSelector(getCategoryBySlug(category));
 
   return (
     <MainLayout>
@@ -42,26 +42,22 @@ const CategoryPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const { category } = context.query;
-
   const reduxStore = initialStore();
   const { dispatch } = reduxStore;
 
+  const category = context.query.category as string;
   const query = context.query;
   try {
-    await dispatch(
-      fetchProductsByCategorySlugAction(category as string, query)
-    );
+    await dispatch(getProductsByCategorySlugAction(category, query));
     await dispatch(getCategoriesAction(query));
-    await dispatch(
-      getProductUnitsAction({ slug: category as string, ...query })
-    );
+    await dispatch(getProductUnitsAction({ slug: category, ...query }));
+
+    const categoryInfo = getCategoryBySlug(category)(reduxStore.getState());
 
     return {
       props: {
         initialReduxState: reduxStore.getState(),
-        title: getCategoryBySlug(category as string)(reduxStore.getState())
-          ?.name
+        title: categoryInfo?.name
       }
     };
   } catch (err) {
