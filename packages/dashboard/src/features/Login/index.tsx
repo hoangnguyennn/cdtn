@@ -1,5 +1,4 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import { toast } from 'react-toastify';
+import { Form, Input, Button, Checkbox, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -21,9 +20,9 @@ const Login = () => {
   const onFinish = async (values: any) => {
     try {
       await dispatch(loginAction(values));
-      toast.success('success');
+      notification.success({ message: 'Success' });
     } catch (err) {
-      toast.error(err?.message || 'error');
+      notification.error({ message: err?.message || 'error' });
     }
   };
 

@@ -1,6 +1,6 @@
 import { ColumnsType } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
-import { Table, Tag, Space, Button } from 'antd';
+import { Table, Tag, Space, Button, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -14,7 +14,6 @@ import { IOrder, IOrderItem, IUser } from '../../interfaces';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import { PATH_NAME } from '../../configs';
 import { OrderStatus, PaymentStatus } from '../../interfaces/enum';
-import { toast } from 'react-toastify';
 
 const renderActionSwitch = (order: IOrder, updateStatus: Function) => {
   switch (order.orderStatus) {
@@ -181,18 +180,18 @@ const OrderList = () => {
   const updateStatus = async (id: string, status: OrderStatus) => {
     try {
       await dispatch(updateOrderStatusAction(id, status));
-      toast.success('success');
+      notification.success({ message: 'Success' });
     } catch (err) {
-      toast.error(err.message || 'error');
+      notification.error({ message: err?.message || 'error' });
     }
   };
 
   const payOrder = async (id: string) => {
     try {
       await dispatch(payOrderAction(id));
-      toast.success('success');
+      notification.success({ message: 'Success' });
     } catch (err) {
-      toast.error(err.message || 'error');
+      notification.error({ message: err?.message || 'error' });
     }
   };
 

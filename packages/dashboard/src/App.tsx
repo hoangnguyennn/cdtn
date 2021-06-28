@@ -1,4 +1,3 @@
-import { ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 
 import { getLoading } from './redux/reducers/app';
@@ -10,7 +9,6 @@ const App = () => {
   return (
     <>
       <Routes />
-      <ToastContainer />
       {isLoading && (
         <div className="loading">
           <div className="loading-sign"></div>

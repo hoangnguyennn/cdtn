@@ -1,15 +1,14 @@
-import { Form, Input, Button } from 'antd';
-import { toast } from 'react-toastify';
+import { Form, Input, Button, notification } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import { createCategoryAction } from '../../redux/reducers/category';
 import {
   formLayout as layout,
   formTailLayout as tailLayout,
   PATH_NAME
 } from '../../configs';
 import { ICategoryCreate } from '../../interfaces';
-import { createCategoryAction } from '../../redux/reducers/category';
 
 const CategoryAdd = () => {
   const dispatch = useDispatch();
@@ -24,9 +23,9 @@ const CategoryAdd = () => {
     try {
       await dispatch(createCategoryAction(categoryCreate));
       history.push(PATH_NAME.CATEGORY_LIST);
-      toast.success('success');
+      notification.success({ message: 'Success' });
     } catch (err) {
-      toast.error(err?.message || 'error');
+      notification.error({ message: err?.message || 'error' });
     }
   };
 

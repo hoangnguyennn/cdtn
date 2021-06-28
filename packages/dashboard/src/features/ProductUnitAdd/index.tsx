@@ -1,5 +1,4 @@
-import { Form, Input, Button } from 'antd';
-import { toast } from 'react-toastify';
+import { Form, Input, Button, notification } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -18,9 +17,9 @@ const ProductUnitAdd = () => {
     try {
       await dispatch(createProductUnitAction(values));
       history.push(PATH_NAME.PRODUCT_UNIT_LIST);
-      toast.success('success');
+      notification.success({ message: 'Success' });
     } catch (err) {
-      toast.error(err?.message || 'error');
+      notification.error({ message: err?.message || 'error' });
     }
   };
 

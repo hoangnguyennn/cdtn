@@ -1,7 +1,6 @@
-import { Button, Table, Image, Tag, Space } from 'antd';
+import { Button, Table, Image, Tag, Space, notification } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -109,9 +108,9 @@ const ProductList = () => {
   const updateProductStatus = async (id: string, newStatus: ProductStatus) => {
     try {
       await dispatch(updateProductStatusAction(id, newStatus));
-      toast.success('success');
+      notification.success({ message: 'Success' });
     } catch (err) {
-      toast.error(err?.message || 'error');
+      notification.error({ message: err?.message || 'error' });
     }
   };
 

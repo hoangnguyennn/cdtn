@@ -1,5 +1,12 @@
-import { Form, Input, InputNumber, Button, Select, Switch } from 'antd';
-import { toast } from 'react-toastify';
+import {
+  Form,
+  Input,
+  InputNumber,
+  Button,
+  Select,
+  Switch,
+  notification
+} from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -50,7 +57,7 @@ const ProductEdit = () => {
 
   const onFinish = async (values: any) => {
     if (!isUploaded) {
-      toast.error('Wait for upload images to complete');
+      notification.error({ message: 'Wait for upload images to complete' });
       return;
     }
 
@@ -79,9 +86,9 @@ const ProductEdit = () => {
     try {
       await dispatch(updateProductAction(id, productUpdate));
       history.push(PATH_NAME.PRODUCT_LIST);
-      toast.success('success');
+      notification.success({ message: 'Success' });
     } catch (err) {
-      toast.error(err?.message || 'error');
+      notification.error({ message: err?.message || 'error' });
     }
   };
 
