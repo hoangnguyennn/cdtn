@@ -17,6 +17,7 @@ export default styled.footer`
     .copyright-text {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .copyright {
@@ -25,6 +26,8 @@ export default styled.footer`
       transition-property: color;
       transition-duration: 0.3s;
       transition-timing-function: linear;
+      display: flex;
+      flex-wrap: wrap;
 
       &:hover {
         color: var(--gray);

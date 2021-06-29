@@ -148,6 +148,7 @@ export default styled.div`
       display: flex;
       align-items: center;
       border: 0.0625rem solid var(--gray);
+      border-radius: 0.375rem;
       cursor: pointer;
       transition: none;
 
