@@ -4,6 +4,8 @@ import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
   .cart-sidebar {
+    margin-bottom: 3rem;
+
     .cart-detail {
       .cart-item {
         padding-bottom: 0.5rem;
@@ -119,6 +121,8 @@ export default styled.div`
 
     .cart-summary {
       margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 0.0625rem solid #dae1e7;
 
       ${FormGroup} {
         display: flex;
@@ -199,6 +203,7 @@ export default styled.div`
       padding: 1rem;
       margin-bottom: 0;
       border: 0.0625rem solid #dae1e7;
+      border-radius: 0.5rem;
     }
   }
 `;

@@ -56,7 +56,7 @@ const ProductList: FC<ProductListProps> = ({
       {viewMore ? (
         <div className="view-more">
           <Link href={PATH_NAME.PRODUCTS}>
-            <Button as="a" href={PATH_NAME.PRODUCTS} shadow>
+            <Button as="a" href={PATH_NAME.PRODUCTS} shadow outline>
               {t('More products')}
             </Button>
           </Link>

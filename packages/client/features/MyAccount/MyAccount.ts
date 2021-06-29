@@ -18,6 +18,7 @@ export default styled.div`
       padding: 1rem;
       margin-bottom: 0;
       border: 0.0625rem solid #dae1e7;
+      border-radius: 0.5rem;
     }
 
     .user-info {

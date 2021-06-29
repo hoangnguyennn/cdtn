@@ -5,11 +5,29 @@ type ButtonProps = {
   variant?: Variant;
   shadow?: boolean;
   inline?: boolean;
+  outline?: boolean;
 };
 
-const renderColor = (props: ButtonProps) => `var(--${props.variant})`;
-const renderHoverColor = (props: ButtonProps) =>
-  `var(--${props.variant}-hover)`;
+const renderColor = (props: ButtonProps) => {
+  if (props.outline) {
+    return `var(--${props.variant})`;
+  }
+
+  return 'var(--white)';
+};
+
+const renderColorHover = () => 'var(--white)';
+
+const renderBgColor = (props: ButtonProps) => {
+  if (props.outline) {
+    return 'var(--white)';
+  }
+
+  return `var(--${props.variant})`;
+};
+
+const renderBgColorHover = (props: ButtonProps) => `var(--${props.variant})`;
+const renderBorderColor = (props: ButtonProps) => `var(--${props.variant})`;
 
 const renderShadow = (props: ButtonProps) => {
   if (props.shadow) {
@@ -20,11 +38,11 @@ const renderShadow = (props: ButtonProps) => {
 const Button = styled.button<ButtonProps>`
   padding: 0.625rem 1.373rem;
   width: ${props => (props.inline ? '' : '100%')};
-  background-color: ${renderColor};
-  color: var(--white);
+  background-color: ${renderBgColor};
+  color: ${renderColor};
   font-size: 1rem;
   text-align: center;
-  border: 0.0625rem solid ${renderColor};
+  border: 0.0625rem solid ${renderBorderColor};
   border-radius: 0.375rem;
   box-shadow: ${renderShadow};
   cursor: pointer;
@@ -33,8 +51,9 @@ const Button = styled.button<ButtonProps>`
   transition-timing-function: linear;
 
   &:hover {
-    background-color: ${renderHoverColor};
-    border-color: ${renderHoverColor};
+    background-color: ${renderBgColorHover};
+    color: ${renderColorHover};
+    border-color: ${renderBorderColor};
     box-shadow: unset;
   }
 
@@ -49,7 +68,8 @@ const Button = styled.button<ButtonProps>`
 Button.defaultProps = {
   variant: 'primary',
   shadow: false,
-  inline: false
+  inline: false,
+  outline: false
 };
 
 export default Button;
