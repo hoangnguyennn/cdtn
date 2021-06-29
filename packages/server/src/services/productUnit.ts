@@ -1,12 +1,8 @@
-import {
-  COMMON_MESSAGE,
-  HttpError,
-  HttpStatusCode
-} from '../helpers/commonResponse';
+import { COMMON_MESSAGE, HttpError } from '../helpers/commonResponse';
 import { IProductUnit } from '../interfaces/IDocuments';
 import { IProductUnitCreate, IProductUnitUpdate } from '../interfaces';
-import ProductUnitModel from '../models/productUnit';
 import { removeInvalidFields } from '../utils';
+import ProductUnitModel from '../models/productUnit';
 
 const create = async (
   productUnit: IProductUnitCreate
@@ -25,7 +21,7 @@ const getById = async (id: string): Promise<IProductUnit> => {
   const productUnit = await ProductUnitModel.findOne({ _id: id });
 
   if (!productUnit) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return productUnit;
@@ -46,7 +42,7 @@ const update = async (
   );
 
   if (!productUnitUpdated) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return productUnitUpdated;

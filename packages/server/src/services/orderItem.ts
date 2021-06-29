@@ -1,7 +1,7 @@
-import { IOrderItemCreate } from '../interfaces';
 import { IOrderItem } from '../interfaces/IDocuments';
-import OrderItemModel from '../models/orderItem';
+import { IOrderItemCreate } from '../interfaces';
 import { removeInvalidFields } from '../utils';
+import OrderItemModel from '../models/orderItem';
 
 const createMany = async (
   orderItems: IOrderItemCreate[]

@@ -2,14 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 const isDev = process.env.NODE !== 'production';
 
-export enum HttpStatusCode {
-  HTTP_200 = 200,
-  HTTP_400 = 400,
-  HTTP_401 = 401,
-  HTTP_403 = 403,
-  HTTP_404 = 404,
-  HTTP_500 = 500
-}
+type HttpStatusCode = 200 | 400 | 401 | 403 | 404 | 500;
 
 export enum COMMON_MESSAGE {
   BAD_REQUEST = 'bad request',
@@ -33,14 +26,14 @@ export class HttpError extends Error {
 }
 
 export const success = (res: Response, data: any = {}) => {
-  return res.status(HttpStatusCode.HTTP_200).json(data);
+  return res.status(200).json(data);
 };
 
 export const badRequest = (
   next: NextFunction,
   message: string = COMMON_MESSAGE.BAD_REQUEST
 ) => {
-  const error = new HttpError(message, HttpStatusCode.HTTP_400);
+  const error = new HttpError(message, 400);
   return next(error);
 };
 
@@ -48,7 +41,7 @@ export const unauthorized = (
   next: NextFunction,
   message: string = COMMON_MESSAGE.UNAUTHORIZED
 ) => {
-  const error = new HttpError(message, HttpStatusCode.HTTP_401);
+  const error = new HttpError(message, 401);
   return next(error);
 };
 
@@ -56,7 +49,7 @@ export const forbidden = (
   next: NextFunction,
   message: string = COMMON_MESSAGE.FORBIDDEN
 ) => {
-  const error = new HttpError(message, HttpStatusCode.HTTP_403);
+  const error = new HttpError(message, 403);
   return next(error);
 };
 
@@ -64,7 +57,7 @@ export const notFound = (
   next: NextFunction,
   message: string = COMMON_MESSAGE.NOT_FOUND
 ) => {
-  const error = new HttpError(message, HttpStatusCode.HTTP_404);
+  const error = new HttpError(message, 404);
   return next(error);
 };
 
@@ -72,7 +65,7 @@ export const internalServerError = (
   next: NextFunction,
   message: string = COMMON_MESSAGE.INTERNAL_SERVER_ERROR
 ) => {
-  const error = new HttpError(message, HttpStatusCode.HTTP_500);
+  const error = new HttpError(message, 500);
   return next(error);
 };
 

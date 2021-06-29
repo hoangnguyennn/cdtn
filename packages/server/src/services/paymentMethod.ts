@@ -1,7 +1,7 @@
 import { IPaymentMethod } from '../interfaces/IDocuments';
 import { IPaymentMethodCreate } from '../interfaces';
-import PaymentMethodModel from '../models/paymentMethod';
 import { removeInvalidFields } from '../utils';
+import PaymentMethodModel from '../models/paymentMethod';
 
 const create = async (
   paymentMethod: IPaymentMethodCreate

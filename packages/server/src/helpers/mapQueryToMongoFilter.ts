@@ -1,9 +1,9 @@
 import { normalize } from '../utils';
 
 /* eslint-disable indent */
-const mapping = (query: any): Record<string, any> => {
+const mapping = (query: { [key: string]: any }): Record<string, any> => {
   return Object.entries(query)
-    .map(([key, value]: [string, any]) => {
+    .map(([key, value]) => {
       let tmp;
       switch (key) {
         case 'price':

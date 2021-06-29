@@ -1,12 +1,8 @@
+import { COMMON_MESSAGE, HttpError } from '../helpers/commonResponse';
+import { ICategory } from '../interfaces/IDocuments';
 import { ICategoryCreate } from '../interfaces';
 import { removeInvalidFields } from '../utils';
 import CategoryModel from '../models/category';
-import { ICategory } from '../interfaces/IDocuments';
-import {
-  COMMON_MESSAGE,
-  HttpError,
-  HttpStatusCode
-} from '../helpers/commonResponse';
 
 const create = async (category: ICategoryCreate): Promise<ICategory> => {
   const categoryLint = removeInvalidFields({
@@ -25,7 +21,7 @@ const getBySlug = async (slug: string): Promise<ICategory> => {
   const category = await CategoryModel.findOne({ slug });
 
   if (!category) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return category;

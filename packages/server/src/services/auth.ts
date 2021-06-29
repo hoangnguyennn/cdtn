@@ -1,22 +1,18 @@
-import UserModel from '../models/user';
-import {
-  COMMON_MESSAGE,
-  HttpError,
-  HttpStatusCode
-} from '../helpers/commonResponse';
+import { COMMON_MESSAGE, HttpError } from '../helpers/commonResponse';
 import { ILogin, IUserCreate } from '../interfaces';
 import { IUser } from '../interfaces/IDocuments';
 import { removeInvalidFields } from '../utils';
+import UserModel from '../models/user';
 
 const login = async (credential: ILogin): Promise<IUser> => {
   const user = await UserModel.findOne({ email: credential.email });
 
   if (!user) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   if (user.passwordHashed !== credential.password) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return user;

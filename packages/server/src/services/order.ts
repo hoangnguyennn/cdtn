@@ -1,14 +1,10 @@
+import { COMMON_MESSAGE, HttpError } from '../helpers/commonResponse';
 import { IOrder } from '../interfaces/IDocuments';
 import { IOrderCreate } from '../interfaces';
-import { OrderStatus, PaymentStatus } from '../interfaces/enums';
-import OrderModel from '../models/order';
-import { removeInvalidFields } from '../utils';
-import {
-  COMMON_MESSAGE,
-  HttpError,
-  HttpStatusCode
-} from '../helpers/commonResponse';
 import { orderPopulate } from '../helpers/populate';
+import { OrderStatus, PaymentStatus } from '../interfaces/enums';
+import { removeInvalidFields } from '../utils';
+import OrderModel from '../models/order';
 
 const create = async (order: IOrderCreate): Promise<IOrder> => {
   const orderLint = removeInvalidFields({
@@ -51,7 +47,7 @@ const updateStatus = async (
   ).populate(orderPopulate);
 
   if (!orderUpdated) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return orderUpdated;
@@ -68,7 +64,7 @@ const updatePaymentStatus = async (
   ).populate(orderPopulate);
 
   if (!orderUpdated) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return orderUpdated;

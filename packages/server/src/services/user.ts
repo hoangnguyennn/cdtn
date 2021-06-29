@@ -1,19 +1,16 @@
 import { Types } from 'mongoose';
-import {
-  COMMON_MESSAGE,
-  HttpError,
-  HttpStatusCode
-} from '../helpers/commonResponse';
+
+import { COMMON_MESSAGE, HttpError } from '../helpers/commonResponse';
 import { IUser } from '../interfaces/IDocuments';
 import { IUserUpdate } from '../interfaces';
-import UserModel from '../models/user';
 import { removeInvalidFields } from '../utils';
+import UserModel from '../models/user';
 
 const getById = async (id: string | Types.ObjectId): Promise<IUser> => {
   const user = await UserModel.findOne({ _id: id });
 
   if (!user) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return user;
@@ -35,7 +32,7 @@ const update = async (id: string, user: IUserUpdate): Promise<IUser> => {
   );
 
   if (!userUpdated) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return userUpdated;

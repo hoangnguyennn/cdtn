@@ -1,16 +1,12 @@
 import { Types } from 'mongoose';
 
-import {
-  COMMON_MESSAGE,
-  HttpError,
-  HttpStatusCode
-} from '../helpers/commonResponse';
+import { COMMON_MESSAGE, HttpError } from '../helpers/commonResponse';
 import { IProduct } from '../interfaces/IDocuments';
 import { IProductCreate } from '../interfaces';
-import ProductModel from '../models/product';
+import { productPopulate } from '../helpers/populate';
 import { ProductStatus } from '../interfaces/enums';
 import { removeInvalidFields } from '../utils';
-import { productPopulate } from '../helpers/populate';
+import ProductModel from '../models/product';
 
 const create = async (product: IProductCreate): Promise<IProduct> => {
   const productLint = removeInvalidFields({
@@ -30,7 +26,7 @@ const create = async (product: IProductCreate): Promise<IProduct> => {
 };
 
 const get = async (
-  filter: any = {},
+  filter: { [key: string]: any } = {},
   skip?: number,
   limit?: number
 ): Promise<IProduct[]> => {
@@ -57,7 +53,7 @@ const getById = async (id: string | Types.ObjectId): Promise<IProduct> => {
   );
 
   if (!product) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return product;
@@ -88,7 +84,7 @@ const updateProduct = async (id: string, product: IProductCreate) => {
   ).populate(productPopulate);
 
   if (!productUpdated) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return productUpdated;
@@ -105,7 +101,7 @@ const updateProductStatus = async (
   ).populate(productPopulate);
 
   if (!productUpdated) {
-    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, HttpStatusCode.HTTP_404);
+    throw new HttpError(COMMON_MESSAGE.NOT_FOUND, 404);
   }
 
   return productUpdated;
