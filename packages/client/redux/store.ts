@@ -12,6 +12,7 @@ import { initialState as initialProduutUnitState } from './reducers/productUnit'
 
 import { IRootState } from '../interfaces/IState';
 import rootReducer from './reducers';
+import { interceptors } from '../services/instance';
 
 let store: ReturnType<typeof initStore>;
 
@@ -50,6 +51,7 @@ export const initialStore = (preloadedState?: IRootState) => {
   // Create the store once in the client
   if (!store) store = _store;
 
+  interceptors(_store);
   return _store;
 };
 

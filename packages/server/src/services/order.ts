@@ -14,6 +14,7 @@ const create = async (order: IOrderCreate): Promise<IOrder> => {
     deliveryPhone: order.deliveryPhone,
     deliveryEmail: order.deliveryEmail,
     deliveryDate: order.deliveryDate,
+    orderDate: order.orderDate,
     paymentMethodId: order.paymentMethodId,
     paymentStatus: PaymentStatus.UNPAID,
     itemsId: order.itemsId

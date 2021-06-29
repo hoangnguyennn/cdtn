@@ -10,6 +10,7 @@ import {
 
 export interface IAppState {
   limitOfToast: number;
+  isLoading: boolean;
 }
 
 export interface IAuthState {
@@ -27,6 +28,7 @@ export interface ICategoryState {
 
 export interface IOrderState {
   orders: IOrderResponse[];
+  tracking: any[];
 }
 
 export interface IPaymentMethodState {

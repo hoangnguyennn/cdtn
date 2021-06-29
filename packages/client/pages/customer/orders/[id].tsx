@@ -9,6 +9,7 @@ import PageContent from '../../../components/PageContent';
 
 const MyOrderDetailPage = () => {
   const { t } = useTranslation();
+
   return (
     <MainLayout>
       <PageContent breadcrumb={myOrderPage()} title={t('Order detail')}>

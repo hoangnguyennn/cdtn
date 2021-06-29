@@ -1,9 +1,10 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { fetchOrders } from '../../apis/order.api';
+import { fetchOrders, fetchTracking } from '../../apis/order.api';
 import { IOrderState, IRootState } from '../../interfaces/IState';
 
 export const initialState: IOrderState = {
-  orders: []
+  orders: [],
+  tracking: []
 };
 
 const orderSlice = createSlice({
@@ -12,13 +13,16 @@ const orderSlice = createSlice({
   reducers: {
     setOrdersAction(state, action) {
       state.orders = action.payload;
+    },
+    setTrackingAction(state, action) {
+      state.tracking = action.payload;
     }
   }
 });
 
-const { setOrdersAction } = orderSlice.actions;
+const { setOrdersAction, setTrackingAction } = orderSlice.actions;
 
-const getOrdersAction = () => async (dispatch: Dispatch) => {
+export const getOrdersAction = () => async (dispatch: Dispatch) => {
   const token = localStorage.getItem('access-token');
   if (!token) {
     return;
@@ -29,7 +33,18 @@ const getOrdersAction = () => async (dispatch: Dispatch) => {
   });
 };
 
-export { getOrdersAction };
+export const getTrackingAction = (orderId: string) => async (
+  dispatch: Dispatch
+) => {
+  const token = localStorage.getItem('access-token');
+  if (!token) {
+    return;
+  }
+
+  return fetchTracking(orderId, token).then(tracking => {
+    dispatch(setTrackingAction(tracking));
+  });
+};
 
 const orderState = (state: IRootState) => state.order;
 const selector = function<T>(combiner: { (state: IOrderState): T }) {

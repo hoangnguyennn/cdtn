@@ -7,22 +7,21 @@ import ProductUnitController from '../controllers/productUnit';
 
 const router = Router();
 
-router
-  .route('/')
-  .get(catcherWrapper(ProductUnitController.get))
-  .post(
-    AuthMiddleware.checkAuth,
-    AuthMiddleware.checkRole([UserType.MANAGER]),
-    catcherWrapper(ProductUnitController.create)
-  );
+router.get('/', catcherWrapper(ProductUnitController.get));
+router.get('/:id', catcherWrapper(ProductUnitController.getById));
 
-router
-  .route('/:id')
-  .get(catcherWrapper(ProductUnitController.getById))
-  .patch(
-    AuthMiddleware.checkAuth,
-    AuthMiddleware.checkRole([UserType.MANAGER]),
-    catcherWrapper(ProductUnitController.update)
-  );
+router.post(
+  '/',
+  AuthMiddleware.checkAuth,
+  AuthMiddleware.checkRole([UserType.MANAGER]),
+  catcherWrapper(ProductUnitController.create)
+);
+
+router.patch(
+  '/:id',
+  AuthMiddleware.checkAuth,
+  AuthMiddleware.checkRole([UserType.MANAGER]),
+  catcherWrapper(ProductUnitController.update)
+);
 
 export default router;

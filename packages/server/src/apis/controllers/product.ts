@@ -91,7 +91,7 @@ const getTrending = async (req: Request, res: Response) => {
   );
 };
 
-const updateProduct = async (req: Request, res: Response) => {
+const update = async (req: Request, res: Response) => {
   const { userType } = res.locals;
   const { id } = req.params;
   const productUpdateRequest: IProductUpdateRequest = req.body;
@@ -116,11 +116,11 @@ const updateProduct = async (req: Request, res: Response) => {
       ? mapProductToResponseForAdmin
       : mapProductToResponse;
 
-  const productUpdated = await ProductService.updateProduct(id, productUpdate);
+  const productUpdated = await ProductService.update(id, productUpdate);
   return success(res, mappingToResponse(productUpdated));
 };
 
-const updateProductStatus = async (req: Request, res: Response) => {
+const updateStatus = async (req: Request, res: Response) => {
   const { userType } = res.locals;
   const { id } = req.params;
   const { status } = req.body;
@@ -130,7 +130,7 @@ const updateProductStatus = async (req: Request, res: Response) => {
       ? mapProductToResponseForAdmin
       : mapProductToResponse;
 
-  const productUpdated = await ProductService.updateProductStatus(id, status);
+  const productUpdated = await ProductService.updateStatus(id, status);
   return success(res, mappingToResponse(productUpdated));
 };
 
@@ -139,6 +139,6 @@ export default {
   get,
   getById,
   getTrending,
-  updateProduct,
-  updateProductStatus
+  update,
+  updateStatus
 };

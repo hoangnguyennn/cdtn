@@ -7,25 +7,23 @@ import { UserType } from '../../interfaces/enums';
 
 const router = Router();
 
-router
-  .route('/')
-  .get(AuthMiddleware.checkAuth, catcherWrapper(OrderController.get))
-  .post(catcherWrapper(OrderController.create));
+router.get('/', AuthMiddleware.checkAuth, catcherWrapper(OrderController.get));
+router.get('/:id/tracking', OrderController.getTrackings);
 
-router
-  .route('/:id/update-status')
-  .post(
-    AuthMiddleware.checkAuth,
-    AuthMiddleware.checkRole([UserType.MANAGER]),
-    catcherWrapper(OrderController.updateOrderStatus)
-  );
+router.post('/', catcherWrapper(OrderController.create));
 
-router
-  .route('/:id/pay')
-  .post(
-    AuthMiddleware.checkAuth,
-    AuthMiddleware.checkRole([UserType.MANAGER]),
-    catcherWrapper(OrderController.payOrder)
-  );
+router.post(
+  '/:id/update-status',
+  AuthMiddleware.checkAuth,
+  AuthMiddleware.checkRole([UserType.MANAGER]),
+  catcherWrapper(OrderController.updateStatus)
+);
+
+router.post(
+  '/:id/pay',
+  AuthMiddleware.checkAuth,
+  AuthMiddleware.checkRole([UserType.MANAGER]),
+  catcherWrapper(OrderController.payOrder)
+);
 
 export default router;

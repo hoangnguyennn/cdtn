@@ -1,13 +1,18 @@
 import { Request, Response } from 'express';
 
-import { IOrderCreate, IOrderCreateRequest } from '../../interfaces';
+import {
+  IOrderCreate,
+  IOrderCreateRequest,
+  ITrackingCreate
+} from '../../interfaces';
 import { mapOrderToResponse } from '../../helpers/mappingResponse';
 import { success } from '../../helpers/commonResponse';
-import { PaymentStatus, UserType } from '../../interfaces/enums';
+import { OrderStatus, PaymentStatus, UserType } from '../../interfaces/enums';
 import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
 import OrderItemService from '../../services/orderItem';
 import OrderService from '../../services/order';
 import ProductService from '../../services/product';
+import TrackingService from '../../services/tracking';
 
 const create = async (req: Request, res: Response) => {
   const orderCreateRequest: IOrderCreateRequest = req.body;
@@ -27,12 +32,21 @@ const create = async (req: Request, res: Response) => {
       }))
   );
 
+  const now = new Date().getTime();
   const orderCreate: IOrderCreate = {
     ...orderCreateRequest,
+    orderDate: now,
     itemsId: orderItems.map(item => item._id)
   };
-
   const orderCreated = await OrderService.create(orderCreate);
+
+  const trackingCreate: ITrackingCreate = {
+    orderId: orderCreated._id,
+    orderStatus: OrderStatus.ORDERED,
+    dateTime: now
+  };
+  await TrackingService.create(trackingCreate);
+
   return success(res, mapOrderToResponse(orderCreated));
 };
 
@@ -48,11 +62,25 @@ const get = async (req: Request, res: Response) => {
   return success(res, orders.map(mapOrderToResponse));
 };
 
-const updateOrderStatus = async (req: Request, res: Response) => {
+const getTrackings = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { status } = req.body;
+  const trackings = await TrackingService.getByOrderId(id);
+  return success(res, trackings);
+};
+
+const updateStatus = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { status, message } = req.body;
 
   const orderUpdated = await OrderService.updateStatus(id, status);
+  const now = new Date().getTime();
+  const trackingCreate: ITrackingCreate = {
+    orderId: orderUpdated._id,
+    orderStatus: status,
+    dateTime: now,
+    description: message
+  };
+  await TrackingService.create(trackingCreate);
   return success(res, mapOrderToResponse(orderUpdated));
 };
 
@@ -69,6 +97,7 @@ const payOrder = async (req: Request, res: Response) => {
 export default {
   create,
   get,
+  getTrackings,
   payOrder,
-  updateOrderStatus
+  updateStatus
 };

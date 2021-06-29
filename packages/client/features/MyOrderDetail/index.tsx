@@ -1,40 +1,49 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
+import { getLoading } from '../../redux/reducers/app';
 import { getOrderById, getOrdersAction } from '../../redux/reducers/order';
 import { imageUrlToSpecificSize } from '../../utils/converter';
 import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import { orderStatus } from '../../constants';
 import { PATH_NAME } from '../../configs/pathName';
+import Loading from '../../components/Loading';
 import Root from './MyOrderDetail';
 
 const MyOrderDetail = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
-  const thumbnailRef = useRef<HTMLDivElement | null>(null);
   const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
 
   const { id } = router.query;
   const order = useSelector(getOrderById(id as string));
   const items = order?.items;
+  const isLoading = useSelector(getLoading());
 
   useEffect(() => {
     dispatch(getOrdersAction());
   }, []);
 
   useEffect(() => {
-    const thumbnail = thumbnailRef.current;
-    if (thumbnail) {
-      setImgSize({
-        width: thumbnail.offsetWidth,
-        height: thumbnail.offsetWidth
-      });
-    }
-  }, [thumbnailRef.current]);
+    const fontSize = Number(
+      window
+        .getComputedStyle(document.body)
+        .getPropertyValue('font-size')
+        .match(/\d+/)[0]
+    );
+    setImgSize({
+      width: 5 * fontSize,
+      height: 5 * fontSize
+    });
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   if (!items) {
     return null;
@@ -78,7 +87,7 @@ const MyOrderDetail = () => {
             items.map(item => (
               <tr key={item.id}>
                 <td>
-                  <div ref={thumbnailRef}>
+                  <div>
                     <img
                       src={imageUrlToSpecificSize(
                         item.product.image,
@@ -153,6 +162,9 @@ const MyOrderDetail = () => {
       </div>
       <Link href={PATH_NAME.MY_ORDER}>
         <a className="back-to-my-orders">{t('Back to my orders')}</a>
+      </Link>
+      <Link href={`${PATH_NAME.MY_ORDER}/tracking/${order.id}`}>
+        <a className="back-to-my-orders">{t('Order tracking')}</a>
       </Link>
     </Root>
   );

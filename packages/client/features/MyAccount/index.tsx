@@ -14,11 +14,14 @@ import Invalid from '../../components/core/Invalid';
 
 import Root from './MyAccount';
 import { toast } from 'react-toastify';
+import Loading from '../../components/Loading';
+import { getLoading } from '../../redux/reducers/app';
 
 const MyAccount = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const userInfo = useSelector(getUserInfo());
+  const isLoading = useSelector(getLoading());
 
   const [initialUserInforValues, setInitialUserInforValues] = useState<
     IUserUpdateInfo
@@ -97,6 +100,10 @@ const MyAccount = () => {
       address: userInfo.address
     }));
   }, [userInfo]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Root>

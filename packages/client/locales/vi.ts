@@ -93,7 +93,8 @@ const vi = {
   'Delivery date': 'Ngày giao hàng',
   'Order date': 'Ngày đặt hàng',
   'Leave a comment': 'Viết đánh giá',
-  Repurchase: 'Mua lại'
+  Repurchase: 'Mua lại',
+  'Order tracking': 'Theo dõi đơn hàng'
 };
 
 export default vi;

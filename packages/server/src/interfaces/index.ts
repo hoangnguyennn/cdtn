@@ -43,6 +43,7 @@ export interface IOrderCreate {
   deliveryPhone: string;
   deliveryEmail: string;
   deliveryDate?: number;
+  orderDate?: number;
   paymentMethodId: string | Types.ObjectId;
   itemsId: string[] | Types.ObjectId[];
 }
@@ -184,6 +185,13 @@ export interface IProductUnitResponse {
 export type IProductUnitWithLength = IProductUnit & {
   productsLength: number;
 };
+
+export interface ITrackingCreate {
+  orderId: Types.ObjectId;
+  orderStatus: OrderStatus;
+  dateTime: number;
+  description?: string;
+}
 
 export interface IUserCreate {
   email: string;

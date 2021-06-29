@@ -67,6 +67,13 @@ export interface IProductUnit extends Document {
   name: string;
 }
 
+export interface ITracking extends Document {
+  orderId: Types.ObjectId;
+  orderStatus: OrderStatus;
+  dateTime: number;
+  description?: string;
+}
+
 export interface IUser extends Document {
   email: string;
   passwordHashed: string;

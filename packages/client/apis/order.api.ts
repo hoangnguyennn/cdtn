@@ -13,3 +13,11 @@ export const fetchOrders = async (token: string): Promise<IOrderResponse[]> => {
     })
     .then(res => res.data);
 };
+
+export const fetchTracking = async (orderId: string, token: string) => {
+  return axiosInstance
+    .get(`${ENDPOINT.orders}/${orderId}/tracking`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data);
+};

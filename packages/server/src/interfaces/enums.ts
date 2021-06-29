@@ -6,6 +6,7 @@ export enum CollectionName {
   PAYMENT_METHOD = 'paymentMethods',
   PRODUCT = 'products',
   PRODUCT_UNIT = 'productUnits',
+  TRACKING = 'trackings',
   USER = 'users'
 }
 

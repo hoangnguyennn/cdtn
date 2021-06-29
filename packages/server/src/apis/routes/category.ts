@@ -7,18 +7,17 @@ import CategoryController from '../controllers/category';
 
 const router = Router();
 
-router
-  .route('/')
-  .get(catcherWrapper(CategoryController.get))
-  .post(
-    AuthMiddleware.checkAuth,
-    AuthMiddleware.checkRole([UserType.MANAGER]),
-    catcherWrapper(CategoryController.create)
-  );
-
+router.get('/', catcherWrapper(CategoryController.get));
 router.get(
   '/slug/:slug/products',
   catcherWrapper(CategoryController.getProductsByCategorySlug)
+);
+
+router.post(
+  '/',
+  AuthMiddleware.checkAuth,
+  AuthMiddleware.checkRole([UserType.MANAGER]),
+  catcherWrapper(CategoryController.create)
 );
 
 export default router;

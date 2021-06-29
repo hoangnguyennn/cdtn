@@ -65,7 +65,7 @@ const getTrending = async (): Promise<IProduct[]> => {
     .populate(productPopulate);
 };
 
-const updateProduct = async (id: string, product: IProductCreate) => {
+const update = async (id: string, product: IProductCreate) => {
   const productLint = removeInvalidFields({
     name: product.name,
     price: product.price,
@@ -90,7 +90,7 @@ const updateProduct = async (id: string, product: IProductCreate) => {
   return productUpdated;
 };
 
-const updateProductStatus = async (
+const updateStatus = async (
   id: string,
   newStatus: ProductStatus
 ): Promise<IProduct> => {
@@ -113,6 +113,6 @@ export default {
   get,
   getById,
   getTrending,
-  updateProduct,
-  updateProductStatus
+  update,
+  updateStatus
 };

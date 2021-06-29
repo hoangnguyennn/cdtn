@@ -8,16 +8,23 @@ import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
 import { orderStatus } from '../../constants';
 import { PATH_NAME } from '../../configs/pathName';
 import Root from './MyOrder';
+import Loading from '../../components/Loading';
+import { getLoading } from '../../redux/reducers/app';
 
 const MyOrder = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const orders = useSelector(getOrders());
+  const isLoading = useSelector(getLoading());
 
   useEffect(() => {
     dispatch(getOrdersAction());
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Root>
