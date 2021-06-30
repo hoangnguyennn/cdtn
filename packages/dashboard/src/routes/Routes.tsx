@@ -111,7 +111,7 @@ const routesConfig: IRoute[] = [
 
 const renderRoutes = (routes: IRoute[]) => {
   return (
-    <Router>
+    <Router basename="/admin">
       <Suspense fallback={<div />}>
         <Switch>
           {routes.map((route, index) => {

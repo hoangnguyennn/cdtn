@@ -7,6 +7,7 @@ import { getToken, getUserType, loginAction } from '../../redux/reducers/auth';
 import { PATH_NAME } from '../../configs';
 
 import bg from '../../assets/images/login-bg.jpg';
+import avatar from '../../assets/images/avatar.jpg';
 
 import './Login.css';
 
@@ -39,6 +40,7 @@ const Login = () => {
         backgroundImage: `url(${bg})`
       }}
     >
+      {console.log(process.env.REACT_APP_NAME)}
       <Form
         name="basic"
         className="form"
@@ -46,10 +48,7 @@ const Login = () => {
         onFinish={onFinish}
       >
         <div className="logo">
-          <img
-            src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.6435-9/189700091_2965430183781561_3921210924480430952_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=k6zJX6uQPuQAX_h9F8Y&_nc_ht=scontent-sin6-1.xx&oh=961a088c7640976ec36392284bcbd836&oe=60DB7F7E"
-            alt=""
-          />
+          <img src={avatar} alt="" />
         </div>
         <h2>Log In</h2>
         <Form.Item
