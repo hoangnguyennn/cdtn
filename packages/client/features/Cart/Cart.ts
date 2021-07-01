@@ -17,7 +17,7 @@ export default styled.div`
           display: flex;
 
           img {
-            max-width: 100%;
+            width: 100%;
             object-fit: contain;
           }
         }

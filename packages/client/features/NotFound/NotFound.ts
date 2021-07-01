@@ -13,7 +13,7 @@ export default styled.div`
     color: #373f50;
 
     img {
-      max-width: 100%;
+      width: 100%;
       height: 300px;
       margin-bottom: 3rem;
       object-fit: contain;

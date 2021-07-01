@@ -1,4 +1,11 @@
-import { FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import {
+  FC,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +19,7 @@ import Button from '../../components/core/Button';
 import Input from '../../components/core/Input';
 import Root from './ProductSummary';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import { useMemo } from 'react';
 
 type ProductSummaryProps = {
   product: IProduct;
@@ -21,10 +29,20 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
   const [qty, setQty] = useState('1');
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const thumbnailRef = useRef<HTMLDivElement | null>(null);
-  const imageRef = useRef<HTMLImageElement | null>(null);
-  const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
+  const imageZoomRef = useRef<HTMLImageElement | null>(null);
   const isDesktop = useMatchMedia('(min-width: 992px)');
+  const thumbnailRef = useRef<HTMLDivElement | null>(null);
+
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  const imageSize = useMemo(() => {
+    return imageRef.current?.offsetWidth;
+  }, [imageRef.current]);
+
+  const imageUrl = useCallback(
+    (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
+    [imageSize]
+  );
 
   const handleAddToCart = () => {
     if (Number(qty) > 0) {
@@ -41,15 +59,15 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
 
   useEffect(() => {
     const div = thumbnailRef.current;
-    const img = imageRef.current;
+    const img = imageZoomRef.current;
 
     if (isDesktop && div && img) {
-      const divHeight = div.offsetHeight;
-      const divWidth = div.offsetWidth;
-      const imgHeight = img.offsetHeight;
-      const imgWidth = img.offsetWidth;
-
       const handleMouseMove = (event: MouseEvent) => {
+        const divHeight = div.offsetHeight;
+        const divWidth = div.offsetWidth;
+        const imgHeight = img.offsetHeight;
+        const imgWidth = img.offsetWidth;
+
         const top = event.clientY - div.offsetTop;
         const left = event.clientX - div.offsetLeft;
 
@@ -63,37 +81,29 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
         div.removeEventListener('mousemove', handleMouseMove);
       };
     }
-  }, [isDesktop, thumbnailRef, imageRef]);
-
-  useEffect(() => {
-    const thumbnail = thumbnailRef.current;
-    if (thumbnail) {
-      setImgSize({
-        width: thumbnail.offsetWidth,
-        height: thumbnail.offsetWidth
-      });
-    }
-  }, [thumbnailRef.current]);
+  }, [isDesktop, thumbnailRef, imageZoomRef]);
 
   return (
     <Root>
       <div className="summary">
         <div className="thumbnail" ref={thumbnailRef}>
           <img
-            src={imageUrlToSpecificSize(
-              product.images[0] || '',
-              imgSize.width,
-              imgSize.height
-            )}
+            src={imageUrl(product.images[0] || '')}
             alt={product.name}
             loading="lazy"
+            style={{
+              width: `${imageSize}px`,
+              height: `${imageSize}px`,
+              paddingTop: imageUrl(product.images[0] || '') ? '' : '100%'
+            }}
+            ref={imageRef}
           />
           {isDesktop && (
             <img
               src={product.images[0] || ''}
               alt={product.name}
               loading="lazy"
-              ref={imageRef}
+              ref={imageZoomRef}
             />
           )}
         </div>

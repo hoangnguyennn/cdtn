@@ -86,12 +86,15 @@ export default styled.div`
   ${mediaQueries('lg')} {
     .summary {
       flex-direction: row;
+      align-items: flex-start;
 
       .thumbnail {
+        align-self: center;
         flex: 1;
         margin-left: 10%;
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+        border-radius: 0.5rem;
         overflow: hidden;
         cursor: zoom-in;
 

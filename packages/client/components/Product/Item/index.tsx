@@ -1,13 +1,13 @@
-import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
+import { FC, MouseEvent, useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
+import { imageUrlToSpecificSize } from '../../../utils/converter';
 import { IProductWithLink } from '../../../interfaces';
 import { toCurrency } from '../../../utils/formatter';
 import ProductItemStyled from './ProductItem';
-import { imageUrlToSpecificSize } from '../../../utils/converter';
 
 type ProductItemProps = IProductWithLink & {
   addToCart: () => any;
@@ -33,40 +33,38 @@ const ProductItem: FC<ProductItemProps> = ({
   unit,
   addToCart
 }) => {
-  const isDesktop = useMatchMedia('(min-width: 992px)');
   const { t } = useTranslation();
-  const thumbnailRef = useRef<HTMLDivElement | null>(null);
-  const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
+  const isDesktop = useMatchMedia('(min-width: 992px)');
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  const imageSize = useMemo(() => {
+    return imageRef.current?.offsetWidth;
+  }, [imageRef.current]);
+
+  const imageUrl = useCallback(
+    (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
+    [imageSize]
+  );
 
   const handleAddToCartClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
     addToCart();
   };
-
-  useEffect(() => {
-    const thumbnail = thumbnailRef.current;
-    if (thumbnail) {
-      setImgSize({
-        width: thumbnail.offsetWidth,
-        height: thumbnail.offsetWidth
-      });
-    }
-  }, [thumbnailRef.current]);
 
   return (
     <Wrap link={link}>
       <div className="wrap">
-        <div className="thumbnail" ref={thumbnailRef}>
+        <div className="thumbnail">
           <img
-            src={imageUrlToSpecificSize(
-              images[0],
-              imgSize.width,
-              imgSize.height
-            )}
+            src={imageUrl(images[0] || '')}
             alt={name}
             loading="lazy"
-            style={{ width: imgSize.width, height: imgSize.height }}
+            style={{
+              width: `${imageSize}px`,
+              height: `${imageSize}px`,
+              paddingTop: imageUrl(images[0] || '') ? '' : '100%'
+            }}
+            ref={imageRef}
           />
         </div>
         <div className="info">

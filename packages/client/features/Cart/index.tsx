@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
@@ -29,20 +29,28 @@ import { getUserInfo } from '../../redux/reducers/auth';
 import { ICartForm, IOrder } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
 import { imageUrlToSpecificSize } from '../../utils/converter';
+import { useCallback } from 'react';
 
 const Cart = () => {
-  const { t } = useTranslation();
   const [isValid, setIsValid] = useState(false);
-
+  const { t } = useTranslation();
   const cartItems = useSelector(getCartItems());
   const cartSubtotal = useSelector(getCartSubtotal());
-  const paymentMethods = useSelector(getPaymentMethods());
-  const userInfo = useSelector(getUserInfo());
-  const router = useRouter();
-  const thumbnailRef = useRef<HTMLDivElement | null>(null);
-  const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
-
   const dispatch = useDispatch();
+  const paymentMethods = useSelector(getPaymentMethods());
+  const router = useRouter();
+  const userInfo = useSelector(getUserInfo());
+
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  const imageSize = useMemo(() => {
+    return imageRef.current?.offsetWidth;
+  }, [imageRef.current]);
+
+  const imageUrl = useCallback(
+    (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
+    [imageSize]
+  );
 
   const [initialValues, setInitialValues] = useState<ICartForm>({
     deliveryFullName: '',
@@ -116,16 +124,6 @@ const Cart = () => {
     }
   }, [paymentMethods]);
 
-  useEffect(() => {
-    const thumbnail = thumbnailRef.current;
-    if (thumbnail) {
-      setImgSize({
-        width: thumbnail.offsetWidth,
-        height: thumbnail.offsetWidth
-      });
-    }
-  }, [thumbnailRef.current]);
-
   return (
     <CartStyled>
       <div className="cart-sidebar">
@@ -135,15 +133,17 @@ const Cart = () => {
           {cartItems.length ? (
             cartItems.map(item => (
               <FormGroup className="cart-item" key={item.id}>
-                <div className="thumbnail" ref={thumbnailRef}>
+                <div className="thumbnail">
                   <img
-                    src={imageUrlToSpecificSize(
-                      item.images[0] || '',
-                      imgSize.width,
-                      imgSize.height
-                    )}
+                    src={imageUrl(item.images[0] || '')}
                     alt={item.name}
                     loading="lazy"
+                    style={{
+                      width: `${imageSize}px`,
+                      height: `${imageSize}px`,
+                      paddingTop: imageUrl(item.images[0] || '') ? '' : '100%'
+                    }}
+                    ref={imageRef}
                   />
                 </div>
                 <div className="info">

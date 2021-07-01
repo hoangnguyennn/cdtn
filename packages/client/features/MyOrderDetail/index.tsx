@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
@@ -17,28 +17,24 @@ const MyOrderDetail = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
-  const [imgSize, setImgSize] = useState({ width: 0, height: 0 });
 
   const { id } = router.query;
   const order = useSelector(getOrderById(id as string));
   const items = order?.items;
   const isLoading = useSelector(getLoading());
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  const imageSize = useMemo(() => {
+    return imageRef.current?.offsetWidth;
+  }, [imageRef.current]);
+
+  const imageUrl = useCallback(
+    (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
+    [imageSize]
+  );
 
   useEffect(() => {
     dispatch(getOrdersAction());
-  }, []);
-
-  useEffect(() => {
-    const fontSize = Number(
-      window
-        .getComputedStyle(document.body)
-        .getPropertyValue('font-size')
-        .match(/\d+/)[0]
-    );
-    setImgSize({
-      width: 5 * fontSize,
-      height: 5 * fontSize
-    });
   }, []);
 
   if (isLoading) {
@@ -89,13 +85,13 @@ const MyOrderDetail = () => {
                 <td>
                   <div>
                     <img
-                      src={imageUrlToSpecificSize(
-                        item.product.image,
-                        imgSize.width,
-                        imgSize.height
-                      )}
+                      src={imageUrl(item.product.image)}
                       alt={item.product.name}
                       loading="lazy"
+                      style={{
+                        paddingTop: imageUrl(item.product.image) ? '' : '100%'
+                      }}
+                      ref={imageRef}
                     />
                     <div className="product-info">
                       <Link href={`${PATH_NAME.PRODUCTS}/${item.productId}`}>
