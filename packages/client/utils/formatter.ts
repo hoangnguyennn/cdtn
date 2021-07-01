@@ -1,3 +1,6 @@
+import { dayOfWeek } from '../constants';
+import i18n from '../locales';
+
 export const toCurrency = (num: number) => {
   return Number(num).toLocaleString('vi-VN', {
     style: 'currency',
@@ -5,7 +8,11 @@ export const toCurrency = (num: number) => {
   });
 };
 
-export const isoDateToNativeDate = (date?: string, showTimeBefore = false) => {
+export const isoDateToNativeDate = (
+  date?: string | number,
+  showTimeBefore = false,
+  withDayOfWeek = false
+) => {
   let dateObject = new Date();
 
   if (date) {
@@ -15,18 +22,22 @@ export const isoDateToNativeDate = (date?: string, showTimeBefore = false) => {
   const currentDate = toNDigits(dateObject.getDate());
   const currentMonth = toNDigits(dateObject.getMonth() + 1);
   const currentYear = toNDigits(dateObject.getFullYear(), 4);
-  const dateArr = [currentDate, currentMonth, currentYear];
+  const dateRes = [currentDate, currentMonth, currentYear].join('/');
 
   const currentHour = toNDigits(dateObject.getHours());
   const currentMin = toNDigits(dateObject.getMinutes());
   const currentSec = toNDigits(dateObject.getSeconds());
-  const timeArr = [currentHour, currentMin, currentSec];
+  const timeRes = [currentHour, currentMin, currentSec].join(':');
+
+  const dayOfWeektText = withDayOfWeek
+    ? i18n.t(dayOfWeek[dateObject.getDay()])
+    : '';
 
   if (showTimeBefore) {
-    return `${timeArr.join(':')} ${dateArr.join('/')}`;
+    return `${timeRes}${withDayOfWeek ? `, ${dayOfWeektText}` : ''} ${dateRes}`;
   }
 
-  return `${dateArr.join('/')} ${timeArr.join(':')}`;
+  return `${withDayOfWeek ? dayOfWeektText : ''} ${dateRes}, ${timeRes}`;
 };
 
 /**

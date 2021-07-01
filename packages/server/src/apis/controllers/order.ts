@@ -5,7 +5,10 @@ import {
   IOrderCreateRequest,
   ITrackingCreate
 } from '../../interfaces';
-import { mapOrderToResponse } from '../../helpers/mappingResponse';
+import {
+  mapOrderToResponse,
+  mapTrackingToResponse
+} from '../../helpers/mappingResponse';
 import { success } from '../../helpers/commonResponse';
 import { OrderStatus, PaymentStatus, UserType } from '../../interfaces/enums';
 import mapQueryToMongoFilter from '../../helpers/mapQueryToMongoFilter';
@@ -65,7 +68,7 @@ const get = async (req: Request, res: Response) => {
 const getTrackings = async (req: Request, res: Response) => {
   const { id } = req.params;
   const trackings = await TrackingService.getByOrderId(id);
-  return success(res, trackings);
+  return success(res, trackings.map(mapTrackingToResponse));
 };
 
 const updateStatus = async (req: Request, res: Response) => {

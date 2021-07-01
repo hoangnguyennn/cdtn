@@ -5,6 +5,7 @@ import {
   IPaymentMethod,
   IProduct,
   IProductUnitWithLength,
+  ITrackingResponse,
   IUser
 } from './index';
 
@@ -28,7 +29,7 @@ export interface ICategoryState {
 
 export interface IOrderState {
   orders: IOrderResponse[];
-  tracking: any[];
+  tracking: ITrackingResponse[];
 }
 
 export interface IPaymentMethodState {

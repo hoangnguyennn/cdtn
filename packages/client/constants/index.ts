@@ -5,3 +5,13 @@ export const orderStatus = {
   ORDERED: 'ORDER_ORDERED',
   VERIFIED: 'ORDER_VERIFIED'
 };
+
+export const dayOfWeek = [
+  'SUNDAY',
+  'MONDAY',
+  'TUESDAY',
+  'WEDNESDAY',
+  'THURSDAY',
+  'FRIDAY',
+  'SATURDAY'
+];

@@ -94,7 +94,17 @@ const vi = {
   'Order date': 'Ngày đặt hàng',
   'Leave a comment': 'Viết đánh giá',
   Repurchase: 'Mua lại',
-  'Order tracking': 'Theo dõi đơn hàng'
+  'Order tracking': 'Theo dõi đơn hàng',
+
+  SUNDAY: 'Chủ nhật',
+  MONDAY: 'Thứ hai',
+  TUESDAY: 'Thứ ba',
+  WEDNESDAY: 'Thứ tư',
+  THURSDAY: 'Thứ năm',
+  FRIDAY: 'Thứ sáu',
+  SATURDAY: 'Thứ bảy',
+  'View order detail': 'Xem chi tiết đơn hàng',
+  OrderId: 'Mã đơn hàng'
 };
 
 export default vi;

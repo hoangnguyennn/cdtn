@@ -115,6 +115,14 @@ export interface IRegisterForm {
   phone: string;
 }
 
+export interface ITrackingResponse {
+  id: string;
+  orderId: string;
+  orderStatus: string;
+  dateTime: number;
+  description?: string;
+}
+
 export interface IUser {
   id: string;
   email: string;

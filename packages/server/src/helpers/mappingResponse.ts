@@ -9,6 +9,7 @@ import {
   IProductResponseForAdmin,
   IProductUnitResponse,
   IProductUnitWithLength,
+  ITrackingResponse,
   IUserResponse
 } from '../interfaces';
 import {
@@ -19,6 +20,7 @@ import {
   IPaymentMethod,
   IProduct,
   IProductUnit,
+  ITracking,
   IUser
 } from '../interfaces/IDocuments';
 
@@ -141,6 +143,18 @@ export const mapProductUnitWithProductListToResponse = (
   return Object.assign(mapProductUnitToResponse(productUnit), {
     productsLength: productUnit.productsLength
   });
+};
+
+export const mapTrackingToResponse = (
+  tracking: ITracking
+): ITrackingResponse => {
+  return {
+    id: tracking._id,
+    orderId: String(tracking.orderId),
+    orderStatus: tracking.orderStatus,
+    dateTime: tracking.dateTime,
+    description: tracking.description
+  };
 };
 
 export const mapUserToResponse = (user: IUser): IUserResponse => {

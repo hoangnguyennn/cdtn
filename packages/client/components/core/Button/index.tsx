@@ -26,8 +26,10 @@ const renderBgColor = (props: ButtonProps) => {
   return `var(--${props.variant})`;
 };
 
-const renderBgColorHover = (props: ButtonProps) => `var(--${props.variant})`;
-const renderBorderColor = (props: ButtonProps) => `var(--${props.variant})`;
+const renderBgColorHover = (props: ButtonProps) =>
+  `var(--${props.variant}-hover)`;
+const renderBorderColor = (props: ButtonProps) =>
+  `var(--${props.variant}-hover)`;
 
 const renderShadow = (props: ButtonProps) => {
   if (props.shadow) {

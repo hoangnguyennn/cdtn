@@ -193,6 +193,14 @@ export interface ITrackingCreate {
   description?: string;
 }
 
+export interface ITrackingResponse {
+  id: string;
+  orderId: string;
+  orderStatus: OrderStatus;
+  dateTime: number;
+  description?: string;
+}
+
 export interface IUserCreate {
   email: string;
   passwordHashed: string;
