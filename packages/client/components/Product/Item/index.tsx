@@ -1,4 +1,11 @@
-import { FC, MouseEvent, useCallback, useMemo, useRef } from 'react';
+import {
+  FC,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
@@ -36,10 +43,7 @@ const ProductItem: FC<ProductItemProps> = ({
   const { t } = useTranslation();
   const isDesktop = useMatchMedia('(min-width: 992px)');
   const imageRef = useRef<HTMLImageElement | null>(null);
-
-  const imageSize = useMemo(() => {
-    return imageRef.current?.offsetWidth;
-  }, [imageRef.current]);
+  const [imageSize, setImageSize] = useState(0);
 
   const imageUrl = useCallback(
     (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
@@ -51,10 +55,16 @@ const ProductItem: FC<ProductItemProps> = ({
     addToCart();
   };
 
+  useEffect(() => {
+    if (imageRef.current?.offsetWidth) {
+      setImageSize(imageRef.current?.offsetWidth);
+    }
+  }, [imageRef]);
+
   return (
     <Wrap link={link}>
       <div className="wrap">
-        <div className="thumbnail">
+        <div className="thumbnail" ref={imageRef}>
           <img
             src={imageUrl(images[0] || '')}
             alt={name}
@@ -64,7 +74,6 @@ const ProductItem: FC<ProductItemProps> = ({
               height: `${imageSize}px`,
               paddingTop: imageUrl(images[0] || '') ? '' : '100%'
             }}
-            ref={imageRef}
           />
         </div>
         <div className="info">

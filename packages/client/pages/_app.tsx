@@ -1,8 +1,8 @@
+import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import dynamic from 'next/dynamic';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-import { AppProps } from 'next/app';
 
 import { getLimitOfToast } from '../redux/reducers/app';
 import Auth from '../guards/Auth';
@@ -20,6 +20,10 @@ Router.events.on('routeChangeStart', url => {
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
+const ToastComponent = dynamic(() =>
+  import('react-toastify').then(module => module.ToastContainer)
+);
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const store = useStore(pageProps.initialReduxState);
 
@@ -29,7 +33,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <Seo title={pageProps.title} />
         <Component {...pageProps} />
       </Auth>
-      <ToastContainer limit={getLimitOfToast()(store.getState())} />
+      <ToastComponent limit={getLimitOfToast()(store.getState())} />
     </Provider>
   );
 };
