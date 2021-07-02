@@ -19,25 +19,22 @@ import Button from '../../components/core/Button';
 import Input from '../../components/core/Input';
 import Root from './ProductSummary';
 import useMatchMedia from '../../hooks/useMatchMedia';
-import { useMemo } from 'react';
 
 type ProductSummaryProps = {
   product: IProduct;
 };
 
 const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
-  const [qty, setQty] = useState('1');
   const { t } = useTranslation();
+
   const dispatch = useDispatch();
-  const imageZoomRef = useRef<HTMLImageElement | null>(null);
   const isDesktop = useMatchMedia('(min-width: 992px)');
-  const thumbnailRef = useRef<HTMLDivElement | null>(null);
 
-  const imageRef = useRef<HTMLImageElement | null>(null);
+  const [qty, setQty] = useState('1');
 
-  const imageSize = useMemo(() => {
-    return imageRef.current?.offsetWidth;
-  }, [imageRef.current]);
+  const imageZoomRef = useRef<HTMLImageElement | null>(null);
+  const imageWrapRef = useRef<HTMLDivElement | null>(null);
+  const [imageSize, setImageSize] = useState(0);
 
   const imageUrl = useCallback(
     (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
@@ -58,7 +55,7 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
   };
 
   useEffect(() => {
-    const div = thumbnailRef.current;
+    const div = imageWrapRef.current;
     const img = imageZoomRef.current;
 
     if (isDesktop && div && img) {
@@ -81,12 +78,18 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
         div.removeEventListener('mousemove', handleMouseMove);
       };
     }
-  }, [isDesktop, thumbnailRef, imageZoomRef]);
+  }, [isDesktop, imageWrapRef, imageZoomRef]);
+
+  useEffect(() => {
+    if (imageWrapRef.current?.offsetWidth) {
+      setImageSize(imageWrapRef.current?.offsetWidth);
+    }
+  }, [imageWrapRef]);
 
   return (
     <Root>
       <div className="summary">
-        <div className="thumbnail" ref={thumbnailRef}>
+        <div className="thumbnail" ref={imageWrapRef}>
           <img
             src={imageUrl(product.images[0] || '')}
             alt={product.name}
@@ -96,7 +99,6 @@ const ProductSummary: FC<ProductSummaryProps> = ({ product }) => {
               height: `${imageSize}px`,
               paddingTop: imageUrl(product.images[0] || '') ? '' : '100%'
             }}
-            ref={imageRef}
           />
           {isDesktop && (
             <img

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
 import { PATH_NAME } from '../../configs/pathName';
 import BannerStyled from './Banner';

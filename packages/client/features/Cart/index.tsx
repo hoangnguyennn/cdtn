@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
@@ -29,23 +29,21 @@ import { getUserInfo } from '../../redux/reducers/auth';
 import { ICartForm, IOrder } from '../../interfaces';
 import { PATH_NAME } from '../../configs/pathName';
 import { imageUrlToSpecificSize } from '../../utils/converter';
-import { useCallback } from 'react';
 
 const Cart = () => {
-  const [isValid, setIsValid] = useState(false);
   const { t } = useTranslation();
+
   const cartItems = useSelector(getCartItems());
   const cartSubtotal = useSelector(getCartSubtotal());
-  const dispatch = useDispatch();
   const paymentMethods = useSelector(getPaymentMethods());
-  const router = useRouter();
   const userInfo = useSelector(getUserInfo());
 
-  const imageRef = useRef<HTMLImageElement | null>(null);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const imageSize = useMemo(() => {
-    return imageRef.current?.offsetWidth;
-  }, [imageRef.current]);
+  const [isValid, setIsValid] = useState(false);
+  const [imageSize, setImageSize] = useState(0);
+  const imageWrapRef = useRef<HTMLDivElement | null>(null);
 
   const imageUrl = useCallback(
     (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
@@ -124,6 +122,12 @@ const Cart = () => {
     }
   }, [paymentMethods]);
 
+  useEffect(() => {
+    if (imageWrapRef.current?.offsetWidth) {
+      setImageSize(imageWrapRef.current?.offsetWidth);
+    }
+  }, [imageWrapRef.current]);
+
   return (
     <CartStyled>
       <div className="cart-sidebar">
@@ -133,17 +137,14 @@ const Cart = () => {
           {cartItems.length ? (
             cartItems.map(item => (
               <FormGroup className="cart-item" key={item.id}>
-                <div className="thumbnail">
+                <div className="thumbnail" ref={imageWrapRef}>
                   <img
                     src={imageUrl(item.images[0] || '')}
                     alt={item.name}
                     loading="lazy"
                     style={{
-                      width: `${imageSize}px`,
-                      height: `${imageSize}px`,
                       paddingTop: imageUrl(item.images[0] || '') ? '' : '100%'
                     }}
-                    ref={imageRef}
                   />
                 </div>
                 <div className="info">

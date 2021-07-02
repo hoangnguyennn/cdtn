@@ -42,8 +42,9 @@ const ProductItem: FC<ProductItemProps> = ({
 }) => {
   const { t } = useTranslation();
   const isDesktop = useMatchMedia('(min-width: 992px)');
-  const imageRef = useRef<HTMLImageElement | null>(null);
+
   const [imageSize, setImageSize] = useState(0);
+  const imageWrapRef = useRef<HTMLDivElement | null>(null);
 
   const imageUrl = useCallback(
     (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
@@ -56,15 +57,15 @@ const ProductItem: FC<ProductItemProps> = ({
   };
 
   useEffect(() => {
-    if (imageRef.current?.offsetWidth) {
-      setImageSize(imageRef.current?.offsetWidth);
+    if (imageWrapRef.current?.offsetWidth) {
+      setImageSize(imageWrapRef.current?.offsetWidth);
     }
-  }, [imageRef]);
+  }, [imageWrapRef.current]);
 
   return (
     <Wrap link={link}>
       <div className="wrap">
-        <div className="thumbnail" ref={imageRef}>
+        <div className="thumbnail" ref={imageWrapRef}>
           <img
             src={imageUrl(images[0] || '')}
             alt={name}

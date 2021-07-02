@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
@@ -15,18 +15,17 @@ import Root from './MyOrderDetail';
 
 const MyOrderDetail = () => {
   const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const router = useRouter();
-
   const { id } = router.query;
+
+  const isLoading = useSelector(getLoading());
   const order = useSelector(getOrderById(id as string));
   const items = order?.items;
-  const isLoading = useSelector(getLoading());
-  const imageRef = useRef<HTMLImageElement | null>(null);
 
-  const imageSize = useMemo(() => {
-    return imageRef.current?.offsetWidth;
-  }, [imageRef.current]);
+  const [imageSize, setImageSize] = useState(0);
+  const imageRef = useRef<HTMLImageElement | null>(null);
 
   const imageUrl = useCallback(
     (image: string) => imageUrlToSpecificSize(image, imageSize, imageSize),
@@ -36,6 +35,12 @@ const MyOrderDetail = () => {
   useEffect(() => {
     dispatch(getOrdersAction());
   }, []);
+
+  useEffect(() => {
+    if (imageRef.current?.offsetWidth) {
+      setImageSize(imageRef.current?.offsetWidth);
+    }
+  }, [imageRef.current]);
 
   if (isLoading) {
     return <Loading />;
