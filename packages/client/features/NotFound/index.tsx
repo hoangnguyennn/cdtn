@@ -1,8 +1,10 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
 import Container from '../../components/core/Container';
 import sadIcon from '../../assets/images/sad.png';
 import Root from './NotFound';
 import Button from '../../components/core/Button';
-import Link from 'next/link';
 import { PATH_NAME } from '../../configs/pathName';
 
 const NotFound = () => {
@@ -10,7 +12,7 @@ const NotFound = () => {
     <Root>
       <Container>
         <div className="content">
-          <img src={sadIcon} alt="Not found" loading="lazy" />
+          <Image src={sadIcon} alt="Not found" loading="lazy" />
           <h2>404</h2>
           <p>
             Xin lỗi, trang bạn tìm kiếm không tồn tại!

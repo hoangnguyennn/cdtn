@@ -16,6 +16,11 @@ export default styled.div<BannerProps>`
 
   display: flex;
   align-items: center;
+  position: relative;
+
+  .background {
+    z-index: -1;
+  }
 
   .intro {
     .title {
