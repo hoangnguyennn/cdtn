@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export default styled.div`
   overflow-x: auto;
+  padding: 1rem;
 
   .order-list {
     width: 100%;

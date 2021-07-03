@@ -3,6 +3,8 @@ import FormGroup from '../../components/core/FormGroup';
 import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
+  padding: 1rem;
+
   .cart-sidebar {
     margin-bottom: 3rem;
 

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
+  padding: 1rem;
+
   .register-form {
     .submit-group {
       padding-top: 1rem;

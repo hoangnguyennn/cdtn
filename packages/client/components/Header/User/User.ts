@@ -6,6 +6,7 @@ export default styled.div`
 
   .dropdown {
     .dropdown-menu {
+      z-index: 2;
       display: none;
       position: absolute;
       top: 4.5rem;

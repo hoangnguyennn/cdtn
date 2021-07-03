@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { mediaQueries } from '../../helpers/checkTypes';
+import Container from '../core/Container';
 
 type BannerProps = {
   background?: string;
@@ -20,6 +21,10 @@ export default styled.div<BannerProps>`
 
   .background {
     z-index: -1;
+  }
+
+  ${Container} {
+    z-index: 1;
   }
 
   .intro {

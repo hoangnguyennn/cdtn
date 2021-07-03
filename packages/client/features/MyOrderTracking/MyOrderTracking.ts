@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 export default styled.div`
+  padding: 1rem;
+
   .order-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   .order-id {

@@ -9,6 +9,6 @@ export default styled.div`
   margin-left: auto;
 
   ${mediaQueries('lg')} {
-    max-width: 1260px;
+    max-width: 1230px;
   }
 `;

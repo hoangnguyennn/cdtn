@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
+  padding: 1rem;
+
   .info {
     display: flex;
     margin-bottom: 1rem;
@@ -19,6 +21,11 @@ export default styled.div`
         }
       }
     }
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
   }
 
   table {

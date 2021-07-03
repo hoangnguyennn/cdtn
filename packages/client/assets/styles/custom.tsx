@@ -7,10 +7,6 @@ const Custom = createGlobalStyle`
   box-sizing: border-box;
 }
 
-html {
-  font-size: 18px;
-}
-
 body {
   color: var(--main-text-color-2);
   font-family: sans-serif;

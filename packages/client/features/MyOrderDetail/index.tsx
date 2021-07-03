@@ -73,73 +73,80 @@ const MyOrderDetail = () => {
           </div>
         </div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>{t('Products')}</th>
-            <th>{t('Price')}</th>
-            <th>{t('Quantity')}</th>
-            <th>{t('Promotion')}</th>
-            <th>{t('Subtotal')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items &&
-            items.map(item => (
-              <tr key={item.id}>
-                <td>
-                  <div>
-                    <img
-                      src={imageUrl(item.product.image)}
-                      alt={item.product.name}
-                      loading="lazy"
-                      style={{
-                        paddingTop: imageUrl(item.product.image) ? '' : '100%'
-                      }}
-                      ref={imageRef}
-                    />
-                    <div className="product-info">
-                      <Link href={`${PATH_NAME.PRODUCTS}/${item.productId}`}>
-                        <a>{item.product.name}</a>
-                      </Link>
-                      <div className="actions">
-                        <span>{t('Leave a comment')}</span>
-                        <span>{t('Repurchase')}</span>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>{t('Products')}</th>
+              <th>{t('Price')}</th>
+              <th>{t('Quantity')}</th>
+              <th>{t('Promotion')}</th>
+              <th>{t('Subtotal')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items &&
+              items.map(item => (
+                <tr key={item.id}>
+                  <td>
+                    <div>
+                      <img
+                        src={imageUrl(item.product.image)}
+                        alt={item.product.name}
+                        loading="lazy"
+                        style={{
+                          paddingTop: imageUrl(item.product.image) ? '' : '100%'
+                        }}
+                        ref={imageRef}
+                      />
+                      <div className="product-info">
+                        <Link href={`${PATH_NAME.PRODUCTS}/${item.productId}`}>
+                          <a>{item.product.name}</a>
+                        </Link>
+                        <div className="actions">
+                          <span>{t('Leave a comment')}</span>
+                          <span>{t('Repurchase')}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>{toCurrency(item.price)}</td>
-                <td>{item.qty}</td>
-                <td>{toCurrency(0)}</td>
-                <td>{toCurrency(item.price * item.qty)}</td>
-              </tr>
-            ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan={4}>{t('Subtotal')}</td>
-            <td className="price">
-              {toCurrency(
-                items.reduce((total, item) => total + item.price * item.qty, 0)
-              )}
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={4}>{t('Delivery fee')}</td>
-            <td className="price">{t('Free')}</td>
-          </tr>
-          <tr>
-            <td colSpan={4}>{t('Total')}</td>
-            <td className="price total-price">
-              {toCurrency(
-                items.reduce((total, item) => total + item.price * item.qty, 0)
-              )}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-
+                  </td>
+                  <td>{toCurrency(item.price)}</td>
+                  <td>{item.qty}</td>
+                  <td>{toCurrency(0)}</td>
+                  <td>{toCurrency(item.price * item.qty)}</td>
+                </tr>
+              ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={4}>{t('Subtotal')}</td>
+              <td className="price">
+                {toCurrency(
+                  items.reduce(
+                    (total, item) => total + item.price * item.qty,
+                    0
+                  )
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4}>{t('Delivery fee')}</td>
+              <td className="price">{t('Free')}</td>
+            </tr>
+            <tr>
+              <td colSpan={4}>{t('Total')}</td>
+              <td className="price total-price">
+                {toCurrency(
+                  items.reduce(
+                    (total, item) => total + item.price * item.qty,
+                    0
+                  )
+                )}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
       <div className="info">
         <div className="info-item">
           <div className="title">

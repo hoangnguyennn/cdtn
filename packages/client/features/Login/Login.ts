@@ -3,6 +3,8 @@ import Form from '../../components/core/Form';
 import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled(Form)`
+  padding: 1rem;
+
   .actions {
     display: flex;
     justify-content: space-between;

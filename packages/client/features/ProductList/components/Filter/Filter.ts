@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import Form from '../../../../components/core/Form';
 
 export default styled(Form)`
-  margin-right: 1rem;
-  padding-right: 1rem;
-  box-shadow: 1rem 0 1rem -1rem rgb(0 0 0 / 10%);
+  padding: 1rem;
+  border-right: 0.0625rem solid #dae1e7;
 
   .filter-item {
     padding: 1rem 0 0.75rem 0;

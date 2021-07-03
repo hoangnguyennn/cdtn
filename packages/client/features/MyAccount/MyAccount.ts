@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { mediaQueries } from '../../helpers/checkTypes';
 
 export default styled.div`
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 
