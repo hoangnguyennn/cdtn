@@ -8,6 +8,8 @@ import MainLayout from '../../layouts/MainLayout';
 import PageContent from '../../components/PageContent';
 import ProductSummary from '../../features/ProductSummary';
 
+import 'react-quill/dist/quill.snow.css';
+
 const ProductDetailPage = () => {
   const product = useSelector(getProduct());
 

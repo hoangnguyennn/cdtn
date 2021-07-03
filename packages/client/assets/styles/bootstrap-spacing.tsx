@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+const BootstrapSpacing = createGlobalStyle`
 .m-0 {
   margin: 0 !important;
 }
@@ -1809,3 +1812,5 @@
     margin-left: auto !important;
   }
 }
+`;
+export default BootstrapSpacing;

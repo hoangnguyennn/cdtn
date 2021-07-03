@@ -22,7 +22,7 @@ const Root = styled.div`
     top: 50%;
     transform: translateY(-50%);
     padding-right: 1.373rem;
-    color: #999;
+    color: #676767;
     font-size: 0.8em;
     font-style: italic;
     user-select: none;

@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+const NProgress = createGlobalStyle`
 #nprogress {
   pointer-events: none;
 
@@ -67,3 +70,6 @@
     transform: rotate(360deg);
   }
 }
+`;
+
+export default NProgress;

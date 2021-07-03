@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+const Custom = createGlobalStyle`
 * {
   margin: 0;
   padding: 0;
@@ -57,3 +60,6 @@ ul {
 ::-webkit-scrollbar-thumb:hover {
   background: #606060;
 }
+`;
+
+export default Custom;

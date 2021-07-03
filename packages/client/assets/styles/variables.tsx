@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+const Variable = createGlobalStyle`
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -47,3 +50,6 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
 }
+`;
+
+export default Variable;

@@ -4,14 +4,15 @@ import dynamic from 'next/dynamic';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 
+import '~react-toastify/scss/main.scss';
+
 import { getLimitOfToast } from '../redux/reducers/app';
 import Auth from '../guards/Auth';
 import useStore from '../redux/store';
 
 import '../locales';
-import '../assets/styles/index.scss';
-import 'react-quill/dist/quill.snow.css';
 import Seo from '../components/Seo';
+import GlobalStyle from '../assets/styles';
 
 Router.events.on('routeChangeStart', url => {
   console.log(`Loading: ${url}`);
@@ -29,6 +30,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <Provider store={store}>
+      <GlobalStyle />
       <Auth>
         <Seo title={pageProps.title} />
         <Component {...pageProps} />
