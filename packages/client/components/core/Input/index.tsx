@@ -1,7 +1,4 @@
-import { useRef } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { InputHTMLAttributes, FC } from 'react';
+import { InputHTMLAttributes, FC, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Root = styled.div`
