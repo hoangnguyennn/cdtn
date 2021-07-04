@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { useTranslation } from 'react-i18next';
 
-import { myOrderPage } from '../../../../configs/breadcrumb';
-import i18n from '../../../../locales';
-import MainLayout from '../../../../layouts/MainLayout';
-import MyOrderTracking from '../../../../features/MyOrderTracking';
-import PageContent from '../../../../components/PageContent';
+import { myOrderPage } from '@configs/breadcrumb';
+import i18n from '@locales/index';
+import MainLayout from '@layouts/MainLayout';
+import MyOrderTracking from '@features/MyOrderTracking';
+import PageContent from '@components/PageContent';
 
 const OrderTrackingPage = () => {
   const { t } = useTranslation();

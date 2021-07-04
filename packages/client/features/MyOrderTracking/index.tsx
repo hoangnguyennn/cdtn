@@ -4,16 +4,15 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import { getLoading } from '../../redux/reducers/app';
-import {
-  getOrderTracking,
-  getTrackingAction
-} from '../../redux/reducers/order';
-import { isoDateToNativeDate } from '../../utils/formatter';
-import { orderStatus } from '../../constants';
-import { PATH_NAME } from '../../configs/pathName';
-import Loading from '../../components/Loading';
 import Root from './MyOrderTracking';
+
+import Loading from '@components/Loading';
+
+import { getLoading } from '@redux/reducers/app';
+import { getOrderTracking, getTrackingAction } from '@redux/reducers/order';
+import { isoDateToNativeDate } from '@utils/formatter';
+import { orderStatus } from '@constants/index';
+import { PATH_NAME } from '@configs/pathName';
 
 const MyOrderTracking = () => {
   const { t } = useTranslation();

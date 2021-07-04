@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
 
-import { getTrendingProductsAction } from '../redux/reducers/product';
-import { initialStore } from '../redux/store';
-import Banner from '../components/Banner';
-import bannerBg from '../assets/images/banner.jpg';
-import Home from '../features/Home';
-import i18n from '../locales';
-import MainLayout from '../layouts/MainLayout';
+import { getTrendingProductsAction } from '@redux/reducers/product';
+import { initialStore } from '@redux/store';
+import Banner from '@components/Banner';
+import bannerBg from '@assets/images/banner.jpg';
+import Home from '@features/Home';
+import i18n from '@locales/index';
+import MainLayout from '@layouts/MainLayout';
 
 const HomePage = () => {
   return (

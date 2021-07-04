@@ -2,14 +2,15 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import Container from '../core/Container';
+import Container from '@components/core/Container';
+import Logo from '@components/Logo';
 import HeaderStyled from './Header';
-import Logo from '../Logo';
 
-import { getCartLength } from '../../redux/reducers/cart';
-import { getFullName } from '../../redux/reducers/auth';
-import { PATH_NAME } from '../../configs/pathName';
 import User from './User';
+
+import { getCartLength } from '@redux/reducers/cart';
+import { getFullName } from '@redux/reducers/auth';
+import { PATH_NAME } from '@configs/pathName';
 
 const Header = () => {
   const { t } = useTranslation();

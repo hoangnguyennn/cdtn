@@ -5,9 +5,9 @@ import {
   fetchProducts,
   fetchProductsByCategorySlug,
   fetchTrendingProducts
-} from '../../apis/product.api';
-import { IProduct } from '../../interfaces';
-import { IProductState, IRootState } from '../../interfaces/IState';
+} from '@apis/product.api';
+import { IProduct } from '@interfaces/index';
+import { IProductState, IRootState } from '@interfaces/IState';
 
 export const initialState: IProductState = {
   products: [],

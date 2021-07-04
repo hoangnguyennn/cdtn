@@ -1,17 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import { getLoading } from '../../redux/reducers/app';
-import { getOrderById, getOrdersAction } from '../../redux/reducers/order';
-import { imageUrlToSpecificSize } from '../../utils/converter';
-import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
-import { orderStatus } from '../../constants';
-import { PATH_NAME } from '../../configs/pathName';
-import Loading from '../../components/Loading';
 import Root from './MyOrderDetail';
+
+import Loading from '@components/Loading';
+
+import { getLoading } from '@redux/reducers/app';
+import { getOrderById, getOrdersAction } from '@redux/reducers/order';
+import { imageUrlToSpecificSize } from '@utils/converter';
+import { isoDateToNativeDate, toCurrency } from '@utils/formatter';
+import { orderStatus } from '@constants/index';
+import { PATH_NAME } from '@configs/pathName';
 
 const MyOrderDetail = () => {
   const { t } = useTranslation();

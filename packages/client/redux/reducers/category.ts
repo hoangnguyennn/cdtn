@@ -1,6 +1,6 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { fetchCategories } from '../../apis/category.api';
-import { ICategoryState, IRootState } from '../../interfaces/IState';
+import { fetchCategories } from '@apis/category.api';
+import { ICategoryState, IRootState } from '@interfaces/IState';
 
 export const initialState: ICategoryState = {
   categories: []

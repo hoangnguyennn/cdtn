@@ -1,11 +1,14 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { IProduct } from '../../interfaces';
-import ProductFilter from './components/Filter';
-import ProductListComponent from '../../components/Product/List';
+import useMatchMedia from '@hooks/useMatchMedia';
+
 import Root from './ProductList';
-import useMatchMedia from '../../hooks/useMatchMedia';
+
+import ProductFilter from './components/Filter';
+import ProductListComponent from '@components/Product/List';
+
+import { IProduct } from '@interfaces/index';
 
 type ProductListProps = {
   products: IProduct[];

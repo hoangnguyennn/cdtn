@@ -2,7 +2,7 @@ import { FC } from 'react';
 import classnames from 'classnames';
 import Link from 'next/link';
 
-import { IBreadcrumb } from '../../interfaces';
+import { IBreadcrumb } from '@interfaces/index';
 import BreadcrumbStyled from './Breadcrumb';
 
 type BreadcrumbProps = {

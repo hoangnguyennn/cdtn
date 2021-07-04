@@ -1,6 +1,6 @@
-import { ENDPOINT } from '../configs/endpoint';
-import { ILogin, ILoginResponse, IUser, IUserCreate } from '../interfaces';
-import axiosInstance from '../services/instance';
+import { ENDPOINT } from '@configs/endpoint';
+import { ILogin, ILoginResponse, IUser, IUserCreate } from '@interfaces/index';
+import axiosInstance from '@services/instance';
 
 export const register = async (user: IUserCreate): Promise<IUser> => {
   return axiosInstance.post(ENDPOINT.register, user).then(res => res.data);

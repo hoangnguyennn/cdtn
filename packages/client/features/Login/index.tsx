@@ -7,15 +7,16 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import Link from 'next/link';
 
-import Button from '../../components/core/Button';
-import FormGroup from '../../components/core/FormGroup';
-import Input from '../../components/core/Input';
-import Invalid from '../../components/core/Invalid';
 import LoginStyled from './Login';
 
-import { getToken, loginAction } from '../../redux/reducers/auth';
-import { ILogin } from '../../interfaces';
-import { PATH_NAME } from '../../configs/pathName';
+import Button from '@components/core/Button';
+import FormGroup from '@components/core/FormGroup';
+import Input from '@components/core/Input';
+import Invalid from '@components/core/Invalid';
+
+import { getToken, loginAction } from '@redux/reducers/auth';
+import { ILogin } from '@interfaces/index';
+import { PATH_NAME } from '@configs/pathName';
 
 const Login = () => {
   const { t } = useTranslation();

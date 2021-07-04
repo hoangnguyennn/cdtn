@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
 import { useSelector } from 'react-redux';
 
-import { getProductByIdAction, getProduct } from '../../redux/reducers/product';
-import { initialStore } from '../../redux/store';
-import { productPage } from '../../configs/breadcrumb';
-import MainLayout from '../../layouts/MainLayout';
-import PageContent from '../../components/PageContent';
-import ProductSummary from '../../features/ProductSummary';
+import { getProductByIdAction, getProduct } from '@redux/reducers/product';
+import { initialStore } from '@redux/store';
+import { productPage } from '@configs/breadcrumb';
+import MainLayout from '@layouts/MainLayout';
+import PageContent from '@components/PageContent';
+import ProductSummary from '@features/ProductSummary';
 
 import 'react-quill/dist/quill.snow.css';
 

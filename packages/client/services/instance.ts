@@ -1,8 +1,9 @@
 import { EnhancedStore } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { BASE_URL } from '../configs/endpoint';
-import { IRootState } from '../interfaces/IState';
-import { setLoadingAction } from '../redux/reducers/app';
+
+import { BASE_URL } from '@configs/endpoint';
+import { IRootState } from '@interfaces/IState';
+import { setLoadingAction } from '@redux/reducers/app';
 
 const instance = axios.create({
   baseURL: BASE_URL

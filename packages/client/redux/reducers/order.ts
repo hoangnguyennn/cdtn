@@ -1,6 +1,6 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { fetchOrders, fetchTracking } from '../../apis/order.api';
-import { IOrderState, IRootState } from '../../interfaces/IState';
+import { fetchOrders, fetchTracking } from '@apis/order.api';
+import { IOrderState, IRootState } from '@interfaces/IState';
 
 export const initialState: IOrderState = {
   orders: [],

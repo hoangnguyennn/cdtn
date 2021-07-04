@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import Container from '../core/Container';
-import PageTitle, { PageTitleProps } from '../PageTitle';
+
+import Container from '@components/core/Container';
 import PageContentStyled from './PageContent';
+import PageTitle, { PageTitleProps } from '@components/PageTitle';
 
 type PageContentProps = PageTitleProps;
 

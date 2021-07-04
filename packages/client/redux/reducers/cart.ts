@@ -1,9 +1,9 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 
-import { ICartState, IRootState } from '../../interfaces/IState';
-import { IOrder } from '../../interfaces';
-import { order } from '../../apis/order.api';
-import { isProductInCart } from '../../helpers/checkTypes';
+import { ICartState, IRootState } from '@interfaces/IState';
+import { IOrder } from '@interfaces/index';
+import { isProductInCart } from '@helpers/checkTypes';
+import { order } from '@apis/order.api';
 
 export const initialState: ICartState = {
   cartItems: []

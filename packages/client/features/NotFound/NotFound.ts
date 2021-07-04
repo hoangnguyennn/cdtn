@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { mediaQueries } from '../../helpers/checkTypes';
+
+import { mediaQueries } from '@helpers/checkTypes';
 
 export default styled.div`
   .content {

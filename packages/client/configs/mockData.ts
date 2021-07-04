@@ -1,4 +1,4 @@
-import { IWidget } from '../interfaces';
+import { IWidget } from '@interfaces/index';
 
 export const widgets: IWidget[][] = [
   [

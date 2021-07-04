@@ -1,7 +1,3 @@
-import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
-import classNames from 'classnames';
-import Link from 'next/link';
 import {
   ChangeEvent,
   Dispatch,
@@ -12,17 +8,20 @@ import {
   useEffect,
   useState
 } from 'react';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-
-import { numberWithDot } from '../../../../utils/formatter';
-import { removeFalsyFields } from '../../../../utils/converter';
-import { sameObject } from '../../../../utils/comparison';
+import classNames from 'classnames';
+import Link from 'next/link';
 
 import Root from './Filter';
 
-import { getCategories } from '../../../../redux/reducers/category';
-import { getProductUnits } from '../../../../redux/reducers/productUnit';
-import { PATH_NAME } from '../../../../configs/pathName';
+import { getCategories } from '@redux/reducers/category';
+import { getProductUnits } from '@redux/reducers/productUnit';
+import { numberWithDot } from '@utils/formatter';
+import { PATH_NAME } from '@configs/pathName';
+import { removeFalsyFields } from '@utils/converter';
+import { sameObject } from '@utils/comparison';
 
 type ProductFilterProps = {
   [key: string]: any;

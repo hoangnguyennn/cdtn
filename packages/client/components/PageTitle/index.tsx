@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
-import { IBreadcrumb } from '../../interfaces';
-import Breadcrumb from '../Breadcrumb';
-import Container from '../core/Container';
 import PageTitleStyled from './PageTitle';
+
+import { IBreadcrumb } from '@interfaces/index';
+import Breadcrumb from '@components/Breadcrumb';
+import Container from '@components/core/Container';
 
 export type PageTitleProps = {
   breadcrumb: IBreadcrumb[];

@@ -2,15 +2,15 @@ import { GetServerSideProps } from 'next';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { getCategoriesAction } from '../../redux/reducers/category';
-import { getProducts, getProductsAction } from '../../redux/reducers/product';
-import { getProductUnitsAction } from '../../redux/reducers/productUnit';
-import { initialStore } from '../../redux/store';
-import { productsPage } from '../../configs/breadcrumb';
-import i18n from '../../locales';
-import MainLayout from '../../layouts/MainLayout';
-import PageContent from '../../components/PageContent';
-import ProductList from '../../features/ProductList';
+import { getCategoriesAction } from '@redux/reducers/category';
+import { getProducts, getProductsAction } from '@redux/reducers/product';
+import { getProductUnitsAction } from '@redux/reducers/productUnit';
+import { initialStore } from '@redux/store';
+import { productsPage } from '@configs/breadcrumb';
+import i18n from '@locales/index';
+import MainLayout from '@layouts/MainLayout';
+import PageContent from '@components/PageContent';
+import ProductList from '@features/ProductList';
 
 const ProductDetailPage = () => {
   const { t } = useTranslation();

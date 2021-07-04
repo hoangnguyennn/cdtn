@@ -1,21 +1,22 @@
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
-import { getUserInfo, updateUserInfoAction } from '../../redux/reducers/auth';
-import { IUserUpdateInfo } from '../../interfaces';
-import Button from '../../components/core/Button';
-import Form from '../../components/core/Form';
-import FormGroup from '../../components/core/FormGroup';
-import Input from '../../components/core/Input';
-import Invalid from '../../components/core/Invalid';
-
 import Root from './MyAccount';
-import { toast } from 'react-toastify';
-import Loading from '../../components/Loading';
-import { getLoading } from '../../redux/reducers/app';
+
+import Button from '@components/core/Button';
+import Form from '@components/core/Form';
+import FormGroup from '@components/core/FormGroup';
+import Input from '@components/core/Input';
+import Invalid from '@components/core/Invalid';
+import Loading from '@components/Loading';
+
+import { getLoading } from '@redux/reducers/app';
+import { getUserInfo, updateUserInfoAction } from '@redux/reducers/auth';
+import { IUserUpdateInfo } from '@interfaces/index';
 
 const MyAccount = () => {
   const { t } = useTranslation();

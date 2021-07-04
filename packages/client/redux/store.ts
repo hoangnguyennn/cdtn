@@ -10,9 +10,10 @@ import { initialState as initialPaymentMethodState } from './reducers/paymentMet
 import { initialState as initialProductState } from './reducers/product';
 import { initialState as initialProduutUnitState } from './reducers/productUnit';
 
-import { IRootState } from '../interfaces/IState';
+import { IRootState } from '@interfaces/IState';
 import rootReducer from './reducers';
-import { interceptors } from '../services/instance';
+
+import { interceptors } from '@services/instance';
 
 let store: ReturnType<typeof initStore>;
 
@@ -51,7 +52,7 @@ export const initialStore = (preloadedState?: IRootState) => {
   // Create the store once in the client
   if (!store) store = _store;
 
-  interceptors(_store);
+  interceptors(store);
   return _store;
 };
 

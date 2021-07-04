@@ -10,15 +10,18 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { addToCartAction } from '../../redux/reducers/cart';
-import { imageUrlToSpecificSize } from '../../utils/converter';
-import { IProduct } from '../../interfaces';
-import { ProductStatus } from '../../interfaces/enums';
-import { toCurrency } from '../../utils/formatter';
-import Button from '../../components/core/Button';
-import Input from '../../components/core/Input';
+import useMatchMedia from '@hooks/useMatchMedia';
+
 import Root from './ProductSummary';
-import useMatchMedia from '../../hooks/useMatchMedia';
+
+import Button from '@components/core/Button';
+import Input from '@components/core/Input';
+
+import { addToCartAction } from '@redux/reducers/cart';
+import { imageUrlToSpecificSize } from '@utils/converter';
+import { IProduct } from '@interfaces/index';
+import { ProductStatus } from '@interfaces/enums';
+import { toCurrency } from '@utils/formatter';
 
 type ProductSummaryProps = {
   product: IProduct;

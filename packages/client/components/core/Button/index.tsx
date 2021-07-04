@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Variant } from '../../../interfaces/types';
+
+import { Variant } from '@interfaces/types';
 
 type ButtonProps = {
   variant?: Variant;

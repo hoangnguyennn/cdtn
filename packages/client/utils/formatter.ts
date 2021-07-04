@@ -1,5 +1,5 @@
-import { dayOfWeek } from '../constants';
-import i18n from '../locales';
+import { dayOfWeek } from '@constants/index';
+import i18n from '@locales/index';
 
 export const toCurrency = (num: number) => {
   return Number(num).toLocaleString('vi-VN', {

@@ -6,15 +6,17 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import Link from 'next/link';
 
-import { IRegisterForm } from '../../interfaces';
-import { PATH_NAME } from '../../configs/pathName';
-import { registerAction } from '../../redux/reducers/auth';
-import Button from '../../components/core/Button';
-import Form from '../../components/core/Form';
-import FormGroup from '../../components/core/FormGroup';
-import Input from '../../components/core/Input';
-import Invalid from '../../components/core/Invalid';
 import RegisterStyled from './Register';
+
+import Button from '@components/core/Button';
+import Form from '@components/core/Form';
+import FormGroup from '@components/core/FormGroup';
+import Input from '@components/core/Input';
+import Invalid from '@components/core/Invalid';
+
+import { IRegisterForm } from '@interfaces/index';
+import { PATH_NAME } from '@configs/pathName';
+import { registerAction } from '@redux/reducers/auth';
 
 const Register = () => {
   const { t } = useTranslation();

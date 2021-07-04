@@ -1,7 +1,7 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
 
-import { fetchPaymentMethods } from '../../apis/paymentMethod.api';
-import { IPaymentMethodState, IRootState } from '../../interfaces/IState';
+import { fetchPaymentMethods } from '@apis/paymentMethod.api';
+import { IPaymentMethodState, IRootState } from '@interfaces/IState';
 
 export const initialState: IPaymentMethodState = {
   paymentMethods: []

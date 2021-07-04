@@ -1,11 +1,13 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import Container from '../../components/core/Container';
-import sadIcon from '../../assets/images/sad.png';
 import Root from './NotFound';
-import Button from '../../components/core/Button';
-import { PATH_NAME } from '../../configs/pathName';
+
+import Button from '@components/core/Button';
+import Container from '@components/core/Container';
+
+import { PATH_NAME } from '@configs/pathName';
+import sadIcon from '@assets/images/sad.png';
 
 const NotFound = () => {
   return (

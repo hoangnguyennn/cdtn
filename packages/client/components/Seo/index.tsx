@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import { FC } from 'react';
-import { BASE_URL, IMG_BASE_URL } from '../../configs/endpoint';
-import seo from '../../configs/seo';
+import Head from 'next/head';
+
+import { BASE_URL, IMG_BASE_URL } from '@configs/endpoint';
+import seo from '@configs/seo';
 
 type SeoProps = {
   title?: string;

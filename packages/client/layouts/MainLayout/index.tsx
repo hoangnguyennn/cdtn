@@ -1,8 +1,10 @@
 import { FC, useEffect } from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import { useDispatch } from 'react-redux';
-import { updateCartFromLocalStorageAction } from '../../redux/reducers/cart';
+
+import Footer from '@components/Footer';
+import Header from '@components/Header';
+
+import { updateCartFromLocalStorageAction } from '@redux/reducers/cart';
 
 const MainLayout: FC = ({ children }) => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
-import { ICartItem } from '../interfaces';
-import { variant } from '../interfaces/types';
+import { ICartItem } from '@interfaces/index';
+import { variant } from '@interfaces/types';
 
 export const isProductInCart = (product: any): product is ICartItem => {
   return (

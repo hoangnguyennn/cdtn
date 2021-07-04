@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { IRootState } from '../../interfaces/IState';
+import { IRootState } from '@interfaces/IState';
 import appReducer from './app';
 import authReducer from './auth';
 import cartReducer from './cart';

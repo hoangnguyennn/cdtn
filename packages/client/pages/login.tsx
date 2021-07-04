@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { useTranslation } from 'react-i18next';
 
-import { loginPage } from '../configs/breadcrumb';
-import i18n from '../locales';
-import Login from '../features/Login';
-import MainLayout from '../layouts/MainLayout';
-import PageContent from '../components/PageContent';
+import { loginPage } from '@configs/breadcrumb';
+import i18n from '@locales/index';
+import Login from '@features/Login';
+import MainLayout from '@layouts/MainLayout';
+import PageContent from '@components/PageContent';
 
 const LoginPage = () => {
   const { t } = useTranslation();

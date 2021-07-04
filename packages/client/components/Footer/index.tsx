@@ -1,10 +1,11 @@
-import Container from '../core/Container';
-import Widget from '../Widget';
+import { widgets } from '@configs/mockData';
+
 import FooterStyled from './Footer';
 
-import { widgets } from '../../configs/mockData';
-import Row from '../core/Row';
-import Col from '../core/Col';
+import Col from '@components/core/Col';
+import Container from '@components/core/Container';
+import Row from '@components/core/Row';
+import Widget from '@components/Widget';
 
 const Footer = () => {
   return (

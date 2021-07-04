@@ -1,6 +1,6 @@
-import { ENDPOINT } from '../configs/endpoint';
-import { IProductUnitWithLength } from '../interfaces';
-import axiosInstance from '../services/instance';
+import { ENDPOINT } from '@configs/endpoint';
+import { IProductUnitWithLength } from '@interfaces/index';
+import axiosInstance from '@services/instance';
 
 export const fetchProductUnits = async (query?: {
   [key: string]: any;

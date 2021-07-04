@@ -1,6 +1,6 @@
-import { ENDPOINT } from '../configs/endpoint';
-import { ICategoryWithProductLength } from '../interfaces';
-import axiosInstance from '../services/instance';
+import { ENDPOINT } from '@configs/endpoint';
+import { ICategoryWithProductLength } from '@interfaces/index';
+import axiosInstance from '@services/instance';
 
 export const fetchCategories = async (
   query: any

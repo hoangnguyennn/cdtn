@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { useTranslation } from 'react-i18next';
 
-import { registerPage } from '../configs/breadcrumb';
-import i18n from '../locales';
-import MainLayout from '../layouts/MainLayout';
-import PageContent from '../components/PageContent';
-import Register from '../features/Register';
+import { registerPage } from '@configs/breadcrumb';
+import i18n from '@locales/index';
+import MainLayout from '@layouts/MainLayout';
+import PageContent from '@components/PageContent';
+import Register from '@features/Register';
 
 const RegisterPage = () => {
   const { t } = useTranslation();

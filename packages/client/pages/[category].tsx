@@ -6,17 +6,17 @@ import { useTranslation } from 'react-i18next';
 import {
   getCategoriesAction,
   getCategoryBySlug
-} from '../redux/reducers/category';
+} from '@redux/reducers/category';
 import {
   getProductsByCategorySlugAction,
   getProductsByCategorySlug
-} from '../redux/reducers/product';
-import { getProductUnitsAction } from '../redux/reducers/productUnit';
-import { initialStore } from '../redux/store';
-import { productsByCategoryPage } from '../configs/breadcrumb';
-import MainLayout from '../layouts/MainLayout';
-import PageContent from '../components/PageContent';
-import ProductList from '../features/ProductList';
+} from '@redux/reducers/product';
+import { getProductUnitsAction } from '@redux/reducers/productUnit';
+import { initialStore } from '@redux/store';
+import { productsByCategoryPage } from '@configs/breadcrumb';
+import MainLayout from '@layouts/MainLayout';
+import PageContent from '@components/PageContent';
+import ProductList from '@features/ProductList';
 
 const CategoryPage = () => {
   const { t } = useTranslation();

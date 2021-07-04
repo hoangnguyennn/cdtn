@@ -1,13 +1,13 @@
 import { GetServerSideProps } from 'next';
 import { useTranslation } from 'react-i18next';
 
-import { cartPage } from '../configs/breadcrumb';
-import { getPaymentMethodsAction } from '../redux/reducers/paymentMethod';
-import { initialStore } from '../redux/store';
-import Cart from '../features/Cart';
-import i18n from '../locales';
-import MainLayout from '../layouts/MainLayout';
-import PageContent from '../components/PageContent';
+import { cartPage } from '@configs/breadcrumb';
+import { getPaymentMethodsAction } from '@redux/reducers/paymentMethod';
+import { initialStore } from '@redux/store';
+import Cart from '@features/Cart';
+import i18n from '@locales/index';
+import MainLayout from '@layouts/MainLayout';
+import PageContent from '@components/PageContent';
 
 const CartPage = () => {
   const { t } = useTranslation();

@@ -1,6 +1,6 @@
 import { createSelector, createSlice, Dispatch } from '@reduxjs/toolkit';
-import { fetchProductUnits } from '../../apis/productUnit';
-import { IProductUnitState, IRootState } from '../../interfaces/IState';
+import { fetchProductUnits } from '@apis/productUnit';
+import { IProductUnitState, IRootState } from '@interfaces/IState';
 
 export const initialState: IProductUnitState = {
   productUnits: []

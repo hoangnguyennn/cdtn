@@ -1,6 +1,6 @@
-import { IBreadcrumb, ICategoryWithProductLength } from '../interfaces';
+import { IBreadcrumb, ICategoryWithProductLength } from '@interfaces/index';
 import { PATH_NAME } from './pathName';
-import i18n from '../locales';
+import i18n from '@locales/index';
 
 export const cartPage = (): IBreadcrumb[] => [
   {

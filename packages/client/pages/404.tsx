@@ -1,5 +1,5 @@
-import NotFound from '../features/NotFound';
-import MainLayout from '../layouts/MainLayout';
+import NotFound from '@features/NotFound';
+import MainLayout from '@layouts/MainLayout';
 
 const NotFoundPage = () => {
   return (

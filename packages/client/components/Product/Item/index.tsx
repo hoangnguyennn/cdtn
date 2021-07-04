@@ -9,12 +9,13 @@ import {
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import useMatchMedia from '../../../hooks/useMatchMedia';
+import useMatchMedia from '@hooks/useMatchMedia';
 
-import { imageUrlToSpecificSize } from '../../../utils/converter';
-import { IProductWithLink } from '../../../interfaces';
-import { toCurrency } from '../../../utils/formatter';
 import ProductItemStyled from './ProductItem';
+
+import { imageUrlToSpecificSize } from '@utils/converter';
+import { IProductWithLink } from '@interfaces/index';
+import { toCurrency } from '@utils/formatter';
 
 type ProductItemProps = IProductWithLink & {
   addToCart: () => any;

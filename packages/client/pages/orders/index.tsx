@@ -4,15 +4,15 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import { getToken } from '../../redux/reducers/auth';
-import { isVariant } from '../../helpers/checkTypes';
-import { orderNotificationPage } from '../../configs/breadcrumb';
-import { PATH_NAME } from '../../configs/pathName';
-import { Variant } from '../../interfaces/types';
-import Alert from '../../components/core/Alert';
-import i18n from '../../locales';
-import MainLayout from '../../layouts/MainLayout';
-import PageContent from '../../components/PageContent';
+import { getToken } from '@redux/reducers/auth';
+import { isVariant } from '@helpers/checkTypes';
+import { orderNotificationPage } from '@configs/breadcrumb';
+import { PATH_NAME } from '@configs/pathName';
+import { Variant } from '@interfaces/types';
+import Alert from '@components/core/Alert';
+import i18n from '@locales/index';
+import MainLayout from '@layouts/MainLayout';
+import PageContent from '@components/PageContent';
 
 const OrderSuccessPage = () => {
   const { t } = useTranslation();

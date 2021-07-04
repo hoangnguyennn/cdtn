@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { mediaQueries } from '../../helpers/checkTypes';
-import Container from '../core/Container';
+
+import { mediaQueries } from '@helpers/checkTypes';
+import Container from '@components/core/Container';
 
 type BannerProps = {
   background?: string;

@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { PATH_NAME } from '../../configs/pathName';
+import { PATH_NAME } from '@configs/pathName';
 import BannerStyled from './Banner';
-import Button from '../core/Button';
-import Container from '../core/Container';
+import Button from '@components/core/Button';
+import Container from '@components/core/Container';
 
 type BannerProps = {
   background?: StaticImageData;

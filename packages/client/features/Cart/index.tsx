@@ -8,15 +8,16 @@ import * as Yup from 'yup';
 import classNames from 'classnames';
 import Link from 'next/link';
 
-import { toCurrency } from '../../utils/formatter';
-import Button from '../../components/core/Button';
 import CartStyled from './Cart';
-import Form from '../../components/core/Form';
-import FormGroup from '../../components/core/FormGroup';
-import Input from '../../components/core/Input';
-import Invalid from '../../components/core/Invalid';
 
-import { getPaymentMethods } from '../../redux/reducers/paymentMethod';
+import { toCurrency } from '@utils/formatter';
+import Button from '@components/core/Button';
+import Form from '@components/core/Form';
+import FormGroup from '@components/core/FormGroup';
+import Input from '@components/core/Input';
+import Invalid from '@components/core/Invalid';
+
+import { getPaymentMethods } from '@redux/reducers/paymentMethod';
 import {
   getCartItems,
   getCartSubtotal,
@@ -24,11 +25,11 @@ import {
   orderAction,
   removeFromCartAction,
   updateQtyAction
-} from '../../redux/reducers/cart';
-import { getUserInfo } from '../../redux/reducers/auth';
-import { ICartForm, IOrder } from '../../interfaces';
-import { PATH_NAME } from '../../configs/pathName';
-import { imageUrlToSpecificSize } from '../../utils/converter';
+} from '@redux/reducers/cart';
+import { getUserInfo } from '@redux/reducers/auth';
+import { ICartForm, IOrder } from '@interfaces/index';
+import { PATH_NAME } from '@configs/pathName';
+import { imageUrlToSpecificSize } from '@utils/converter';
 
 const Cart = () => {
   const { t } = useTranslation();

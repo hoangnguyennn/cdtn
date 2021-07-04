@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
-import { getOrdersAction, getOrders } from '../../redux/reducers/order';
-import { isoDateToNativeDate, toCurrency } from '../../utils/formatter';
-import { orderStatus } from '../../constants';
-import { PATH_NAME } from '../../configs/pathName';
 import Root from './MyOrder';
-import Loading from '../../components/Loading';
-import { getLoading } from '../../redux/reducers/app';
+import Loading from '@components/Loading';
+
+import { getLoading } from '@redux/reducers/app';
+import { getOrdersAction, getOrders } from '@redux/reducers/order';
+import { isoDateToNativeDate, toCurrency } from '@utils/formatter';
+import { orderStatus } from '@constants/index';
+import { PATH_NAME } from '@configs/pathName';
 
 const MyOrder = () => {
   const dispatch = useDispatch();

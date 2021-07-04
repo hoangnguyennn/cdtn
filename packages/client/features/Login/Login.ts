@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Form from '../../components/core/Form';
-import { mediaQueries } from '../../helpers/checkTypes';
+import Form from '@components/core/Form';
+import { mediaQueries } from '@helpers/checkTypes';
 
 export default styled(Form)`
   padding: 1rem;

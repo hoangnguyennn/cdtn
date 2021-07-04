@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import Form from '../../../../components/core/Form';
+
+import Form from '@components/core/Form';
 
 export default styled(Form)`
   padding: 1rem;

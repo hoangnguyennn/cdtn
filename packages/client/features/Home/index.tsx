@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { getTrendingProducts } from '../../redux/reducers/product';
-import Container from '../../components/core/Container';
 import HomeStyled from './Home';
-import ProductList from '../../components/Product/List';
+
+import { getTrendingProducts } from '@redux/reducers/product';
+import Container from '@components/core/Container';
+import ProductList from '@components/Product/List';
 
 const Home = () => {
   const { t } = useTranslation();

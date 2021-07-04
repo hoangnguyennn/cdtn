@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import FormGroup from '../../components/core/FormGroup';
-import { mediaQueries } from '../../helpers/checkTypes';
+
+import { mediaQueries } from '@helpers/checkTypes';
+import FormGroup from '@components/core/FormGroup';
 
 export default styled.div`
   padding: 1rem;

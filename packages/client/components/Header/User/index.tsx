@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
-
-import Root from './User';
 import { useDispatch } from 'react-redux';
-import { logoutAction } from '../../../redux/reducers/auth';
-import { PATH_NAME } from '../../../configs/pathName';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
+
+import { logoutAction } from '@redux/reducers/auth';
+import { PATH_NAME } from '@configs/pathName';
+import Root from './User';
 
 type UserProps = {
   fullName: string;

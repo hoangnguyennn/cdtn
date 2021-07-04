@@ -6,13 +6,15 @@ import Router from 'next/router';
 
 import 'react-toastify/scss/main.scss';
 
-import { getLimitOfToast } from '../redux/reducers/app';
-import Auth from '../guards/Auth';
-import useStore from '../redux/store';
+import useStore from '@redux/store';
 
-import '../locales';
-import Seo from '../components/Seo';
-import GlobalStyle from '../assets/styles';
+import '@locales/index';
+
+import Auth from '@guards/Auth';
+import GlobalStyle from '@assets/styles';
+import Seo from '@components/Seo';
+
+import { getLimitOfToast } from '@redux/reducers/app';
 
 Router.events.on('routeChangeStart', url => {
   console.log(`Loading: ${url}`);

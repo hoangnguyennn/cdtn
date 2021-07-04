@@ -1,6 +1,6 @@
-import { ENDPOINT } from '../configs/endpoint';
-import { IUser, IUserUpdate } from '../interfaces';
-import axiosInstance from '../services/instance';
+import { ENDPOINT } from '@configs/endpoint';
+import { IUser, IUserUpdate } from '@interfaces/index';
+import axiosInstance from '@services/instance';
 
 export const updateUserInfo = async (
   userId: string,

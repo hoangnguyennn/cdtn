@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-import { IWidget } from '../../interfaces';
+import { IWidget } from '@interfaces/index';
 import WidgetStyled from './Widget';
 
 type WidgetProps = {
