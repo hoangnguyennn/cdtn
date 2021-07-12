@@ -14,7 +14,7 @@
     "fe-deploy": "pm2 start yarn --interpreter bash --name client -- fe-start",
     "be-deploy": "pm2 start yarn --interpreter bash --name server -- be-start",
     "dev": "yarn be-dev && yarn fe-dev",
-    "build": "yarn be-build && yarn fe-build",
+    "build": "yarn be-build && yarn fe-build && yarn dashboard-build",
     "deploy": "yarn be-deploy && yarn fe-deploy",
     "fix-code": "prettier-eslint --write 'packages/**/*.{ts,tsx,js,jsx}'",
     "fix-styles": "prettier-stylelint --write 'packages/**/*.{css,scss}'",
